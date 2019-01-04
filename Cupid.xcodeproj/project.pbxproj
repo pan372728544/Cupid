@@ -13,6 +13,18 @@
 		3801018D21DE175600D5F7D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3801018C21DE175600D5F7D2 /* Assets.xcassets */; };
 		3801019021DE175600D5F7D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3801018E21DE175600D5F7D2 /* LaunchScreen.storyboard */; };
 		3801019321DE175600D5F7D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801019221DE175600D5F7D2 /* main.m */; };
+		3801019B21DE18B200D5F7D2 /* ZJBaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801019A21DE18B200D5F7D2 /* ZJBaseTabBarController.m */; };
+		3801019E21DE193000D5F7D2 /* ZJBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801019D21DE193000D5F7D2 /* ZJBaseNavigationController.m */; };
+		380101A121DE195000D5F7D2 /* ZJBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101A021DE195000D5F7D2 /* ZJBaseViewController.m */; };
+		380101A421DF0AE200D5F7D2 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101A321DF0AE200D5F7D2 /* FirstViewController.m */; };
+		380101A721DF0AF000D5F7D2 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101A621DF0AF000D5F7D2 /* SecondViewController.m */; };
+		380101AA21DF0AFD00D5F7D2 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101A921DF0AFD00D5F7D2 /* ThirdViewController.m */; };
+		380101AD21DF0B2A00D5F7D2 /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101AC21DF0B2A00D5F7D2 /* FourthViewController.m */; };
+		380101B121DF3CA900D5F7D2 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101B021DF3CA900D5F7D2 /* ListViewController.m */; };
+		380101B421DF4D0B00D5F7D2 /* ZJBasePopAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101B321DF4D0A00D5F7D2 /* ZJBasePopAnimation.m */; };
+		380101B721DF5D8400D5F7D2 /* ZJNavgationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101B621DF5D8400D5F7D2 /* ZJNavgationBarView.m */; };
+		380101BD21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101BC21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m */; };
+		57C42E4A1E5BCB0E6973E01A /* libPods-Cupid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E35B713560E9DC37C4F79AD /* libPods-Cupid.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +38,32 @@
 		3801018F21DE175600D5F7D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3801019121DE175600D5F7D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3801019221DE175600D5F7D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3801019921DE18B200D5F7D2 /* ZJBaseTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJBaseTabBarController.h; sourceTree = "<group>"; };
+		3801019A21DE18B200D5F7D2 /* ZJBaseTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJBaseTabBarController.m; sourceTree = "<group>"; };
+		3801019C21DE193000D5F7D2 /* ZJBaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJBaseNavigationController.h; sourceTree = "<group>"; };
+		3801019D21DE193000D5F7D2 /* ZJBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJBaseNavigationController.m; sourceTree = "<group>"; };
+		3801019F21DE195000D5F7D2 /* ZJBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJBaseViewController.h; sourceTree = "<group>"; };
+		380101A021DE195000D5F7D2 /* ZJBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJBaseViewController.m; sourceTree = "<group>"; };
+		380101A221DF0AE200D5F7D2 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		380101A321DF0AE200D5F7D2 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		380101A521DF0AF000D5F7D2 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		380101A621DF0AF000D5F7D2 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		380101A821DF0AFD00D5F7D2 /* ThirdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
+		380101A921DF0AFD00D5F7D2 /* ThirdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
+		380101AB21DF0B2A00D5F7D2 /* FourthViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
+		380101AC21DF0B2A00D5F7D2 /* FourthViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FourthViewController.m; sourceTree = "<group>"; };
+		380101AF21DF3CA900D5F7D2 /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		380101B021DF3CA900D5F7D2 /* ListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		380101B221DF4D0A00D5F7D2 /* ZJBasePopAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJBasePopAnimation.h; sourceTree = "<group>"; };
+		380101B321DF4D0A00D5F7D2 /* ZJBasePopAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJBasePopAnimation.m; sourceTree = "<group>"; };
+		380101B521DF5D8400D5F7D2 /* ZJNavgationBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJNavgationBarView.h; sourceTree = "<group>"; };
+		380101B621DF5D8400D5F7D2 /* ZJNavgationBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJNavgationBarView.m; sourceTree = "<group>"; };
+		380101BB21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZJBaseViewController+NavBar.h"; sourceTree = "<group>"; };
+		380101BC21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ZJBaseViewController+NavBar.m"; sourceTree = "<group>"; };
+		380101BE21DF676800D5F7D2 /* ZJCommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJCommonMacro.h; sourceTree = "<group>"; };
+		7E35B713560E9DC37C4F79AD /* libPods-Cupid.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cupid.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		82BF0E830E852FDB0E7C36BA /* Pods-Cupid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cupid.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cupid/Pods-Cupid.debug.xcconfig"; sourceTree = "<group>"; };
+		F8ADFD4554F8446D43C7E1A2 /* Pods-Cupid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cupid.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cupid/Pods-Cupid.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57C42E4A1E5BCB0E6973E01A /* libPods-Cupid.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +83,8 @@
 			children = (
 				3801018221DE175500D5F7D2 /* Cupid */,
 				3801018121DE175500D5F7D2 /* Products */,
+				933605EECB54D4C35CDD5A18 /* Pods */,
+				EDFD03601D1B718A83F82214 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +99,11 @@
 		3801018221DE175500D5F7D2 /* Cupid */ = {
 			isa = PBXGroup;
 			children = (
+				380101AE21DF3C4000D5F7D2 /* Base */,
 				3801018321DE175500D5F7D2 /* AppDelegate.h */,
 				3801018421DE175500D5F7D2 /* AppDelegate.m */,
+				380101AF21DF3CA900D5F7D2 /* ListViewController.h */,
+				380101B021DF3CA900D5F7D2 /* ListViewController.m */,
 				3801018621DE175500D5F7D2 /* ViewController.h */,
 				3801018721DE175500D5F7D2 /* ViewController.m */,
 				3801018921DE175500D5F7D2 /* Main.storyboard */,
@@ -71,6 +115,51 @@
 			path = Cupid;
 			sourceTree = "<group>";
 		};
+		380101AE21DF3C4000D5F7D2 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				380101A221DF0AE200D5F7D2 /* FirstViewController.h */,
+				380101A321DF0AE200D5F7D2 /* FirstViewController.m */,
+				380101A521DF0AF000D5F7D2 /* SecondViewController.h */,
+				380101A621DF0AF000D5F7D2 /* SecondViewController.m */,
+				380101A821DF0AFD00D5F7D2 /* ThirdViewController.h */,
+				380101A921DF0AFD00D5F7D2 /* ThirdViewController.m */,
+				380101AB21DF0B2A00D5F7D2 /* FourthViewController.h */,
+				380101AC21DF0B2A00D5F7D2 /* FourthViewController.m */,
+				3801019921DE18B200D5F7D2 /* ZJBaseTabBarController.h */,
+				3801019A21DE18B200D5F7D2 /* ZJBaseTabBarController.m */,
+				3801019C21DE193000D5F7D2 /* ZJBaseNavigationController.h */,
+				3801019D21DE193000D5F7D2 /* ZJBaseNavigationController.m */,
+				3801019F21DE195000D5F7D2 /* ZJBaseViewController.h */,
+				380101A021DE195000D5F7D2 /* ZJBaseViewController.m */,
+				380101BB21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.h */,
+				380101BC21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m */,
+				380101B221DF4D0A00D5F7D2 /* ZJBasePopAnimation.h */,
+				380101B321DF4D0A00D5F7D2 /* ZJBasePopAnimation.m */,
+				380101B521DF5D8400D5F7D2 /* ZJNavgationBarView.h */,
+				380101B621DF5D8400D5F7D2 /* ZJNavgationBarView.m */,
+				380101BE21DF676800D5F7D2 /* ZJCommonMacro.h */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		933605EECB54D4C35CDD5A18 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				82BF0E830E852FDB0E7C36BA /* Pods-Cupid.debug.xcconfig */,
+				F8ADFD4554F8446D43C7E1A2 /* Pods-Cupid.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EDFD03601D1B718A83F82214 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E35B713560E9DC37C4F79AD /* libPods-Cupid.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -78,6 +167,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3801019621DE175600D5F7D2 /* Build configuration list for PBXNativeTarget "Cupid" */;
 			buildPhases = (
+				3F5E50EC9CCCC3ACD11FCCFA /* [CP] Check Pods Manifest.lock */,
 				3801017C21DE175500D5F7D2 /* Sources */,
 				3801017D21DE175500D5F7D2 /* Frameworks */,
 				3801017E21DE175500D5F7D2 /* Resources */,
@@ -136,13 +226,49 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3F5E50EC9CCCC3ACD11FCCFA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cupid-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3801017C21DE175500D5F7D2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3801018821DE175500D5F7D2 /* ViewController.m in Sources */,
+				380101B721DF5D8400D5F7D2 /* ZJNavgationBarView.m in Sources */,
+				380101B421DF4D0B00D5F7D2 /* ZJBasePopAnimation.m in Sources */,
 				3801019321DE175600D5F7D2 /* main.m in Sources */,
+				380101B121DF3CA900D5F7D2 /* ListViewController.m in Sources */,
+				380101A421DF0AE200D5F7D2 /* FirstViewController.m in Sources */,
+				3801019E21DE193000D5F7D2 /* ZJBaseNavigationController.m in Sources */,
+				380101BD21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m in Sources */,
+				380101A721DF0AF000D5F7D2 /* SecondViewController.m in Sources */,
+				380101AA21DF0AFD00D5F7D2 /* ThirdViewController.m in Sources */,
+				380101AD21DF0B2A00D5F7D2 /* FourthViewController.m in Sources */,
+				380101A121DE195000D5F7D2 /* ZJBaseViewController.m in Sources */,
+				3801019B21DE18B200D5F7D2 /* ZJBaseTabBarController.m in Sources */,
 				3801018521DE175500D5F7D2 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,15 +409,19 @@
 		};
 		3801019721DE175600D5F7D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82BF0E830E852FDB0E7C36BA /* Pods-Cupid.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QH6865CZKU;
 				INFOPLIST_FILE = Cupid/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cupid;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cupid.abc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -299,15 +429,19 @@
 		};
 		3801019821DE175600D5F7D2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8ADFD4554F8446D43C7E1A2 /* Pods-Cupid.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QH6865CZKU;
 				INFOPLIST_FILE = Cupid/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cupid;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cupid.abc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
