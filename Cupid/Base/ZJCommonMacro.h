@@ -13,7 +13,7 @@
 #define TABBAE_BOTTOM (([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) ? [UIApplication sharedApplication].keyWindow.rootViewController.view.safeAreaInsets.bottom : 0)
 
 
-// 状态栏告诉
+// 状态栏高度
 #define STATUSBAR_H ([UIApplication sharedApplication].statusBarFrame.size.height)
 
 // 屏幕宽度和高度

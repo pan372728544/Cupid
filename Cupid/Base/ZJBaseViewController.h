@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 自定义NavBar
 @property (nonatomic, strong) ZJNavgationBarView *superNavBarView;
 
+
+// 设置动画类型
+@property(nonatomic,assign) BOOL isOpenTransiton;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -27,7 +27,7 @@
     // Do any additional setup after loading the view.
     
     
-    
+    self.isOpenTransiton = NO;
     
     _maryTitle = [NSMutableArray arrayWithObjects:@"ABCD--", @"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",@"ABCD--",nil];
     
@@ -67,10 +67,7 @@
     }
     
     cell.textLabel.text = [_maryTitle objectAtIndex:indexPath.row];
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    view.backgroundColor = [UIColor orangeColor];
-    
-//    [cell.contentView addSubview:view];
+
     return cell;
     
 }

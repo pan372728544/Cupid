@@ -20,6 +20,8 @@ typedef NS_ENUM(NSInteger,PopAnimationType)
 };
 
 @interface ZJBasePopAnimation : NSObject<UIViewControllerAnimatedTransitioning>
+
+// pop类型
 @property(nonatomic,assign)PopAnimationType popType;
 @end
 

@@ -8,18 +8,26 @@
 
 #import "ZJBaseNavigationController.h"
 
-@interface ZJBaseNavigationController ()
+@interface ZJBaseNavigationController ()<UIGestureRecognizerDelegate>
 
 @end
 
 @implementation ZJBaseNavigationController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController{
+    
+    if (self == [super initWithRootViewController:rootViewController]) {
+        
+    }
+    return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.view.backgroundColor =[UIColor clearColor];
 
+}
 
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {

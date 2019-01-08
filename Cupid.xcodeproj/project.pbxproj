@@ -24,6 +24,8 @@
 		380101B421DF4D0B00D5F7D2 /* ZJBasePopAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101B321DF4D0A00D5F7D2 /* ZJBasePopAnimation.m */; };
 		380101B721DF5D8400D5F7D2 /* ZJNavgationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101B621DF5D8400D5F7D2 /* ZJNavgationBarView.m */; };
 		380101BD21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101BC21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m */; };
+		380101E821E35CEA00D5F7D2 /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 380101E721E35CEA00D5F7D2 /* MyView.m */; };
+		3801026321E49E5700D5F7D2 /* ZJBasePushAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801026221E49E5700D5F7D2 /* ZJBasePushAnimation.m */; };
 		57C42E4A1E5BCB0E6973E01A /* libPods-Cupid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E35B713560E9DC37C4F79AD /* libPods-Cupid.a */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +63,10 @@
 		380101BB21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZJBaseViewController+NavBar.h"; sourceTree = "<group>"; };
 		380101BC21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ZJBaseViewController+NavBar.m"; sourceTree = "<group>"; };
 		380101BE21DF676800D5F7D2 /* ZJCommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJCommonMacro.h; sourceTree = "<group>"; };
+		380101E621E35CEA00D5F7D2 /* MyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyView.h; sourceTree = "<group>"; };
+		380101E721E35CEA00D5F7D2 /* MyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyView.m; sourceTree = "<group>"; };
+		3801026121E49E5700D5F7D2 /* ZJBasePushAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJBasePushAnimation.h; sourceTree = "<group>"; };
+		3801026221E49E5700D5F7D2 /* ZJBasePushAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJBasePushAnimation.m; sourceTree = "<group>"; };
 		7E35B713560E9DC37C4F79AD /* libPods-Cupid.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cupid.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82BF0E830E852FDB0E7C36BA /* Pods-Cupid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cupid.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cupid/Pods-Cupid.debug.xcconfig"; sourceTree = "<group>"; };
 		F8ADFD4554F8446D43C7E1A2 /* Pods-Cupid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cupid.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cupid/Pods-Cupid.release.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +110,8 @@
 				3801018421DE175500D5F7D2 /* AppDelegate.m */,
 				380101AF21DF3CA900D5F7D2 /* ListViewController.h */,
 				380101B021DF3CA900D5F7D2 /* ListViewController.m */,
+				380101E621E35CEA00D5F7D2 /* MyView.h */,
+				380101E721E35CEA00D5F7D2 /* MyView.m */,
 				3801018621DE175500D5F7D2 /* ViewController.h */,
 				3801018721DE175500D5F7D2 /* ViewController.m */,
 				3801018921DE175500D5F7D2 /* Main.storyboard */,
@@ -136,6 +144,8 @@
 				380101BC21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m */,
 				380101B221DF4D0A00D5F7D2 /* ZJBasePopAnimation.h */,
 				380101B321DF4D0A00D5F7D2 /* ZJBasePopAnimation.m */,
+				3801026121E49E5700D5F7D2 /* ZJBasePushAnimation.h */,
+				3801026221E49E5700D5F7D2 /* ZJBasePushAnimation.m */,
 				380101B521DF5D8400D5F7D2 /* ZJNavgationBarView.h */,
 				380101B621DF5D8400D5F7D2 /* ZJNavgationBarView.m */,
 				380101BE21DF676800D5F7D2 /* ZJCommonMacro.h */,
@@ -270,6 +280,8 @@
 				380101A121DE195000D5F7D2 /* ZJBaseViewController.m in Sources */,
 				3801019B21DE18B200D5F7D2 /* ZJBaseTabBarController.m in Sources */,
 				3801018521DE175500D5F7D2 /* AppDelegate.m in Sources */,
+				380101E821E35CEA00D5F7D2 /* MyView.m in Sources */,
+				3801026321E49E5700D5F7D2 /* ZJBasePushAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,7 +433,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cupid.abc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cupid.abc.aaa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -441,7 +453,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cupid.abc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cupid.abc.aaa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

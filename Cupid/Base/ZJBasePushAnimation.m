@@ -1,16 +1,15 @@
 //
-//  ZJBasePopAnimation.m
+//  ZJBasePushAnimation.m
 //  Cupid
 //
-//  Created by panzhijun on 2019/1/4.
+//  Created by panzhijun on 2019/1/8.
 //  Copyright © 2019 panzhijun. All rights reserved.
 //
 
-#import "ZJBasePopAnimation.h"
+#import "ZJBasePushAnimation.h"
 #import "ZJCommonMacro.h"
 
-
-@implementation ZJBasePopAnimation
+@implementation ZJBasePushAnimation
 
 // 返回动画执行的时间
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
@@ -45,15 +44,14 @@
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     
     // 动画类型
-    switch (_popType) {
-        case PopAnimationTypeDefault:
+    switch (_pushType) {
+        case PushAnimationTypeDefault:
         {
-
             
+              toVC.view.transform = CGAffineTransformMakeTranslation(SCREEN_W,0);
             [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-                fromVC.view.transform = CGAffineTransformMakeTranslation(SCREEN_W,0);
+                toVC.view.transform = CGAffineTransformMakeTranslation(0,0);
             } completion:^(BOOL finished) {
-                fromVC.view.transform = CGAffineTransformIdentity;
                 toVC.view.transform = CGAffineTransformIdentity;
                 // 当动画执行完时，这个方法必须要调用，否则系统会认为你的其余操作都在动画执行过程中
                 [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
@@ -62,10 +60,10 @@
         }
             break;
             
-        case PopAnimationTypeFollow:
+        case PushAnimationTypeFollow:
         {
             toVC.view.transform = CGAffineTransformMakeTranslation(-SCREEN_W, 0);
-
+            
             
             [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
                 fromVC.view.transform = CGAffineTransformMakeTranslation(SCREEN_W,0);

@@ -8,6 +8,7 @@
 
 #import "ListViewController.h"
 #import "ZJBaseViewController+NavBar.h"
+#import "MyView.h"
 
 
 @interface ListViewController()<UITableViewDelegate,UITableViewDataSource>
@@ -38,9 +39,6 @@
         [_maryTitle addObject:[NSString stringWithFormat:@"---%d",i]];
     }
     
-
-
-    
     
 }
 
@@ -56,7 +54,7 @@
 -(void)initMainViews
 {
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-100) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-1) style:UITableViewStylePlain];
     
     self.tableView.delegate= self;
     self.tableView.dataSource = self;
@@ -92,6 +90,7 @@
     
     cell.textLabel.text = [_maryTitle objectAtIndex:indexPath.row];
     
+    
     return cell;
     
 }
@@ -100,8 +99,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    ListViewController *vc = [[ListViewController alloc]init];
-    
-    [self.navigationController pushViewController:vc animated:YES];
+//    ListViewController *vc = [[ListViewController alloc]init];
+//    
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
