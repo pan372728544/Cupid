@@ -7,6 +7,7 @@
 //
 
 #import "ZJBaseNavigationController.h"
+#import "ZJBaseTabBarController.h"
 
 @interface ZJBaseNavigationController ()<UIGestureRecognizerDelegate>
 
@@ -18,27 +19,33 @@
     
     if (self == [super initWithRootViewController:rootViewController]) {
         
+        self.navigationBar.hidden = YES;
     }
     return self;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor =[UIColor clearColor];
+    self.tabBarController.tabBar.hidden = YES;
 
 }
+
+
 
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    
-    
-    if (self.viewControllers.count > 0) {
-        
-        viewController.hidesBottomBarWhenPushed = YES;
-    }
-    
+
+
     [super pushViewController:viewController animated:animated];
 }
 
+
+-(nullable UIViewController *)popViewControllerAnimated:(BOOL)animated
+{
+//   self.tabBarController.tabBar.hidden = YES;
+  return   [super popViewControllerAnimated:animated];
+}
 @end

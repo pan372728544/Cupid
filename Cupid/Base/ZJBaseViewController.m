@@ -12,7 +12,8 @@
 
 
 
-@interface ZJBaseViewController ()<UINavigationControllerDelegate>
+
+@interface ZJBaseViewController ()<UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
 // 百分比交互
 @property(nonatomic,strong)UIPercentDrivenInteractiveTransition *interactiveTransition;
@@ -28,6 +29,7 @@
 
 @implementation ZJBaseViewController
 
+
 -(id)init
 {
     if (self = [super init]) {
@@ -40,19 +42,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationController.delegate = self;
     
     self.view.userInteractionEnabled = YES;
     // 添加手势
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(customControllerPopHandle:)];
     [self.view addGestureRecognizer:panGesture];
+    panGesture.delegate = self;
     
-    // 隐藏系统导航栏
-    self.navigationController.navigationBarHidden = YES;
-    
-        self.popAnimation = [[ZJBasePopAnimation alloc]init];
+    self.popAnimation = [[ZJBasePopAnimation alloc]init];
 
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    [super viewWillAppear:animated];
 }
 
 -(void)setIsOpenTransiton:(BOOL)isOpenTransiton
@@ -72,7 +79,7 @@
     CGFloat process = [recognizer translationInView:self.view].x/self.view.bounds.size.width;
     process = MIN(1.0, MAX(0.0, process));
     
-    NSLog(@"%f===== %f",[recognizer translationInView:self.view].x,self.view.bounds.size.width);
+//    NSLog(@"%f===== %f",[recognizer translationInView:self.view].x,self.view.bounds.size.width);
     
     if(recognizer.state == UIGestureRecognizerStateBegan)
     {

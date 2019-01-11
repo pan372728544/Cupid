@@ -12,7 +12,6 @@
 // tabbar安全区域底部高度
 #define TABBAE_BOTTOM (([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) ? [UIApplication sharedApplication].keyWindow.rootViewController.view.safeAreaInsets.bottom : 0)
 
-
 // 状态栏高度
 #define STATUSBAR_H ([UIApplication sharedApplication].statusBarFrame.size.height)
 
@@ -30,7 +29,8 @@
 // X以后高度
 #define NAVBAR_IPHONEX_H (NAVBAR_H + STATUSBAR_H)
 
-
+// X以后高度
+#define TABBAR_IPHONEX_H (TABBAR_H + TABBAE_BOTTOM)
 
 
 /// 通过RGBA设置颜色，使用0x格式，如：RGBAAllColor(0xAABBCC, 0.5);
@@ -52,11 +52,12 @@ alpha:(a)/1.0]
 #define RGBColor(r, g, b) RGBAColor(r, g, b, 1.0)
 
 /// 随机颜色 用于区分不同的布局
-#define GMK_Color_Random [UIColor colorWithRed:(random() % 256) / 255.0  \
+#define Randon_Color [UIColor colorWithRed:(random() % 256) / 255.0  \
 green:(random() % 256) / 255.0  \
 blue:(random() % 256) / 255.0  \
 alpha:1.0]
 
 
+#define WEAKSELF typeof(self) __weak weakSelf = self;
 
 #endif /* ZJCommonMacro_h */

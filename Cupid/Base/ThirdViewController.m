@@ -7,6 +7,7 @@
 //
 
 #import "ThirdViewController.h"
+#import "ZJBaseViewController+NavBar.h"
 
 @interface ThirdViewController ()
 
@@ -19,8 +20,16 @@
     self.title = @"发现";
     self.view.backgroundColor= [UIColor whiteColor];
     // Do any additional setup after loading the view.
+    [self initNavView];
+    
 }
 
+
+-(void)initNavView
+{
+    [self createNavBarViewWithTitle:@"发现"];
+    
+}
 /*
 #pragma mark - Navigation
 

@@ -7,6 +7,7 @@
 //
 
 #import "SecondViewController.h"
+#import "ZJBaseViewController+NavBar.h"
 
 @interface SecondViewController ()
 
@@ -19,8 +20,16 @@
     self.title = @"通讯录";
     self.view.backgroundColor= [UIColor whiteColor];
     // Do any additional setup after loading the view.
+    [self initNavView];
+    
 }
 
+
+-(void)initNavView
+{
+    [self createNavBarViewWithTitle:@"通讯录"];
+    
+}
 /*
 #pragma mark - Navigation
 

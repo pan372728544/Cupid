@@ -7,6 +7,7 @@
 //
 
 #import "FourthViewController.h"
+#import "ZJBaseViewController+NavBar.h"
 
 @interface FourthViewController ()
 
@@ -19,8 +20,16 @@
     self.title = @"我";
     self.view.backgroundColor= [UIColor whiteColor];
     // Do any additional setup after loading the view.
+    [self initNavView];
+    
 }
 
+
+-(void)initNavView
+{
+    [self createNavBarViewWithTitle:@"我"];
+    
+}
 /*
 #pragma mark - Navigation
 
