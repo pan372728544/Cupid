@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)setNavigationViewBackgroundColor:(UIColor *)bgcolor;
 
+- (void)createNavRightBtnWithItem:(id)idItem target:(id)target action:(SEL)selAction;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -14,10 +14,12 @@
 #import "HomeContentViewController.h"
 #import "HomeTopBarView.h"
 #import "CategoryTitleModel.h"
-#import "YQNetworking.h"
+#import "ZJNetworking.h"
 #import "MJExtension.h"
 #import "HomeCategoryAddView.h"
 #import "HomeRequest.h"
+#import "HomeDetailViewController.h"
+
 
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CategoryAddViewDelegate>
@@ -39,13 +41,16 @@
 
 
 
+
+
 @end
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"首页";
+    
+
     
     self.isfullScreen = NO;
     self.maryData = [NSMutableArray array];
@@ -56,13 +61,12 @@
     [self.view addSubview:self.categoryAdd];
     [self.view addSubview:self.fengeLineView];
     
-    
-//    [self.view addSubview:self.topBarView];
-   
-    
+
     [self initNavView];
     
     [self getDatas];
+    
+
     
 }
 
@@ -70,15 +74,27 @@
 
 -(void)initNavView
 {
+    [self createNavLeftBtnWithItem:[UIImage imageNamed:@"arrow-left-white-24_24x24_"] target:self action:@selector(btnClick:)];
     
-//    UISearchBar *search = [UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 280, 44)
+    [self createNavRightBtnWithItem:@"搜索" target:self action:@selector(seachClick:)];
     
     [self createNavBarViewWithTitle:self.topBarView];
-    [self setNavigationViewBackgroundColor:RGBAllColor(0xFF1111)];
-//    [self createNavBarViewWithTitle:@"首页"];
+    
+    [self setNavigationViewBackgroundColor:COLOR_COMMONRED];
+
     
 }
 
+-(void)btnClick:(id)sender
+{
+ 
+
+}
+
+-(void)seachClick:(id)sender
+{
+
+}
 
 -(void)getDatas
 {
@@ -89,7 +105,8 @@
 {
 
     WEAKSELF;
-    [YQNetworking getWithUrl:[HomeRequest getHomeCategoryTitleUrl] refreshRequest:NO cache:NO params:nil progressBlock:nil successBlock:^(id response) {
+    NSDictionary *rootPram=[HomeRequest getCommonParamDic];
+    [ZJNetworking getWithUrl:[HomeRequest getHomeCategoryTitleUrl] refreshRequest:NO cache:NO params:rootPram progressBlock:nil successBlock:^(id response) {
    
         
         [weakSelf requestSuccess:(id)response];
@@ -140,9 +157,9 @@
     [self setUpTitleGradient:^(TitleColorGradientStyle *titleColorGradientStyle, UIColor *__autoreleasing *norColor, UIColor *__autoreleasing *selColor) {
         *norColor = [UIColor blackColor];
         *selColor = [UIColor colorWithRed:0.84 green:0.23 blue:0.22 alpha:1];;
-        
+
     }];
-    
+
     [self setUpTitleScale:^(CGFloat *titleScale) {
         *titleScale=1.1;
     }];
@@ -160,7 +177,8 @@
 {
     if(!_topBarView){
         _topBarView = [HomeTopBarView new];
-        
+        _topBarView.superVC = self;
+
     }
     return _topBarView;
 }

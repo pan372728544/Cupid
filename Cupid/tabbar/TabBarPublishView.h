@@ -8,9 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^closeViewBlock)(void);
+
+typedef void(^pubClickBlock)(NSInteger num);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TabBarPublishView : UIView
+
+
+@property(nonatomic,copy) closeViewBlock myBlock ;
+
+
+@property(nonatomic,copy) pubClickBlock pubBlock ;
 
 @end
 

@@ -20,7 +20,6 @@
         
         self.frame = CGRectMake(0, 0, SCREEN_W,NAVBAR_IPHONEX_H);
         self.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1];
-//        self.backgroundColor = [UIColor blackColor];
         /// 标题
         _labelTitle = [[UILabel alloc] init];
         _labelTitle.frame = CGRectMake(80, STATUSBAR_H, SCREEN_W-80*2, NAVBAR_H);
@@ -74,16 +73,9 @@
         UIView *viewNewNavTitle = idNavTitle;
         viewNewNavTitle.tag = NavBar_ViewTitle_Tag;
         
-//        if (viewNewNavTitle.frame.size.width > (SCREEN_W - GMK_NavBar_Btn_W*2)) /// 如果中间视图超出最大宽度，重新设定
-//        {
-//            viewNewNavTitle.frame = CGRectMake(viewNewNavTitle.frame.origin.x,
-//                                               viewNewNavTitle.frame.origin.y,
-//                                               SCREEN_W - GMK_NavBar_Btn_W*2,
-//                                               viewNewNavTitle.frame.size.height);
-//        }
-
         /// 视图居中
-        viewNewNavTitle.center = CGPointMake(SCREEN_W/2, (NAVBAR_IPHONEX_H-STATUSBAR_H)/2+STATUSBAR_H);
+        viewNewNavTitle.center = CGPointMake(SCREEN_W/2, NAVBAR_H/2+STATUSBAR_H);
+    
         [self addSubview:viewNewNavTitle];
     }
 }
@@ -92,16 +84,84 @@
 - (void)createNavLeftBtnWithItem:(id)idItem
 {
     
-    UIButton *btnLeft = [[UIButton alloc]initWithFrame:CGRectMake(0, STATUSBAR_H, 80, NAVBAR_H)];
-    btnLeft.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    btnLeft.imageEdgeInsets = UIEdgeInsetsMake(0, 4, 0, -4);
-    btnLeft.titleEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 0);
-    [btnLeft setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btnLeft.titleLabel.adjustsFontSizeToFitWidth = YES;
-    [btnLeft setBackgroundImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
-    [btnLeft setTitle:idItem forState:UIControlStateNormal];
-    self.btnLeft = btnLeft;
-    [self addSubview:btnLeft];
+    if (!_btnLeft)
+    {
+        UIButton *btnLeft = [[UIButton alloc]initWithFrame:CGRectMake(10, STATUSBAR_H, NavBar_Btn_W, NAVBAR_H)];
+        _btnLeft = btnLeft;
+        _btnLeft.tag = 100;
+        _btnLeft.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _btnLeft.imageEdgeInsets = UIEdgeInsetsMake(0, 4, 0, -4);
+        _btnLeft.titleEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 0);
+        _btnLeft.titleLabel.adjustsFontSizeToFitWidth = YES;
+        
+        /// 高亮时的文字颜色
+        [_btnLeft setTitleColor:NavBar_BtnTitle_Color forState:UIControlStateHighlighted];
+        /// 不可点击时的文字颜色
+        [_btnLeft setTitleColor:NavBar_BtnTitle_Color forState:UIControlStateDisabled];
+        
+        [self addSubview:_btnLeft];
+        
+    }
+    
+    if ([idItem isKindOfClass:[NSString class]]) /// NSString
+    {
+        if (![idItem isEqualToString:@""]) /// 有标题
+        {
+
+            
+            [_btnLeft setTitle:idItem forState:UIControlStateNormal];
+        }
+        else /// 没有标题，直接设置返回按钮图片
+        {
+            [_btnLeft setImage:[UIImage imageNamed:@"back_24x24_"] forState:UIControlStateNormal];
+        }
+    }
+    else if ([idItem isKindOfClass:[UIImage class]]) /// UIImage类型
+    {
+        [_btnLeft setImage:idItem forState:UIControlStateNormal];
+    }
+    
+    
 }
+
+
+/// 创建右侧按钮
+- (void)createNavRightBtnWithItem:(id)idItem
+{
+    if (!_btnRight)
+    {
+        
+        UIButton *btnRight = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W - GMK_NavBar_Btn_W-5, STATUSBAR_H, NavBar_Btn_W, NAVBAR_H)];
+        
+        _btnRight = btnRight;
+        _btnRight.tag = 200;
+        _btnRight.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        _btnRight.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 12);
+        _btnRight.titleLabel.adjustsFontSizeToFitWidth = YES;
+        
+        /// 普通状态时的文字颜色
+        [_btnRight setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        /// 高亮时的文字颜色
+        [_btnRight setTitleColor:NavBar_BtnTitle_Color forState:UIControlStateHighlighted];
+        /// 不可点击时的文字颜色
+        [_btnRight setTitleColor:NavBar_BtnTitle_Color forState:UIControlStateDisabled];
+        
+        _btnRight.titleLabel.font = NAV_Btn_Font;
+        [self addSubview:_btnRight];
+        
+    }
+    
+    if ([idItem isKindOfClass:[NSString class]]) /// String类型
+    {
+        /// 设置title
+        [_btnRight setTitle:idItem forState:UIControlStateNormal];
+    }
+    else if ([idItem isKindOfClass:[UIImage class]]) /// UIImage类型
+    {
+        /// 设置image
+        [_btnRight setImage:idItem forState:UIControlStateNormal];
+    }
+}
+
 
 @end

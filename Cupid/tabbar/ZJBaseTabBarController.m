@@ -11,6 +11,8 @@
 #import "ZJCommonMacro.h"
 #import "ZJTabBar.h"
 #import "TabBarPublishView.h"
+#import "PublishViewController.h"
+
 
 
 @interface ZJBaseTabBarController ()<ZJTabBarDelegate>
@@ -19,6 +21,9 @@
 @property (nonatomic, strong) ZJTabBarConfig *config;
 
 @property(nonatomic,strong) TabBarPublishView *viewPub;
+
+
+@property(nonatomic,strong) UIControl *controlCover;
 
 @end
 
@@ -213,6 +218,9 @@
     self.customTabBar.items = [items copy];
     self.customTabBar.frame = CGRectMake(0, SCREEN_H - TABBAR_IPHONEX_H, SCREEN_W, TABBAR_IPHONEX_H);
     [self.view addSubview:self.customTabBar];
+    
+    // 添加发布视图
+    [self.view addSubview:self.viewPub];
 }
 
 - (void)viewDidLoad {
@@ -236,8 +244,12 @@
     }
     
     
+    // 全部变成正常图标
     for (int i = 0; i < items.count; i++)
     {
+        if (index == 2) {
+            break;
+        }
         UIView *view = items[i];
         if ([view isKindOfClass:[ZJTabBarItem class]]) {
             ZJTabBarItem *item = (ZJTabBarItem *)view;
@@ -276,21 +288,80 @@
             item.titleColor = self.config.selectedColor;
         }
     }
-    
-    if (index != 2) {
+    NSLog(@"%ld",index);
+    if (index < 2) {
         // 设置被选中的tabbaritem
         self.selectedIndex = index;
+    }
+    else if (index > 2) {
+        // 设置被选中的tabbaritem
+        self.selectedIndex = index-1;
     }
     else
     {
         
-        NSLog(@"中间被点击了");
+        // 创建蒙版
+        self.controlCover = [[UIControl alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+     
+        self.controlCover.backgroundColor = [UIColor lightGrayColor];
+        self.controlCover.alpha = 0.02;
+           [self.view insertSubview:self.controlCover belowSubview:self.viewPub];
+        [self.controlCover addTarget:self action:@selector(coverClick) forControlEvents:UIControlEventTouchUpInside];
         
-        self.viewPub =[[TabBarPublishView alloc]initWithFrame:CGRectMake(0, SCREEN_H-100, SCREEN_W, 100)];
         
-        [self.view addSubview:self.viewPub];
+        WEAKSELF
+        
+        self.viewPub.hidden = NO;
+
+        self.viewPub.transform = CGAffineTransformTranslate(CGAffineTransformMakeScale(0.1, 0.1), 0, 30);
+        [UIView animateWithDuration:0.15 animations:^{
+
+            self.viewPub.transform = CGAffineTransformTranslate(CGAffineTransformMakeScale(1.0, 1.0), 0, 0);
+
+        } completion:^(BOOL finished) {
+            self.viewPub.transform = CGAffineTransformIdentity;
+        }];
+
+
+
+        // 点击关闭按钮
+        _viewPub.myBlock = ^{
+
+            weakSelf.viewPub.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            [UIView animateWithDuration:0.15 animations:^{
+                weakSelf.viewPub.transform = CGAffineTransformMakeScale(0.1, 0.1);
+            } completion:^(BOOL finished) {
+                weakSelf.viewPub.transform = CGAffineTransformIdentity;
+                [weakSelf coverClick];
+            }];
+
+        };
+
+
+        // 点击发不按钮
+        _viewPub.pubBlock = ^(NSInteger num) {
+
+            [weakSelf coverClick];
+            [weakSelf presentViewController:[PublishViewController new] animated:YES completion:nil];
+        };
     }
 
+}
+
+-(void)coverClick
+{
+    
+    self.viewPub.hidden = YES;
+    [self.controlCover removeFromSuperview];
+}
+
+-(TabBarPublishView * )viewPub
+{
+    if (!_viewPub){
+        _viewPub =[[TabBarPublishView alloc]initWithFrame:CGRectMake(0, SCREEN_H-200, SCREEN_W, 200)];
+        _viewPub.hidden = YES;
+    }
+    return _viewPub;
 }
 
 // 屏幕旋转时调整tabbar

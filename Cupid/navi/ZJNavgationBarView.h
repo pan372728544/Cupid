@@ -28,7 +28,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)createNavLeftBtnWithItem:(id)idItem;
 
-@property (nonatomic, weak)   UIButton    *btnLeft;
+- (void)createNavRightBtnWithItem:(id)idItem;
+
+@property (nonatomic, strong)   UIButton    *btnLeft;
+
+@property (nonatomic, strong)   UIButton    *btnRight;
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

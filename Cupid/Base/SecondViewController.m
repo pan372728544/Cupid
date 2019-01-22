@@ -8,9 +8,10 @@
 
 #import "SecondViewController.h"
 #import "ZJBaseViewController+NavBar.h"
+#import "HomeDetailViewController.h"
 
-@interface SecondViewController ()
-
+@interface SecondViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong)UITableView *tableView;
 @end
 
 @implementation SecondViewController
@@ -22,6 +23,13 @@
     // Do any additional setup after loading the view.
     [self initNavView];
     
+    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, NAVBAR_IPHONEX_H, SCREEN_W, SCREEN_H-NAVBAR_IPHONEX_H) style:UITableViewStylePlain];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource= self;
+    
+    [self.view addSubview:self.tableView];
 }
 
 
@@ -29,6 +37,37 @@
 {
     [self createNavBarViewWithTitle:@"通讯录"];
     
+}
+
+
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    
+    return 1;
+}
+
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 20;
+    
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    cell.textLabel.text = @"dddddddd";
+    
+    return cell;
+    
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [self.navigationController pushViewController:[HomeDetailViewController new] animated:YES];
 }
 /*
 #pragma mark - Navigation

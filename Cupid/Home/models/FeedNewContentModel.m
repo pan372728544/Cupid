@@ -7,7 +7,7 @@
 //
 
 #import "FeedNewContentModel.h"
-#import <MJExtension/MJExtension.h>
+
 
 @implementation FeedNewContentModel
 

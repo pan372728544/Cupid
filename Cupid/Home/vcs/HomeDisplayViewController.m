@@ -504,8 +504,7 @@ static NSString * const identify = @"CONTENTCELL";
         }
         
     
-        self.contentView.frame = CGRectMake(0, titleY, SCREEN_W, SCREEN_H - titleY);
-        
+        self.contentView.frame = CGRectMake(0, titleY, SCREEN_W, SCREEN_H - titleY- TABBAR_IPHONEX_H);
         
         // 顶部标题View尺寸
         self.titleScrollView.frame = CGRectMake(0, 0, SCREEN_W, self.titleHeight);

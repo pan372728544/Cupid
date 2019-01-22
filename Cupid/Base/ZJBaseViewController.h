@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ZJNavgationBarView.h"
 //#import "ZJBaseViewController+NavBar.h"
+#import "CommonHeader.h"
+
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,6 +23,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 设置动画类型
 @property(nonatomic,assign) BOOL isOpenTransiton;
+
+
+@property(nonatomic,assign) PopAnimationType typeAnimation;
+
+
+
+
 
 @end
 

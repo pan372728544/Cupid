@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeContentViewController : ZJBaseViewController
 @property(nonatomic,strong) NSString* category;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

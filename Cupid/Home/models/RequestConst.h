@@ -12,6 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RequestConst : NSObject
 
+
+typedef NS_ENUM(NSUInteger, FeedCellStyle) {
+    FeedNormalCell=0,
+    FeedWeiBoCell=32,
+    FeedFocusonCell=50,
+    
+};
+
 //************************** 接口URL ******************************//
 extern NSString * URLHostURL;                   // 主地址
 extern NSString *const URLVersion_Code;              // 接口版本
@@ -34,6 +42,9 @@ extern NSString *const URLGetWeiboContent;               //获取微博内容的
 
 extern NSString *const URLCategoryTitleModelMe;
 extern NSString *const URLCategoryTitleModelOther;
+
+
+extern NSString *const URLGetAritcleInformation;
 
 
 @end

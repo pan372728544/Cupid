@@ -1,0 +1,47 @@
+//
+//  PrefixHeader.pch
+//  Cupid
+//
+//  Created by panzhijun on 2019/1/15.
+//  Copyright © 2019 panzhijun. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+// 公共头文件引用
+#ifdef __OBJC__
+
+#import "ZJCommonMacro.h"
+#import "UIView+Frame.h"
+#import <Masonry.h>
+#import "ZJBaseViewController.h"
+#import "ZJBaseViewController+NavBar.h"
+#import "CommonHeader.h"
+#import "UIImageView+WebCache.h"
+#import <MJExtension/MJExtension.h>
+#import "MJLoadMoreFooter.h"
+
+#endif
+
+
+
+// 自定义log输出，debug时，正常NSLog输出，release状态，为空，不打印
+#ifdef DEBUG // 调试时
+
+#define MYLog(...) NSLog(__VA_ARGS__)
+
+#else // 发布时
+
+#define MYLog(...)
+
+#endif
+
+
+
+
+#endif /* PrefixHeader_pch */

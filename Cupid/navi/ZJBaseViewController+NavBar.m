@@ -29,6 +29,12 @@
 - (void)createNavLeftBtnWithItem:(id)idItem target:(id)target action:(SEL)selAction
 {
     
+    if (!self.superNavBarView)
+    {
+        /// 创建导航栏
+        self.superNavBarView = [[ZJNavgationBarView alloc] initWithTitle:@""];
+        [self.view addSubview:self.superNavBarView];
+    }
     
     [self.superNavBarView createNavLeftBtnWithItem:idItem];
     
@@ -36,6 +42,26 @@
                                      action:selAction
                            forControlEvents:UIControlEventTouchUpInside];
     
+}
+
+
+/// 创建右侧按钮
+- (void)createNavRightBtnWithItem:(id)idItem target:(id)target action:(SEL)selAction
+{
+    if (!self.superNavBarView)
+    {
+        /// 创建导航栏
+        self.superNavBarView = [[ZJNavgationBarView alloc] initWithTitle:@""];
+        [self.view addSubview:self.superNavBarView];
+    }
+    
+    if (idItem)
+    {
+        [self.superNavBarView createNavRightBtnWithItem:idItem];
+        [self.superNavBarView.btnRight addTarget:target
+                                          action:selAction
+                                forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 -(void)setNavigationViewBackgroundColor:(UIColor *)bgcolor

@@ -15,7 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FeedFocusonTableViewCell : UITableViewCell
 
--(void)setDataWithModel:(FeedNewContentModel*)model;
+//-(void)setDataWithModel:(FeedNewContentModel*)model;
+
+@property(nonatomic,strong) FeedNewContentModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

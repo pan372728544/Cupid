@@ -7,5 +7,6 @@ target 'Cupid' do
     pod 'SDWebImage','3.7.5'
     pod 'Masonry', '~> 1.0.2'
     pod 'MJExtension', '~> 3.0.15.1'
+    pod 'MJRefresh', '~> 3.1.15.7'
     
 end

@@ -11,18 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger,PopAnimationType)
-{
-    
-    PopAnimationTypeDefault,
-    PopAnimationTypeFollow,
-    
-};
-
 @interface ZJBasePopAnimation : NSObject<UIViewControllerAnimatedTransitioning>
 
 // pop类型
 @property(nonatomic,assign)PopAnimationType popType;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

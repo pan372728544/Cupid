@@ -12,7 +12,7 @@
 
 
 
-NSString * URLHostURL = @"http://lf.snssdk.com/";
+NSString * URLHostURL = @"https://lf.snssdk.com/";
 NSString *const URLVersion_Code=@"6.2.6";
 NSString *const URLVid=@"3678164C-BC97-4BDE-90C3-3796BF8C39DA";
 NSString *const URLDriveID=@"3002398707";
@@ -30,6 +30,9 @@ NSString *const URLUnFocusonUser=@"2/relation/unfollow/";
 NSString *const URLGetFeedNews=@"api/news/feed/v88/";
 NSString *const URLZangWeibo=@"ttdiscuss/v1/commit/threaddigg/";
 NSString *const URLGetWeiboContent=@"ttdiscuss/v1/thread/detail/content";
+
+
+NSString *const URLGetAritcleInformation=@"2/article/information/v23/";
 
 
 

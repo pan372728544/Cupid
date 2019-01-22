@@ -19,6 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)getHomeFeedNewsUrl;
 
 
+// 详情页请求
++(NSString *)getHomeArticleInformationUrl;
+
++(NSDictionary *)getCommonParamDic;
 @end
 
 NS_ASSUME_NONNULL_END

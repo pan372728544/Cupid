@@ -9,6 +9,8 @@
 #ifndef ZJCommonMacro_h
 #define ZJCommonMacro_h
 
+
+
 // tabbar安全区域底部高度
 #define TABBAE_BOTTOM (([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) ? [UIApplication sharedApplication].keyWindow.rootViewController.view.safeAreaInsets.bottom : 0)
 
@@ -24,7 +26,9 @@
 #define TABBAR_H    (49)
 
 // 导航高度
-#define NAVBAR_H (44)
+#define NAVBAR_H (50)
+
+#define  NAV_Btn_Font [UIFont systemFontOfSize:14]
 
 // X以后高度
 #define NAVBAR_IPHONEX_H (NAVBAR_H + STATUSBAR_H)
@@ -58,6 +62,17 @@ blue:(random() % 256) / 255.0  \
 alpha:1.0]
 
 
+#define COLOR_COMMONRED RGBAllColor(0xDE4A43)
+
+
 #define WEAKSELF typeof(self) __weak weakSelf = self;
+
+
+#define NavBar_Btn_H (44)       /// 左右Button的高度
+#define NavBar_Btn_W (80)       /// 左右各有一个Button的宽度
+#define  NavBar_BtnTitle_Color  RGBAllColor(0xD2D2D2) /// NavBar按钮文字颜色
+
+
+#define SearchBar_H (38)       /// 左右Button的高度
 
 #endif /* ZJCommonMacro_h */

@@ -10,7 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^closeSearchViewList)();
+
 @interface HomeTopBarView : UIView
+
+
+@property(nonatomic,strong) ZJBaseViewController *superVC;
+
+
+
+@property(nonatomic,copy)closeSearchViewList closeView;
+
 
 @end
 
