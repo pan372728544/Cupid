@@ -25,6 +25,9 @@
 #import "UIImageView+WebCache.h"
 #import <MJExtension/MJExtension.h>
 #import "MJLoadMoreFooter.h"
+#import "MBProgressHUD.h"
+#import "MBProgressHUD+Extension.h"
+#import "ZJBasePresentViewController.h"
 
 #endif
 

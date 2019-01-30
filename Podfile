@@ -8,5 +8,6 @@ target 'Cupid' do
     pod 'Masonry', '~> 1.0.2'
     pod 'MJExtension', '~> 3.0.15.1'
     pod 'MJRefresh', '~> 3.1.15.7'
+    pod 'MBProgressHUD', '~> 1.1.0'
     
 end

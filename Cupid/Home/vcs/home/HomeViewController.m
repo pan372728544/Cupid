@@ -19,6 +19,7 @@
 #import "HomeCategoryAddView.h"
 #import "HomeRequest.h"
 #import "HomeDetailViewController.h"
+#import "HomeChannelViewController.h"
 
 
 
@@ -70,7 +71,9 @@
     
 }
 
-
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 
 -(void)initNavView
 {
@@ -186,6 +189,18 @@
 -(void)clickAddCategory
 {
 //    [self.cateGoryManagerView show];
+    
+    HomeChannelViewController *vc = [[HomeChannelViewController alloc]init];
+
+    [self presentViewController:vc animated:YES completion:nil];
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 -(HomeCategoryAddView *)categoryAdd

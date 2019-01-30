@@ -8,7 +8,8 @@
 
 #import "SecondViewController.h"
 #import "ZJBaseViewController+NavBar.h"
-#import "HomeDetailViewController.h"
+#import "ThirdViewController.h"
+#import "VideoDetailViewController.h"
 
 @interface SecondViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -30,6 +31,22 @@
     self.tableView.dataSource= self;
     
     [self.view addSubview:self.tableView];
+    
+    self.typeAnimation = PopAnimationTypeOther;
+    
+//    UIImageView *imgV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 100, SCREEN_W, SCREEN_H)];
+//    imgV.backgroundColor = [UIColor orangeColor];
+//    [self.view addSubview:imgV];
+//
+//    NSString *str = [@"http%3A%2F%2Fp3-tt.bytecdn.cn%2Flarge%2Fpgc-image%2Fe119b15f49f44485871e433519f07d42" stringByRemovingPercentEncoding];
+//
+//    [imgV sd_setImageWithURL:[NSURL URLWithString:str] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//
+//        UIImage *imag = image;
+//        NSLog(@"%@",imag);
+//
+//    }];
+    
 }
 
 
@@ -67,7 +84,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    [self.navigationController pushViewController:[HomeDetailViewController new] animated:YES];
+    [self presentViewController:[VideoDetailViewController new] animated:YES completion:nil];
+    
+//    [self.navigationController pushViewController:[VideoDetailViewController new] animated:YES];
 }
 /*
 #pragma mark - Navigation

@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger,PopAnimationType)
     PopAnimationTypeFollow,
     PopAnimationTypeSearch,
     
+    PopAnimationTypeOther,
+    
 };
 
 

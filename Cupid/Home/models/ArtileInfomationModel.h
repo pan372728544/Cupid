@@ -78,5 +78,62 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+@class ArtileInfomationHtmlH5ExtraModel;
+@class ArtileInfomationHtmlTitleImageModel;
+@interface ArtileInfomationHtmlModel : NSObject
 
+
+@property(nonatomic,copy)NSString  *content;//:null,
+
+@property(nonatomic,strong)NSArray  *image_detail;//:null,
+
+//
+@property(nonatomic,strong)ArtileInfomationHtmlH5ExtraModel  *h5_extra;
+
+
+@property(nonatomic,strong)ArtileInfomationHtmlTitleImageModel  *title_image;
+
+@end
+
+@interface ArtileInfomationHtmlImglistModel : NSObject
+
+
+@property(nonatomic,copy)NSString  *url;
+
+
+@end
+
+@class ArtileInfomationHtmlH5ExtraMediaModel;
+@interface ArtileInfomationHtmlH5ExtraModel : NSObject
+
+
+// s发布时间
+@property(nonatomic,copy)NSString  *publish_time;
+@property(nonatomic,strong)ArtileInfomationHtmlH5ExtraMediaModel  *media;
+
+@end
+
+
+@interface ArtileInfomationHtmlH5ExtraMediaModel : NSObject
+
+
+/// 名字
+@property(nonatomic,copy)NSString  *name;
+// 头像
+@property(nonatomic,copy)NSString  *avatar_url;
+// 信息
+@property(nonatomic,copy)NSString  *auth_info;
+
+@end
+
+
+
+@interface ArtileInfomationHtmlTitleImageModel : NSObject
+
+
+/// 标题图片
+@property(nonatomic,copy)NSString  *title_image_url;
+
+
+@end
 NS_ASSUME_NONNULL_END

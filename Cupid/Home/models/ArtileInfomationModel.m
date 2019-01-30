@@ -39,5 +39,58 @@
              };
 }
 
+
+
+
 @end
+
+
+@implementation ArtileInfomationHtmlModel
+
+
++(NSDictionary *)mj_objectClassInArray
+{
+    
+    return @{
+             @"image_detail":@"ArtileInfomationHtmlImglistModel"
+             };
+}
+
+
+
+
+@end
+
+@implementation ArtileInfomationHtmlImglistModel
+
+
+
+
+@end
+
+
+
+@implementation ArtileInfomationHtmlH5ExtraModel
+
+
+
+
+@end
+
+
+@implementation ArtileInfomationHtmlH5ExtraMediaModel
+
+
+
+
+@end
+
+
+@implementation ArtileInfomationHtmlTitleImageModel
+
+
+
+
+@end
+
 
