@@ -272,7 +272,7 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
         [html appendFormat:@"body{\
          font-size:18px;\
          color: black;\
-         padding: 10px;\
+         padding: 8px;\
          /* 文字两端对齐 */\
          text-align: justify;\
          text-justify: inter-ideograph;\
@@ -281,7 +281,7 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
          width: 100%%;\
          height: auto;\
          }\
-        .tt-title{font-size:20px;font-weight:bold;font-family:\"Arial\",\"Microsoft Yahei\",\"Simsun\"; margin:10px }\
+        .tt-title{font-size:28px;font-weight:bold;font-family:\"Arial\",\"Microsoft Yahei\",\"Simsun\"; margin:0px }\
          .divs{height: 30px;width: auto; margin:10px 10px}\
          .imgstouxiang{display: inline-block;vertical-align: middle;width: 30px;height: 30px;}\
          .info1{display: inline-block;width: 150px;height: 15px;vertical-align: top;font-size: 13px;font-weight: bold;margin-left: 10px;}\

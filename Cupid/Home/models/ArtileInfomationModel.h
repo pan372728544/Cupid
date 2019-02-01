@@ -29,9 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 //@property(nonatomic,copy)NSString  *reply_count;//":137,
 //
 //@property(nonatomic,copy)NSString  *digg_count;//":1161,
-//@property(nonatomic,copy)NSString  *bury_count;//":0,
+@property(nonatomic,copy)NSString  *bury_count;//":0,
 //@property(nonatomic,copy)NSString  *forward_count;//":8,
-//@property(nonatomic,copy)NSString  *create_time;//":1547994426,
+@property(nonatomic,copy)NSString  *create_time;//":1547994426,
 //@property(nonatomic,copy)NSString  *score;//":0.92825190235562,
 //@property(nonatomic,copy)NSString  *user_id;//":7495422986,
 @property(nonatomic,copy)NSString  *user_name;//":"Jason0912",

@@ -165,6 +165,8 @@
 		38FF1FB522019CB100A3CA7F /* ZJPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1FA822019CB100A3CA7F /* ZJPhotoBrowser.m */; };
 		38FF1FB622019CB100A3CA7F /* ZJPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1FAA22019CB100A3CA7F /* ZJPhoto.m */; };
 		38FF1FBA22019CB100A3CA7F /* ZJPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1FB122019CB100A3CA7F /* ZJPhotoView.m */; };
+		38FF1FC62204012B00A3CA7F /* c_comment_like_icon_18x18_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38FF1FC42204012A00A3CA7F /* c_comment_like_icon_18x18_@2x.png */; };
+		38FF1FC72204012B00A3CA7F /* c_comment_like_icon_18x18_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38FF1FC52204012A00A3CA7F /* c_comment_like_icon_18x18_@3x.png */; };
 		57C42E4A1E5BCB0E6973E01A /* libPods-Cupid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E35B713560E9DC37C4F79AD /* libPods-Cupid.a */; };
 /* End PBXBuildFile section */
 
@@ -401,6 +403,8 @@
 		38FF1FAA22019CB100A3CA7F /* ZJPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJPhoto.m; sourceTree = "<group>"; };
 		38FF1FAF22019CB100A3CA7F /* ZJPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJPhotoBrowser.h; sourceTree = "<group>"; };
 		38FF1FB122019CB100A3CA7F /* ZJPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJPhotoView.m; sourceTree = "<group>"; };
+		38FF1FC42204012A00A3CA7F /* c_comment_like_icon_18x18_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c_comment_like_icon_18x18_@2x.png"; sourceTree = "<group>"; };
+		38FF1FC52204012A00A3CA7F /* c_comment_like_icon_18x18_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c_comment_like_icon_18x18_@3x.png"; sourceTree = "<group>"; };
 		7E35B713560E9DC37C4F79AD /* libPods-Cupid.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cupid.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82BF0E830E852FDB0E7C36BA /* Pods-Cupid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cupid.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cupid/Pods-Cupid.debug.xcconfig"; sourceTree = "<group>"; };
 		F8ADFD4554F8446D43C7E1A2 /* Pods-Cupid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cupid.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cupid/Pods-Cupid.release.xcconfig"; sourceTree = "<group>"; };
@@ -611,6 +615,8 @@
 		386392E921E8709F00A834EE /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				38FF1FC42204012A00A3CA7F /* c_comment_like_icon_18x18_@2x.png */,
+				38FF1FC52204012A00A3CA7F /* c_comment_like_icon_18x18_@3x.png */,
 				38FF1F0821FEF52B00A3CA7F /* deleteicon_channel_18x18_@2x.png */,
 				38FF1F0721FEF52B00A3CA7F /* deleteicon_channel_18x18_@3x.png */,
 				38FF1EF721FEE34A00A3CA7F /* close_channel_24x24_@2x.png */,
@@ -954,6 +960,7 @@
 				3863930D21E8729B00A834EE /* home_tabbar_night_32x32_@2x.png in Resources */,
 				3863930921E8729B00A834EE /* home_tabbar_press_night_32x32_@3x.png in Resources */,
 				3863930021E8718300A834EE /* addfriend_tabbar_press_32x32_@3x.png in Resources */,
+				38FF1FC62204012B00A3CA7F /* c_comment_like_icon_18x18_@2x.png in Resources */,
 				3863933D21E8730C00A834EE /* pgc_tabbar_icon_more_night_24x24_@3x.png in Resources */,
 				3863934921E8733100A834EE /* video_tabbar_night_32x32_@2x.png in Resources */,
 				38C20A8821EDE4C8007C4CB7 /* back_24x24_@3x.png in Resources */,
@@ -1001,6 +1008,7 @@
 				386392EF21E870F100A834EE /* add_channel_titlbar_thin_new_24x24_@3x.png in Resources */,
 				3863932321E872E400A834EE /* mine_tabbar_press_33x32_@3x.png in Resources */,
 				38C20A4921ED8515007C4CB7 /* detail_search_icon_16x16_@3x.png in Resources */,
+				38FF1FC72204012B00A3CA7F /* c_comment_like_icon_18x18_@3x.png in Resources */,
 				3863930B21E8729B00A834EE /* home_tabbar_press_32x32_@3x.png in Resources */,
 				3801018B21DE175500D5F7D2 /* Main.storyboard in Resources */,
 				3863931521E872C000A834EE /* huoshan_tabbar_press_night_32x32_@2x.png in Resources */,
