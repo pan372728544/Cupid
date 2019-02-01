@@ -155,11 +155,8 @@
     NSString *dateString       = [formatter stringFromDate: date];
     self.labTime.text = [NSString stringWithFormat:@"%@·回复",dateString];
     
-    if (![model.bury_count isEqualToString:@"0"]) {
-        self.labCount.text = model.bury_count;
-    }
     
-
+    self.labCount.text = [model.bury_count isEqualToString:@"0"]?@"赞":model.bury_count;
     self.imagLike.image = [UIImage imageNamed:@"c_comment_like_icon_18x18_"];
     
     [self setNeedsLayout];
