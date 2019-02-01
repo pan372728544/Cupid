@@ -1,153 +1,237 @@
 //
-//  ZJPhotoBrowser.h
+//  ZJPhotoBrowser.m
 //  Cupid
 //
-//  Created by panzhijun on 2019/1/25.
+//  Created by panzhijun on 2019/1/14.
 //  Copyright © 2019 panzhijun. All rights reserved.
 //
 
-
 #import "ZJPhotoBrowser.h"
-#import "ZJPhotoBrowserConfig.h"
- 
-@interface ZJPhotoBrowser() <UIScrollViewDelegate>
 
-@property (nonatomic,strong) UIScrollView *scrollView;
-@property (nonatomic,assign) BOOL hasShowedPhotoBrowser;
-@property (nonatomic,strong) UILabel *indexLabel;
-@property (nonatomic,strong) UIActivityIndicatorView *indicatorView;
-@property (nonatomic,strong) UIButton *saveButton;
-@property (nonatomic,strong) UILabel *backButton;
+
+@interface ZJPhotoBrowser()<UIScrollViewDelegate>
+{
+    UILabel  *_countLabel;
+    UIView *_viewBottom ;
+}
+
+@property (nonatomic, strong, readwrite) UIView *contentView;
+
+@property (nonatomic, strong, readwrite) NSArray *photos;
+@property (nonatomic, assign, readwrite) NSInteger currentIndex;
+@property (nonatomic, assign, readwrite) BOOL       isLandspace;
+@property (nonatomic, assign, readwrite) UIDeviceOrientation currentOrientation;
+
+@property (nonatomic, strong) UIScrollView *photoScrollView;
+
+@property (nonatomic, strong) NSMutableArray *visiblePhotoViews;
+@property (nonatomic, strong) NSMutableSet *reusablePhotoViews;
+
+@property (nonatomic, strong) UIViewController *fromVC;
+
+@property (nonatomic, assign) BOOL isShow;
+
+@property (nonatomic, strong) NSArray *coverViews;
+@property (nonatomic, copy) layoutBlock layoutBlock;
+
+/** 记录上一次的设备方向 */
+@property (nonatomic, assign) UIDeviceOrientation originalOrientation;
+
+/** 正在发生屏幕旋转 */
+@property (nonatomic, assign) BOOL isRotation;
+
+/** 状态栏正在发生变化 */
+@property (nonatomic, assign) BOOL isStatusBarChanged;
+/** 状态栏是否显示 */
+@property (nonatomic, assign) BOOL isStatusBarShowing;
+
+/** 正在滑动缩放隐藏 */
+@property (nonatomic, assign) BOOL isZoomScale;
+
+@property (nonatomic, assign) BOOL isPortraitToUp;
+
+@property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
+
+@property (nonatomic, assign) CGPoint   firstMovePoint;
+@property (nonatomic, assign) CGPoint   startLocation;
+@property (nonatomic, assign) CGRect    startFrame;
+
 
 @end
 
 @implementation ZJPhotoBrowser
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    _hasShowedPhotoBrowser = NO;
-    // 背景颜色黑色
-    self.view.backgroundColor = kPhotoBrowserBackgrounColor;
-    // 添加scrollview
-    [self addScrollView];
-    // 添加序号和保存图片按钮
-    [self addToolbars];
-    // 设置frame
-    [self setUpFrames];
-}
+#pragma mark - 懒加载
+- (UIScrollView *)photoScrollView {
+    if (!_photoScrollView) {
+        CGRect frame = self.view.bounds;
+        frame.origin.x   -= kPhotoViewPadding;
+        frame.size.width += (2 * kPhotoViewPadding);
+        _photoScrollView = [[UIScrollView alloc] initWithFrame:frame];
+        _photoScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _photoScrollView.pagingEnabled  = YES;
+        _photoScrollView.delegate       = self;
+        _photoScrollView.showsVerticalScrollIndicator   = NO;
+        _photoScrollView.showsHorizontalScrollIndicator = NO;
+        _photoScrollView.backgroundColor                = [UIColor clearColor];
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if (!_hasShowedPhotoBrowser) {
-        [self showPhotoBrowser];
     }
+    return _photoScrollView;
 }
 
-#pragma mark 重置各控件frame（处理屏幕旋转）
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    [self setUpFrames];
+- (UIPanGestureRecognizer *)panGesture {
+    if (!_panGesture) {
+        _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    }
+    return _panGesture;
 }
 
-#pragma mark 设置各控件frame
-- (void)setUpFrames
-{
-    CGRect rect = self.view.bounds;
-    rect.size.width += kPhotoBrowserImageViewMargin * 2;
-    _scrollView.bounds = rect;
-    _scrollView.center = CGPointMake(SCREEN_W *0.5, SCREEN_H *0.5);
-    
-    CGFloat y = 0;
-    __block CGFloat w = SCREEN_W;
-    CGFloat h = SCREEN_H;
-    
-    //设置所有ZJPhotoBrowserView的frame
-    [_scrollView.subviews enumerateObjectsUsingBlock:^(ZJPhotoBrowserView *obj, NSUInteger idx, BOOL *stop) {
-        CGFloat x = kPhotoBrowserImageViewMargin + idx * (kPhotoBrowserImageViewMargin * 2 + w);
-        obj.frame = CGRectMake(x, y, w, h);
-    }];
-    self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
-   
-  
-    _scrollView.contentSize = CGSizeMake(_scrollView.subviews.count * _scrollView.frame.size.width, SCREEN_H);
-    _scrollView.contentOffset = CGPointMake(self.currentImageIndex * _scrollView.frame.size.width, 0);
+- (ZJPhoto *)currentPhoto {
+    return self.photos[self.currentIndex];
 }
 
-#pragma mark 显示图片浏览器
-- (void)showPhotoBrowser
-{
-    _hasShowedPhotoBrowser = YES;
-    
-    _scrollView.hidden = NO;
-    _indexLabel.hidden = NO;
-    _saveButton.hidden = NO;
+- (ZJPhotoView *)currentPhotoView {
+    return [self photoViewForIndex:self.currentIndex];
 }
 
-#pragma mark 添加scrollview
-- (void)addScrollView
-{
-    _scrollView = [[UIScrollView alloc] init];
-    _scrollView.frame = self.view.bounds;
-    _scrollView.delegate = self;
-    _scrollView.showsHorizontalScrollIndicator = NO;
-    _scrollView.showsVerticalScrollIndicator = NO;
-    _scrollView.pagingEnabled = YES;
-    _scrollView.hidden = YES;
-    [self.view addSubview:_scrollView];
-    
-    // 添加图片view
-    for (int i = 0; i < self.imageCount; i++) {
-        ZJPhotoBrowserView *view = [[ZJPhotoBrowserView alloc] init];
-        view.imageview.tag = i;
-        //处理单击
-        __weak __typeof(self)weakSelf = self;
-        view.singleTapBlock = ^(UITapGestureRecognizer *recognizer){
-            // 点击隐藏图片浏览器
-            __strong __typeof(weakSelf)strongSelf = weakSelf;
-            [strongSelf hidePhotoBrowser:recognizer];
-        };
++ (instancetype)photoBrowserWithPhotos:(NSArray<ZJPhoto *> *)photos currentIndex:(NSInteger)currentIndex {
+    return [[self alloc] initWithPhotos:photos currentIndex:currentIndex];
+}
+
+- (instancetype)initWithPhotos:(NSArray<ZJPhoto *> *)photos currentIndex:(NSInteger)currentIndex {
+    if (self = [super init]) {
         
-        [_scrollView addSubview:view];
+        // photo对象数组
+        self.photos       = photos;
+        // 图片当前索引
+        self.currentIndex = currentIndex;
+        
+        // 初始化
+        
+        // 是否显示状态栏
+        self.isStatusBarShow            = NO;
+        self.isHideSourceView           = YES;
+        
+        _visiblePhotoViews  = [NSMutableArray new];
+        _reusablePhotoViews = [NSMutableSet new];
+        
+
     }
-    // 加载图片
-    [self setupImageOfImageViewForIndex:self.currentImageIndex];
+    return self;
 }
 
-#pragma mark 添加操作按钮
-- (void)addToolbars
-{
-    //序标
-    self.indexLabel = [[UILabel alloc] init];
-    self.indexLabel.textAlignment = NSTextAlignmentCenter;
-    self.indexLabel.textColor = [UIColor whiteColor];
-    self.indexLabel.font = [UIFont systemFontOfSize:14];
-    self.indexLabel.frame = CGRectMake(20 , self.view.height - TABBAE_BOTTOM-30 , 60 , 30 );
+- (instancetype)init {
+    NSAssert(NO, @"Use initWithPhotos:currentIndex: instead.");
+    return nil;
+}
 
-    if (self.imageCount >= 1) {
-        self.indexLabel.text = [NSString stringWithFormat:@"1/%ld", (long)self.imageCount];
-        [self.view addSubview:self.indexLabel];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // 设置UI
+    [self setupUI];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // 手势
+    [self addGestureRecognizer];
+    
+    // 获取当前点击的图片
+    ZJPhoto *photo  = [self currentPhoto];
+    // 获取当前photoview
+    ZJPhotoView *photoView  = [self currentPhotoView];
+    
+    if ([[SDImageCache sharedImageCache] imageFromDiskCacheForKey:photo.url.absoluteString] || photo.image) {
+        [photoView setupPhoto:photo];
+    }else {
+        photoView.imageView.image = photo.placeholderImage ? photo.placeholderImage : photo.sourceImageView.image;
+        [photoView adjustFrame];
     }
     
-    // 2.保存按钮
-    self.saveButton = [[UIButton alloc] init];
-    [self.saveButton setTitle:@"保存" forState:UIControlStateNormal];
-    [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.saveButton.titleLabel.font = [UIFont systemFontOfSize:13];
-    self.saveButton.frame = CGRectMake(SCREEN_W-60 ,self.view.height - TABBAE_BOTTOM-30 , 60 , 30 );
-    [self.saveButton addTarget:self action:@selector(saveImage) forControlEvents:UIControlEventTouchUpInside];
-
-    [self.view addSubview:self.saveButton];
+    switch (self.showStyle) {
+        case ZJPhotoBrowserShowStyleNone:
+            [self browserNoneShow];
+            break;
+        case ZJPhotoBrowserShowStylePush:
+            [self browserPushShow];
+            break;
+        case ZJPhotoBrowserShowStyleZoom:{
+            [self browserZoomShow];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
-#pragma mark 保存图像
-- (void)saveImage
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:didDisappearAtIndex:)]) {
+        [self.delegate photoBrowser:self didDisappearAtIndex:self.currentIndex];
+    }
+}
+
+- (void)setupUI
 {
-    int index = _scrollView.contentOffset.x / _scrollView.bounds.size.width;
-    ZJPhotoBrowserView *currentView = _scrollView.subviews[index];
-    UIImageWriteToSavedPhotosAlbum(currentView.imageview.image, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), NULL);
+    self.view.backgroundColor   = self.bgColor ? : [UIColor blackColor];
+
+    // 内容视图
+    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+    self.contentView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.contentView];
+    
+    // 图片scrollview
+    [self.contentView addSubview:self.photoScrollView];
+    
+    // 图片页数
+    _countLabel = [UILabel new];
+    _countLabel.textColor = [UIColor whiteColor];
+    _countLabel.font  = [UIFont systemFontOfSize:16.0];
+    _countLabel.textAlignment = NSTextAlignmentLeft;
+    _countLabel.frame = CGRectMake(20, 0, 80, 30);
+    _countLabel.hidden = self.photos.count == 1;
+    
+    [self updateLabel];
+    
+    
+    UIButton *save = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-40-20, 6, 40, 18)];
+    [save setTitle:@"保存" forState:UIControlStateNormal];
+    save.titleLabel.font = [UIFont systemFontOfSize:15];
+    save.titleLabel.tintColor = [UIColor whiteColor];
+    [save addTarget:self action:@selector(saveImage:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _viewBottom = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_H-TABBAR_H, SCREEN_W, 30)];
+    _viewBottom.backgroundColor = [UIColor clearColor];
+    
+    [_viewBottom addSubview:_countLabel];
+    [_viewBottom addSubview:save];
+    [self.contentView addSubview:_viewBottom];
+    
+    
+    // 设置scrolview contentSize
+    CGRect frame = self.photoScrollView.bounds;
+    CGSize contentSize = CGSizeMake(frame.size.width * self.photos.count, frame.size.height);
+    self.photoScrollView.contentSize = contentSize;
+    
+    // 设置滑动到第几页
+    CGPoint contentOffset = CGPointMake(frame.size.width * self.currentIndex, 0);
+    [self.photoScrollView setContentOffset:contentOffset animated:NO];
+    
+    if (self.photoScrollView.contentOffset.x == 0) {
+        [self scrollViewDidScroll:self.photoScrollView];
+    }
+}
+
+
+-(void)saveImage:(id)sender
+{
+    ZJPhoto *photo  = [self currentPhoto];
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:photo.url.absoluteString];
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), NULL);
 }
 
 - (void)imageSavedToPhotosAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
@@ -161,93 +245,870 @@
     }
 }
 
-- (void)show
-{
-    [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:self animated:NO completion:nil];
+#pragma mark - Setter
+- (void)setShowStyle:(ZJPhotoBrowserShowStyle)showStyle {
+    _showStyle = showStyle;
+    
+    if (showStyle != ZJPhotoBrowserShowStylePush) {
+        self.modalPresentationStyle = UIModalPresentationCustom;
+        self.modalTransitionStyle   = UIModalTransitionStyleCoverVertical;
+    }
 }
 
-#pragma mark 单击退出图片浏览器
-- (void)hidePhotoBrowser:(UITapGestureRecognizer *)recognizer
+- (void)setIsStatusBarShow:(BOOL)isStatusBarShow {
+    _isStatusBarShow = isStatusBarShow;
+    
+    /**这一行代码打开，在有些情况下会出现pageControl位置不正确的bug */
+//    self.isStatusBarChanged = YES;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.isStatusBarChanged = NO;
+    });
+    
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        [self prefersStatusBarHidden];
+        
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    }
+}
+
+- (void)setIsScreenRotateDisabled:(BOOL)isScreenRotateDisabled {
+    _isScreenRotateDisabled = isScreenRotateDisabled;
+    
+    if (isScreenRotateDisabled) {
+        [self delDeviceOrientationObserver];
+    }else {
+        [self addDeviceOrientationObserver];
+    }
+}
+
+#pragma mark - BrowserShow
+- (void)browserNoneShow {
+    ZJPhotoView *photoView = [self currentPhotoView];
+    ZJPhoto *photo = [self currentPhoto];
+    
+    self.view.alpha = 0;
+    
+    [UIView animateWithDuration:kAnimationDuration animations:^{
+        self.view.alpha = 1.0;
+    }completion:^(BOOL finished) {
+        self.isShow = YES;
+        
+        [photoView setupPhoto:photo];
+        
+        [self deviceOrientationDidChange];
+    }];
+}
+
+- (void)browserPushShow {
+    self.view.backgroundColor = self.bgColor ? : [UIColor blackColor];
+    self.isShow = YES;
+    
+    [[self currentPhotoView] setupPhoto:[self currentPhoto]];
+    
+    [self deviceOrientationDidChange];
+}
+
+- (void)browserZoomShow {
+    ZJPhoto *photo          = [self currentPhoto];
+    ZJPhotoView *photoView  = [self currentPhotoView];
+    
+    CGRect endRect = CGRectZero;
+    if (photoView.imageView.image) {
+        endRect = photoView.imageView.frame;
+    }else {
+        if (CGRectEqualToRect(photo.sourceFrame, CGRectZero)) {
+            endRect = photoView.imageView.frame;
+        }else {
+            CGFloat w = GKScreenW;
+            CGFloat h = w * photo.sourceFrame.size.height / photo.sourceFrame.size.width;
+            CGFloat x = 0;
+            CGFloat y = (GKScreenH - h) / 2;
+            endRect = CGRectMake(x, y, w, h);
+        }
+    }
+    
+    CGRect sourceRect = photo.sourceFrame;
+    
+    if (CGRectEqualToRect(sourceRect, CGRectZero)) {
+        float systemVersion = [UIDevice currentDevice].systemVersion.floatValue;
+        if (systemVersion >= 8.0 && systemVersion < 9.0) {
+            sourceRect = [photo.sourceImageView.superview convertRect:photo.sourceImageView.frame toCoordinateSpace:photoView];
+        }else {
+            sourceRect = [photo.sourceImageView.superview convertRect:photo.sourceImageView.frame toView:photoView];
+        }
+    }
+    
+    photoView.imageView.frame = sourceRect;
+    
+    [UIView animateWithDuration:kAnimationDuration animations:^{
+        photoView.imageView.frame = endRect;
+        self.view.backgroundColor = self.bgColor ? : [UIColor blackColor];
+    }completion:^(BOOL finished) {
+        self.isShow = YES;
+        [photoView setupPhoto:photo];
+        
+        [self deviceOrientationDidChange];
+    }];
+}
+
+- (void)updateLabel {
+    _countLabel.text = [NSString stringWithFormat:@"%zd/%zd", self.currentIndex + 1, self.photos.count];
+}
+
+- (void)layoutSubviews {
+    CGRect frame = self.contentView.bounds;
+    
+    frame.origin.x   -= kPhotoViewPadding;
+    frame.size.width += kPhotoViewPadding * 2;
+    
+    CGFloat photoScrollW = frame.size.width;
+    CGFloat photoScrollH = frame.size.height;
+    
+    CGFloat pointX = photoScrollW * 0.5 - kPhotoViewPadding;
+    
+    self.photoScrollView.frame  = frame;
+    self.photoScrollView.center = CGPointMake(pointX, photoScrollH * 0.5);
+    
+    self.photoScrollView.contentOffset = CGPointMake(self.currentIndex * photoScrollW, 0);
+    
+    self.photoScrollView.contentSize = CGSizeMake(photoScrollW * self.photos.count, 0);
+    
+    // 调整所有显示的photoView的frame
+    CGFloat w = photoScrollW - kPhotoViewPadding * 2;
+    CGFloat h = photoScrollH;
+    CGFloat x = 0;
+    CGFloat y = 0;
+    
+    for (ZJPhotoView *photoView in _visiblePhotoViews) {
+        x = kPhotoViewPadding + photoView.tag * (kPhotoViewPadding * 2 + w);
+        
+        photoView.frame = CGRectMake(x, y, w, h);
+        [photoView resetFrame];
+    }
+    
+    if (self.coverViews) {
+        !self.layoutBlock ? : self.layoutBlock(self, self.contentView.bounds);
+    }else {
+
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:willLayoutSubViews:)]) {
+        [self.delegate photoBrowser:self willLayoutSubViews:self.currentIndex];
+    }
+}
+
+- (void)dealloc {
+    [self delDeviceOrientationObserver];
+}
+
+#pragma mark - 屏幕旋转
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
+
+#pragma mark - 状态栏
+- (BOOL)prefersStatusBarHidden {
+    return !self.isStatusBarShow;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return self.fromVC.preferredStatusBarStyle;
+}
+
+
+
+- (void)showFromVC:(UIViewController *)vc {
+    
+    self.fromVC = vc;
+    
+    if (self.showStyle == ZJPhotoBrowserShowStylePush) {
+        [vc.navigationController pushViewController:self animated:YES];
+    }else {
+        
+        // present
+        self.modalPresentationCapturesStatusBarAppearance = YES;
+        [vc presentViewController:self animated:NO completion:nil];
+    }
+}
+
+- (void)removePhotoAtIndex:(NSInteger)index {
+    if (index < 0 || index >= self.photos.count) return;
+    
+    NSMutableArray *photos = [NSMutableArray arrayWithArray:self.photos];
+    [photos removeObjectAtIndex:index];
+    
+    [self resetPhotoBrowserWithPhotos:photos];
+}
+
+- (void)resetPhotoBrowserWithPhotos:(NSArray *)photos {
+    if (photos.count == 0) {
+        [self handleSingleTap:nil];
+        return;
+    }
+    
+    self.photos = photos;
+    
+    [self.visiblePhotoViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    [self.reusablePhotoViews removeAllObjects];
+    [self.visiblePhotoViews removeAllObjects];
+    
+    [self updateReusableViews];
+    [self setupPhotoViews];
+    
+    [self layoutSubviews];
+}
+
+#pragma mark - Private Methods
+
+- (void)addGestureRecognizer
 {
+    // 单击手势
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    singleTap.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:singleTap];
+    
+    // 双击手势
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self.view addGestureRecognizer:doubleTap];
+    [singleTap requireGestureRecognizerToFail:doubleTap];
+    
+    // 长按手势
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    [self.view addGestureRecognizer:longPress];
+    
+    // 拖拽手势
+    [self addPanGesture:YES];
+}
+
+- (void)addPanGesture:(BOOL)isFirst {
+ 
+
+        [self.view addGestureRecognizer:self.panGesture];
+
+
+}
+
+- (void)removePanGesture {
+    if ([self.view.gestureRecognizers containsObject:self.panGesture]) {
+        [self.view removeGestureRecognizer:self.panGesture];
+    }
+}
+
+- (void)dismissAnimated:(BOOL)animated {
+    ZJPhoto *photo = [self currentPhoto];
+    
+    if (animated) {
+        [UIView animateWithDuration:kAnimationDuration animations:^{
+            photo.sourceImageView.alpha = 1.0;
+        }];
+    }else {
+        photo.sourceImageView.alpha = 1.0;
+    }
+    
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+    
+    // 移除屏幕旋转监听
+    [self delDeviceOrientationObserver];
+    
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
-#pragma mark 网络加载图片
-- (void)setupImageOfImageViewForIndex:(NSInteger)index
-{
-    ZJPhotoBrowserView *view = _scrollView.subviews[index];
-    if (view.beginLoadingImage) return;
-    if ([self highQualityImageURLForIndex:index]) {
-        [view setImageWithURL:[self highQualityImageURLForIndex:index] placeholderImage:[self placeholderImageForIndex:index]];
-    } else {
-        view.imageview.image = [self placeholderImageForIndex:index];
-    }
-    view.beginLoadingImage = YES;
-}
-
-#pragma mark 获取控制器的view
-- (UIView *)getParsentView:(UIView *)view{
-    if ([[view nextResponder] isKindOfClass:[UIViewController class]] || view == nil) {
-        return view;
-    }
-    return [self getParsentView:view.superview];
-}
-
-#pragma mark 获取低分辨率（占位）图片
-- (UIImage *)placeholderImageForIndex:(NSInteger)index
-{
-    if ([self.delegate respondsToSelector:@selector(photoBrowser:placeholderImageForIndex:)]) {
-        return [self.delegate photoBrowser:self placeholderImageForIndex:index];
-    }
-    return nil;
-}
-
-#pragma mark 获取高分辨率图片url
-- (NSURL *)highQualityImageURLForIndex:(NSInteger)index
-{
-    if ([self.delegate respondsToSelector:@selector(photoBrowser:highQualityImageURLForIndex:)]) {
-        return [self.delegate photoBrowser:self highQualityImageURLForIndex:index];
-    }
-    return nil;
-}
-
-
-#pragma mark - scrollview代理方法
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    int index = (scrollView.contentOffset.x + _scrollView.bounds.size.width * 0.5) / _scrollView.bounds.size.width;
-    _indexLabel.text = [NSString stringWithFormat:@"%d/%ld", index + 1, (long)self.imageCount];
-    long left = index - 2;
-    long right = index + 2;
-    left = left>0?left : 0;
-    right = right>self.imageCount?self.imageCount:right;
-    //预加载三张图片
-    for (long i = left; i < right; i++) {
-        [self setupImageOfImageViewForIndex:i];
+#pragma mark - Gesture Handle
+- (void)handleSingleTap:(UITapGestureRecognizer *)tap {
+    ZJPhotoView *photoView = [self currentPhotoView];
+    photoView.isLayoutSubViews = YES;
+    
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:singleTapWithIndex:)]) {
+        [self.delegate photoBrowser:self singleTapWithIndex:self.currentIndex];
     }
     
-    MYLog(@"上下:%f",scrollView.contentOffset.y);
+    if (self.isSingleTapDisabled) return;
+    
+    // 状态栏恢复到竖屏
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+    
+    if (self.showStyle == ZJPhotoBrowserShowStylePush) {
+        [self delDeviceOrientationObserver];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }else {
+        // 显示状态栏
+        self.isStatusBarShow = YES;
+        
+        // 防止返回时跳动
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self recoverAnimation];
+        });
+    }
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    int autualIndex = scrollView.contentOffset.x  / _scrollView.bounds.size.width;
-    //设置当前下标
-    self.currentImageIndex = autualIndex;
+- (void)handleDoubleTap:(UITapGestureRecognizer *)tap {
+    ZJPhotoView *photoView = [self currentPhotoView];
+    ZJPhoto *photo = [self currentPhoto];
     
-    //将不是当前imageview的缩放全部还原 (这个方法有些冗余，后期可以改进)
-    for (ZJPhotoBrowserView *view in _scrollView.subviews) {
-        if (view.imageview.tag != autualIndex) {
-            view.scrollview.zoomScale = 1.0;
+//    if (!photo.finished) return;
+    
+    if (photoView.scrollView.zoomScale > 1.0) {
+        [photoView.scrollView setZoomScale:1.0 animated:YES];
+        photo.isZooming = NO;
+        
+        // 默认情况下有滑动手势
+//        [self addPanGesture:YES];
+    }else {
+        CGPoint location = [tap locationInView:self.contentView];
+        CGFloat wh       = 1.0;
+        CGRect zoomRect  = [self frameWithWidth:wh height:wh center:location];
+        
+        [photoView zoomToRect:zoomRect animated:YES];
+        
+        photo.isZooming = YES;
+        photo.zoomRect  = zoomRect;
+        
+        // 放大情况下移除滑动手势
+//        [self removePanGesture];
+//        [self addPanGesture:YES];
+    }
+}
+
+- (CGRect)frameWithWidth:(CGFloat)width height:(CGFloat)height center:(CGPoint)center {
+    CGFloat x = center.x - width * 0.5;
+    CGFloat y = center.y - height * 0.5;
+    
+    return CGRectMake(x, y, width, height);
+}
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)longPress {
+    switch (longPress.state) {
+        case UIGestureRecognizerStateBegan:{
+            if ([self.delegate respondsToSelector:@selector(photoBrowser:longPressWithIndex:)]) {
+                [self.delegate photoBrowser:self longPressWithIndex:self.currentIndex];
+            }
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+            
+            break;
+            
+        default:
+            break;
+    }
+}
+
+// 滑动手势
+- (void)handlePanGesture:(UIPanGestureRecognizer *)panGesture {
+    // 放大时候禁止滑动返回
+    ZJPhotoView *photoView = [self currentPhotoView];
+    if (photoView.scrollView.zoomScale > 1.0f) return;
+    
+    switch (self.hideStyle) {
+        case ZJPhotoBrowserHideStyleZoomScale:
+            [self handlePanZoomScale:panGesture];
+            break;
+        case ZJPhotoBrowserHideStyleZoomSlide:
+            [self handlePanZoomSlide:panGesture];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)handlePanZoomScale:(UIPanGestureRecognizer *)panGesture {
+    ZJPhotoView *photoView = [self photoViewForIndex:self.currentIndex];
+    CGPoint point       = [panGesture translationInView:self.view];
+    CGPoint location    = [panGesture locationInView:photoView.scrollView];
+    CGPoint velocity    = [panGesture velocityInView:self.view];
+    
+    switch (panGesture.state) {
+        case UIGestureRecognizerStateBegan:
+            self.startLocation = location;
+            self.startFrame = photoView.imageView.frame;
+            self.isZoomScale = YES;
+            
+            _viewBottom.hidden = YES;
+            [self handlePanBegin];
+            break;
+        case UIGestureRecognizerStateChanged: {
+            double percent = 1 - fabs(point.y) / self.view.frame.size.height;
+            
+            // 设置图片滑动是最小的比例
+            double s = MAX(percent, 0.3);
+            
+            CGFloat width = self.startFrame.size.width * s;
+            CGFloat height = self.startFrame.size.height * s;
+            
+            CGFloat rateX = (self.startLocation.x - self.startFrame.origin.x) / self.startFrame.size.width;
+            CGFloat x = location.x - width * rateX;
+            
+            CGFloat rateY = (self.startLocation.y - self.startFrame.origin.y) / self.startFrame.size.height;
+            CGFloat y = location.y - height * rateY;
+            
+            photoView.imageView.frame = CGRectMake(x, y, width, height);
+            // 背景透明不百分比
+            double percentBack = 1 - fabs(point.y) / 100;
+            
+            self.view.backgroundColor = self.bgColor ? [self.bgColor colorWithAlphaComponent:percentBack] : [[UIColor blackColor] colorWithAlphaComponent:percentBack];
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:{
+            
+              _viewBottom.hidden = NO;
+            if (fabs(point.y) > 200 || fabs(velocity.y) > 500) {
+                [self showDismissAnimation];
+            }else {
+                [self showCancelAnimation];
+            }
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)handlePanZoomSlide:(UIPanGestureRecognizer *)panGesture {
+    CGPoint point    = [panGesture translationInView:self.view];
+    CGPoint location = [panGesture locationInView:self.view];
+    CGPoint velocity = [panGesture velocityInView:self.view];
+    
+    ZJPhotoView *photoView = [self currentPhotoView];
+    switch (panGesture.state) {
+        case UIGestureRecognizerStateBegan:
+            _startLocation = location;
+            [self handlePanBegin];
+            break;
+        case UIGestureRecognizerStateChanged:{
+            photoView.imageView.transform = CGAffineTransformMakeTranslation(0, point.y);
+            double percent = 1 - fabs(point.y) / self.view.frame.size.height * 0.5;
+            
+            self.view.backgroundColor = self.bgColor ? [self.bgColor colorWithAlphaComponent:percent] : [[UIColor blackColor] colorWithAlphaComponent:percent];
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled: {
+            if (fabs(point.y) > 200 || fabs(velocity.y) > 500) {
+                [self showSlideDismissAnimationWithPoint:point];
+            }else {
+                [self showCancelAnimation];
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)handlePanBegin {
+    ZJPhoto *photo = [self currentPhoto];
+    
+    if (self.isHideSourceView) {
+        photo.sourceImageView.alpha = 0;
+    }
+    
+    _isStatusBarShowing = self.isStatusBarShow;
+    
+    // 显示状态栏
+    self.isStatusBarShow = YES;
+    
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:panBeginWithIndex:)]) {
+        [self.delegate photoBrowser:self panBeginWithIndex:self.currentIndex];
+    }
+}
+
+- (void)recoverAnimation {
+    
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    
+    if (UIDeviceOrientationIsLandscape(orientation)) {
+        [UIView animateWithDuration:kAnimationDuration animations:^{
+            // 旋转view
+            self.contentView.transform = CGAffineTransformIdentity;
+            
+            CGFloat height = MAX(screenBounds.size.width, screenBounds.size.height);
+            
+            if (self.isAdaptiveSafeArea) {
+                height -= (kSafeTopSpace + kSafeBottomSpace);
+            }
+            // 设置frame
+            self.contentView.bounds = CGRectMake(0, 0, MIN(screenBounds.size.width, screenBounds.size.height), height);
+            
+            self.contentView.center = [UIApplication sharedApplication].keyWindow.center;
+            
+            [self.view setNeedsLayout];
+            [self.view layoutIfNeeded];
+            [self layoutSubviews];
+        }completion:^(BOOL finished) {
+            [self showDismissAnimation];
+        }];
+    }else {
+        [self showDismissAnimation];
+    }
+}
+
+- (void)showDismissAnimation {
+    
+    ZJPhotoView *photoView = [self photoViewForIndex:self.currentIndex];
+    ZJPhoto *photo = self.photos[self.currentIndex];
+    
+    CGRect sourceRect = photo.sourceFrame;
+    
+    if (CGRectEqualToRect(sourceRect, CGRectZero)) {
+        if (photo.sourceImageView == nil) {
+            [UIView animateWithDuration:kAnimationDuration animations:^{
+                self.view.alpha = 0;
+            }completion:^(BOOL finished) {
+                [self dismissAnimated:NO];
+            }];
+            return;
+        }
+        
+        if (self.isHideSourceView) {
+            photo.sourceImageView.alpha = 0;
+        }
+        
+        float systemVersion = [UIDevice currentDevice].systemVersion.floatValue;
+        if (systemVersion >= 8.0 && systemVersion < 9.0) {
+            sourceRect = [photo.sourceImageView.superview convertRect:photo.sourceImageView.frame toCoordinateSpace:photoView];
+        }else {
+            sourceRect = [photo.sourceImageView.superview convertRect:photo.sourceImageView.frame toView:photoView];
+        }
+    }else {
+        if (self.isHideSourceView && photo.sourceImageView) {
+            photo.sourceImageView.alpha = 0;
+        }
+    }
+    
+    if (photoView.scrollView.zoomScale > 1.0f) {
+        [photoView.scrollView setZoomScale:1.0f animated:YES];
+    }
+    
+    if (photo.sourceImageView) {
+        photoView.imageView.image = photo.sourceImageView.image;
+    }
+    
+    [UIView animateWithDuration:kAnimationDuration animations:^{
+        photoView.imageView.frame = sourceRect;
+        self.view.backgroundColor = [UIColor clearColor];
+    }completion:^(BOOL finished) {
+        [self dismissAnimated:NO];
+        
+        [self panEndedWillDisappear:YES];
+    }];
+}
+
+- (void)showSlideDismissAnimationWithPoint:(CGPoint)point {
+    ZJPhotoView *photoView = [self currentPhotoView];
+    BOOL throwToTop = point.y < 0;
+    CGFloat toTranslationY = 0;
+    if (throwToTop) {
+        toTranslationY = - self.view.frame.size.height;
+    }else {
+        toTranslationY = self.view.frame.size.height;
+    }
+    
+    [UIView animateWithDuration:kAnimationDuration animations:^{
+        photoView.imageView.transform = CGAffineTransformMakeTranslation(0, toTranslationY);
+        self.view.backgroundColor = [UIColor clearColor];
+    }completion:^(BOOL finished) {
+        [self dismissAnimated:YES];
+        
+        [self panEndedWillDisappear:YES];
+    }];
+}
+
+- (void)showCancelAnimation {
+    ZJPhotoView *photoView = [self photoViewForIndex:self.currentIndex];
+    ZJPhoto *photo = self.photos[self.currentIndex];
+    photo.sourceImageView.alpha = 1.0;
+    
+    [UIView animateWithDuration:kAnimationDuration animations:^{
+        if (self.hideStyle == ZJPhotoBrowserHideStyleZoomScale) {
+            photoView.imageView.frame = self.startFrame;
+        }else {
+            photoView.imageView.transform = CGAffineTransformIdentity;
+        }
+        self.view.backgroundColor = self.bgColor ? : [UIColor blackColor];
+    }completion:^(BOOL finished) {
+        
+        if (!self.isStatusBarShowing) {
+            // 隐藏状态栏
+            self.isStatusBarShow = NO;
+        }
+        
+        [self panEndedWillDisappear:NO];
+    }];
+}
+
+- (void)panEndedWillDisappear:(BOOL)disappear {
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:panEndedWithIndex:willDisappear:)]) {
+        [self.delegate photoBrowser:self panEndedWithIndex:self.currentIndex willDisappear:disappear];
+    }
+}
+
+// 重用页面
+- (ZJPhotoView *)dequeueReusablePhotoView {
+    ZJPhotoView *photoView = [self.reusablePhotoViews anyObject];
+    if (photoView) {
+        [_reusablePhotoViews removeObject:photoView];
+    }else {
+        photoView = [[ZJPhotoView alloc] initWithFrame:self.photoScrollView.bounds];
+    }
+    photoView.tag =  -1;
+    return photoView;
+}
+
+#pragma mark - 屏幕旋转相关
+- (void)addDeviceOrientationObserver {
+    // 默认设备方向：竖屏
+    self.originalOrientation = UIDeviceOrientationPortrait;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+}
+
+- (void)delDeviceOrientationObserver {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+}
+
+- (void)deviceOrientationDidChange {
+    if (self.isScreenRotateDisabled) return;
+    
+    self.isRotation = YES;
+    
+    // 恢复当前视图的缩放
+    ZJPhoto *photo  = [self currentPhoto];
+    photo.isZooming = NO;
+    photo.zoomRect  = CGRectZero;
+    
+    ZJPhotoView *photoView = [self currentPhotoView];
+    
+    // 旋转之后当前的设备方向
+    UIDeviceOrientation currentOrientation = [UIDevice currentDevice].orientation;
+    self.currentOrientation = currentOrientation;
+    
+    if (UIDeviceOrientationIsPortrait(self.originalOrientation)) {
+        if (UIDeviceOrientationIsLandscape(currentOrientation)) {
+            [photoView.scrollView setZoomScale:1.0 animated:YES];
+        }
+    }
+    
+    if (UIDeviceOrientationIsLandscape(self.originalOrientation)) {
+        if (UIDeviceOrientationIsPortrait(currentOrientation)) {
+            [photoView.scrollView setZoomScale:1.0 animated:YES];
+        }
+    }
+    
+    self.isPortraitToUp = NO;
+    
+    if (UIDeviceOrientationIsPortrait(self.originalOrientation)) {
+        if (currentOrientation == UIDeviceOrientationFaceUp) {
+            self.isPortraitToUp = YES;
+        }
+    }
+    
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    
+    // 旋转之后是横屏
+    if (UIDeviceOrientationIsLandscape(currentOrientation)) {
+        self.isLandspace = YES;
+        [self deviceOrientationChangedDelegate];
+        
+        // 横屏移除pan手势
+        [self removePanGesture];
+        
+        NSTimeInterval duration = UIDeviceOrientationIsLandscape(self.originalOrientation) ? 2 * kAnimationDuration : kAnimationDuration;
+        
+        [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            // 旋转状态栏
+            [[UIApplication sharedApplication] setStatusBarOrientation:(UIInterfaceOrientation)currentOrientation animated:YES];
+            
+            float rotation = currentOrientation == UIDeviceOrientationLandscapeRight ? 1.5 : 0.5;
+            
+            // 旋转contentView
+            self.contentView.transform = CGAffineTransformMakeRotation(M_PI * rotation);
+            
+            CGFloat width = MAX(screenBounds.size.width, screenBounds.size.height);
+            if (self.isAdaptiveSafeArea) {
+                width -= (kSafeTopSpace + kSafeBottomSpace);
+            }
+            // 设置frame
+            self.contentView.bounds = CGRectMake(0, 0, width, MIN(screenBounds.size.width, screenBounds.size.height));
+            
+            self.contentView.center = [UIApplication sharedApplication].keyWindow.center;
+            
+            [self.view setNeedsLayout];
+            [self.view layoutIfNeeded];
+            [self layoutSubviews];
+            
+        } completion:^(BOOL finished) {
+            // 记录设备方向
+            self.originalOrientation = currentOrientation;
+            self.isRotation = NO;
+            
+            // 横屏时隐藏状态栏，这里为了解决一个bug，iPhone X中横屏状态栏隐藏后不能再次显示，暂时的解决办法是这样，如果有更好的方法可随时修改
+            if (self.isStatusBarShow) { // 状态栏是显示状态
+                self.isStatusBarShowing = self.isStatusBarShow;  // 记录状态栏显隐状态
+                self.isStatusBarShow = NO;
+            }
+        }];
+    }else {
+        self.isRotation     = NO;
+        self.isLandspace    = NO;
+        [self.view setNeedsLayout];
+        [self.view layoutIfNeeded];
+        [self layoutSubviews];
+        
+        [self deviceOrientationChangedDelegate];
+    }
+}
+
+- (void)deviceOrientationChangedDelegate {
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:onDeciceChangedWithIndex:isLandspace:)]) {
+        [self.delegate photoBrowser:self onDeciceChangedWithIndex:self.currentIndex isLandspace:self.isLandspace];
+    }
+}
+
+// 更新可复用的图片视图
+- (void)updateReusableViews {
+    NSMutableArray *viewsForRemove = [NSMutableArray new];
+    for (ZJPhotoView *photoView in _visiblePhotoViews) {
+        if ((photoView.frame.origin.x + photoView.frame.size.width < self.photoScrollView.contentOffset.x - self.photoScrollView.frame.size.width) || (photoView.frame.origin.x > self.photoScrollView.contentOffset.x + 2 * self.photoScrollView.frame.size.width)) {
+            [photoView removeFromSuperview];
+            ZJPhoto *photo = nil;
+            
+            [photoView setupPhoto:photo];
+            
+            [viewsForRemove addObject:photoView];
+            [_reusablePhotoViews addObject:photoView];
+        }
+    }
+    [_visiblePhotoViews removeObjectsInArray:viewsForRemove];
+}
+
+// 设置图片视图
+- (void)setupPhotoViews {
+    NSInteger index = self.photoScrollView.contentOffset.x / self.photoScrollView.frame.size.width + 0.5;
+    
+    for (NSInteger i = index - 1; i <= index + 1; i++) {
+        if (i < 0 || i >= self.photos.count) continue;
+        // 创建photoview
+        ZJPhotoView *photoView = [self photoViewForIndex:i];
+        if (photoView == nil) {
+            photoView  = [self dequeueReusablePhotoView];
+            photoView.loadStyle   = self.loadStyle;
+            
+            __typeof(self) __weak weakSelf = self;
+            photoView.zoomEnded     = ^(NSInteger scale) {
+//                if (scale == 1.0f) {
+//                    [weakSelf addPanGesture:NO];
+//                }else {
+//                    [weakSelf removePanGesture];
+//                }
+            };
+            
+            CGRect frame = self.photoScrollView.bounds;
+            
+            CGFloat photoScrollW    = frame.size.width;
+            CGFloat photoScrollH    = frame.size.height;
+            // 调整当前显示的photoView的frame
+            CGFloat w = photoScrollW - kPhotoViewPadding * 2;
+            CGFloat h = photoScrollH;
+            CGFloat x = kPhotoViewPadding + i * (kPhotoViewPadding * 2 + w);
+            CGFloat y = 0;
+            
+            photoView.frame = CGRectMake(x, y, w, h);
+            photoView.tag   = i;
+            [self.photoScrollView addSubview:photoView];
+            [_visiblePhotoViews addObject:photoView];
+            
+            [photoView resetFrame];
+        }
+        
+        if (photoView.photo == nil && self.isShow) {
+            [photoView setupPhoto:self.photos[i]];
+        }
+    }
+    
+    // 更换photoView
+    if (index != self.currentIndex && self.isShow && (index >= 0 && index < self.photos.count)) {
+        self.currentIndex = index;
+        
+        ZJPhotoView *photoView = [self currentPhotoView];
+        
+//        if (photoView.scrollView.zoomScale != 1.0) {
+//            [self removePanGesture];
+//        }else {
+//            [self addPanGesture:NO];
+//        }
+        
+        [self updateLabel];
+        
+        if ([self.delegate respondsToSelector:@selector(photoBrowser:didChangedIndex:)]) {
+            [self.delegate photoBrowser:self didChangedIndex:self.currentIndex];
         }
     }
 }
 
+- (ZJPhotoView *)photoViewForIndex:(NSInteger)index {
+    for (ZJPhotoView *photoView in _visiblePhotoViews) {
+        if (photoView.tag == index) {
+            return photoView;
+        }
+    }
+    return nil;
+}
 
-// 隐藏状态栏
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
+#pragma mark - 代理
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    // 更新可复用视图
+    [self updateReusableViews];
+    
+    [self setupPhotoViews];
+    
+}
+
+// scrollView结束滚动时调用
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    CGFloat offsetX = scrollView.contentOffset.x;
+    CGFloat scrollW = self.photoScrollView.frame.size.width;
+    
+    NSInteger index = (offsetX + scrollW * 0.5) / scrollW;
+    
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:scrollEndedIndex:)]) {
+        [self.delegate photoBrowser:self scrollEndedIndex:index];
+    }
+    
+    if (self.isResumePhotoZoom) {
+        [self.visiblePhotoViews enumerateObjectsUsingBlock:^(ZJPhotoView *photoView, NSUInteger idx, BOOL * _Nonnull stop) {
+            ZJPhoto *photo = self.photos[idx];
+            photo.isZooming = NO;
+            
+            [photoView.scrollView setZoomScale:1.0 animated:NO];
+        }];
+    }
+    
+//    if ([self currentPhotoView].scrollView.zoomScale > 1.0) {
+//        [self removePanGesture];
+//    }else {
+//        [self addPanGesture:NO];
+//    }
 }
 
 @end

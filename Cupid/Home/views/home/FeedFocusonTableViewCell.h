@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 //-(void)setDataWithModel:(FeedNewContentModel*)model;
 
 @property(nonatomic,strong) FeedNewContentModel *model;
+
 @end
 
 NS_ASSUME_NONNULL_END

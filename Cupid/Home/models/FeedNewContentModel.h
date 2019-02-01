@@ -77,8 +77,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-
-
 @property (nonatomic, assign) NSInteger cell_type;
 
 @property(nonatomic,strong) FocusonMainModel *raw_data;  // 推荐关注的人数据

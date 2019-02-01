@@ -24,6 +24,7 @@
 #import "MJDrawAnimationHeader.h"
 #import "MJLoadMoreFooter.h"
 #import "HomeOtherDetailViewController.h"
+#import "FeedFocusonTableViewCell.h"
 
 static NSString *const cellfocuson=@"cellfocuson";
 static NSString *const cellIdentf=@"showCellTop";
@@ -32,9 +33,17 @@ static NSString *const defaultcell=@"defaultcell";
 static NSString *const cellweiboidentify=@"TTWeiboTableViewCell";
 static NSString *const layoutgrouppiccell=@"TTLayOutGroupPicCell";
 
+
+static NSString *const load_more=@"load_more";
+static NSString *const pull=@"pull";
+static NSString *const enter_auto=@"enter_auto";
+
+
 @interface HomeContentViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView *mainTableView;
 @property(nonatomic,strong) NSMutableArray *mainDaraArrs;
+
+@property(nonatomic,copy)NSString *behottime;
 @end
 
 @implementation HomeContentViewController
@@ -49,7 +58,8 @@ static NSString *const layoutgrouppiccell=@"TTLayOutGroupPicCell";
     [super viewDidLoad];
     
     _mainDaraArrs=[NSMutableArray array];
-    [self loadMainRequest];
+
+
     [self.view addSubview:self.mainTableView];
     
     [self initRefreshView];
@@ -61,17 +71,20 @@ static NSString *const layoutgrouppiccell=@"TTLayOutGroupPicCell";
 {
     
     self.mainTableView.mj_header= [MJDrawAnimationHeader headerWithRefreshingBlock:^{
-        [self loadMainRequest];
+        [self loadMainRequest:pull];
         
     }];
     
     self.mainTableView.mj_footer = [MJLoadMoreFooter footerWithRefreshingBlock:^{
         
-        [self loadMainRequest];
+        [self loadMainRequest:load_more];
         
     }];
     
-
+    [self.mainTableView.mj_header beginRefreshing];
+    
+    
+    [self loadMainRequest:enter_auto];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -84,16 +97,29 @@ static NSString *const layoutgrouppiccell=@"TTLayOutGroupPicCell";
 
 
 
--(void)loadMainRequest
+-(void)loadMainRequest:(NSString *)pullType
 {
     NSString *category = self.category;
-    NSLog(@"选中的分类是：==========%@",category);
-    NSDictionary *dirParams = @{@"category":category};
+
     
-        NSDictionary *rootPram=@{@"version_code":@"7.0.5",@"app_name":@"news_article",@"vid":@"3678164C-BC97-4BDE-90C3-3796BF8C39DA",@"device_id":@"3002398707",@"channel":@"pp",@"openudid":@"5f892e162435cdbae5dc2856c69bb9ecbc678040",@"idfv":@"3678164C-BC97-4BDE-90C3-3796BF8C39DA",@"iid":@"12374638189",@"category":category};
+    // 公共参数
+    NSDictionary *dirParams = [HomeRequest getCommonParamDic];
     
-    [ZJNetworking getWithUrl:[HomeRequest getHomeFeedNewsUrl] refreshRequest:NO cache:NO params:rootPram progressBlock:nil successBlock:^(id response) {
-        [self requestSuccess:response];
+    NSMutableDictionary *mdic2 = [NSMutableDictionary dictionary];
+    [dirParams enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [mdic2 setObject:obj forKey:key];
+    }];
+    [mdic2 setValue:pullType forKey:@"tt_from"];
+    [mdic2 setValue:category forKey:@"category"];
+    [mdic2 setValue:@"1" forKey:@"refresh_reason"];
+    if(self.behottime)
+    {
+        [mdic2 setValue: self.behottime forKey:@"min_behot_time"];
+        
+    }
+    
+    [ZJNetworking getWithUrl:[HomeRequest getHomeFeedNewsUrl] refreshRequest:NO cache:NO params:mdic2 progressBlock:nil successBlock:^(id response) {
+        [self requestSuccess:response withType:pullType];
         
     } failBlock:^(NSError *error) {
         
@@ -101,18 +127,32 @@ static NSString *const layoutgrouppiccell=@"TTLayOutGroupPicCell";
     
 }
 
--(void)requestSuccess:(id)response
+-(void)requestSuccess:(id)response withType:(NSString *)type
 {
     
     NSArray *arrayFeedNew = [FeedNewsModel mj_objectArrayWithKeyValuesArray:response[@"data"]];
-[self.mainDaraArrs removeAllObjects];
+
     [arrayFeedNew enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         FeedNewsModel *modelNews = obj;
         
         FeedNewContentModel *modelContent = [FeedNewContentModel mj_objectWithKeyValues:modelNews.content];
-     
-        [self.mainDaraArrs addObject:modelContent];
+        
+        self.behottime = [NSString stringWithFormat:@"%@",modelContent.behot_time];
+        if ([type isEqualToString:pull] ) {
+            [self.mainDaraArrs insertObject:modelContent atIndex:0];
+            
+        }
+        else if([type isEqualToString:load_more])
+        {
+            [self.mainDaraArrs addObject:modelContent];
+        }
+        else if([type isEqualToString:enter_auto])
+        {
+            [self.mainDaraArrs removeAllObjects];
+             [self.mainDaraArrs addObject:modelContent];
+        }
+        
     }];
     
     [self.mainTableView.mj_header endRefreshing];
@@ -120,7 +160,7 @@ static NSString *const layoutgrouppiccell=@"TTLayOutGroupPicCell";
     [self.mainTableView.mj_footer endRefreshing];
     
     [self.mainTableView reloadData];
-  
+    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -139,29 +179,13 @@ static NSString *const layoutgrouppiccell=@"TTLayOutGroupPicCell";
     
     if(model.cell_type == FeedNormalCell)
     {
-
-        FeedNormalTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:layoutgrouppiccell];
-
-        [cell setModelDataWith:model];
-
-        return cell;
         
+        FeedNormalTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:layoutgrouppiccell];
+        
+        [cell setModelDataWith:model];
+        
+        return cell;
     }
-//    else if(model.cell_type == FeedWeiBoCell)
-//    {
-//        TTWeiboTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellweiboidentify];
-//        [cell setModelDataWith:model];
-//        cell.delegate=self;
-//        return  cell;
-//    }
-    
-//    else if(model.cell_type == FeedNormalCell){
-//        TTLayOutGroupPicCell *cell=[tableView dequeueReusableCellWithIdentifier:layoutgrouppiccell];
-//        cell.delegate=self;
-//        [cell setModelDataWith:model];
-//
-//        return  cell;
-//    }
     else
     {
         
@@ -190,8 +214,7 @@ static NSString *const layoutgrouppiccell=@"TTLayOutGroupPicCell";
         _mainTableView.tableFooterView=[UIView new];
         _mainTableView.backgroundColor=[UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
         _mainTableView.separatorStyle=NO;
-        [_mainTableView registerClass:[FeedFocusonTableViewCell class] forCellReuseIdentifier:cellfocuson];
-//        [_mainTableView registerClass:[TTWeiboTableViewCell class] forCellReuseIdentifier:cellweiboidentify];
+        [_mainTableView registerClass:[FeedFocusonTableViewCell class] forCellReuseIdentifier:cellweiboidentify];
         [_mainTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:defaultcell];
         [_mainTableView registerClass:[FeedNormalTableViewCell class] forCellReuseIdentifier:layoutgrouppiccell];
         

@@ -47,7 +47,7 @@ interactiveTransition;
 {
     //产生百分比
     CGFloat process = ([pan translationInView:self.view].y) / ([UIScreen mainScreen].bounds.size.height);
-//    NSLog(@"%f  = %f",[pan translationInView:self.view].y,process);
+//    NSLog(@"%f  = %f",[pan translationInView:self.view].y,[pan translationInView:self.view].x);
     process = MIN(1.0,(MAX(0.0, process)));
     
     
@@ -78,7 +78,6 @@ interactiveTransition;
         self.interactiveTransition = nil;
     }
 }
-
 
 
 #pragma mark - UIViewControllerTransitioningDelegate

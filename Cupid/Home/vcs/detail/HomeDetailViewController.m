@@ -15,9 +15,10 @@
 #import <MJExtension/MJExtension.h>
 #import "LoadingDefaultView.h"
 #import "HomeCommentTableViewCell.h"
-#import "ZJPhotoBrowser.h"
 #import "NSURLProtocol+WKWebVIew.h"
 #import "HybridNSURLProtocol.h"
+#import "ZJPhotoBrowser.h"
+
 
 #define viewH SCREEN_H-NAVBAR_IPHONEX_H
 
@@ -52,6 +53,13 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 @property(nonatomic, strong)NSMutableArray *imageArray;//HTML中的图片个数
 
 
+@property (nonatomic, strong) NSMutableArray *imgUrls;
+
+@property (nonatomic, strong) NSMutableArray *imgFrames;
+
+@property (nonatomic, strong) UIView *whiteView;
+
+
 @property(nonatomic,assign)int offset;
 
 @end
@@ -61,6 +69,9 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    _imgUrls = [NSMutableArray array];
+    _imgFrames = [NSMutableArray array];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
             [NSURLProtocol registerClass:[HybridNSURLProtocol class]];
     [NSURLProtocol wk_registerScheme:@"http"];
@@ -74,26 +85,8 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-//    NSString *path = @"http://toutiao.com/group/6647008405284192771/";
-//
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
-//    request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
-//    [self.webView loadRequest:request];
-//
-    
    [self initNavView];
     
-    
-//    UIImageView *img = [[UIImageView alloc]initWithFrame:self.view.bounds];
-//    
-//    NSString *urlStr = @"http%3A%2F%2Fp9-tt.bytecdn.cn%2Flarge%2Fpgc-image%2F14d157c5e6074118a4d8854994df7d65";
-//    
-//    urlStr = [urlStr stringByRemovingPercentEncoding];
-//    //    str = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]];
-//    //    NSLog(@"百分比编码：%@",urlStr);
-//    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
-//    img.image = [UIImage imageWithData:data];
-//    [self.view addSubview:img];
 }
 
 -(void)initNavView
@@ -164,30 +157,29 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 -(void)loadMainRequest
 {
     // 公共参数
-    NSDictionary *dirParams = [HomeRequest getCommonParamDic];
-    NSMutableDictionary *mdic = [NSMutableDictionary dictionary];
-    [dirParams enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [mdic setObject:obj forKey:key];
-    }];
-    [mdic setValue:[NSString stringWithFormat:@"%@",self.group_id] forKey:@"group_id" ];
-    [mdic setValue:[NSString stringWithFormat:@"%@",self.item_id] forKey:@"item_id"];
-    [mdic setValue:self.category forKey:@"from_category"];
-    WEAKSELF
-    [ZJNetworking getWithUrl:[HomeRequest getHomeArticleInformationUrl] refreshRequest:NO cache:NO params:mdic progressBlock:nil successBlock:^(id response) {
-        
-        // 处理请求成功数据
-        [weakSelf requessWithResponse:response];
-        
-        
-    } failBlock:^(NSError *error) {
-        
-    }];
+//    NSDictionary *dirParams = [HomeRequest getCommonParamDic];
+//    NSMutableDictionary *mdic = [NSMutableDictionary dictionary];
+//    [dirParams enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+//        [mdic setObject:obj forKey:key];
+//    }];
+//    [mdic setValue:[NSString stringWithFormat:@"%@",self.group_id] forKey:@"group_id" ];
+//    [mdic setValue:[NSString stringWithFormat:@"%@",self.item_id] forKey:@"item_id"];
+//    [mdic setValue:self.category forKey:@"from_category"];
+//    WEAKSELF
+//    [ZJNetworking getWithUrl:[HomeRequest getHomeArticleInformationUrl] refreshRequest:NO cache:NO params:mdic progressBlock:nil successBlock:^(id response) {
+//
+//        // 处理请求成功数据
+//        [weakSelf requessWithResponse:response];
+//
+//
+//    } failBlock:^(NSError *error) {
+//
+//    }];
     
     
-    // 请求评论
-    [self loadCommentRequest:0];
+
     
-    // 请求头像html数据
+    // 请求html数据
     [self loadHtmlContent];
     
 }
@@ -195,7 +187,6 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 // 加载html内容
 -(void)loadHtmlContent
 {
-    
     NSString *requestUrl = [NSString stringWithFormat:@"https://a3.pstatp.com/article/content/22/2/%@/%@/1/0/0/",self.group_id,self.group_id];
     
     // 公共参数
@@ -243,62 +234,100 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
     
     ArtileInfomationHtmlH5ExtraModel *modelH5 = modelHtml.h5_extra;
     
-    // 添加媒体头部信息
-    NSString *div = [NSString stringWithFormat:@"</header> <div class=\"divs\"> <div class=\"imgstouxiang\"><img  class=\"img-touxiang\" src=\"%@\" ></div><div class=\"info1\">%@</div><div class=\"info2\">%@</div><div class=\"info3\"><div class=\"p-guanzhu\"><a class=\"guanzhu\" href=\"guanzhu://aaa\">&nbsp;关注&nbsp;</a></div></div></div>",modelH5.media.avatar_url,modelH5.media.name,modelH5.media.auth_info];
     
-     strContent= [strContent stringByReplacingOccurrencesOfString:@"</header>" withString:div];
-    
-    // 替换a标签
-    strContent= [strContent stringByReplacingOccurrencesOfString:@"<a class=\"image\"" withString:@"<img class=\"image\""];
-    strContent=  [strContent stringByReplacingOccurrencesOfString:@" ></a>" withString:@"/>"];
+    {
+            // 添加媒体头部信息
+            NSString *div = [NSString stringWithFormat:@"</header> <div class=\"divs\"> <div class=\"imgstouxiang\"><img  class=\"img-touxiang\" src=\"%@\" ></div><div class=\"info1\">%@</div><div class=\"info2\">%@</div><div class=\"info3\"><div class=\"p-guanzhu\"><a class=\"guanzhu\" href=\"guanzhu://aaa\">&nbsp;关注&nbsp;</a></div></div></div>",modelH5.media.avatar_url,modelH5.media.name,modelH5.media.auth_info];
 
-    for (int i=0;i<modelHtml.image_detail.count;i++) {
-
-        ArtileInfomationHtmlImglistModel *imgModel = modelHtml.image_detail[i];
-        NSString *strUrl = imgModel.url;
-
-        NSString *stringf = [NSString stringWithFormat:@"index=%d\"  src=\"%@\"",i,strUrl];
-        NSString *str1 = [NSString stringWithFormat:@"index=%d\"",i];
-        strContent = [strContent stringByReplacingOccurrencesOfString:str1 withString:stringf];
-
+             strContent= [strContent stringByReplacingOccurrencesOfString:@"</header>" withString:div];
+        
+            // 替换a标签
+            strContent= [strContent stringByReplacingOccurrencesOfString:@"<a class=\"image\"" withString:@"<img class=\"image\""];
+            strContent=  [strContent stringByReplacingOccurrencesOfString:@" ></a>" withString:@"/>"];
+        
+            for (int i=0;i<modelHtml.image_detail.count;i++) {
+        
+                ArtileInfomationHtmlImglistModel *imgModel = modelHtml.image_detail[i];
+                NSString *strUrl = imgModel.url;
+        
+                NSString *stringf = [NSString stringWithFormat:@"index=%d\"  src=\"%@\"",i,strUrl];
+                NSString *str1 = [NSString stringWithFormat:@"index=%d\"",i];
+                strContent = [strContent stringByReplacingOccurrencesOfString:str1 withString:stringf];
+        
+            }
+        
+        
     }
     
-    // 添加meta
-    strContent = [strContent stringByAppendingString:@"<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no\" />"];
     
-    // 添加样式
     
-    strContent= [strContent stringByAppendingString:@"<style>"
- ".tt-title"
-        "{font-size:20px;font-weight:bold;font-family:\"Arial\",\"Microsoft Yahei\",\"Simsun\"; margin:10px }"
- "p"
-    "{font-size:16px; color:#333; margin:10px} .pgc-img{ margin:10px 10px; } "
- "img"
-    "{width:100%; height:auto;}.ql-align-justify{font-size: 20px;margin: 10px ;}"
- ".divs"
-    "{height: 30px;width: auto;}"
- ".imgstouxiang"
-    "{display: inline-block;vertical-align: middle;width: 30px;height: 30px;}"
- ".info1"
-    "{display: inline-block;width: 150px;height: 15px;vertical-align: top;font-size: 13px;font-weight: bold;margin-left: 10px;}"
- ".info2"
-    "{display: inline-block;width: auto;height: 15px;vertical-align: bottom;font-size: 10px;margin-left:-150px;color: #333; margin-top:17px}"
- ".info3"
-    "{display: inline-block;width:100%;height: 30px;vertical-align: middle;color: #333;border-radius: 2px;margin-top: -40px; }"
- ".img-touxiang"
-    "{width: 30px;height: 30px;border-radius: 15px;}"
- ".guanzhu"
-     "{text-decoration:none ;color:white;background-color: red;border-radius: 4px; font-size:14px; }"
- ".p-guanzhu"
-    "{vertical-align: middle;text-align: right;margin-right: 10px;margin-top: 5px;}"
- "</style>"
-];
-    
+            NSMutableString *html = [NSMutableString string];
+    {
 
-    [self.webView loadHTMLString:strContent baseURL:nil];
+        [html appendString:@"<html>"];
+        [html appendString:@"<head>"];
+        [html appendString:@"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />"];
+        [html appendString:@"<meta content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no\" name=\"viewport\" />"];
+        [html appendFormat:@"<style>"];
+        [html appendFormat:@"body{\
+         font-size:18px;\
+         color: black;\
+         padding: 10px;\
+         /* 文字两端对齐 */\
+         text-align: justify;\
+         text-justify: inter-ideograph;\
+         }\
+         img{\
+         width: 100%%;\
+         height: auto;\
+         }\
+        .tt-title{font-size:20px;font-weight:bold;font-family:\"Arial\",\"Microsoft Yahei\",\"Simsun\"; margin:10px }\
+         .divs{height: 30px;width: auto; margin:10px 10px}\
+         .imgstouxiang{display: inline-block;vertical-align: middle;width: 30px;height: 30px;}\
+         .info1{display: inline-block;width: 150px;height: 15px;vertical-align: top;font-size: 13px;font-weight: bold;margin-left: 10px;}\
+         .info2{display: inline-block;width: auto;height: 15px;vertical-align: bottom;font-size: 10px;margin-left:-150px;color: #333; margin-top:17px}\
+        .info3{display: inline-block;width:100%%;height: 30px;vertical-align: middle;color: #333;border-radius: 2px;margin-top: -40px; }\
+         .img-touxiang{width: 30px;height: 30px;border-radius: 15px;}\
+         .guanzhu{text-decoration:none ;color:white;background-color:#EB4B46 ;border-radius: 4px; font-size:16px; }\
+         .p-guanzhu{vertical-align: middle;text-align: right;margin-right: 10px;margin-top: 5px;}"];
+        [html appendFormat:@"</style>"];
+        [html appendFormat:@"</head>"];
+        [html appendFormat:@"<body>"];
+        [html appendFormat:@"%@", strContent];
+        [html appendString:[self getImgClickJSString]];
+        [html appendString:@"</script>"];
+        [html appendString:@"</body>"];
+        [html appendString:@"</html>"];
+        
+        
+    }
+
+
+    [self.webView loadHTMLString:html baseURL:nil];
     
-    [self.tableView reloadData];
+}
+
+
+
+
+- (NSString *)getImgClickJSString {
     
+    NSMutableString *jsString = [NSMutableString new];
+    
+    // 给所有图片加入点击事件
+    [jsString appendString:@"<script>"];
+    [jsString appendString:@"function addImgClick() {\
+     var imgs = document.getElementsByTagName('img');\
+     for (var i = 0; i < imgs.length; i++) {\
+     var img = imgs[i];\
+     img.onclick = function() {\
+     window.location.href = 'imgurl:' + this.src;\
+     }\
+     }\
+     }"];
+    [jsString appendString:@"addImgClick();"];  // 调用js
+    
+    return jsString;
 }
 
 
@@ -372,32 +401,36 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
     }
     
     [self.maryCommon addObjectsFromArray:self.modelData.data];
-    
-    [self.tableView reloadData];
+      [self.tableView reloadData];
 }
 
--(void)requessWithResponse:(id)response
-{
-    self.model =   [ArtileInfomationModel mj_objectWithKeyValues:[response objectForKey:@"data"]];
-    
-    NSURL *url = [NSURL URLWithString:[self.model.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    MYLog(@"请求地址====%@======",url);
-    if ([self.model.url containsString:@"http://toutiao.com"] || [self.model.url containsString:@"www.wukong.com"]) {
-        return;
-    }
-    
-    // 设置请求userAgent
-    NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 @"Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16A366 NewsArticle/7.0.6.14 JsSdk/2.0 NetType/WIFI (News 7.0.6 12.000000)", @"UserAgent", nil];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:request];
-    [self.tableView reloadData];
-}
+//-(void)requessWithResponse:(id)response
+//{
+// NSString *message=   [response objectForKey:@"message"];
+//    if (![message isEqualToString:@""] || !message) {
+////        [MBProgressHUD showError:message];
+//        return;
+//    }
+//
+//    self.model =   [ArtileInfomationModel mj_objectWithKeyValues:[response objectForKey:@"data"]];
+//
+//    NSURL *url = [NSURL URLWithString:[self.model.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//    MYLog(@"请求地址====%@======",url);
+//    if ([self.model.url containsString:@"http://toutiao.com"] || [self.model.url containsString:@"www.wukong.com"]) {
+//        return;
+//    }
+//
+//    // 设置请求userAgent
+//    NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                                 @"Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16A366 NewsArticle/7.0.6.14 JsSdk/2.0 NetType/WIFI (News 7.0.6 12.000000)", @"UserAgent", nil];
+//    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//
+//
+//
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    [self.webView loadRequest:request];
+//}
 
 #pragma mark - WKWebView NavigationDelegate
 
@@ -413,7 +446,7 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 }
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
     NSLog(@"开始加载");
-    
+    [self.tableView reloadData];
     [self.defautView removeFromSuperview];
     // 处理点击关注按钮
     if ([webView.URL.absoluteString containsString:@"guanzhu://aaa"]) {
@@ -438,25 +471,24 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
         [self presentViewController:alert animated:YES completion:nil];
     }
     
-    // 处理图片点击事件
-    if ([webView.URL.absoluteString containsString:@"image-preview"])
-    {
+    // 点击图片
+    NSString *url = webView.URL.absoluteString;
+    
+    if ([url hasPrefix:@"imgurl:"]) {
         
-        NSString *url = [webView.URL.absoluteString substringFromIndex:14];
+        NSString *imgUrl = [url substringFromIndex:7];
         
-        MYLog(@"图片地址：%@",url);
-        //启动图片浏览器， 跳转到图片浏览页面
-        if (_imageArray.count != 0) {
-
-            ZJPhotoBrowser *browserVc = [[ZJPhotoBrowser alloc] init];
-            browserVc.imageCount = self.imageArray.count; // 图片总数
-            browserVc.currentImageIndex = [_imageArray indexOfObject:url];//当前点击的图片
-            browserVc.delegate = self;
-            [browserVc show];
-
+        NSLog(@"%@", imgUrl);
+    
+        NSInteger index = [self.imgUrls indexOfObject:imgUrl];
+        
+        if (index >=0 && index < self.imgUrls.count) {
+            [self showImageWithArray:self.imgUrls index:index];
         }
         
+
     }
+    
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
@@ -474,27 +506,17 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 }
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation {
     NSLog(@"网页开始接收网页内容");
+    // 请求评论
+    [self loadCommentRequest:0];
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
     NSLog(@"网页导航加载完毕");
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
-    self.title = webView.title;
-    [webView evaluateJavaScript:@"document.title" completionHandler:^(id _Nullable ss, NSError * _Nullable error) {
-        NSLog(@"----document.title:%@---webView title:%@",ss,webView.title);
-    }];
+    [self.tableView reloadData];
+    [self getImgsJSToWebView:webView];
     
-    
-    //    插入js代码，对图片进行点击操作
-    [webView evaluateJavaScript:@"function imageClickAction(){var imgs=document.getElementsByTagName('img');var length=imgs.length;for(var i=0; i < length;i++){img=imgs[i];img.onclick=function(){window.location.href='image-preview:'+this.src}}}" completionHandler:^(id object, NSError *error) {
-        
-    }];
-    [webView evaluateJavaScript:@"imageClickAction();" completionHandler:^(id object, NSError *error) {
-        
-    }];
-
-    [self getImgesCount];
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
@@ -504,84 +526,146 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
     NSLog(@"网页加载内容进程终止");
 }
-//- (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler {
-//    NSLog(@"receive");
-//}
 
 
 
-#pragma mark -- 获取文章中的图片个数
-- (NSArray *)getImgesCount
-{
+- (void)showImageWithArray:(NSArray *)imageUrls index:(NSInteger)index {
+    NSMutableArray *photos = [NSMutableArray new];
     
-    NSMutableArray *arrImgURL = [[NSMutableArray alloc] init];
-    NSInteger numberImage = [self nodeCountOfTag:@"img"];
-
-   if(numberImage > 1)
-    {
-        for (int i=1; i < numberImage ; i++) {
-            NSString *jsString = [NSString stringWithFormat:@"document.getElementsByTagName('img')[%d].src", i];
+    [imageUrls enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        ZJPhoto *photo = [ZJPhoto new];
+        photo.url = [NSURL URLWithString:obj];
+        
+        if (index == idx) {
+            CGRect rect = CGRectFromString(self.imgFrames[idx]);
             
+            rect.origin.y += NAVBAR_IPHONEX_H;
             
-            __block BOOL isExecuted = NO;
-            [self.webView evaluateJavaScript:jsString completionHandler:^(NSString *str, NSError *error) {
-                
-                if (error ==nil) {
-                    [arrImgURL addObject:str];
-                    isExecuted = YES;
-                }
-
-            }];
-            while (isExecuted == NO) {
-                [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-            }
+            CGFloat offsetY = self.webView.scrollView.contentOffset.y;
             
+            rect.origin.y -= offsetY;
+            
+            photo.sourceFrame = rect;
         }
-    }
-    
-    
-  
-    _imageArray = [NSMutableArray arrayWithArray:arrImgURL];
-    
-    
-    return arrImgURL;
-}
-
-// 获取某个标签的结点个数
-- (NSInteger)nodeCountOfTag:(NSString *)tag
-{
-    NSString *jsString = [NSString stringWithFormat:@"document.getElementsByTagName('%@').length", tag];
-    
-    __block NSString* result = nil;
-    __block BOOL isExecuted = NO;
-    [self.webView evaluateJavaScript:jsString completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
-        result = obj;
-        isExecuted = YES;
+        
+        // 获取缓存？
+        NSURLCache *cache = [NSURLCache sharedURLCache];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:obj]];
+        
+        NSCachedURLResponse *response = [cache cachedResponseForRequest:request];
+        
+        UIImage *image = [UIImage imageWithData:response.data];
+        
+        photo.placeholderImage = image;
+        
+        [photos addObject:photo];
     }];
     
-    while (isExecuted == NO) {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    
+    ZJPhotoBrowser *browser = [ZJPhotoBrowser photoBrowserWithPhotos:photos currentIndex:index];
+    browser.showStyle = ZJPhotoBrowserShowStyleZoom;
+    browser.hideStyle = ZJPhotoBrowserHideStyleZoomScale;
+    
+    browser.delegate  = self;
+    
+    [browser showFromVC:self];
+}
+
+#pragma mark - ZJPhotoBrowserDelegate
+- (void)photoBrowser:(ZJPhotoBrowser *)browser panBeginWithIndex:(NSInteger)index {
+    // 执行js，隐藏对应的图片
+    [self addViewToImageWithIndex:index hidden:NO];
+}
+
+- (void)photoBrowser:(ZJPhotoBrowser *)browser panEndedWithIndex:(NSInteger)index willDisappear:(BOOL)disappear {
+    // 执行js，显示对应的图片
+    [self addViewToImageWithIndex:index hidden:YES];
+}
+
+- (void)addViewToImageWithIndex:(NSInteger)index hidden:(BOOL)hidden {
+    if (hidden) {
+        [self.whiteView removeFromSuperview];
+        self.whiteView = nil;
+    }else {
+        CGRect frame = CGRectFromString(self.imgFrames[index]);
+        
+        CGFloat offsetY = self.webView.scrollView.contentOffset.y;
+        
+        frame.origin.y -= offsetY;
+        
+        self.whiteView = [[UIView alloc] initWithFrame:frame];
+        self.whiteView.backgroundColor = [UIColor whiteColor];
+        [self.webView addSubview:self.whiteView];
     }
-    
-    NSInteger tempInter = [result integerValue];
-    
-    
-    return tempInter;
 }
 
-#pragma mark - photobrowser代理方法
-- (UIImage *)photoBrowser:(ZJPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
-{
-    //图片浏览时，未加载出图片的占位图
-    return [UIImage imageNamed:@"gg_pic@2x"];
+
+- (void)getImgsJSToWebView:(WKWebView *)webView {
+    // 获取图片地址
+    NSString *getImgUrlsJS = @"\
+    function getImgUrls() {\
+    var imgs = document.getElementsByTagName('img');\
+    var urls = [];\
+    for (var i = 0; i < imgs.length; i++) {\
+    var img = imgs[i];\
+    urls[i] = img.src;\
+    }\
+    return urls;\
+    }";
     
+    [webView evaluateJavaScript:getImgUrlsJS completionHandler:nil];
+    
+    [webView evaluateJavaScript:@"getImgUrls()" completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+
+        // 移除第一个头像
+        NSMutableArray *mary = (NSMutableArray *)obj;
+        if (mary.count >=1) {
+            [mary removeObjectAtIndex:0];
+        }
+        self.imgUrls = mary;
+    }];
+    
+    // 获取图片frame
+    NSString *getImgFramesJS = @"\
+    function getImgFrames() {\
+    var imgs = document.getElementsByTagName('img');\
+    var frames = [];\
+    for (var i = 0; i < imgs.length; i++) {\
+    var img = imgs[i];\
+    var imgX = img.offsetLeft;\
+    var imgY = img.offsetTop;\
+    var imgW = img.offsetWidth;\
+    var imgH = img.offsetHeight;\
+    frames[i] = {'x': imgX, 'y': imgY, 'w': imgW, 'h': imgH};\
+    }\
+    return frames;\
+    }";
+    
+    [webView evaluateJavaScript:getImgFramesJS completionHandler:nil];
+    
+    [webView evaluateJavaScript:@"getImgFrames()" completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+        NSMutableArray *frames = (NSMutableArray *)obj;
+        // 移除第一个头像
+        if (frames.count>=1) {
+            [frames removeObjectAtIndex:0];
+        }
+        
+        NSMutableArray *imgFrames = [NSMutableArray new];
+        
+        for (NSDictionary *dic in frames) {
+            CGRect rect = CGRectMake([dic[@"x"] floatValue],
+                                     [dic[@"y"] floatValue],
+                                     [dic[@"w"] floatValue],
+                                     [dic[@"h"] floatValue]);
+            
+            [imgFrames addObject:NSStringFromCGRect(rect)];
+        }
+        self.imgFrames = imgFrames;
+    }];
 }
 
-- (NSURL *)photoBrowser:(ZJPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
-{
-    NSString *urlStr = [self.imageArray[index] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
-    return [NSURL URLWithString:urlStr];
-}
+
 
 #pragma mark - Observers
 - (void)addObservers{
