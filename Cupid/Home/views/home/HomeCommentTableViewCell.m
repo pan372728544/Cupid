@@ -80,10 +80,8 @@
     self.labCount.font= [UIFont systemFontOfSize:13];
     [self.contentView addSubview:self.labCount];
     
-}
-
--(void)layoutSubviews
-{
+    
+    
     
     [self.imagView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -128,11 +126,11 @@
         make.top.mas_equalTo(self.contentLablel.mas_bottom).offset(10);
         make.left.mas_equalTo(self.imagView.mas_right).offset(0);
         make.right.mas_equalTo(self.contentView.mas_right).offset(-20);
-        make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-10);
+        make.bottom.mas_equalTo(-10);
     }];
-
     
 }
+
 
 -(void)setModel:(ArtileInfomationCommentListModel *)model
 {
@@ -156,10 +154,9 @@
     self.labTime.text = [NSString stringWithFormat:@"%@·回复",dateString];
     
     
-    self.labCount.text = [model.bury_count isEqualToString:@"0"]?@"赞":model.bury_count;
+    self.labCount.text = [model.digg_count isEqualToString:@"0"]?@"赞":model.digg_count;
     self.imagLike.image = [UIImage imageNamed:@"c_comment_like_icon_18x18_"];
     
-    [self setNeedsLayout];
 }
 
 @end

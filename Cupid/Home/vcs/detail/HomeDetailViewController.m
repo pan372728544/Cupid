@@ -132,7 +132,8 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
     // webviewe在最上面
     self.webView.top = 0;
     
-    self.webView.height = viewH;
+    self.webView.height = 10;
+    self.tableView.height = 10;
     // 设置tableview 在webview下面
     self.tableView.top = self.webView.bottom;
     
@@ -156,29 +157,6 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 
 -(void)loadMainRequest
 {
-    // 公共参数
-//    NSDictionary *dirParams = [HomeRequest getCommonParamDic];
-//    NSMutableDictionary *mdic = [NSMutableDictionary dictionary];
-//    [dirParams enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-//        [mdic setObject:obj forKey:key];
-//    }];
-//    [mdic setValue:[NSString stringWithFormat:@"%@",self.group_id] forKey:@"group_id" ];
-//    [mdic setValue:[NSString stringWithFormat:@"%@",self.item_id] forKey:@"item_id"];
-//    [mdic setValue:self.category forKey:@"from_category"];
-//    WEAKSELF
-//    [ZJNetworking getWithUrl:[HomeRequest getHomeArticleInformationUrl] refreshRequest:NO cache:NO params:mdic progressBlock:nil successBlock:^(id response) {
-//
-//        // 处理请求成功数据
-//        [weakSelf requessWithResponse:response];
-//
-//
-//    } failBlock:^(NSError *error) {
-//
-//    }];
-    
-    
-
-    
     // 请求html数据
     [self loadHtmlContent];
     
@@ -359,6 +337,7 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 // 评论请求
 -(void)loadCommentRequest:(int)offset
 {
+ [ self.containerScrollView.mj_footer endRefreshing];
     // 公共参数
     NSDictionary *dirParams = [HomeRequest getCommonParamDic];
 
@@ -375,7 +354,7 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
     WEAKSELF;
     
     [ZJNetworking getWithUrl:@"http://lg.snssdk.com/article/v4/tab_comments/" refreshRequest:NO cache:NO params:mdic2 progressBlock:nil successBlock:^(id response) {
-        
+     
         // 处理请求成功数据
         [weakSelf requessWithResponse2:response];
         
@@ -397,40 +376,13 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
     }
     else
     {
-        self.tableView.mj_footer = nil;
+
+        self.containerScrollView.mj_footer = nil;
     }
     
     [self.maryCommon addObjectsFromArray:self.modelData.data];
       [self.tableView reloadData];
 }
-
-//-(void)requessWithResponse:(id)response
-//{
-// NSString *message=   [response objectForKey:@"message"];
-//    if (![message isEqualToString:@""] || !message) {
-////        [MBProgressHUD showError:message];
-//        return;
-//    }
-//
-//    self.model =   [ArtileInfomationModel mj_objectWithKeyValues:[response objectForKey:@"data"]];
-//
-//    NSURL *url = [NSURL URLWithString:[self.model.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//    MYLog(@"请求地址====%@======",url);
-//    if ([self.model.url containsString:@"http://toutiao.com"] || [self.model.url containsString:@"www.wukong.com"]) {
-//        return;
-//    }
-//
-//    // 设置请求userAgent
-//    NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                                 @"Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16A366 NewsArticle/7.0.6.14 JsSdk/2.0 NetType/WIFI (News 7.0.6 12.000000)", @"UserAgent", nil];
-//    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//
-//
-//
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    [self.webView loadRequest:request];
-//}
 
 #pragma mark - WKWebView NavigationDelegate
 
@@ -686,6 +638,9 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
             [self updateContainerScrollViewContentSize];
         }
     }else if(object == _tableView) {
+        
+        NSLog(@"===============tableview=======contentSize===change");
+        
         if ([keyPath isEqualToString:@"contentSize"]) {
             [self updateContainerScrollViewContentSize];
         }
@@ -721,18 +676,26 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
     
     self.tableView.height = tableViewHeight;
     self.tableView.top = self.webView.bottom;
-    
+
     //Fix:contentSize变化时需要更新各个控件的位置
     [self scrollViewDidScroll:self.containerScrollView];
+    
+
 }
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    if (_containerScrollView != scrollView) {
+        NSLog(@" load More %f==",self.containerScrollView.contentOffset.y);
+    
+//    NSLog(@"scrllview  %f == %d",scrollView.contentOffset.y,scrollView.tag);
+    if (_containerScrollView != scrollView ) {
         return;
     }
-    
+//    if (scrollView.tag == 0) {
+//        return;
+//    }
+
     CGFloat offsetY = scrollView.contentOffset.y;
     
     CGFloat webViewHeight = self.webView.height;
@@ -768,6 +731,7 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 //    NSLog(@"%f===================",offsetY);
 }
 
+
 #pragma mark - UITableViewDataSouce
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -778,9 +742,25 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
     return self.maryCommon.count;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 100;
-//}
+//设置行高
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    ArtileInfomationCommentModel *modelComment = [self.maryCommon objectAtIndex:indexPath.row];
+    ArtileInfomationCommentListModel *modelList = modelComment.comment;
+    
+    NSString *text =modelList.text;
+    UIFont *font = [UIFont systemFontOfSize:17];
+
+    CGSize size = [text boundingRectWithSize:CGSizeMake(SCREEN_W-60, MAXFLOAT)
+                                          options:NSStringDrawingUsesLineFragmentOrigin
+                                       attributes:@{NSFontAttributeName:font}
+                                          context:nil].size;
+    
+   
+    return size.height+80;
+}
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HomeCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
@@ -838,6 +818,8 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, NAVBAR_IPHONEX_H, SCREEN_W, SCREEN_H-NAVBAR_IPHONEX_H) style:UITableViewStylePlain];
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.estimatedRowHeight = 0;
+        _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.scrollEnabled = NO;

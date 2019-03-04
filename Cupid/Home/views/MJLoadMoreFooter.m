@@ -146,7 +146,7 @@
 
 -(void)stopAnimation{
 
-    NSLog(@"完成==================");
+
     
     self.shapeLayerOne.position = CGPointMake( 0, 0);
     self.shapeLayerThree.position = CGPointMake(0, 0);
