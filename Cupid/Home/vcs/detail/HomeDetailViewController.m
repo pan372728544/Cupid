@@ -458,12 +458,13 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 }
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation {
     NSLog(@"网页开始接收网页内容");
-    // 请求评论
-    [self loadCommentRequest:0];
+//    // 请求评论
+//    [self loadCommentRequest:0];
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
     NSLog(@"网页导航加载完毕");
-
+    // 请求评论
+    [self loadCommentRequest:0];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
     [self.tableView reloadData];
