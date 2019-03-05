@@ -893,6 +893,8 @@
 				3801017D21DE175500D5F7D2 /* Frameworks */,
 				3801017E21DE175500D5F7D2 /* Resources */,
 				1FA61E55A1795DD082A475FF /* [CP] Copy Pods Resources */,
+				392F96B25C84090B909D9731 /* [CP] Embed Pods Frameworks */,
+				38A4E3AC222E2682002F2382 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1058,6 +1060,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cupid/Pods-Cupid-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		38A4E3AC222E2682002F2382 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed\n";
+		};
+		392F96B25C84090B909D9731 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Cupid/Pods-Cupid-frameworks.sh",
+				"${PODS_ROOT}/../my_flutter/.ios/Flutter/engine/Flutter.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flutter.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cupid/Pods-Cupid-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3F5E50EC9CCCC3ACD11FCCFA /* [CP] Check Pods Manifest.lock */ = {
@@ -1308,6 +1349,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QH6865CZKU;
+				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Cupid/PrefixHeader.pch";
 				INFOPLIST_FILE = Cupid/Info.plist;
@@ -1330,6 +1372,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QH6865CZKU;
+				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Cupid/PrefixHeader.pch";
 				INFOPLIST_FILE = Cupid/Info.plist;

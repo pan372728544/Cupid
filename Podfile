@@ -1,4 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
+
+flutter_application_path = 'my_flutter/'
+ eval(File.read(File.join(flutter_application_path, '.ios', 'Flutter', 'podhelper.rb')), binding)
+
 platform :ios, '8.0'
 
 target 'Cupid' do

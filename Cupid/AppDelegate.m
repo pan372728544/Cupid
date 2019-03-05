@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AppDelegate+Internal.h"
+#import <FlutterPluginRegistrant/GeneratedPluginRegistrant.h> // Only if you have Flutter Plugins
 
 @interface AppDelegate ()
 
@@ -19,7 +20,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
     [self initViews];
-    return YES;
+//    return YES;
+    
+    [GeneratedPluginRegistrant registerWithRegistry:self];
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 
