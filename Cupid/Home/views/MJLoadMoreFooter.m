@@ -191,6 +191,7 @@
             [self stopAnimation];
             break;
         case MJRefreshStatePulling:
+            [self feedback];
             [self stopAnimation];
             break;
         case MJRefreshStateRefreshing:
@@ -201,6 +202,16 @@
         default:
             break;
     }
+}
+
+-(void)feedback
+{
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    if (version.doubleValue >= 10.0) {
+        UIImpactFeedbackGenerator *feedBackGenertor = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleMedium];
+        [feedBackGenertor impactOccurred];
+    }
+    
 }
 #pragma mark 监听scrollView的contentOffset改变
 - (void)scrollViewContentOffsetDidChange:(NSDictionary *)change

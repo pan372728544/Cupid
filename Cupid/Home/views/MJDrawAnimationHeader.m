@@ -207,7 +207,21 @@
     
 }
 
+
+-(void)feedback
+{
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    if (version.doubleValue >= 10.0) {
+        UIImpactFeedbackGenerator *feedBackGenertor = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleMedium];
+        [feedBackGenertor impactOccurred];
+    }
+   
+}
+
 -(void)stopAnimation{
+    
+ 
+    
     [self.smallRectView.layer removeAllAnimations];
     [self.shortLineView.layer removeAllAnimations];
     [self.longLineView.layer removeAllAnimations];
@@ -248,6 +262,7 @@
             break;
         case MJRefreshStatePulling:
             self.lableShow.text=@"松开推荐";
+            [self feedback];
             [self stopAnimation];
             break;
         case MJRefreshStateRefreshing:
