@@ -30,6 +30,8 @@
 		3801026C21E4AD4600D5F7D2 /* AppDelegate+Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801026B21E4AD4600D5F7D2 /* AppDelegate+Internal.m */; };
 		3801026F21E4B3E300D5F7D2 /* ZJTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801026E21E4B3E300D5F7D2 /* ZJTabBar.m */; };
 		382D522E21F1EEAD00009C17 /* HomeCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 382D522D21F1EEAD00009C17 /* HomeCommentTableViewCell.m */; };
+		3837E7522230C3BB0094D2EA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837E7512230C3BB0094D2EA /* LoginViewController.m */; };
+		3837E7542230CD350094D2EA /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 3837E7532230CD350094D2EA /* abc.png */; };
 		38636BAF21E5F7D700A834EE /* HomeContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38636BAE21E5F7D700A834EE /* HomeContentViewController.m */; };
 		38636BB221E5F88100A834EE /* HomeTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38636BB121E5F88100A834EE /* HomeTopBarView.m */; };
 		38636BB521E600E500A834EE /* CategoryTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38636BB421E600E500A834EE /* CategoryTitleModel.m */; };
@@ -216,6 +218,9 @@
 		3801026E21E4B3E300D5F7D2 /* ZJTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJTabBar.m; sourceTree = "<group>"; };
 		382D522C21F1EEAD00009C17 /* HomeCommentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCommentTableViewCell.h; sourceTree = "<group>"; };
 		382D522D21F1EEAD00009C17 /* HomeCommentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCommentTableViewCell.m; sourceTree = "<group>"; };
+		3837E7502230C3BB0094D2EA /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		3837E7512230C3BB0094D2EA /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		3837E7532230CD350094D2EA /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = abc.png; sourceTree = "<group>"; };
 		38636BAD21E5F7D700A834EE /* HomeContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeContentViewController.h; sourceTree = "<group>"; };
 		38636BAE21E5F7D700A834EE /* HomeContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeContentViewController.m; sourceTree = "<group>"; };
 		38636BB021E5F88100A834EE /* HomeTopBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTopBarView.h; sourceTree = "<group>"; };
@@ -481,6 +486,8 @@
 				380101A621DF0AF000D5F7D2 /* SecondViewController.m */,
 				38FF1EDC21FADEF500A3CA7F /* VideoDetailViewController.h */,
 				38FF1EDD21FADEF500A3CA7F /* VideoDetailViewController.m */,
+				3837E7502230C3BB0094D2EA /* LoginViewController.h */,
+				3837E7512230C3BB0094D2EA /* LoginViewController.m */,
 				380101A821DF0AFD00D5F7D2 /* ThirdViewController.h */,
 				380101A921DF0AFD00D5F7D2 /* ThirdViewController.m */,
 				380101AB21DF0B2A00D5F7D2 /* FourthViewController.h */,
@@ -615,6 +622,7 @@
 		386392E921E8709F00A834EE /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				3837E7532230CD350094D2EA /* abc.png */,
 				38FF1FC42204012A00A3CA7F /* c_comment_like_icon_18x18_@2x.png */,
 				38FF1FC52204012A00A3CA7F /* c_comment_like_icon_18x18_@3x.png */,
 				38FF1F0821FEF52B00A3CA7F /* deleteicon_channel_18x18_@2x.png */,
@@ -1002,6 +1010,7 @@
 				38C20A8721EDE4C8007C4CB7 /* back_24x24_@2x.png in Resources */,
 				386392F121E870F100A834EE /* add_channel_titlbar_thin_new_24x24_@2x.png in Resources */,
 				38C20A5421EDC28E007C4CB7 /* arrow-left-white-24_24x24_@3x.png in Resources */,
+				3837E7542230CD350094D2EA /* abc.png in Resources */,
 				3863933A21E8730C00A834EE /* pgc_tabbar_icon_more_press_24x24_@3x.png in Resources */,
 				3863935721E89F3300A834EE /* chatroom_close_18x18_@3x.png in Resources */,
 				3863936721E8A6F500A834EE /* tabbar_publish_article_34x34_@2x.png in Resources */,
@@ -1177,6 +1186,7 @@
 				38636C1121E830A600A834EE /* RequestConst.m in Sources */,
 				38636BC121E6094000A834EE /* HomeFlowLayout.m in Sources */,
 				38C20A1321EC92FD007C4CB7 /* MJDrawAnimationHeader.m in Sources */,
+				3837E7522230C3BB0094D2EA /* LoginViewController.m in Sources */,
 				38FF1FB522019CB100A3CA7F /* ZJPhotoBrowser.m in Sources */,
 				3801018521DE175500D5F7D2 /* AppDelegate.m in Sources */,
 				38FF1EDE21FADEF500A3CA7F /* VideoDetailViewController.m in Sources */,

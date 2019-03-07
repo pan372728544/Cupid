@@ -17,7 +17,7 @@
     
     // 设置present视图的高度
     self.presentedView.frame = CGRectMake(0, _height, SCREEN_W, SCREEN_H);
-    self.presentedView.backgroundColor = [UIColor whiteColor];
+//    self.presentedView.backgroundColor = [UIColor whiteColor];
     self.presentedView.layer.cornerRadius = 7;
     // 添加到containerView 上
     [self.containerView addSubview:self.presentedView];

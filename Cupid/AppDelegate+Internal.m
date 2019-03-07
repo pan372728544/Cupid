@@ -12,6 +12,7 @@
 #import "SecondViewController.h"
 #import "ThirdViewController.h"
 #import "FourthViewController.h"
+#import "LoginViewController.h"
 
 #import "ZJTabBarManager.h"
 
@@ -43,9 +44,59 @@
         HomeViewController * homeVC = [HomeViewController new];
         SecondViewController * secondVC = [SecondViewController new];
         ThirdViewController * thirdVC = [ThirdViewController new];
-        FourthViewController * fourthVC =[FourthViewController new];
+//        FourthViewController * fourthVC =[FourthViewController new];
         
-        config.viewControllers = @[homeVC, secondVC, thirdVC,fourthVC];
+        // flutter 设置
+        
+            
+           FlutterViewController* flutterViewController = [[FlutterViewController alloc] initWithProject:nil nibName:nil bundle:nil];
+            [flutterViewController setInitialRoute:@"myApp"];
+            __weak __typeof(self) weakSelf = self;
+            
+            // 要与main.dart中一致
+            NSString *channelName = @"com.pages.your/native_get";
+            
+            FlutterMethodChannel *messageChannel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:flutterViewController];
+            
+            [messageChannel setMethodCallHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult  _Nonnull result) {
+                // call.method 获取 flutter 给回到的方法名，要匹配到 channelName 对应的多个 发送方法名，一般需要判断区分
+                // call.arguments 获取到 flutter 给到的参数，（比如跳转到另一个页面所需要参数）
+                // result 是给flutter的回调， 该回调只能使用一次
+                NSLog(@"method=%@ \narguments = %@", call.method, call.arguments);
+                
+                // method和WKWebView里面JS交互很像
+                // flutter点击事件执行后在iOS跳转TargetViewController
+                if ([call.method isEqualToString:@"iOSFlutter"]) {
+                    LoginViewController *vc = [[LoginViewController alloc] init];
+                    
+                    UIWindow *windowW = [UIApplication sharedApplication].keyWindow;
+                    UIViewController *rootViewController1 = windowW.rootViewController;
+                    
+                    [rootViewController1 presentViewController:vc animated:YES completion:nil];
+                }
+                // flutter传参给iOS
+                if ([call.method isEqualToString:@"iOSFlutter1"]) {
+                    NSDictionary *dic = call.arguments;
+                    NSLog(@"arguments = %@", dic);
+                    NSString *code = dic[@"code"];
+                    NSArray *data = dic[@"data"];
+                    NSLog(@"code = %@", code);
+                    NSLog(@"data = %@",data);
+                    NSLog(@"data 第一个元素%@",data[0]);
+                    NSLog(@"data 第一个元素类型%@",[data[0] class]);
+                }
+                // iOS给iOS返回值
+                if ([call.method isEqualToString:@"iOSFlutter2"]) {
+                    if (result) {
+                        result(@"返回给flutter的内容");
+                    }
+                }
+            }];
+            
+        
+        
+        
+        config.viewControllers = @[homeVC, secondVC, thirdVC,flutterViewController];
         
         config.normalImages = @[@"home_tabbar_night_32x32_",@"video_tabbar_night_32x32_",@"huoshan_tabbar_night_32x32_",@"no_login_tabbar_night_33x32_"];
         config.selectedImages = @[@"home_tabbar_press_32x32_", @"video_tabbar_press_32x32_", @"huoshan_tabbar_press_32x32_",@"no_login_tabbar_press_33x32_"];
