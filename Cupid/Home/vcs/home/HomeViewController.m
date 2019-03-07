@@ -166,6 +166,7 @@
     [self setUpTitleScale:^(CGFloat *titleScale) {
         *titleScale=1.1;
     }];
+    self.selectIndex = 1;
     [self refreshDisplay];
     
     [self.view bringSubviewToFront:self.categoryAdd];

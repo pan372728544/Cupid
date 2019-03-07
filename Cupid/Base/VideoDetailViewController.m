@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor orangeColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, NAVBAR_IPHONEX_H, SCREEN_W,500) style:UITableViewStylePlain];
     
@@ -27,7 +27,7 @@
     self.tableView.dataSource= self;
 
     
-    [self.view addSubview:self.tableView];
+//    [self.view addSubview:self.tableView];
 }
 
 

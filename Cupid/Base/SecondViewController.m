@@ -52,7 +52,7 @@
 
 -(void)initNavView
 {
-    [self createNavBarViewWithTitle:@"通讯录"];
+    [self createNavBarViewWithTitle:@"西瓜视频"];
     
 }
 
@@ -75,7 +75,7 @@
 {
     
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    cell.textLabel.text = @"dddddddd";
+    cell.textLabel.text = [NSString stringWithFormat:@"Test--%ld",indexPath.row];
     
     return cell;
     
