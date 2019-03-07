@@ -45,8 +45,21 @@ class MyApp extends StatelessWidget{
   _iOSPushToVC() async {
     await methodChannel.invokeMethod('iOSFlutter', '参数');
   }
+
+
+
     @override
     Widget build(BuildContext context){
+        // 跳转到其他页面
+       _pushSecondView(String ti,String des){
+    
+          Navigator.push(context, 
+                    new MaterialPageRoute(
+                      builder: (context) =>new SecondScreen(product: Product(ti, des),)
+                    ),
+                    );
+        }
+
       return Container(
         child: Column(
           // 总的数组
@@ -108,21 +121,64 @@ class MyApp extends StatelessWidget{
             height: 500.0,
             child: ListView(
                 children: <Widget>[
-                 buildListColumn(Icons.access_alarm, "我的关注"),
+
+                  new FlatButton(
+                   child: buildListColumn(Icons.access_alarm, "我的关注"),
+                   onPressed:(){
+                    //  print('aaaaaa');
+                    _pushSecondView('我的关注','描述信息-我的关注！->点击返回');
+                    }
+                  ),
+              
                  new Divider(),
-                 buildListColumn(Icons.ac_unit, "我的钱包"),
+                  new FlatButton(
+                 child: buildListColumn(Icons.ac_unit, "我的钱包"),
+                      onPressed:(){
+                     _pushSecondView("我的钱包",'描述信息-我的钱包！->点击返回');
+                    }
+                  ),
                  new Divider(),
-                 buildListColumn(Icons.access_time, "消息通知"),
+                 new FlatButton(
+                 child: buildListColumn(Icons.access_time, "消息通知"),
+                      onPressed:(){
+                        _pushSecondView('消息通知','描述信息-消息通知！->点击返回');
+                    }
+                  ),
                  LineTips(),
-                 buildListColumn(Icons.accessibility_new, "扫一扫"),
+                 new FlatButton(
+                 child: buildListColumn(Icons.accessibility_new, "扫一扫"),
+                      onPressed:(){
+                        _pushSecondView('扫一扫','描述信息-扫一扫！->点击返回');
+                    }
+                  ),
                  new Divider(),
-                 buildListColumn(Icons.backspace, "免流量看头条"),
+                 new FlatButton(
+                 child: buildListColumn(Icons.backspace, "免流量看头条"),
+                      onPressed:(){
+                        _pushSecondView('免流量看头条','描述信息-免流量看头条！->点击返回');
+                    }
+                  ),
                  new Divider(),
-                 buildListColumn(Icons.cake, "阅读公益"),
+                 new FlatButton(
+                 child: buildListColumn(Icons.cake, "阅读公益"),
+                      onPressed:(){
+                        _pushSecondView('阅读公益','描述信息-阅读公益！->点击返回');
+                    }
+                  ),
                   LineTips(),
-                 buildListColumn(Icons.dashboard, "用户反馈"),
+                  new FlatButton(
+                 child: buildListColumn(Icons.dashboard, "用户反馈"),
+                      onPressed:(){
+                       _pushSecondView('用户反馈','描述信息-用户反馈！->点击返回');
+                    }
+                  ),
                  new Divider(),
-                 buildListColumn(Icons.face, "系统设置"),
+                 new FlatButton(
+                 child: buildListColumn(Icons.face, "系统设置"),
+                      onPressed:(){
+                        _pushSecondView('系统设置','描述信息-系统设置！->点击返回');
+                    }
+                  ),
                  new Divider(),
 
                 ],
@@ -178,6 +234,7 @@ class MyApp extends StatelessWidget{
 ListTile buildListColumn(IconData icon,String text){
 
   return new ListTile(
+
          leading: Icon(icon),
          title:new Text(text),
          
@@ -213,3 +270,52 @@ ListTile buildListColumn(IconData icon,String text){
       );
     }
 
+class Product{
+  final String title;  //商品标题
+  final String description;  //商品描述
+  Product(this.title,this.description);
+}
+
+// flutter跳转的第二个页面
+class SecondScreen extends StatelessWidget{
+  final Product product;
+  SecondScreen({Key key ,@required this.product}):super(key:key);
+ @override
+
+ Widget build(BuildContext context){
+   return Scaffold(
+
+     appBar: AppBar(
+       title: Text(
+         '${product.title}',
+         style: TextStyle(
+           fontSize: 20.0,
+            fontWeight: FontWeight.normal,
+              color: Colors.white,
+
+         ),
+       ),
+       backgroundColor: Colors.red,
+     ),
+
+    
+     body: Container(
+       height: 200.0,
+       width: 200.0,
+      margin: const EdgeInsets.only(top: 200.0,left: 100.0),
+     child: RaisedButton(
+        color: Colors.lightBlue,
+        child: Text('${product.description}',style: TextStyle(fontSize: 20.0,color: Colors.white),),
+        onPressed: (){
+          Navigator.pop(context);
+        },
+      ),
+      )
+     
+
+     );
+
+ }
+
+
+}
