@@ -21,13 +21,21 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, NAVBAR_IPHONEX_H, SCREEN_W,500) style:UITableViewStylePlain];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_W-24-10, 10, 24, 24)];
+    [btn setBackgroundImage:[UIImage imageNamed:@"close_channel_24x24_"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(btnClose:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 40, SCREEN_W, SCREEN_H-30-STATUSBAR_H) style:UITableViewStylePlain];
     
     self.tableView.delegate = self;
     self.tableView.dataSource= self;
-
     
-//    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
+
+    self.isSupportRightSlide = YES;
+    
+    [self.view addSubview:self.tableView];
 }
 
 
@@ -45,6 +53,10 @@
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    // tableview滑动的时候 传递滑动方向
+    if (scrollView.contentOffset.x==scrollView.contentOffset.y) {
+        self.isUp = YES;
+    }
     
     if (scrollView.contentOffset.y <=0) {
     
@@ -124,9 +136,14 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    cell.textLabel.text = @"mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm";
+    static NSString *identify = @"cell";
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.textLabel.text = [NSString stringWithFormat:@"测试数--%ld",indexPath.row];
     return cell;
     
 }

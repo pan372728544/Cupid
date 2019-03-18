@@ -12,8 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZJBasePresentViewController : UIViewController
 
-// 设置遮盖背影颜色
-//@property(nonatomic,strong)UIColor *colorbackCover;
+
+
+// 是否支持向右滑动返回（默认不支持，默认为NO）
+@property(nonatomic,assign)BOOL isSupportRightSlide;
+
+
+@property(nonatomic,assign)BOOL isUp;
+
+@property(nonatomic,assign)BOOL isRight;
 
 @end
 

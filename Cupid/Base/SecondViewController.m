@@ -19,7 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"通讯录";
     self.view.backgroundColor= [UIColor whiteColor];
     // Do any additional setup after loading the view.
     [self initNavView];
