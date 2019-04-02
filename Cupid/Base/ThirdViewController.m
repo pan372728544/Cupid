@@ -10,6 +10,7 @@
 #import "ZJBaseViewController+NavBar.h"
 #import <WebKit/WebKit.h>
 #import "CardDemoViewController.h"
+#import "cupid-Swift.h"
 
 @interface ThirdViewController ()<WKNavigationDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -43,6 +44,19 @@
     btn.backgroundColor = [UIColor orangeColor];
     [btn setTitle:@"跳转卡片展示" forState:UIControlStateNormal];
     [self.view addSubview:btn];
+    
+    
+    UIButton *btn2 = [[UIButton alloc]initWithFrame:CGRectMake(100, 200, 200, 50)];
+    [btn2 addTarget:self action:@selector(btnClickSwift) forControlEvents:UIControlEventTouchUpInside];
+    btn2.backgroundColor = [UIColor orangeColor];
+    [btn2 setTitle:@"swift" forState:UIControlStateNormal];
+    [self.view addSubview:btn2];
+  
+}
+
+-(void)btnClickSwift
+{
+    [self.navigationController pushViewController:[swiftVideoHome new] animated:YES];
 }
 
 -(void)btnClick
