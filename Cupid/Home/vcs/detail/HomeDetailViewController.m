@@ -528,11 +528,13 @@ WKNavigationDelegate,ZJPhotoBrowserDelegate>
 #pragma mark - ZJPhotoBrowserDelegate
 - (void)photoBrowser:(ZJPhotoBrowser *)browser panBeginWithIndex:(NSInteger)index {
     // 执行js，隐藏对应的图片
+       NSLog(@"显示");
     [self addViewToImageWithIndex:index hidden:NO];
 }
 
 - (void)photoBrowser:(ZJPhotoBrowser *)browser panEndedWithIndex:(NSInteger)index willDisappear:(BOOL)disappear {
     // 执行js，显示对应的图片
+    NSLog(@"隐藏");
     [self addViewToImageWithIndex:index hidden:YES];
 }
 

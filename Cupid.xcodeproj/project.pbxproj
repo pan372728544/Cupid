@@ -117,6 +117,9 @@
 		3863936821E8A6F500A834EE /* tabbar_publish_shortvideo_34x34_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3863936021E8A6F500A834EE /* tabbar_publish_shortvideo_34x34_@2x.png */; };
 		3863936B21E8ABE900A834EE /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3863936A21E8ABE900A834EE /* PublishViewController.m */; };
 		3863936E21EC22EE00A834EE /* HomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3863936D21EC22EE00A834EE /* HomeDetailViewController.m */; };
+		38717AC0225364C00020955F /* GMCCardAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38717ABF225364C00020955F /* GMCCardAnimationView.m */; };
+		38717AC3225364D50020955F /* GMCDefaultCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38717AC2225364D50020955F /* GMCDefaultCardView.m */; };
+		38717AC6225366320020955F /* CardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38717AC5225366320020955F /* CardDemoViewController.m */; };
 		38AC1A2521F05A88001D491B /* MJLoadMoreFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A2421F05A88001D491B /* MJLoadMoreFooter.m */; };
 		38AC1A2821F08EB8001D491B /* HomeOtherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A2721F08EB8001D491B /* HomeOtherDetailViewController.m */; };
 		38AC1A3121F17F6B001D491B /* ArtileInfomationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A3021F17F6B001D491B /* ArtileInfomationModel.m */; };
@@ -330,6 +333,12 @@
 		3863936A21E8ABE900A834EE /* PublishViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishViewController.m; sourceTree = "<group>"; };
 		3863936C21EC22EE00A834EE /* HomeDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDetailViewController.h; sourceTree = "<group>"; };
 		3863936D21EC22EE00A834EE /* HomeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDetailViewController.m; sourceTree = "<group>"; };
+		38717ABE225364C00020955F /* GMCCardAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMCCardAnimationView.h; sourceTree = "<group>"; };
+		38717ABF225364C00020955F /* GMCCardAnimationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMCCardAnimationView.m; sourceTree = "<group>"; };
+		38717AC1225364D50020955F /* GMCDefaultCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMCDefaultCardView.h; sourceTree = "<group>"; };
+		38717AC2225364D50020955F /* GMCDefaultCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMCDefaultCardView.m; sourceTree = "<group>"; };
+		38717AC4225366320020955F /* CardDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardDemoViewController.h; sourceTree = "<group>"; };
+		38717AC5225366320020955F /* CardDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardDemoViewController.m; sourceTree = "<group>"; };
 		38AC1A2321F05A88001D491B /* MJLoadMoreFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJLoadMoreFooter.h; sourceTree = "<group>"; };
 		38AC1A2421F05A88001D491B /* MJLoadMoreFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJLoadMoreFooter.m; sourceTree = "<group>"; };
 		38AC1A2621F08EB8001D491B /* HomeOtherDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeOtherDetailViewController.h; sourceTree = "<group>"; };
@@ -461,6 +470,12 @@
 				380101B021DF3CA900D5F7D2 /* ListViewController.m */,
 				3863936921E8ABE900A834EE /* PublishViewController.h */,
 				3863936A21E8ABE900A834EE /* PublishViewController.m */,
+				38717ABE225364C00020955F /* GMCCardAnimationView.h */,
+				38717ABF225364C00020955F /* GMCCardAnimationView.m */,
+				38717AC1225364D50020955F /* GMCDefaultCardView.h */,
+				38717AC2225364D50020955F /* GMCDefaultCardView.m */,
+				38717AC4225366320020955F /* CardDemoViewController.h */,
+				38717AC5225366320020955F /* CardDemoViewController.m */,
 				38C20A4621ED7A06007C4CB7 /* PrefixHeader.pch */,
 				38C20A8C21EEE4C9007C4CB7 /* CommonHeader.h */,
 				380101E621E35CEA00D5F7D2 /* MyView.h */,
@@ -1145,6 +1160,7 @@
 				3801018821DE175500D5F7D2 /* ViewController.m in Sources */,
 				38636C0121E733AE00A834EE /* ZJMemoryCache.m in Sources */,
 				38FF1EF121FEB00E00A3CA7F /* ZJPresentationController.m in Sources */,
+				38717AC3225364D50020955F /* GMCDefaultCardView.m in Sources */,
 				38AC1A2521F05A88001D491B /* MJLoadMoreFooter.m in Sources */,
 				38FF1FBA22019CB100A3CA7F /* ZJPhotoView.m in Sources */,
 				38636BBE21E6067E00A834EE /* HomeDisplayViewController.m in Sources */,
@@ -1155,6 +1171,7 @@
 				3801026F21E4B3E300D5F7D2 /* ZJTabBar.m in Sources */,
 				380101B421DF4D0B00D5F7D2 /* ZJBasePopAnimation.m in Sources */,
 				3801019321DE175600D5F7D2 /* main.m in Sources */,
+				38717AC6225366320020955F /* CardDemoViewController.m in Sources */,
 				38636BC421E60A7F00A834EE /* UIView+Frame.m in Sources */,
 				38C20A5021EDAFB4007C4CB7 /* ResultSearchViewController.m in Sources */,
 				38636BFE21E733AE00A834EE /* ZJNetworking+RequestManager.m in Sources */,
@@ -1206,6 +1223,7 @@
 				38C20A8021EDD97D007C4CB7 /* SearchBarView.m in Sources */,
 				38AC1A3121F17F6B001D491B /* ArtileInfomationModel.m in Sources */,
 				38FF1EEB21FEAC7C00A3CA7F /* ZJBasePresentViewController.m in Sources */,
+				38717AC0225364C00020955F /* GMCCardAnimationView.m in Sources */,
 				38FF1F0621FEEC7800A3CA7F /* HomeChannelCollectionViewCell.m in Sources */,
 				38636BFD21E733AE00A834EE /* ZJNetworking.m in Sources */,
 			);

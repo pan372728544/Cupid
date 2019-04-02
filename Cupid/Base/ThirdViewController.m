@@ -9,6 +9,7 @@
 #import "ThirdViewController.h"
 #import "ZJBaseViewController+NavBar.h"
 #import <WebKit/WebKit.h>
+#import "CardDemoViewController.h"
 
 @interface ThirdViewController ()<WKNavigationDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -31,7 +32,23 @@
     [self initNavView];
     
     
+
+    
+    
     [self addWKWebView];
+    
+    
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 200, 50)];
+    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    btn.backgroundColor = [UIColor orangeColor];
+    [btn setTitle:@"跳转卡片展示" forState:UIControlStateNormal];
+    [self.view addSubview:btn];
+}
+
+-(void)btnClick
+{
+    [self.navigationController pushViewController:[CardDemoViewController new] animated:YES];
+    
 }
 
 - (void)addWKWebView {
