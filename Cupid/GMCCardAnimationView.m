@@ -95,6 +95,13 @@ static CGFloat gGlobalviewScale = 0.04;
     
     CGPoint velocity = [sender velocityInView:self.frontView];
     
+    CGFloat timeAnimation = 0.3;
+
+    // 滑动速率快动画时间缩短
+    if (fabs((double)velocity.x)>=1000) {
+        timeAnimation = 0.03;
+    }
+    
     // 最后一页 不可以左划
     if (self.currentCount+1 == self.showCount  &&  (velocity.x <0 || transition.y<0 ||(velocity.x>=0&&transition.y>0)) && self.isCanMoveView )
     {
@@ -189,7 +196,7 @@ static CGFloat gGlobalviewScale = 0.04;
                         // 水平移除屏幕
                         center.x = -CGRectGetWidth(self.frontView.frame)/2-CGRectGetWidth(self.frame)/2;
                     }
-                    [UIView animateWithDuration:0.3 animations:^{
+                    [UIView animateWithDuration:timeAnimation animations:^{
                         self.frontView.center = center;
                         // 其余卡片缩放处理
                         for (NSInteger i = 1; i<self.showViewsMulAry.count; i++)
@@ -197,7 +204,7 @@ static CGFloat gGlobalviewScale = 0.04;
                             UIView*view = self.showViewsMulAry[i];
                             if (view != self.frontView)
                             {
-                                view.center = CGPointMake(_preferCenter.x+ (i-1)*gGlobalviewGaps, _preferCenter.y );
+                                view.center = CGPointMake(self.preferCenter.x+ (i-1)*gGlobalviewGaps, self.preferCenter.y );
                                 view.transform = CGAffineTransformMakeScale(1.0-(i-1)*gGlobalviewScale,1.0-(i-1)*gGlobalviewScale);
                             }
                         }
@@ -210,7 +217,7 @@ static CGFloat gGlobalviewScale = 0.04;
                         self.queryView.alpha = 0;
                         // 数组添加新元素
                         [self.showViewsMulAry addObject:[self queryView]];
-                        [UIView animateWithDuration:0.3 animations:^{
+                        [UIView animateWithDuration:timeAnimation animations:^{
                             self.queryView.alpha = 1;
                         }];
                         
@@ -244,7 +251,7 @@ static CGFloat gGlobalviewScale = 0.04;
                     CGPoint center = self.frontView.center;
                     center.x = self.preferCenter.x;
                     center.y = self.preferCenter.y;
-                    [UIView animateWithDuration:0.3 animations:^{
+                    [UIView animateWithDuration:timeAnimation animations:^{
                         self.frontView.center = center;
                         
                         for (NSInteger i = 1; i<self.showViewsMulAry.count; i++)
@@ -252,7 +259,7 @@ static CGFloat gGlobalviewScale = 0.04;
                             UIView*view = self.showViewsMulAry[i];
                             if (view != self.frontView)
                             {
-                                view.center = CGPointMake(_preferCenter.x+ i*gGlobalviewGaps, _preferCenter.y );
+                                view.center = CGPointMake(self.preferCenter.x+ i*gGlobalviewGaps, self.preferCenter.y );
                                 view.transform = CGAffineTransformMakeScale(1.0-i*gGlobalviewScale,1.0-i*gGlobalviewScale);
                             }
                         }
@@ -267,7 +274,7 @@ static CGFloat gGlobalviewScale = 0.04;
                 if (self.currentCount){
                     if (self.queryView.center.x>=self.preferCenter.x-CGRectGetWidth(self.queryView.frame)*3/4)
                     {
-                        [UIView animateWithDuration:0.3 animations:^{
+                        [UIView animateWithDuration:timeAnimation animations:^{
                             // 设置滑动回来的卡片中心点
                             self.queryView.center = self.preferCenter;
                             // 旋转角度清空
@@ -290,8 +297,8 @@ static CGFloat gGlobalviewScale = 0.04;
                     }else
                     {
                         // 队列中的还原之前的位置
-                        [UIView animateWithDuration:0.1 animations:^{
-                            self.queryView.center = CGPointMake(_preferCenter.x-CGRectGetWidth(self.frame)/2-CGRectGetWidth(_queryView.frame)/2, _preferCenter.y);
+                        [UIView animateWithDuration:timeAnimation animations:^{
+                            self.queryView.center = CGPointMake(self.preferCenter.x-CGRectGetWidth(self.frame)/2-CGRectGetWidth(self.queryView.frame)/2, self.preferCenter.y);
                         } completion:^(BOOL finished) {
                             [self.queryView removeFromSuperview];
                         }];
@@ -300,8 +307,8 @@ static CGFloat gGlobalviewScale = 0.04;
                         for (NSInteger i = 0; i<self.showViewsMulAry.count; i++) {
                             UIView* view = self.showViewsMulAry[i];
                             
-                            [UIView animateWithDuration:0.3 animations:^{
-                                view.center = CGPointMake(_preferCenter.x+ i*gGlobalviewGaps, _preferCenter.y );
+                            [UIView animateWithDuration:timeAnimation animations:^{
+                                view.center = CGPointMake(self.preferCenter.x+ i*gGlobalviewGaps, self.preferCenter.y );
                                 view.transform = CGAffineTransformMakeScale(1.0-i*gGlobalviewScale,1.0-i*gGlobalviewScale);
                                 if (i == self.showViewsMulAry.count-1) {
                                     view.alpha = 1;
