@@ -501,8 +501,14 @@ static CGFloat gGlobalviewScale = 0.04;
         // 获取卡片数量
         self.showCount = [self.dataSource numberOfCountInCardView];
     }
-    NSString *errorStr =  [NSString stringWithFormat:@"设置显示的索引不能大于最大的卡片数量. %ld  已经超过最大索引%ld",index,self.showCount-1];
-    NSAssert(index <self.showCount, errorStr);
+//    NSString *errorStr =  [NSString stringWithFormat:@"设置显示的索引不能大于最大的卡片数量. %ld  已经超过最大索引%ld",index,self.showCount-1];
+//    NSAssert(index <self.showCount, errorStr);
+    
+    // 大于最大值取最后一个值
+    if (index > self.showCount-1) {
+        index = self.showCount-1;
+    }
+    
     // 当前应显示的个数
     self.presentCount  = self.showCount>self.maxCount? self.maxCount:self.showCount;
     

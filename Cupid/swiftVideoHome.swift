@@ -14,45 +14,52 @@ class swiftVideoHome:  ZJBaseViewController{
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.red
+        
+        let tableView =  UITableView(frame: CGRect(x: 0, y: 100, width: self.view.frame.size.width
+            , height: view.frame.size.height-100), style: UITableView.Style.plain)
+        
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        view .addSubview(tableView)
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "abc")
+        
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 
-//extension swiftVideoHome:UITableViewDelegate,UITableViewDataSource  {
+extension swiftVideoHome:UITableViewDelegate,UITableViewDataSource  {
 
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        var cell:UITableViewCell
+
+        cell = tableView.dequeueReusableCell(withIdentifier: "abc", for: indexPath)
+//        if cell == nil {
+//            cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "abc")
 //
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 20
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        var cell:UITableViewCell
-//
-//        cell = tableView.dequeueReusableCell(withIdentifier: "aaa") ?? <#default value#>
-//        cell = UITableViewCell
-//
-//    }
+//        }
+
+        cell.textLabel?.text = "cell \(indexPath.row)"
+        
+        return cell
+    }
     
     
     
     
-//}
+}

@@ -87,7 +87,7 @@
         self.cardDataMulAry = [NSMutableArray arrayWithObjects:@"测试数据0",@"测试数据1",@"测试数据2", @"测试数据3", @"测试数据4", @"测试数据5", @"测试数据6",@"测试数据7",@"测试数据8",@"测试数据9",@"测试数据10",@"测试数据11",@"测试数据12",@"测试数据13",@"测试数据14",@"测试数据15",@"测试数据16",@"测试数据17",@"测试数据18",@"测试数据19",  nil];
         
       
-        [self.cardView reloadDataWithOffsetIndex:   [self.index integerValue]];
+        [self.cardView reloadDataWithOffsetIndex:[self.index integerValue]];
         
     });
 }
