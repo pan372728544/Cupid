@@ -11,6 +11,19 @@
 #import "GMCDefaultCardView.h"
 
 
+typedef enum : NSUInteger {
+    // 方向
+    GME_MoveDirectionNone = 0,
+    // 方向向左
+    GME_MoveDirectionLeft = 1<<1,
+    // 方向右
+    GME_MoveDirectionRight = 1<<2,
+    // 方向上
+    GME_MoveDirectionUp = 1<<3,
+    // 方向下
+    GME_MoveDirectionDown = 1<<4,
+} GME_MoveDirection;
+
 @interface GMCCardAnimationView ()
 
 /// 当前第一个view
@@ -49,6 +62,9 @@
 
 /// 是否忽视本次手势
 @property (nonatomic, assign,getter=isIgnoreGes) BOOL ignoreGes;
+
+/// 滑动方向
+@property (nonatomic, assign) GME_MoveDirection direction;
 
 
 @end
@@ -99,20 +115,31 @@ static CGFloat gGlobalviewScale = 0.04;
 
     // 滑动速率快动画时间缩短
     if (fabs((double)velocity.x)>=1000) {
-        timeAnimation = 0.03;
+        timeAnimation = 0.15;
     }
+    
+    // 设置滑动方向
+    if (transition.x == 0 || transition.y == 0) {
+        [self commitTranslation:velocity];
+    }else
+    {
+        [self commitTranslation:transition];
+    }
+    
     
     // 最后一页 不可以左划
     if (self.currentCount+1 == self.showCount  &&  (velocity.x <0 || transition.y<0 ||(velocity.x>=0&&transition.y>0)) && self.isCanMoveView )
     {
+        self.direction = GME_MoveDirectionNone;
         return;
     }
+
     switch (sender.state) {
         case UIGestureRecognizerStateBegan:{
-            // 向左滑动
-            if ( velocity.x<0 || transition.y < 0){
+            // 向左滑动 或者 向上滑动
+            if ( self.direction == GME_MoveDirectionLeft || self.direction == GME_MoveDirectionUp /*|| velocity.x<0 || transition.y < 0*/ ){
                 self.canMoveView = YES;
-            }else if(velocity.x>0){ // 向右滑动
+            }else if(self.direction == GME_MoveDirectionRight){ // 向右滑动
                 self.canMoveView = NO;
                 if (self.currentCount){
                     
@@ -145,8 +172,14 @@ static CGFloat gGlobalviewScale = 0.04;
             if (self.isCanMoveView){
                 // 更新当前的中心点
                 CGPoint center = self.frontView.center;
-                center.x = self.tagetCenter.x + transition.x;
-                center.y = self.tagetCenter.y + transition.y;
+                if (self.direction == GME_MoveDirectionLeft || self.direction == GME_MoveDirectionRight) {
+                    center.x = self.tagetCenter.x + transition.x;
+                } else /*if(self.direction == GME_MoveDirectionUp || self.direction == GME_MoveDirectionDown)*/
+                {
+                    
+                    center.y = self.tagetCenter.y + transition.y;
+                }
+
                 self.frontView.center = center;
                 
                 CGFloat offPercent = (self.frontView.center.x - self.preferCenter.x)/(self.preferCenter.x);
@@ -159,8 +192,13 @@ static CGFloat gGlobalviewScale = 0.04;
                     
                     // 更新位置
                     CGPoint center = self.queryView.center;
-                    center.x = self.queryViewCenter.x + transition.x;
-                    center.y = self.queryViewCenter.y + transition.y;
+                    if (self.direction == GME_MoveDirectionLeft || self.direction == GME_MoveDirectionRight) {
+                        center.x = self.queryViewCenter.x + transition.x;
+                    } else if(self.direction == GME_MoveDirectionUp || self.direction == GME_MoveDirectionDown)
+                    {
+                        
+                        center.y = self.queryViewCenter.y + transition.y;
+                    }
                     self.queryView.center = center;
                     CGFloat total =  self.preferCenter.x-self.queryViewCenter.x;
                     
@@ -177,7 +215,8 @@ static CGFloat gGlobalviewScale = 0.04;
             break;
             
         case UIGestureRecognizerStateEnded: {
-            
+            // 滑动结束后重置方向
+            self.direction = GME_MoveDirectionNone;
             if (self.isIgnoreGes){
                 self.ignoreGes = NO;
                 return;
@@ -496,6 +535,45 @@ static CGFloat gGlobalviewScale = 0.04;
         CGFloat scale = 1 - gGlobalviewScale *i+offPercent * gGlobalviewScale;
         
         otherView.transform = CGAffineTransformMakeScale(scale, scale);
+    }
+}
+
+// 滑动方向
+- (void)commitTranslation:(CGPoint)translation
+{
+    
+    CGFloat absX = fabs(translation.x);
+    CGFloat absY = fabs(translation.y);
+    
+    // 滑动时方向不允许改变
+    if ( self.direction != GME_MoveDirectionNone) {
+//        NSLog(@"fanhuile ");
+        return;
+    }
+
+    if (absX > absY ) {
+        
+        if (translation.x<0) {
+            //向左滑动
+            self.direction = GME_MoveDirectionLeft;
+            NSLog(@"⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️");
+            
+        }else{
+            //向右滑动
+            self.direction = GME_MoveDirectionRight;
+        }
+        
+    } else if (absY > absX) {
+        if (translation.y<0) {
+            self.direction = GME_MoveDirectionUp;
+            
+                       NSLog(@"⬆️⬆️⬆️⬆️ ⬆️ ⬆️ ⬆️ ⬆️ ⬆️ ⬆️ ");
+            //向上滑动
+        }else{
+            
+            //向下滑动
+            self.direction = GME_MoveDirectionDown;
+        }
     }
 }
 
