@@ -98,7 +98,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  刷新数据
  */
--(void)reloadCardViewData;
+-(void)reloadDataWithOffsetIndex:(NSInteger)index;
+
 
 
 @end

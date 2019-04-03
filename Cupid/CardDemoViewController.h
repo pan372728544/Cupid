@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CardDemoViewController : ZJBaseViewController
 
+@property(nonatomic,copy)NSString *index;
+
 @end
 
 NS_ASSUME_NONNULL_END

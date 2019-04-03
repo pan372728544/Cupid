@@ -12,7 +12,7 @@
 #import "CardDemoViewController.h"
 #import "cupid-Swift.h"
 
-@interface ThirdViewController ()<WKNavigationDelegate>
+@interface ThirdViewController ()<WKNavigationDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @property (nonatomic, strong) WKWebView *webView;
@@ -23,6 +23,9 @@
 @property (nonatomic, strong) NSArray *imgFrames;
 
 @property (nonatomic, strong) UIView *whiteView;
+
+
+@property(nonatomic,strong)UITextField *text;
 @end
 
 @implementation ThirdViewController
@@ -32,21 +35,27 @@
     self.view.backgroundColor= [UIColor whiteColor];
     [self initNavView];
     
-    
 
-    
-    
     [self addWKWebView];
     
     
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 200, 50)];
+
+    
+    UITextField *text = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, SCREEN_W, 50)];
+    text.backgroundColor = [UIColor orangeColor];
+    text.placeholder = @"输入跳转到卡片的第几页";
+    self.text = text;
+    [self.view addSubview:text];
+    
+    
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(100, 200, 200, 50)];
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
     btn.backgroundColor = [UIColor orangeColor];
     [btn setTitle:@"跳转卡片展示" forState:UIControlStateNormal];
     [self.view addSubview:btn];
     
     
-    UIButton *btn2 = [[UIButton alloc]initWithFrame:CGRectMake(100, 200, 200, 50)];
+    UIButton *btn2 = [[UIButton alloc]initWithFrame:CGRectMake(100, 300, 200, 50)];
     [btn2 addTarget:self action:@selector(btnClickSwift) forControlEvents:UIControlEventTouchUpInside];
     btn2.backgroundColor = [UIColor orangeColor];
     [btn2 setTitle:@"swift" forState:UIControlStateNormal];
@@ -54,16 +63,41 @@
   
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+     [self.view endEditing:YES];
+}
 -(void)btnClickSwift
 {
     [self.navigationController pushViewController:[swiftVideoHome new] animated:YES];
 }
 
--(void)btnClick
+
+-(void)btnClickSet
 {
-    [self.navigationController pushViewController:[CardDemoViewController new] animated:YES];
+    
     
 }
+
+
+
+-(void)btnClick
+{
+    
+    CardDemoViewController *vc= [CardDemoViewController new];
+    vc.index = self.text.text;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+
+
 
 - (void)addWKWebView {
     CGRect frame = CGRectMake(0, 100, SCREEN_W, SCREEN_H - 100);

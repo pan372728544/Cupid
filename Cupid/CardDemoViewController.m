@@ -81,11 +81,13 @@
     [_backView addSubview:cardView];
     
     self.cardView = cardView;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         
-        self.cardDataMulAry = [NSMutableArray arrayWithObjects:@"测试数据1",@"测试数据2", @"测试数据3", @"测试数据4", @"测试数据5", @"测试数据6",@"测试数据7",@"测试数据8",@"测试数据9",@"测试数据10",@"测试数据11",@"测试数据12",@"测试数据13",@"测试数据14",@"测试数据15",@"测试数据16",@"测试数据17",@"测试数据18",@"测试数据19",@"测试数据20",  nil];
-        [self.cardView reloadCardViewData];
+        self.cardDataMulAry = [NSMutableArray arrayWithObjects:@"测试数据0",@"测试数据1",@"测试数据2", @"测试数据3", @"测试数据4", @"测试数据5", @"测试数据6",@"测试数据7",@"测试数据8",@"测试数据9",@"测试数据10",@"测试数据11",@"测试数据12",@"测试数据13",@"测试数据14",@"测试数据15",@"测试数据16",@"测试数据17",@"测试数据18",@"测试数据19",  nil];
+        
+      
+        [self.cardView reloadDataWithOffsetIndex:   [self.index integerValue]];
         
     });
 }
@@ -108,7 +110,7 @@
 -(void)cardViewScrollViewCardAtIndex:(NSInteger)index
 {
     NSLog(@"滑动到了%ld页面",index);
-    self.countLbl.text = [NSString stringWithFormat:@"%ld/%ld",index+1,self.cardDataMulAry.count];
+    self.countLbl.text = [NSString stringWithFormat:@"%ld/%ld",index,self.cardDataMulAry.count-1];
 }
 
 -(void)cardViewClickCardAtIndex:(NSInteger)index

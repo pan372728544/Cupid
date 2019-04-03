@@ -38,11 +38,14 @@ typedef enum : NSUInteger {
 /// 当被推出的视图数量
 @property (nonatomic, assign) NSInteger currentCount;
 
-/// 视图中显示的视图数量
+/// 视图中视图总数量
 @property (nonatomic, assign) NSInteger showCount;
 
 /// 视图中显示的最大视图数量
 @property (nonatomic, assign) NSInteger maxCount;
+
+/// 偏移索引
+@property (nonatomic, assign) NSInteger offsetIndex;
 
 
 /// 后面应添加的卡片的索引
@@ -115,7 +118,7 @@ static CGFloat gGlobalviewScale = 0.04;
 
     // 滑动速率快动画时间缩短
     if (fabs((double)velocity.x)>=1000) {
-        timeAnimation = 0.15;
+        timeAnimation = 0.1;
     }
     
     // 设置滑动方向
@@ -181,10 +184,19 @@ static CGFloat gGlobalviewScale = 0.04;
                 }
 
                 self.frontView.center = center;
-                
-                CGFloat offPercent = (self.frontView.center.x - self.preferCenter.x)/(self.preferCenter.x);
-                CGFloat rotation = M_PI_2/10.0*offPercent;
-                
+                // 滑动百分比
+                CGFloat offPercent= 0;
+                // 旋转角度
+                CGFloat rotation = 0;
+                if (self.direction == GME_MoveDirectionUp) {
+                    CGFloat centerY = self.frontView.center.y<=0?0:self.frontView.center.y;
+                    offPercent = (centerY - self.preferCenter.y)/(self.preferCenter.y);
+                }else{
+                    CGFloat centerX = self.frontView.center.x<=0?0:self.frontView.center.x;
+                 
+                    offPercent = (centerX - self.preferCenter.x)/(self.preferCenter.x);
+                    rotation = M_PI_2/10.0*offPercent;
+                }
                 self.frontView.transform = CGAffineTransformMakeRotation(-rotation);
                 [self animationBlowViewWithLeftOffPercent:fabs(offPercent)];
             }else{
@@ -224,11 +236,11 @@ static CGFloat gGlobalviewScale = 0.04;
             if (self.isCanMoveView){ // 向左滑动
                 // 记录当前中心点
                 self.tagetCenter = self.frontView.center;
-                // 滑动的距离大于100
-                if (self.tagetCenter.x<self.preferCenter.x-100.0  || self.tagetCenter.y<self.preferCenter.y-100.0){
+                // 滑动的距离大于卡片宽度1/4
+                if (self.tagetCenter.x<self.preferCenter.x-CGRectGetHeight(self.frontView.frame)*1/4  || self.tagetCenter.y<self.preferCenter.y-CGRectGetHeight(self.frontView.frame)*1/4){
                     CGPoint center = self.frontView.center;
                     
-                    if (self.tagetCenter.y<self.preferCenter.y-100.0) {
+                    if (self.tagetCenter.y<self.preferCenter.y-CGRectGetHeight(self.frontView.frame)*1/4) {
                         center.y = -CGRectGetHeight(self.frontView.frame)/2-CGRectGetHeight(self.frame)/2;
                     }
                     else{
@@ -266,7 +278,7 @@ static CGFloat gGlobalviewScale = 0.04;
                             // 添加新卡片在最后
                             [self addSubview:[self queryView]];
                             [self sendSubviewToBack:[self queryView]];
-                            
+                           
                             // 更新数据
                             GMCDefaultCardView *defaultView = self.queryView.subviews[0];
                             if ([self.dataSource respondsToSelector:@selector(cardViewDisplayDataForCardViewAtIndex:)]){
@@ -279,7 +291,7 @@ static CGFloat gGlobalviewScale = 0.04;
                         self.frontView = self.showViewsMulAry[0];
                         self.tagetCenter = self.frontView.center;
                         self.currentCount ++;
-                        
+                        [self animationBlowViewWithLeftOffPercent:0];
                         // 调取代理
                         [self cardViewScrollFinish];
                     }];
@@ -309,7 +321,7 @@ static CGFloat gGlobalviewScale = 0.04;
                 }
                 
             }else{
-                // 不可滑动的时候
+                // 向右滑动
                 if (self.currentCount){
                     if (self.queryView.center.x>=self.preferCenter.x-CGRectGetWidth(self.queryView.frame)*3/4)
                     {
@@ -333,19 +345,26 @@ static CGFloat gGlobalviewScale = 0.04;
                             // 调用代理
                             [self cardViewScrollFinish];
                         }];
-                    }else
-                    {
+                    }else{
+                        CGPoint center = self.queryView.center;
+                        center.x -= CGRectGetWidth(self.frame)/2;
+                        CGFloat centerX = self.queryView.center.x<=0?0:self.queryView.center.x;
+                        CGFloat offPercent = (centerX - self.preferCenter.x)/(self.preferCenter.x);
+                        CGFloat rotation = M_PI_2/10.0*offPercent;
+                        self.queryView.transform = CGAffineTransformMakeRotation(rotation);
+                        
                         // 队列中的还原之前的位置
                         [UIView animateWithDuration:timeAnimation animations:^{
-                            self.queryView.center = CGPointMake(self.preferCenter.x-CGRectGetWidth(self.frame)/2-CGRectGetWidth(self.queryView.frame)/2, self.preferCenter.y);
+                            self.queryView.center = center;
                         } completion:^(BOOL finished) {
+                            
                             [self.queryView removeFromSuperview];
                         }];
                         
                         // 其余的卡片视图
                         for (NSInteger i = 0; i<self.showViewsMulAry.count; i++) {
                             UIView* view = self.showViewsMulAry[i];
-                            
+
                             [UIView animateWithDuration:timeAnimation animations:^{
                                 view.center = CGPointMake(self.preferCenter.x+ i*gGlobalviewGaps, self.preferCenter.y );
                                 view.transform = CGAffineTransformMakeScale(1.0-i*gGlobalviewScale,1.0-i*gGlobalviewScale);
@@ -474,16 +493,23 @@ static CGFloat gGlobalviewScale = 0.04;
     return _showViewsMulAry;
 }
 
--(void)reloadCardViewData
+-(void)reloadDataWithOffsetIndex:(NSInteger)index
 {
+ 
     
     if ([self.dataSource respondsToSelector:@selector(numberOfCountInCardView)]) {
         // 获取卡片数量
         self.showCount = [self.dataSource numberOfCountInCardView];
     }
-    
-    // 当前
+    NSString *errorStr =  [NSString stringWithFormat:@"设置显示的索引不能大于最大的卡片数量. %ld  已经超过最大索引%ld",index,self.showCount-1];
+    NSAssert(index <self.showCount, errorStr);
+    // 当前应显示的个数
     self.presentCount  = self.showCount>self.maxCount? self.maxCount:self.showCount;
+    
+    // 边界个数处理
+    if (index+self.maxCount>self.showCount) {
+        self.presentCount = self.showCount-index;
+    }
     
     // 显示的卡片数量 大于最大的6个
     [self addDefaultCardViewInViewWithDefault:NO count:self.presentCount];
@@ -491,13 +517,44 @@ static CGFloat gGlobalviewScale = 0.04;
     // 获取卡片数据
     if ([self.dataSource respondsToSelector:@selector(cardViewDisplayDataForCardViewAtIndex:)]) {
         
-        for ( int i=0;i<self.showViewsMulAry.count;i++) {
+        self.offsetIndex = index;
+        self.currentCount = self.offsetIndex;
+        for ( NSInteger i=index;i<self.showViewsMulAry.count+index;i++) {
             
-            UIView *view = self.showViewsMulAry[i];
+            UIView *view = self.showViewsMulAry[i-index];
             GMCDefaultCardView *defaultView = view.subviews[0];
             [defaultView setDisplayData:[self.dataSource cardViewDisplayDataForCardViewAtIndex:i]];
             
         }
+    }
+    
+    // 数组保持添加最大个数
+    if (self.showViewsMulAry.count< self.maxCount) {
+        
+        // 多添加一个放进队列中
+        for (NSInteger i = self.showViewsMulAry.count; i<self.maxCount; i++){
+            
+            UIView *cardBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _preferCenter.x*2, _preferCenter.y*2)];
+            cardBackView.center = CGPointMake(_preferCenter.x+ i*gGlobalviewGaps, _preferCenter.y );
+            cardBackView.transform = CGAffineTransformMakeScale(1-i*gGlobalviewScale, 1-i*gGlobalviewScale);
+            cardBackView.layer.masksToBounds = YES;
+            cardBackView.layer.cornerRadius = 20.0;
+            // 添加滑动手势
+            UIPanGestureRecognizer*panGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panned:)];
+            
+            // 添加点击手势
+            UITapGestureRecognizer*tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cardViewTapped:)];
+            [cardBackView addGestureRecognizer:tapGesture];
+            [cardBackView addGestureRecognizer:panGesture];
+            GMCDefaultCardView*defaultView = [self defaultCardViewSubViews];
+            
+            [cardBackView addSubview:defaultView];
+            
+            // 添加到显示的数组中
+            [self.showViewsMulAry addObject:cardBackView];
+        
+        }
+        
     }
     
     [self cardViewScrollFinish];
@@ -521,11 +578,10 @@ static CGFloat gGlobalviewScale = 0.04;
 }
 
 
-// 向左滑动
+// 向左滑动 和向上
 - (void)animationBlowViewWithLeftOffPercent:(CGFloat)offPercent {
     
     for (NSInteger i = 1; i < self.showViewsMulAry.count; i++) {
-        
         // 从第二个开始偏移
         GMCDefaultCardView * otherView = self.showViewsMulAry[i];
         CGPoint point = CGPointMake((self.preferCenter.x + gGlobalviewGaps*i)-offPercent * gGlobalviewGaps,self.preferCenter.y);
@@ -541,22 +597,19 @@ static CGFloat gGlobalviewScale = 0.04;
 // 滑动方向
 - (void)commitTranslation:(CGPoint)translation
 {
-    
     CGFloat absX = fabs(translation.x);
     CGFloat absY = fabs(translation.y);
     
     // 滑动时方向不允许改变
     if ( self.direction != GME_MoveDirectionNone) {
-//        NSLog(@"fanhuile ");
         return;
     }
-
+    
     if (absX > absY ) {
         
         if (translation.x<0) {
             //向左滑动
             self.direction = GME_MoveDirectionLeft;
-            NSLog(@"⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️⬅️");
             
         }else{
             //向右滑动
@@ -566,8 +619,6 @@ static CGFloat gGlobalviewScale = 0.04;
     } else if (absY > absX) {
         if (translation.y<0) {
             self.direction = GME_MoveDirectionUp;
-            
-                       NSLog(@"⬆️⬆️⬆️⬆️ ⬆️ ⬆️ ⬆️ ⬆️ ⬆️ ⬆️ ");
             //向上滑动
         }else{
             
@@ -576,5 +627,6 @@ static CGFloat gGlobalviewScale = 0.04;
         }
     }
 }
+
 
 @end
