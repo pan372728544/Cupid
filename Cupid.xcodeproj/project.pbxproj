@@ -120,8 +120,9 @@
 		38717AC0225364C00020955F /* GMCCardAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38717ABF225364C00020955F /* GMCCardAnimationView.m */; };
 		38717AC3225364D50020955F /* GMCDefaultCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38717AC2225364D50020955F /* GMCDefaultCardView.m */; };
 		38717AC6225366320020955F /* CardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38717AC5225366320020955F /* CardDemoViewController.m */; };
-		38717ACB22537F7E0020955F /* swiftTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717ACA22537F7E0020955F /* swiftTest.swift */; };
 		38717AD1225380D30020955F /* swiftVideoHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AD0225380D30020955F /* swiftVideoHome.swift */; };
+		38717AD32254BE910020955F /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AD22254BE910020955F /* Const.swift */; };
+		38717AD52254C0660020955F /* ZJContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AD42254C0660020955F /* ZJContentView.swift */; };
 		38AC1A2521F05A88001D491B /* MJLoadMoreFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A2421F05A88001D491B /* MJLoadMoreFooter.m */; };
 		38AC1A2821F08EB8001D491B /* HomeOtherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A2721F08EB8001D491B /* HomeOtherDetailViewController.m */; };
 		38AC1A3121F17F6B001D491B /* ArtileInfomationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A3021F17F6B001D491B /* ArtileInfomationModel.m */; };
@@ -342,8 +343,9 @@
 		38717AC4225366320020955F /* CardDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardDemoViewController.h; sourceTree = "<group>"; };
 		38717AC5225366320020955F /* CardDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardDemoViewController.m; sourceTree = "<group>"; };
 		38717AC722537F3B0020955F /* Cupid-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cupid-Bridging-Header.h"; sourceTree = "<group>"; };
-		38717ACA22537F7E0020955F /* swiftTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftTest.swift; sourceTree = "<group>"; };
 		38717AD0225380D30020955F /* swiftVideoHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftVideoHome.swift; sourceTree = "<group>"; };
+		38717AD22254BE910020955F /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		38717AD42254C0660020955F /* ZJContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJContentView.swift; sourceTree = "<group>"; };
 		38AC1A2321F05A88001D491B /* MJLoadMoreFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJLoadMoreFooter.h; sourceTree = "<group>"; };
 		38AC1A2421F05A88001D491B /* MJLoadMoreFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJLoadMoreFooter.m; sourceTree = "<group>"; };
 		38AC1A2621F08EB8001D491B /* HomeOtherDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeOtherDetailViewController.h; sourceTree = "<group>"; };
@@ -482,7 +484,8 @@
 				38717AC4225366320020955F /* CardDemoViewController.h */,
 				38717AC5225366320020955F /* CardDemoViewController.m */,
 				38717AD0225380D30020955F /* swiftVideoHome.swift */,
-				38717ACA22537F7E0020955F /* swiftTest.swift */,
+				38717AD42254C0660020955F /* ZJContentView.swift */,
+				38717AD22254BE910020955F /* Const.swift */,
 				38C20A4621ED7A06007C4CB7 /* PrefixHeader.pch */,
 				38C20A8C21EEE4C9007C4CB7 /* CommonHeader.h */,
 				380101E621E35CEA00D5F7D2 /* MyView.h */,
@@ -1174,9 +1177,11 @@
 				38FF1FBA22019CB100A3CA7F /* ZJPhotoView.m in Sources */,
 				38636BBE21E6067E00A834EE /* HomeDisplayViewController.m in Sources */,
 				38636C0221E733AE00A834EE /* ZJCacheManager.m in Sources */,
+				38717AD32254BE910020955F /* Const.swift in Sources */,
 				38636BB221E5F88100A834EE /* HomeTopBarView.m in Sources */,
 				380101B721DF5D8400D5F7D2 /* ZJNavgationBarView.m in Sources */,
 				38C20A8F21EF07CF007C4CB7 /* ResultTopView.m in Sources */,
+				38717AD52254C0660020955F /* ZJContentView.swift in Sources */,
 				3801026F21E4B3E300D5F7D2 /* ZJTabBar.m in Sources */,
 				380101B421DF4D0B00D5F7D2 /* ZJBasePopAnimation.m in Sources */,
 				3801019321DE175600D5F7D2 /* main.m in Sources */,
@@ -1190,7 +1195,6 @@
 				3801026921E4A88600D5F7D2 /* ZJTabBarManager.m in Sources */,
 				380101B121DF3CA900D5F7D2 /* ListViewController.m in Sources */,
 				38636C0E21E82FF300A834EE /* HomeRequest.m in Sources */,
-				38717ACB22537F7E0020955F /* swiftTest.swift in Sources */,
 				380101A421DF0AE200D5F7D2 /* HomeViewController.m in Sources */,
 				38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */,
 				38717AD1225380D30020955F /* swiftVideoHome.swift in Sources */,

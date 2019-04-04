@@ -15,8 +15,8 @@ class swiftVideoHome:  ZJBaseViewController{
         
         self.view.backgroundColor = UIColor.red
         
-        let tableView =  UITableView(frame: CGRect(x: 0, y: 100, width: self.view.frame.size.width
-            , height: view.frame.size.height-100), style: UITableView.Style.plain)
+        let tableView =  UITableView(frame: CGRect(x: 0, y: 100, width: Screen_W
+            , height: Screen_H-100), style: UITableView.Style.plain)
         
         
         tableView.delegate = self

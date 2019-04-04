@@ -237,10 +237,10 @@ static CGFloat gGlobalviewScale = 0.04;
                 // 记录当前中心点
                 self.tagetCenter = self.frontView.center;
                 // 滑动的距离大于卡片宽度1/4
-                if (self.tagetCenter.x<self.preferCenter.x-CGRectGetHeight(self.frontView.frame)*1/4  || self.tagetCenter.y<self.preferCenter.y-CGRectGetHeight(self.frontView.frame)*1/4){
+                if (self.preferCenter.x-self.tagetCenter.x>=CGRectGetWidth(self.frontView.frame)*1/4   || self.preferCenter.y-self.tagetCenter.y>=CGRectGetWidth(self.frontView.frame)*1/4){
                     CGPoint center = self.frontView.center;
                     
-                    if (self.tagetCenter.y<self.preferCenter.y-CGRectGetHeight(self.frontView.frame)*1/4) {
+                    if (self.preferCenter.y-self.tagetCenter.y>=CGRectGetWidth(self.frontView.frame)*1/4) {
                         center.y = -CGRectGetHeight(self.frontView.frame)/2-CGRectGetHeight(self.frame)/2;
                     }
                     else{
