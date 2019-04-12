@@ -14,3 +14,7 @@ let Screen_W = UIScreen.main.bounds.width
 let Screen_H = UIScreen.main.bounds.height
 
 
+let StatusBar_H = UIApplication.shared.statusBarFrame.size.height
+
+
+

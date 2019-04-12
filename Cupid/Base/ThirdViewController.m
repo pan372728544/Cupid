@@ -54,12 +54,20 @@
     [btn setTitle:@"跳转卡片展示" forState:UIControlStateNormal];
     [self.view addSubview:btn];
     
+//    
+//    UIButton *btn2 = [[UIButton alloc]initWithFrame:CGRectMake(100, 300, 200, 50)];
+//    [btn2 addTarget:self action:@selector(btnClickSwift) forControlEvents:UIControlEventTouchUpInside];
+//    btn2.backgroundColor = [UIColor orangeColor];
+//    [btn2 setTitle:@"swift" forState:UIControlStateNormal];
+//    [self.view addSubview:btn2];
     
-    UIButton *btn2 = [[UIButton alloc]initWithFrame:CGRectMake(100, 300, 200, 50)];
-    [btn2 addTarget:self action:@selector(btnClickSwift) forControlEvents:UIControlEventTouchUpInside];
-    btn2.backgroundColor = [UIColor orangeColor];
-    [btn2 setTitle:@"swift" forState:UIControlStateNormal];
-    [self.view addSubview:btn2];
+    
+    
+    UIButton *btn3 = [[UIButton alloc]initWithFrame:CGRectMake(100, 400, 200, 50)];
+    [btn3 addTarget:self action:@selector(btnClickSwift2) forControlEvents:UIControlEventTouchUpInside];
+    btn3.backgroundColor = [UIColor orangeColor];
+    [btn3 setTitle:@"swift2" forState:UIControlStateNormal];
+    [self.view addSubview:btn3];
   
 }
 
@@ -75,6 +83,11 @@
 -(void)btnClickSwift
 {
     [self.navigationController pushViewController:[swiftVideoHome new] animated:YES];
+}
+
+-(void)btnClickSwift2
+{
+    [self.navigationController pushViewController:[VideoViewController new] animated:YES];
 }
 
 

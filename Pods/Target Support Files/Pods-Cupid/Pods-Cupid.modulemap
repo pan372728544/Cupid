@@ -1,0 +1,6 @@
+module Pods_Cupid {
+  umbrella header "Pods-Cupid-umbrella.h"
+
+  export *
+  module * { export * }
+}

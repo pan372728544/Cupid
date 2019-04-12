@@ -123,6 +123,22 @@
 		38717AD1225380D30020955F /* swiftVideoHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AD0225380D30020955F /* swiftVideoHome.swift */; };
 		38717AD32254BE910020955F /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AD22254BE910020955F /* Const.swift */; };
 		38717AD52254C0660020955F /* ZJContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AD42254C0660020955F /* ZJContentView.swift */; };
+		38717AD72255A9CB0020955F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AD62255A9CB0020955F /* VideoViewController.swift */; };
+		38717ADB2255B1D90020955F /* UIColor-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717ADA2255B1D90020955F /* UIColor-Extension.swift */; };
+		38717ADD2255D0D20020955F /* ZJTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717ADC2255D0D10020955F /* ZJTitleView.swift */; };
+		38717ADF2255D2E60020955F /* ZJTitleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717ADE2255D2E60020955F /* ZJTitleStyle.swift */; };
+		38717AE12255E7080020955F /* ZJPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AE02255E7080020955F /* ZJPageView.swift */; };
+		38717AE62255F4900020955F /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AE42255F4900020955F /* NetworkTools.swift */; };
+		38717AE72255F4900020955F /* KingfisherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AE52255F4900020955F /* KingfisherExtension.swift */; };
+		38717AEA2255F81B0020955F /* AnchorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AE92255F81B0020955F /* AnchorViewController.swift */; };
+		38717AED2255F8620020955F /* HomeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AEB2255F8620020955F /* HomeType.swift */; };
+		38717AEE2255F8620020955F /* AnchorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AEC2255F8620020955F /* AnchorModel.swift */; };
+		38717AF02255F8870020955F /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AEF2255F8870020955F /* BaseModel.swift */; };
+		38717AF32255F8BD0020955F /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF12255F8BD0020955F /* WaterfallLayout.swift */; };
+		38717AF42255F8BD0020955F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF22255F8BD0020955F /* HomeViewModel.swift */; };
+		38717AF62255F91B0020955F /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF52255F91B0020955F /* RoomViewController.swift */; };
+		38717AFA2255F9870020955F /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF82255F9870020955F /* HomeViewCell.swift */; };
+		38717AFB2255F9870020955F /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38717AF92255F9870020955F /* HomeViewCell.xib */; };
 		38AC1A2521F05A88001D491B /* MJLoadMoreFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A2421F05A88001D491B /* MJLoadMoreFooter.m */; };
 		38AC1A2821F08EB8001D491B /* HomeOtherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A2721F08EB8001D491B /* HomeOtherDetailViewController.m */; };
 		38AC1A3121F17F6B001D491B /* ArtileInfomationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A3021F17F6B001D491B /* ArtileInfomationModel.m */; };
@@ -346,6 +362,22 @@
 		38717AD0225380D30020955F /* swiftVideoHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftVideoHome.swift; sourceTree = "<group>"; };
 		38717AD22254BE910020955F /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		38717AD42254C0660020955F /* ZJContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJContentView.swift; sourceTree = "<group>"; };
+		38717AD62255A9CB0020955F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		38717ADA2255B1D90020955F /* UIColor-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Extension.swift"; sourceTree = "<group>"; };
+		38717ADC2255D0D10020955F /* ZJTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJTitleView.swift; sourceTree = "<group>"; };
+		38717ADE2255D2E60020955F /* ZJTitleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJTitleStyle.swift; sourceTree = "<group>"; };
+		38717AE02255E7080020955F /* ZJPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJPageView.swift; sourceTree = "<group>"; };
+		38717AE42255F4900020955F /* NetworkTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
+		38717AE52255F4900020955F /* KingfisherExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingfisherExtension.swift; sourceTree = "<group>"; };
+		38717AE92255F81B0020955F /* AnchorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorViewController.swift; sourceTree = "<group>"; };
+		38717AEB2255F8620020955F /* HomeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeType.swift; sourceTree = "<group>"; };
+		38717AEC2255F8620020955F /* AnchorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnchorModel.swift; sourceTree = "<group>"; };
+		38717AEF2255F8870020955F /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		38717AF12255F8BD0020955F /* WaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallLayout.swift; sourceTree = "<group>"; };
+		38717AF22255F8BD0020955F /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		38717AF52255F91B0020955F /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		38717AF82255F9870020955F /* HomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
+		38717AF92255F9870020955F /* HomeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
 		38AC1A2321F05A88001D491B /* MJLoadMoreFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJLoadMoreFooter.h; sourceTree = "<group>"; };
 		38AC1A2421F05A88001D491B /* MJLoadMoreFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJLoadMoreFooter.m; sourceTree = "<group>"; };
 		38AC1A2621F08EB8001D491B /* HomeOtherDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeOtherDetailViewController.h; sourceTree = "<group>"; };
@@ -464,6 +496,7 @@
 		3801018221DE175500D5F7D2 /* Cupid */ = {
 			isa = PBXGroup;
 			children = (
+				38717AE22255F3BE0020955F /* swift */,
 				38636BEE21E7336500A834EE /* NetWorking */,
 				38636BBB21E6032500A834EE /* navi */,
 				38636BBA21E602D300A834EE /* tabbar */,
@@ -483,9 +516,6 @@
 				38717AC2225364D50020955F /* GMCDefaultCardView.m */,
 				38717AC4225366320020955F /* CardDemoViewController.h */,
 				38717AC5225366320020955F /* CardDemoViewController.m */,
-				38717AD0225380D30020955F /* swiftVideoHome.swift */,
-				38717AD42254C0660020955F /* ZJContentView.swift */,
-				38717AD22254BE910020955F /* Const.swift */,
 				38C20A4621ED7A06007C4CB7 /* PrefixHeader.pch */,
 				38C20A8C21EEE4C9007C4CB7 /* CommonHeader.h */,
 				380101E621E35CEA00D5F7D2 /* MyView.h */,
@@ -740,6 +770,56 @@
 				386392F421E8718200A834EE /* addfriend_tabbar_press_night_32x32_@3x.png */,
 			);
 			path = imgs;
+			sourceTree = "<group>";
+		};
+		38717AE22255F3BE0020955F /* swift */ = {
+			isa = PBXGroup;
+			children = (
+				38717AE82255F7F70020955F /* vc */,
+				38717AD0225380D30020955F /* swiftVideoHome.swift */,
+				38717AD62255A9CB0020955F /* VideoViewController.swift */,
+				38717AD42254C0660020955F /* ZJContentView.swift */,
+				38717ADC2255D0D10020955F /* ZJTitleView.swift */,
+				38717AE02255E7080020955F /* ZJPageView.swift */,
+				38717ADE2255D2E60020955F /* ZJTitleStyle.swift */,
+				38717ADA2255B1D90020955F /* UIColor-Extension.swift */,
+				38717AD22254BE910020955F /* Const.swift */,
+				38717AE32255F4900020955F /* Tools */,
+			);
+			path = swift;
+			sourceTree = "<group>";
+		};
+		38717AE32255F4900020955F /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				38717AE42255F4900020955F /* NetworkTools.swift */,
+				38717AE52255F4900020955F /* KingfisherExtension.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		38717AE82255F7F70020955F /* vc */ = {
+			isa = PBXGroup;
+			children = (
+				38717AF22255F8BD0020955F /* HomeViewModel.swift */,
+				38717AF12255F8BD0020955F /* WaterfallLayout.swift */,
+				38717AE92255F81B0020955F /* AnchorViewController.swift */,
+				38717AEC2255F8620020955F /* AnchorModel.swift */,
+				38717AEB2255F8620020955F /* HomeType.swift */,
+				38717AEF2255F8870020955F /* BaseModel.swift */,
+				38717AF52255F91B0020955F /* RoomViewController.swift */,
+				38717AF72255F9870020955F /* View */,
+			);
+			path = vc;
+			sourceTree = "<group>";
+		};
+		38717AF72255F9870020955F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				38717AF82255F9870020955F /* HomeViewCell.swift */,
+				38717AF92255F9870020955F /* HomeViewCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		38FF1E4121F99D7900A3CA7F /* detail */ = {
@@ -1036,6 +1116,7 @@
 				3863931621E872C000A834EE /* huoshan_tabbar_press_night_32x32_@3x.png in Resources */,
 				38C20A8721EDE4C8007C4CB7 /* back_24x24_@2x.png in Resources */,
 				386392F121E870F100A834EE /* add_channel_titlbar_thin_new_24x24_@2x.png in Resources */,
+				38717AFB2255F9870020955F /* HomeViewCell.xib in Resources */,
 				38C20A5421EDC28E007C4CB7 /* arrow-left-white-24_24x24_@3x.png in Resources */,
 				3837E7542230CD350094D2EA /* abc.png in Resources */,
 				3863933A21E8730C00A834EE /* pgc_tabbar_icon_more_press_24x24_@3x.png in Resources */,
@@ -1170,6 +1251,7 @@
 				38AC1A3421F1B4AA001D491B /* LoadingDefaultView.m in Sources */,
 				38FF1FB622019CB100A3CA7F /* ZJPhoto.m in Sources */,
 				3801018821DE175500D5F7D2 /* ViewController.m in Sources */,
+				38717AED2255F8620020955F /* HomeType.swift in Sources */,
 				38636C0121E733AE00A834EE /* ZJMemoryCache.m in Sources */,
 				38FF1EF121FEB00E00A3CA7F /* ZJPresentationController.m in Sources */,
 				38717AC3225364D50020955F /* GMCDefaultCardView.m in Sources */,
@@ -1181,6 +1263,8 @@
 				38636BB221E5F88100A834EE /* HomeTopBarView.m in Sources */,
 				380101B721DF5D8400D5F7D2 /* ZJNavgationBarView.m in Sources */,
 				38C20A8F21EF07CF007C4CB7 /* ResultTopView.m in Sources */,
+				38717AEE2255F8620020955F /* AnchorModel.swift in Sources */,
+				38717AFA2255F9870020955F /* HomeViewCell.swift in Sources */,
 				38717AD52254C0660020955F /* ZJContentView.swift in Sources */,
 				3801026F21E4B3E300D5F7D2 /* ZJTabBar.m in Sources */,
 				380101B421DF4D0B00D5F7D2 /* ZJBasePopAnimation.m in Sources */,
@@ -1198,11 +1282,14 @@
 				380101A421DF0AE200D5F7D2 /* HomeViewController.m in Sources */,
 				38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */,
 				38717AD1225380D30020955F /* swiftVideoHome.swift in Sources */,
+				38717AF02255F8870020955F /* BaseModel.swift in Sources */,
 				38636C0821E7572E00A834EE /* FeedFocusonTableViewCell.m in Sources */,
 				38FF1E5421F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m in Sources */,
+				38717AEA2255F81B0020955F /* AnchorViewController.swift in Sources */,
 				3801019E21DE193000D5F7D2 /* ZJBaseNavigationController.m in Sources */,
 				382D522E21F1EEAD00009C17 /* HomeCommentTableViewCell.m in Sources */,
 				38FF1F0321FEEC2A00A3CA7F /* HomeChannelModel.m in Sources */,
+				38717AE72255F4900020955F /* KingfisherExtension.swift in Sources */,
 				380101BD21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m in Sources */,
 				38636C0021E733AE00A834EE /* ZJDiskCache.m in Sources */,
 				38636C1421E8333600A834EE /* FeedNewContentModel.m in Sources */,
@@ -1220,16 +1307,24 @@
 				38C20A1321EC92FD007C4CB7 /* MJDrawAnimationHeader.m in Sources */,
 				3837E7522230C3BB0094D2EA /* LoginViewController.m in Sources */,
 				38FF1FB522019CB100A3CA7F /* ZJPhotoBrowser.m in Sources */,
+				38717ADB2255B1D90020955F /* UIColor-Extension.swift in Sources */,
+				38717AE12255E7080020955F /* ZJPageView.swift in Sources */,
 				3801018521DE175500D5F7D2 /* AppDelegate.m in Sources */,
 				38FF1EDE21FADEF500A3CA7F /* VideoDetailViewController.m in Sources */,
 				380101E821E35CEA00D5F7D2 /* MyView.m in Sources */,
 				38636BAF21E5F7D700A834EE /* HomeContentViewController.m in Sources */,
 				38C20A1021EC8D1D007C4CB7 /* FeedWeiboTableViewCell.m in Sources */,
 				38636BEC21E6FAA700A834EE /* HomeDisplayTitleLabel.m in Sources */,
+				38717AF42255F8BD0020955F /* HomeViewModel.swift in Sources */,
 				38FF1F0F21FF127500A3CA7F /* ChannelCollectionView.m in Sources */,
+				38717AF62255F91B0020955F /* RoomViewController.swift in Sources */,
 				38636C1721E8428000A834EE /* FeedNormalTableViewCell.m in Sources */,
+				38717ADF2255D2E60020955F /* ZJTitleStyle.swift in Sources */,
+				38717AD72255A9CB0020955F /* VideoViewController.swift in Sources */,
 				38C20A8B21EED136007C4CB7 /* ResultSearchDetailViewController.m in Sources */,
 				3863936B21E8ABE900A834EE /* PublishViewController.m in Sources */,
+				38717AF32255F8BD0020955F /* WaterfallLayout.swift in Sources */,
+				38717AE62255F4900020955F /* NetworkTools.swift in Sources */,
 				38FF1EFD21FEE37F00A3CA7F /* ChannelTopView.m in Sources */,
 				3801026321E49E5700D5F7D2 /* ZJBasePushAnimation.m in Sources */,
 				38FF1EEE21FEACDF00A3CA7F /* HomeChannelViewController.m in Sources */,
@@ -1239,6 +1334,7 @@
 				38AC1A3121F17F6B001D491B /* ArtileInfomationModel.m in Sources */,
 				38FF1EEB21FEAC7C00A3CA7F /* ZJBasePresentViewController.m in Sources */,
 				38717AC0225364C00020955F /* GMCCardAnimationView.m in Sources */,
+				38717ADD2255D0D20020955F /* ZJTitleView.swift in Sources */,
 				38FF1F0621FEEC7800A3CA7F /* HomeChannelCollectionViewCell.m in Sources */,
 				38636BFD21E733AE00A834EE /* ZJNetworking.m in Sources */,
 			);
@@ -1398,7 +1494,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Cupid/PrefixHeader.pch";
 				INFOPLIST_FILE = Cupid/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1427,7 +1523,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Cupid/PrefixHeader.pch";
 				INFOPLIST_FILE = Cupid/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

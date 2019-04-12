@@ -118,7 +118,7 @@ static CGFloat gGlobalviewScale = 0.04;
 
     // 滑动速率快动画时间缩短
     if (fabs((double)velocity.x)>=1000) {
-        timeAnimation = 0.1;
+        timeAnimation = 0.12;
     }
     
     // 设置滑动方向
@@ -323,7 +323,7 @@ static CGFloat gGlobalviewScale = 0.04;
             }else{
                 // 向右滑动
                 if (self.currentCount){
-                    if (self.queryView.center.x>=self.preferCenter.x-CGRectGetWidth(self.queryView.frame)*3/4)
+                    if (self.queryView.center.x>=self.preferCenter.x-CGRectGetWidth(self.queryView.frame)*3/4 || fabs((double)velocity.x)>=1000)
                     {
                         [UIView animateWithDuration:timeAnimation animations:^{
                             // 设置滑动回来的卡片中心点

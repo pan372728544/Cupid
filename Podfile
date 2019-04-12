@@ -3,7 +3,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 flutter_application_path = 'my_flutter/'
  eval(File.read(File.join(flutter_application_path, '.ios', 'Flutter', 'podhelper.rb')), binding)
 
-platform :ios, '8.0'
+platform :ios, '10.0'
 
 target 'Cupid' do
     
@@ -13,5 +13,8 @@ target 'Cupid' do
     pod 'MJExtension', '~> 3.0.15.1'
     pod 'MJRefresh', '~> 3.1.15.7'
     pod 'MBProgressHUD', '~> 1.1.0'
+    
+    pod 'Alamofire', '~> 4.8.2'
+    pod 'Kingfisher', '~> 5.3.1'
     
 end

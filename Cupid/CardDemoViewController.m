@@ -54,8 +54,7 @@
 
 -(void)closeCardView
 {
-    NSLog(@"ddddddddd");
-    
+
     [self.backView removeFromSuperview];
     
 }
