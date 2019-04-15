@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ZJPageView: UIView {
     
     // MARK: 定义属性
@@ -59,6 +60,9 @@ extension ZJPageView {
 extension ZJPageView : ZJContentViewDelegate {
     func contentView(_ contentView: ZJContentView, progress: CGFloat, sourceIndex: Int, targetIndex: Int) {
         titleView.setTitleWithProgress(progress, sourceIndex: sourceIndex, targetIndex: targetIndex)
+        
+        
+        
     }
     
     func contentViewEndScroll(_ contentView: ZJContentView) {

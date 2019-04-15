@@ -10,5 +10,5 @@ import UIKit
 
 class HomeType: BaseModel {
     var title : String = ""
-    var type : Int = 0
+//    var type : Int = 0
 }

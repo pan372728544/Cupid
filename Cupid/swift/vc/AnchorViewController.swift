@@ -31,7 +31,7 @@ class AnchorViewController: ZJBaseViewController {
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: kAnchorCellID)
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        collectionView.backgroundColor = UIColor.randomColor()
+        collectionView.backgroundColor = UIColor.white
         
         return collectionView
     }()
@@ -43,6 +43,10 @@ class AnchorViewController: ZJBaseViewController {
         setupUI()
         loadData(index: 0)
     }
+    deinit {
+
+    }
+
     
 }
 
@@ -50,44 +54,49 @@ class AnchorViewController: ZJBaseViewController {
 // MARK:- 设置UI界面内容
 extension AnchorViewController {
     fileprivate func setupUI() {
+ 
         view.addSubview(collectionView)
     }
+    
+}
+
+extension AnchorViewController {
+
 }
 
 extension AnchorViewController {
     fileprivate func loadData(index : Int) {
-//        homeVM.loadHomeData(type: homeType, index : index, finishedCallback: {
-//            self.collectionView.reloadData()
-//        })
-         self.collectionView.reloadData()
+  
+        print("\(homeType.title)=========")
+        homeVM.loadHomeContentData(type: homeType, finishedCallback: {
+            self.collectionView.reloadData()
+        })
+       
     }
 }
 
 // MARK:- collectionView的数据源&代理
 extension AnchorViewController : UICollectionViewDataSource, WaterfallLayoutDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return homeVM.anchorModels.count
-        return 20
+
+        return homeVM.videoModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kAnchorCellID, for: indexPath) as! HomeViewCell
         
-//        cell.anchorModel = homeVM.anchorModels[indexPath.item]
-        
-//        if indexPath.item == homeVM.anchorModels.count - 1 {
-//            loadData(index: homeVM.anchorModels.count)
-//        }
-        cell.backgroundColor = UIColor.randomColor()
+        cell.videoModel = homeVM.videoModels[indexPath.item]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let roomVc = RoomViewController()
+        let roomVc = PlayViewController()
+        roomVc.videoModel = homeVM.videoModels[indexPath.item]
         navigationController?.pushViewController(roomVc, animated: true)
     }
     
     func waterfallLayout(_ layout: WaterfallLayout, indexPath: IndexPath) -> CGFloat {
         return indexPath.item % 2 == 0 ? Screen_W * 2 / 3 : Screen_W * 0.5
     }
+
 }

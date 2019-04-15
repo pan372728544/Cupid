@@ -10,7 +10,7 @@
 #import "ZJBaseViewController+NavBar.h"
 #import <WebKit/WebKit.h>
 #import "CardDemoViewController.h"
-#import "cupid-Swift.h"
+//#import "cupid-Swift.h"
 
 @interface ThirdViewController ()<WKNavigationDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -82,12 +82,12 @@
 }
 -(void)btnClickSwift
 {
-    [self.navigationController pushViewController:[swiftVideoHome new] animated:YES];
+//    [self.navigationController pushViewController:[swiftVideoHome new] animated:YES];
 }
 
 -(void)btnClickSwift2
 {
-    [self.navigationController pushViewController:[VideoViewController new] animated:YES];
+//    [self.navigationController pushViewController:[VideoViewController new] animated:YES];
 }
 
 

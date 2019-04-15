@@ -25,3 +25,14 @@ class AnchorModel: BaseModel {
     
     var type : Int = 0
 }
+
+
+
+class videoModel: BaseModel {
+
+    var img_url : String = ""
+
+    var title : String = ""
+    var videoUrl : String = ""
+   
+}

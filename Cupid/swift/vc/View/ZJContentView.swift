@@ -163,11 +163,15 @@ extension ZJContentView : UICollectionViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         delegate?.contentViewEndScroll?(self)
+        let aa =  Int(scrollView.contentOffset.x/Screen_W)
+        NotificationCenter.default.post(name: NSNotification.Name("isTest"), object: self, userInfo: ["post": aa])
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             delegate?.contentViewEndScroll?(self)
+            
+       
         }
     }
 }

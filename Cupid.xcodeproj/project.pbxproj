@@ -120,7 +120,6 @@
 		38717AC0225364C00020955F /* GMCCardAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38717ABF225364C00020955F /* GMCCardAnimationView.m */; };
 		38717AC3225364D50020955F /* GMCDefaultCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38717AC2225364D50020955F /* GMCDefaultCardView.m */; };
 		38717AC6225366320020955F /* CardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38717AC5225366320020955F /* CardDemoViewController.m */; };
-		38717AD1225380D30020955F /* swiftVideoHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AD0225380D30020955F /* swiftVideoHome.swift */; };
 		38717AD32254BE910020955F /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AD22254BE910020955F /* Const.swift */; };
 		38717AD52254C0660020955F /* ZJContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AD42254C0660020955F /* ZJContentView.swift */; };
 		38717AD72255A9CB0020955F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AD62255A9CB0020955F /* VideoViewController.swift */; };
@@ -136,7 +135,7 @@
 		38717AF02255F8870020955F /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AEF2255F8870020955F /* BaseModel.swift */; };
 		38717AF32255F8BD0020955F /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF12255F8BD0020955F /* WaterfallLayout.swift */; };
 		38717AF42255F8BD0020955F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF22255F8BD0020955F /* HomeViewModel.swift */; };
-		38717AF62255F91B0020955F /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF52255F91B0020955F /* RoomViewController.swift */; };
+		38717AF62255F91B0020955F /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF52255F91B0020955F /* PlayViewController.swift */; };
 		38717AFA2255F9870020955F /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF82255F9870020955F /* HomeViewCell.swift */; };
 		38717AFB2255F9870020955F /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38717AF92255F9870020955F /* HomeViewCell.xib */; };
 		38AC1A2521F05A88001D491B /* MJLoadMoreFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A2421F05A88001D491B /* MJLoadMoreFooter.m */; };
@@ -359,7 +358,6 @@
 		38717AC4225366320020955F /* CardDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardDemoViewController.h; sourceTree = "<group>"; };
 		38717AC5225366320020955F /* CardDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardDemoViewController.m; sourceTree = "<group>"; };
 		38717AC722537F3B0020955F /* Cupid-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cupid-Bridging-Header.h"; sourceTree = "<group>"; };
-		38717AD0225380D30020955F /* swiftVideoHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftVideoHome.swift; sourceTree = "<group>"; };
 		38717AD22254BE910020955F /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		38717AD42254C0660020955F /* ZJContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJContentView.swift; sourceTree = "<group>"; };
 		38717AD62255A9CB0020955F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
@@ -375,7 +373,7 @@
 		38717AEF2255F8870020955F /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		38717AF12255F8BD0020955F /* WaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallLayout.swift; sourceTree = "<group>"; };
 		38717AF22255F8BD0020955F /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		38717AF52255F91B0020955F /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		38717AF52255F91B0020955F /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		38717AF82255F9870020955F /* HomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		38717AF92255F9870020955F /* HomeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
 		38AC1A2321F05A88001D491B /* MJLoadMoreFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJLoadMoreFooter.h; sourceTree = "<group>"; };
@@ -553,6 +551,26 @@
 				380101BE21DF676800D5F7D2 /* ZJCommonMacro.h */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		3846983322606D0D001234F8 /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				38717AEB2255F8620020955F /* HomeType.swift */,
+				38717AEF2255F8870020955F /* BaseModel.swift */,
+				38717AEC2255F8620020955F /* AnchorModel.swift */,
+				38717AF22255F8BD0020955F /* HomeViewModel.swift */,
+			);
+			path = viewmodel;
+			sourceTree = "<group>";
+		};
+		38469834226424C2001234F8 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				38717AD22254BE910020955F /* Const.swift */,
+				38717ADA2255B1D90020955F /* UIColor-Extension.swift */,
+			);
+			path = other;
 			sourceTree = "<group>";
 		};
 		38636BB621E6029200A834EE /* Home */ = {
@@ -776,14 +794,6 @@
 			isa = PBXGroup;
 			children = (
 				38717AE82255F7F70020955F /* vc */,
-				38717AD0225380D30020955F /* swiftVideoHome.swift */,
-				38717AD62255A9CB0020955F /* VideoViewController.swift */,
-				38717AD42254C0660020955F /* ZJContentView.swift */,
-				38717ADC2255D0D10020955F /* ZJTitleView.swift */,
-				38717AE02255E7080020955F /* ZJPageView.swift */,
-				38717ADE2255D2E60020955F /* ZJTitleStyle.swift */,
-				38717ADA2255B1D90020955F /* UIColor-Extension.swift */,
-				38717AD22254BE910020955F /* Const.swift */,
 				38717AE32255F4900020955F /* Tools */,
 			);
 			path = swift;
@@ -801,13 +811,11 @@
 		38717AE82255F7F70020955F /* vc */ = {
 			isa = PBXGroup;
 			children = (
-				38717AF22255F8BD0020955F /* HomeViewModel.swift */,
-				38717AF12255F8BD0020955F /* WaterfallLayout.swift */,
+				38717AD62255A9CB0020955F /* VideoViewController.swift */,
+				38717AF52255F91B0020955F /* PlayViewController.swift */,
 				38717AE92255F81B0020955F /* AnchorViewController.swift */,
-				38717AEC2255F8620020955F /* AnchorModel.swift */,
-				38717AEB2255F8620020955F /* HomeType.swift */,
-				38717AEF2255F8870020955F /* BaseModel.swift */,
-				38717AF52255F91B0020955F /* RoomViewController.swift */,
+				38469834226424C2001234F8 /* other */,
+				3846983322606D0D001234F8 /* viewmodel */,
 				38717AF72255F9870020955F /* View */,
 			);
 			path = vc;
@@ -816,6 +824,11 @@
 		38717AF72255F9870020955F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				38717ADE2255D2E60020955F /* ZJTitleStyle.swift */,
+				38717AE02255E7080020955F /* ZJPageView.swift */,
+				38717ADC2255D0D10020955F /* ZJTitleView.swift */,
+				38717AD42254C0660020955F /* ZJContentView.swift */,
+				38717AF12255F8BD0020955F /* WaterfallLayout.swift */,
 				38717AF82255F9870020955F /* HomeViewCell.swift */,
 				38717AF92255F9870020955F /* HomeViewCell.xib */,
 			);
@@ -1281,7 +1294,6 @@
 				38636C0E21E82FF300A834EE /* HomeRequest.m in Sources */,
 				380101A421DF0AE200D5F7D2 /* HomeViewController.m in Sources */,
 				38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */,
-				38717AD1225380D30020955F /* swiftVideoHome.swift in Sources */,
 				38717AF02255F8870020955F /* BaseModel.swift in Sources */,
 				38636C0821E7572E00A834EE /* FeedFocusonTableViewCell.m in Sources */,
 				38FF1E5421F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m in Sources */,
@@ -1317,7 +1329,7 @@
 				38636BEC21E6FAA700A834EE /* HomeDisplayTitleLabel.m in Sources */,
 				38717AF42255F8BD0020955F /* HomeViewModel.swift in Sources */,
 				38FF1F0F21FF127500A3CA7F /* ChannelCollectionView.m in Sources */,
-				38717AF62255F91B0020955F /* RoomViewController.swift in Sources */,
+				38717AF62255F91B0020955F /* PlayViewController.swift in Sources */,
 				38636C1721E8428000A834EE /* FeedNormalTableViewCell.m in Sources */,
 				38717ADF2255D2E60020955F /* ZJTitleStyle.swift in Sources */,
 				38717AD72255A9CB0020955F /* VideoViewController.swift in Sources */,
