@@ -139,7 +139,7 @@ extension HomeViewModel {
                 
                 let dataAA = dic!["raw_data"] as? [String : Any]
                 
-                guard let resultDictBB = dataAA?["video"] as? [String : Any] else { return }
+                guard let resultDictBB = dataAA?["video"] as? [String : Any] else { finishedCallback(); return }
                 
                 // 图片地址
                 guard let origin_cover = resultDictBB["origin_cover"] as? [String : Any] else { return }

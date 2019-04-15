@@ -86,6 +86,7 @@ extension AnchorViewController {
         print("\(homeType.title)=========")
         homeType.typeLoad = type
         homeVM.loadHomeContentData(type: homeType, finishedCallback: {
+
             
             self.collectionView.mj_header.endRefreshing()
             
