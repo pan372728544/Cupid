@@ -64,6 +64,14 @@ extension HomeViewModel {
         
         var param = [String:Any]()
 
+        //获取当前时间
+        let now = NSDate()
+
+        //当前时间的时间戳
+        let timeInterval : TimeInterval = now.timeIntervalSince1970
+        let timeSp = Int(timeInterval)
+        
+        
         param.updateValue("F2TqPzKtP2wbFlDqLlU1FYweLlqM", forKey: "fp")
         param.updateValue("7.1.4", forKey: "version_code")
         param.updateValue("1.11.4.0", forKey: "tma_jssdk_version")
@@ -88,7 +96,7 @@ extension HomeViewModel {
         param.updateValue("00000000-0000-0000-0000-000000000000", forKey: "idfa")
         param.updateValue("5", forKey: "refresh_reason")
         param.updateValue("1", forKey: "detail")
-        param.updateValue("1555058922", forKey: "last_refresh_sub_entrance_interval")
+        param.updateValue(timeSp, forKey: "last_refresh_sub_entrance_interval")
         param.updateValue("auto", forKey: "tt_from")
         param.updateValue("20", forKey: "count")
         param.updateValue("21", forKey: "list_count")
@@ -107,7 +115,7 @@ extension HomeViewModel {
         param.updateValue("2707", forKey: "st_time")
         param.updateValue("002e00626f97f2958ae862cc7180be4eddd478665da6128a4b2acf", forKey: "mas")
         param.updateValue("a2b5a56b499e7c80003459", forKey: "as")
-        param.updateValue("1555058921", forKey: "ts")
+        param.updateValue(timeSp, forKey: "ts")
         
         
         // MARK: 字符串转字典

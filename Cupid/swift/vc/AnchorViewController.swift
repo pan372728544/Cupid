@@ -56,6 +56,7 @@ extension AnchorViewController {
     fileprivate func setupUI() {
  
         view.addSubview(collectionView)
+        
     }
     
 }
