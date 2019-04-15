@@ -30,7 +30,7 @@ class AnchorViewController: ZJBaseViewController {
         layout.minimumInteritemSpacing = kEdgeMargin
         layout.dataSource = self
         
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: Screen_H-StatusBar_H-Tabbar_H) , collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: self.view.bounds , collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: kAnchorCellID)

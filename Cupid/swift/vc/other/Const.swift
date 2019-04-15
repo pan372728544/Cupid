@@ -13,7 +13,8 @@ let Screen_W = UIScreen.main.bounds.width
 
 let Screen_H = UIScreen.main.bounds.height
 
-let Tabbar_H = CGFloat(49)
+let Tabbar_H = CGFloat(49+(UIApplication.shared.keyWindow?.rootViewController?.view.safeAreaInsets.bottom)! ?? 0)
+
 
 let StatusBar_H = UIApplication.shared.statusBarFrame.size.height
 

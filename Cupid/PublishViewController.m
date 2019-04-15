@@ -24,9 +24,9 @@
 
 -(void)initNavView
 {
-    [self createNavBarViewWithTitle:@"发布"];
-    [self createNavLeftBtnWithItem:@"" target:self action:@selector(backClick:)];
-    self.view.backgroundColor= [UIColor orangeColor];
+//    [self createNavBarViewWithTitle:@"发布"];
+//    [self createNavLeftBtnWithItem:@"" target:self action:@selector(backClick:)];
+    self.view.backgroundColor= [UIColor whiteColor];
     // Do any additional setup after loading the view.
     
 }

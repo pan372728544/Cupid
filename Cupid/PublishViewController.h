@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PublishViewController : ZJBaseViewController
+@interface PublishViewController : ZJBasePresentViewController
 
 @end
 

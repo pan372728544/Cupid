@@ -32,6 +32,10 @@
 		382D522E21F1EEAD00009C17 /* HomeCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 382D522D21F1EEAD00009C17 /* HomeCommentTableViewCell.m */; };
 		3837E7522230C3BB0094D2EA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837E7512230C3BB0094D2EA /* LoginViewController.m */; };
 		3837E7542230CD350094D2EA /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 3837E7532230CD350094D2EA /* abc.png */; };
+		3846988F22647FCA001234F8 /* finish_live_video_32x24_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3846988D22647FCA001234F8 /* finish_live_video_32x24_@3x.png */; };
+		3846989022647FCA001234F8 /* finish_live_video_32x24_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3846988E22647FCA001234F8 /* finish_live_video_32x24_@2x.png */; };
+		3846989322648122001234F8 /* chatroom_video_night_28x28_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3846989122648121001234F8 /* chatroom_video_night_28x28_@3x.png */; };
+		3846989422648122001234F8 /* chatroom_video_night_28x28_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3846989222648122001234F8 /* chatroom_video_night_28x28_@2x.png */; };
 		38636BAF21E5F7D700A834EE /* HomeContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38636BAE21E5F7D700A834EE /* HomeContentViewController.m */; };
 		38636BB221E5F88100A834EE /* HomeTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38636BB121E5F88100A834EE /* HomeTopBarView.m */; };
 		38636BB521E600E500A834EE /* CategoryTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38636BB421E600E500A834EE /* CategoryTitleModel.m */; };
@@ -242,6 +246,10 @@
 		3837E7502230C3BB0094D2EA /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		3837E7512230C3BB0094D2EA /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3837E7532230CD350094D2EA /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = abc.png; sourceTree = "<group>"; };
+		3846988D22647FCA001234F8 /* finish_live_video_32x24_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "finish_live_video_32x24_@3x.png"; sourceTree = "<group>"; };
+		3846988E22647FCA001234F8 /* finish_live_video_32x24_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "finish_live_video_32x24_@2x.png"; sourceTree = "<group>"; };
+		3846989122648121001234F8 /* chatroom_video_night_28x28_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatroom_video_night_28x28_@3x.png"; sourceTree = "<group>"; };
+		3846989222648122001234F8 /* chatroom_video_night_28x28_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatroom_video_night_28x28_@2x.png"; sourceTree = "<group>"; };
 		38636BAD21E5F7D700A834EE /* HomeContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeContentViewController.h; sourceTree = "<group>"; };
 		38636BAE21E5F7D700A834EE /* HomeContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeContentViewController.m; sourceTree = "<group>"; };
 		38636BB021E5F88100A834EE /* HomeTopBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTopBarView.h; sourceTree = "<group>"; };
@@ -696,6 +704,10 @@
 		386392E921E8709F00A834EE /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				3846989222648122001234F8 /* chatroom_video_night_28x28_@2x.png */,
+				3846989122648121001234F8 /* chatroom_video_night_28x28_@3x.png */,
+				3846988E22647FCA001234F8 /* finish_live_video_32x24_@2x.png */,
+				3846988D22647FCA001234F8 /* finish_live_video_32x24_@3x.png */,
 				3837E7532230CD350094D2EA /* abc.png */,
 				38FF1FC42204012A00A3CA7F /* c_comment_like_icon_18x18_@2x.png */,
 				38FF1FC52204012A00A3CA7F /* c_comment_like_icon_18x18_@3x.png */,
@@ -1078,6 +1090,7 @@
 				38AC1A3E21F1B7FF001D491B /* title_72x20_@2x.png in Resources */,
 				3863931421E872C000A834EE /* huoshan_tabbar_night_32x32_@2x.png in Resources */,
 				38C20A8321EDE3CB007C4CB7 /* feed_dislike_arrow_left_10x16_@3x.png in Resources */,
+				3846988F22647FCA001234F8 /* finish_live_video_32x24_@3x.png in Resources */,
 				3863936321E8A6F500A834EE /* tabbar_publish_article_34x34_@3x.png in Resources */,
 				38C20A0D21EC8207007C4CB7 /* tabbar_closebtn_56x56_@3x.png in Resources */,
 				38FF1F0921FEF52B00A3CA7F /* deleteicon_channel_18x18_@3x.png in Resources */,
@@ -1104,6 +1117,7 @@
 				3863930A21E8729B00A834EE /* home_tabbar_press_night_32x32_@2x.png in Resources */,
 				3863931821E872C000A834EE /* huoshan_tabbar_press_32x32_@2x.png in Resources */,
 				38C20A0921EC81AA007C4CB7 /* tsv_close_popup_textpage_24x24_@2x.png in Resources */,
+				3846989022647FCA001234F8 /* finish_live_video_32x24_@2x.png in Resources */,
 				38AC1A3821F1B6DC001D491B /* lefterbackicon_titlebar_night_24x24_@2x.png in Resources */,
 				3863936221E8A6F500A834EE /* tabbar_publish_question_34x34_@3x.png in Resources */,
 				3863934821E8733100A834EE /* video_tabbar_press_night_32x32_@3x.png in Resources */,
@@ -1111,6 +1125,7 @@
 				38C20A4421ED78E0007C4CB7 /* search_icon_20x20_@3x.png in Resources */,
 				3863931921E872C000A834EE /* huoshan_tabbar_press_32x32_@3x.png in Resources */,
 				38C20A0821EC81AA007C4CB7 /* tsv_close_popup_textpage_24x24_@3x.png in Resources */,
+				3846989422648122001234F8 /* chatroom_video_night_28x28_@2x.png in Resources */,
 				3863935121E87EFB00A834EE /* addicon_repost_night_34x34_@3x.png in Resources */,
 				3863936521E8A6F500A834EE /* tabbar_publish_question_34x34_@2x.png in Resources */,
 				3801018D21DE175600D5F7D2 /* Assets.xcassets in Resources */,
@@ -1156,6 +1171,7 @@
 				386392FA21E8718300A834EE /* addfriend_tabbar_32x32_@2x.png in Resources */,
 				3863932421E872E400A834EE /* mine_tabbar_press_night_33x32_@2x.png in Resources */,
 				386392FD21E8718300A834EE /* addfriend_tabbar_night_32x32_@2x.png in Resources */,
+				3846989322648122001234F8 /* chatroom_video_night_28x28_@3x.png in Resources */,
 				386392FC21E8718300A834EE /* addfriend_tabbar_press_night_32x32_@3x.png in Resources */,
 				38FF1EFA21FEE34B00A3CA7F /* close_channel_24x24_@3x.png in Resources */,
 				38C20A0C21EC8207007C4CB7 /* tabbar_closebtn_56x56_@2x.png in Resources */,

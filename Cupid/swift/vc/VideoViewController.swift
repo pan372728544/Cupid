@@ -12,6 +12,9 @@ class VideoViewController: ZJBaseViewController {
 
     fileprivate lazy var homeVM : HomeViewModel = HomeViewModel()
     
+    fileprivate lazy var pubButton : UIButton = UIButton()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -27,6 +30,21 @@ extension VideoViewController {
         // 初始化内容视图
         setupContentView()
     }
+
+    
+    fileprivate func setupButtonView() {
+        
+        pubButton.frame = CGRect(x: Screen_W-100, y: StatusBar_H, width: 100, height: 44)
+        pubButton.setImage(UIImage(named: "chatroom_video_night_28x28_"), for: UIControl.State.normal)
+        pubButton.setTitle("发布", for: UIControl.State.normal)
+        pubButton.setTitleColor(UIColor.black, for: .normal)
+        pubButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        pubButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 10)
+        pubButton.addTarget(self, action:#selector(pubClick(sender: )), for: UIControl.Event.touchUpInside)
+        self.view.addSubview(pubButton)
+        
+       
+    }
     
     fileprivate func setupContentView() {
         
@@ -41,7 +59,7 @@ extension VideoViewController {
             style.bottomLineColor =  UIColor.init(r: 210, g: 50, b: 50)
             style.isScrollEnable = true
             style.isShowBottomLine = true
-            let pageFrame = CGRect(x: 0, y: StatusBar_H, width: Screen_W, height: Screen_H-StatusBar_H)
+            let pageFrame = CGRect(x: 0, y: StatusBar_H, width: Screen_W, height: CGFloat(Screen_H-StatusBar_H-Tabbar_H))
 
             // 临时数组
             var titles : [String] = [String]()
@@ -72,12 +90,24 @@ extension VideoViewController {
             }
             // 添加
             let pageView = ZJPageView(frame: pageFrame, titles: titles, style: style, childVcs: childvc, parentVc: self)
-            
             pageView .setIndex(index: 1)
             self.view.addSubview(pageView)
+            
+            // 发布按钮
+            self.setupButtonView()
 
         })
 
     }
     
+ 
+    
+}
+
+extension VideoViewController {
+    
+    @objc fileprivate func pubClick(sender : UIButton) {
+        
+        self.navigationController?.present(PublishViewController(), animated: true, completion: nil)
+    }
 }
