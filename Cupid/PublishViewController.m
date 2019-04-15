@@ -24,10 +24,14 @@
 
 -(void)initNavView
 {
-//    [self createNavBarViewWithTitle:@"发布"];
-//    [self createNavLeftBtnWithItem:@"" target:self action:@selector(backClick:)];
+        self.isSupportRightSlide = YES;
     self.view.backgroundColor= [UIColor whiteColor];
-    // Do any additional setup after loading the view.
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 44)];
+    lab.text = @"发布";
+    lab.textAlignment = NSTextAlignmentCenter;
+    
+    [self.view addSubview:lab];
+
     
 }
 
