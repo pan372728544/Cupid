@@ -12,6 +12,10 @@ import UIKit
 private let kEdgeMargin : CGFloat = 8
 private let kAnchorCellID = "kAnchorCellID"
 
+private let load_more = "load_more";
+private let pull = "pull";
+private let enter_auto = "enter_auto";
+
 class AnchorViewController: ZJBaseViewController {
     
     // MARK: 对外属性
@@ -26,7 +30,7 @@ class AnchorViewController: ZJBaseViewController {
         layout.minimumInteritemSpacing = kEdgeMargin
         layout.dataSource = self
         
-        let collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: Screen_W, height: Screen_H-StatusBar_H-Tabbar_H) , collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: kAnchorCellID)
@@ -41,7 +45,7 @@ class AnchorViewController: ZJBaseViewController {
         super.viewDidLoad()
         
         setupUI()
-        loadData(index: 0)
+
     }
     deinit {
 
@@ -57,6 +61,17 @@ extension AnchorViewController {
  
         view.addSubview(collectionView)
         
+        self.collectionView.mj_header = MJDrawAnimationHeader(refreshingBlock: {
+            self.loadData(type: pull)
+        })
+
+        
+        self.collectionView.mj_footer = MJLoadMoreFooter(refreshingBlock: {
+            self.loadData(type: load_more)
+        })
+        
+        loadData(type: enter_auto)
+        self.collectionView.mj_header.beginRefreshing()
     }
     
 }
@@ -66,10 +81,15 @@ extension AnchorViewController {
 }
 
 extension AnchorViewController {
-    fileprivate func loadData(index : Int) {
+    fileprivate func loadData(type : String) {
   
         print("\(homeType.title)=========")
+        homeType.typeLoad = type
         homeVM.loadHomeContentData(type: homeType, finishedCallback: {
+            
+            self.collectionView.mj_header.endRefreshing()
+            
+            self.collectionView.mj_footer.endRefreshing()
             self.collectionView.reloadData()
         })
        

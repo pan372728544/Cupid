@@ -97,7 +97,7 @@ extension HomeViewModel {
         param.updateValue("5", forKey: "refresh_reason")
         param.updateValue("1", forKey: "detail")
         param.updateValue(timeSp, forKey: "last_refresh_sub_entrance_interval")
-        param.updateValue("auto", forKey: "tt_from")
+        param.updateValue(type.typeLoad, forKey: "tt_from")
         param.updateValue("20", forKey: "count")
         param.updateValue("21", forKey: "list_count")
         param.updateValue("4", forKey: "support_rn")
@@ -156,10 +156,17 @@ extension HomeViewModel {
                 modelL.img_url = url_list[0]
                 modelL.videoUrl = url_listVideo[0]
                 modelL.title = dataAA?["title"] as? String ?? ""
-                self.videoModels.append(modelL)
+
+                if type.typeLoad == "pull" {
+                    self.videoModels.insert(modelL, at: 0)
+                }else
+                {
+                    self.videoModels.append(modelL)
+                }
+
             }
             
-            
+            print("数组个数：\(self.videoModels.count)")
           
             
             finishedCallback()

@@ -5,3 +5,5 @@
 
 #import "ZJBaseViewController.h"
 #import "HomeRequest.h"
+#import "MJDrawAnimationHeader.h"
+#import "MJLoadMoreFooter.h"
