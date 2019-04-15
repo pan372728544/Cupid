@@ -52,9 +52,11 @@ extension ZJPageView {
         contentView = ZJContentView(frame: contentFrame, childVcs: childVcs, parentViewController: parentVc)
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         contentView.delegate = self
+        
         addSubview(contentView)
     }
 }
+
 
 // MARK:- 设置ZJContentView的代理
 extension ZJPageView : ZJContentViewDelegate {
@@ -75,5 +77,13 @@ extension ZJPageView : ZJContentViewDelegate {
 extension ZJPageView : ZJTitleViewDelegate {
     func titleView(_ titleView: ZJTitleView, selectedIndex index: Int) {
         contentView.setCurrentIndex(index)
+    }
+}
+
+// MARK:- 设置默认跳转到第几页
+extension ZJPageView  {
+    func setIndex(index: Int) {
+        contentView.setCurrentIndex(index)
+         titleView.setTitleWithProgress(1, sourceIndex: 0, targetIndex: index)
     }
 }

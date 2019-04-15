@@ -72,8 +72,10 @@ extension VideoViewController {
             }
             // 添加
             let pageView = ZJPageView(frame: pageFrame, titles: titles, style: style, childVcs: childvc, parentVc: self)
-            self.view.addSubview(pageView)
             
+            pageView .setIndex(index: 1)
+            self.view.addSubview(pageView)
+
         })
 
     }
