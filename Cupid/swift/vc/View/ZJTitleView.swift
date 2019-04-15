@@ -36,7 +36,7 @@ class ZJTitleView: UIView {
     }()
     fileprivate lazy var splitLineView : UIView = {
         let splitView = UIView()
-        splitView.backgroundColor = UIColor.lightGray
+        splitView.backgroundColor = UIColor.init(r: 204, g: 204, b: 204)
         let h : CGFloat = 0.5
         splitView.frame = CGRect(x: 0, y: self.frame.height - h, width: self.frame.width, height: h)
         return splitView
