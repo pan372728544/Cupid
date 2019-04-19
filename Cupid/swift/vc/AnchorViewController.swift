@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIKit
 
 private let kEdgeMargin : CGFloat = 8
 private let kAnchorCellID = "kAnchorCellID"

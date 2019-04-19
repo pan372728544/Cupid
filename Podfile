@@ -7,6 +7,7 @@ platform :ios, '10.0'
 
 target 'Cupid' do
     
+#    use_frameworks!
     pod 'AFNetworking', '~> 3.2.1'
     pod 'SDWebImage','3.7.5'
     pod 'Masonry', '~> 1.0.2'
@@ -16,5 +17,7 @@ target 'Cupid' do
     
     pod 'Alamofire', '~> 4.8.2'
     pod 'Kingfisher', '~> 5.3.1'
+    pod 'ProtocolBuffers-Swift', '~> 4.0.6'
+    pod 'SwiftSocket', '~> 2.0.2'
     
 end

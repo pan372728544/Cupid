@@ -29,6 +29,7 @@
 		3801026921E4A88600D5F7D2 /* ZJTabBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801026821E4A88600D5F7D2 /* ZJTabBarManager.m */; };
 		3801026C21E4AD4600D5F7D2 /* AppDelegate+Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801026B21E4AD4600D5F7D2 /* AppDelegate+Internal.m */; };
 		3801026F21E4B3E300D5F7D2 /* ZJTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801026E21E4B3E300D5F7D2 /* ZJTabBar.m */; };
+		3819F5582266D271009D0C03 /* ZJSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3819F5572266D271009D0C03 /* ZJSocket.swift */; };
 		382D522E21F1EEAD00009C17 /* HomeCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 382D522D21F1EEAD00009C17 /* HomeCommentTableViewCell.m */; };
 		3837E7522230C3BB0094D2EA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837E7512230C3BB0094D2EA /* LoginViewController.m */; };
 		3837E7542230CD350094D2EA /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 3837E7532230CD350094D2EA /* abc.png */; };
@@ -194,7 +195,7 @@
 		38FF1FBA22019CB100A3CA7F /* ZJPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1FB122019CB100A3CA7F /* ZJPhotoView.m */; };
 		38FF1FC62204012B00A3CA7F /* c_comment_like_icon_18x18_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38FF1FC42204012A00A3CA7F /* c_comment_like_icon_18x18_@2x.png */; };
 		38FF1FC72204012B00A3CA7F /* c_comment_like_icon_18x18_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38FF1FC52204012A00A3CA7F /* c_comment_like_icon_18x18_@3x.png */; };
-		57C42E4A1E5BCB0E6973E01A /* libPods-Cupid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E35B713560E9DC37C4F79AD /* libPods-Cupid.a */; };
+		7B21BB467BC4A5F912BB8F60 /* libPods-Cupid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E9CC9AC475CA4938258C9C /* libPods-Cupid.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -241,6 +242,8 @@
 		3801026B21E4AD4600D5F7D2 /* AppDelegate+Internal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Internal.m"; sourceTree = "<group>"; };
 		3801026D21E4B3E300D5F7D2 /* ZJTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJTabBar.h; sourceTree = "<group>"; };
 		3801026E21E4B3E300D5F7D2 /* ZJTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJTabBar.m; sourceTree = "<group>"; };
+		3819F5572266D271009D0C03 /* ZJSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJSocket.swift; sourceTree = "<group>"; };
+		3819F5592266E4DD009D0C03 /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		382D522C21F1EEAD00009C17 /* HomeCommentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCommentTableViewCell.h; sourceTree = "<group>"; };
 		382D522D21F1EEAD00009C17 /* HomeCommentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCommentTableViewCell.m; sourceTree = "<group>"; };
 		3837E7502230C3BB0094D2EA /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -464,8 +467,8 @@
 		38FF1FB122019CB100A3CA7F /* ZJPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJPhotoView.m; sourceTree = "<group>"; };
 		38FF1FC42204012A00A3CA7F /* c_comment_like_icon_18x18_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c_comment_like_icon_18x18_@2x.png"; sourceTree = "<group>"; };
 		38FF1FC52204012A00A3CA7F /* c_comment_like_icon_18x18_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c_comment_like_icon_18x18_@3x.png"; sourceTree = "<group>"; };
-		7E35B713560E9DC37C4F79AD /* libPods-Cupid.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cupid.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82BF0E830E852FDB0E7C36BA /* Pods-Cupid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cupid.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cupid/Pods-Cupid.debug.xcconfig"; sourceTree = "<group>"; };
+		83E9CC9AC475CA4938258C9C /* libPods-Cupid.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cupid.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8ADFD4554F8446D43C7E1A2 /* Pods-Cupid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cupid.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cupid/Pods-Cupid.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -474,7 +477,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57C42E4A1E5BCB0E6973E01A /* libPods-Cupid.a in Frameworks */,
+				7B21BB467BC4A5F912BB8F60 /* libPods-Cupid.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +505,7 @@
 		3801018221DE175500D5F7D2 /* Cupid */ = {
 			isa = PBXGroup;
 			children = (
+				384698A82266CEA1001234F8 /* Socket */,
 				38717AE22255F3BE0020955F /* swift */,
 				38636BEE21E7336500A834EE /* NetWorking */,
 				38636BBB21E6032500A834EE /* navi */,
@@ -579,6 +583,30 @@
 				38717ADA2255B1D90020955F /* UIColor-Extension.swift */,
 			);
 			path = other;
+			sourceTree = "<group>";
+		};
+		384698A82266CEA1001234F8 /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				384698AA2266CECD001234F8 /* Server */,
+				384698A92266CEBE001234F8 /* Client */,
+			);
+			path = Socket;
+			sourceTree = "<group>";
+		};
+		384698A92266CEBE001234F8 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				3819F5572266D271009D0C03 /* ZJSocket.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		384698AA2266CECD001234F8 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Server;
 			sourceTree = "<group>";
 		};
 		38636BB621E6029200A834EE /* Home */ = {
@@ -1015,7 +1043,8 @@
 		EDFD03601D1B718A83F82214 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7E35B713560E9DC37C4F79AD /* libPods-Cupid.a */,
+				3819F5592266E4DD009D0C03 /* MJRefresh.framework */,
+				83E9CC9AC475CA4938258C9C /* libPods-Cupid.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1031,9 +1060,9 @@
 				3801017C21DE175500D5F7D2 /* Sources */,
 				3801017D21DE175500D5F7D2 /* Frameworks */,
 				3801017E21DE175500D5F7D2 /* Resources */,
-				1FA61E55A1795DD082A475FF /* [CP] Copy Pods Resources */,
 				392F96B25C84090B909D9731 /* [CP] Embed Pods Frameworks */,
 				38A4E3AC222E2682002F2382 /* ShellScript */,
+				4315731F485366015C1E42FB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1186,28 +1215,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1FA61E55A1795DD082A475FF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Cupid/Pods-Cupid-resources.sh",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cupid/Pods-Cupid-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		38A4E3AC222E2682002F2382 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1269,6 +1276,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4315731F485366015C1E42FB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Cupid/Pods-Cupid-resources.sh",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cupid/Pods-Cupid-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1298,6 +1327,7 @@
 				3801026F21E4B3E300D5F7D2 /* ZJTabBar.m in Sources */,
 				380101B421DF4D0B00D5F7D2 /* ZJBasePopAnimation.m in Sources */,
 				3801019321DE175600D5F7D2 /* main.m in Sources */,
+				3819F5582266D271009D0C03 /* ZJSocket.swift in Sources */,
 				38717AC6225366320020955F /* CardDemoViewController.m in Sources */,
 				38636BC421E60A7F00A834EE /* UIView+Frame.m in Sources */,
 				38C20A5021EDAFB4007C4CB7 /* ResultSearchViewController.m in Sources */,

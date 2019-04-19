@@ -23,13 +23,15 @@ PODS:
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.15.1)
   - MJRefresh (3.1.15.7)
+  - ProtocolBuffers-Swift (4.0.6)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
+  - SwiftSocket (2.0.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.2.1)
-  - Alamofire (~> 4.2)
+  - Alamofire (~> 4.8.2)
   - Flutter (from `my_flutter/.ios/Flutter/engine`)
   - FlutterPluginRegistrant (from `my_flutter/.ios/Flutter/FlutterPluginRegistrant`)
   - Kingfisher (~> 5.3.1)
@@ -37,7 +39,9 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.1.0)
   - MJExtension (~> 3.0.15.1)
   - MJRefresh (~> 3.1.15.7)
+  - ProtocolBuffers-Swift (~> 4.0.6)
   - SDWebImage (= 3.7.5)
+  - SwiftSocket (~> 2.0.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -48,7 +52,9 @@ SPEC REPOS:
     - MBProgressHUD
     - MJExtension
     - MJRefresh
+    - ProtocolBuffers-Swift
     - SDWebImage
+    - SwiftSocket
 
 EXTERNAL SOURCES:
   Flutter:
@@ -66,8 +72,10 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
+  ProtocolBuffers-Swift: 09b5cfcc641ab512d6aaa1d2cc3879a40432052c
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SwiftSocket: 6f4c9c63fbc5c1d61188936bb3c599fd546f40ae
 
-PODFILE CHECKSUM: 8974e2c6e756bb41b8c1d39afb0c68a3091db63a
+PODFILE CHECKSUM: 18ce626226c3bef8b1d50a4fdf13de7ebac06646
 
 COCOAPODS: 1.5.3
