@@ -10,7 +10,7 @@
 #import "ZJBaseViewController+NavBar.h"
 #import "ThirdViewController.h"
 #import "VideoDetailViewController.h"
-
+#import "Cupid-Swift.h"
 @interface SecondViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 @end
@@ -33,25 +33,13 @@
     
     self.typeAnimation = PopAnimationTypeOther;
     
-//    UIImageView *imgV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 100, SCREEN_W, SCREEN_H)];
-//    imgV.backgroundColor = [UIColor orangeColor];
-//    [self.view addSubview:imgV];
-//
-//    NSString *str = [@"http%3A%2F%2Fp3-tt.bytecdn.cn%2Flarge%2Fpgc-image%2Fe119b15f49f44485871e433519f07d42" stringByRemovingPercentEncoding];
-//
-//    [imgV sd_setImageWithURL:[NSURL URLWithString:str] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//
-//        UIImage *imag = image;
-//        NSLog(@"%@",imag);
-//
-//    }];
     
 }
 
 
 -(void)initNavView
 {
-    [self createNavBarViewWithTitle:@"西瓜视频"];
+    [self createNavBarViewWithTitle:@"IM"];
     
 }
 
@@ -82,19 +70,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    [self presentViewController:[VideoDetailViewController new] animated:YES completion:nil];
-    
-//    [self.navigationController pushViewController:[VideoDetailViewController new] animated:YES];
-}
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [self.navigationController pushViewController:[IMChatViewController new] animated:YES];
 }
-*/
 
 @end

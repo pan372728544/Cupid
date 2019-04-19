@@ -41,11 +41,16 @@
     
     ZJBaseTabBarController *tabBarViewController = [ZJBaseTabBarController createTabBarController:^ZJTabBarConfig *(ZJTabBarConfig * _Nonnull config) {
         
+        // 首页
         HomeViewController * homeVC = [HomeViewController new];
+        
+        // IM
         SecondViewController * secondVC = [SecondViewController new];
+        
+        // 小视频
         VideoViewController * thirdVC = [VideoViewController new];
         
-        // flutter 设置
+        // 我的
         FlutterViewController* flutterViewController = [[FlutterViewController alloc] initWithProject:nil nibName:nil bundle:nil];
         [flutterViewController setInitialRoute:@"myApp"];
         

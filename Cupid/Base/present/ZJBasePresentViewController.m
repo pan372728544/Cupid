@@ -167,7 +167,8 @@ interactiveTransition;
     
     ZJPresentationController *presentVC = [[ZJPresentationController alloc]initWithPresentedViewController:presented presentingViewController:presenting];
     // 设置距离顶部的高度
-    presentVC.height = STATUSBAR_H;
+    
+    presentVC.height =  self.heightTop==0? STATUSBAR_H:self.heightTop;
     
     return presentVC;
 }

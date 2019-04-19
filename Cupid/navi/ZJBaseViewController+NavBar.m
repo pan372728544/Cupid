@@ -69,4 +69,8 @@
     self.superNavBarView.backgroundColor = bgcolor;
 }
 
+-(void)setRightTitleColro:(UIColor *)color
+{
+    [self.superNavBarView.btnRight setTitleColor:color forState:UIControlStateNormal];
+}
 @end

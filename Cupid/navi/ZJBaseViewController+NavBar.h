@@ -22,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)createNavRightBtnWithItem:(id)idItem target:(id)target action:(SEL)selAction;
 
+
+-(void)setRightTitleColro:(UIColor *)color;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -41,6 +41,12 @@
 		381DCDB02269710200EC34F3 /* ProtocolBuffers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381DCDAF2269710200EC34F3 /* ProtocolBuffers.framework */; };
 		381DCDB22269710200EC34F3 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381DCDB12269710200EC34F3 /* SDWebImage.framework */; };
 		381DCDB42269710200EC34F3 /* SwiftSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381DCDB32269710200EC34F3 /* SwiftSocket.framework */; };
+		381DCDB62269754F00EC34F3 /* IMMessage.proto in Sources */ = {isa = PBXBuildFile; fileRef = 381DCDB52269754F00EC34F3 /* IMMessage.proto */; };
+		381DCDBA2269781700EC34F3 /* Immessage.proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381DCDB92269781700EC34F3 /* Immessage.proto.swift */; };
+		381DCDBD22697DB100EC34F3 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381DCDBC22697DB100EC34F3 /* ServerManager.swift */; };
+		381DCDBF226994AD00EC34F3 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381DCDBE226994AD00EC34F3 /* ClientManager.swift */; };
+		381DCDC822699AAF00EC34F3 /* IMChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381DCDC722699AAF00EC34F3 /* IMChatViewController.swift */; };
+		381DCDCA2269A03700EC34F3 /* IMStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381DCDC92269A03700EC34F3 /* IMStatusViewController.swift */; };
 		382D522E21F1EEAD00009C17 /* HomeCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 382D522D21F1EEAD00009C17 /* HomeCommentTableViewCell.m */; };
 		3837E7522230C3BB0094D2EA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837E7512230C3BB0094D2EA /* LoginViewController.m */; };
 		3837E7542230CD350094D2EA /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 3837E7532230CD350094D2EA /* abc.png */; };
@@ -267,6 +273,12 @@
 		381DCDAF2269710200EC34F3 /* ProtocolBuffers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProtocolBuffers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		381DCDB12269710200EC34F3 /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		381DCDB32269710200EC34F3 /* SwiftSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		381DCDB52269754F00EC34F3 /* IMMessage.proto */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.protobuf; path = IMMessage.proto; sourceTree = "<group>"; };
+		381DCDB92269781700EC34F3 /* Immessage.proto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Immessage.proto.swift; sourceTree = "<group>"; };
+		381DCDBC22697DB100EC34F3 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
+		381DCDBE226994AD00EC34F3 /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
+		381DCDC722699AAF00EC34F3 /* IMChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMChatViewController.swift; sourceTree = "<group>"; };
+		381DCDC92269A03700EC34F3 /* IMStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMStatusViewController.swift; sourceTree = "<group>"; };
 		382D522C21F1EEAD00009C17 /* HomeCommentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCommentTableViewCell.h; sourceTree = "<group>"; };
 		382D522D21F1EEAD00009C17 /* HomeCommentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCommentTableViewCell.m; sourceTree = "<group>"; };
 		3837E7502230C3BB0094D2EA /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -598,6 +610,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		381DCDC422699A8F00EC34F3 /* vc */ = {
+			isa = PBXGroup;
+			children = (
+				381DCDC722699AAF00EC34F3 /* IMChatViewController.swift */,
+				381DCDC92269A03700EC34F3 /* IMStatusViewController.swift */,
+			);
+			path = vc;
+			sourceTree = "<group>";
+		};
 		3846983322606D0D001234F8 /* viewmodel */ = {
 			isa = PBXGroup;
 			children = (
@@ -621,6 +642,7 @@
 		384698A82266CEA1001234F8 /* Socket */ = {
 			isa = PBXGroup;
 			children = (
+				381DCDC422699A8F00EC34F3 /* vc */,
 				384698AA2266CECD001234F8 /* Server */,
 				384698A92266CEBE001234F8 /* Client */,
 			);
@@ -630,7 +652,9 @@
 		384698A92266CEBE001234F8 /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				381DCDB92269781700EC34F3 /* Immessage.proto.swift */,
 				3819F5572266D271009D0C03 /* ZJSocket.swift */,
+				381DCDB52269754F00EC34F3 /* IMMessage.proto */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -638,6 +662,8 @@
 		384698AA2266CECD001234F8 /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				381DCDBC22697DB100EC34F3 /* ServerManager.swift */,
+				381DCDBE226994AD00EC34F3 /* ClientManager.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -1364,6 +1390,7 @@
 				38636BB221E5F88100A834EE /* HomeTopBarView.m in Sources */,
 				380101B721DF5D8400D5F7D2 /* ZJNavgationBarView.m in Sources */,
 				38C20A8F21EF07CF007C4CB7 /* ResultTopView.m in Sources */,
+				381DCDCA2269A03700EC34F3 /* IMStatusViewController.swift in Sources */,
 				38717AEE2255F8620020955F /* AnchorModel.swift in Sources */,
 				38717AFA2255F9870020955F /* HomeViewCell.swift in Sources */,
 				38717AD52254C0660020955F /* ZJContentView.swift in Sources */,
@@ -1373,6 +1400,7 @@
 				3819F5582266D271009D0C03 /* ZJSocket.swift in Sources */,
 				38717AC6225366320020955F /* CardDemoViewController.m in Sources */,
 				38636BC421E60A7F00A834EE /* UIView+Frame.m in Sources */,
+				381DCDBA2269781700EC34F3 /* Immessage.proto.swift in Sources */,
 				38C20A5021EDAFB4007C4CB7 /* ResultSearchViewController.m in Sources */,
 				38636BFE21E733AE00A834EE /* ZJNetworking+RequestManager.m in Sources */,
 				38AC1A2821F08EB8001D491B /* HomeOtherDetailViewController.m in Sources */,
@@ -1389,15 +1417,18 @@
 				38717AEA2255F81B0020955F /* AnchorViewController.swift in Sources */,
 				3801019E21DE193000D5F7D2 /* ZJBaseNavigationController.m in Sources */,
 				382D522E21F1EEAD00009C17 /* HomeCommentTableViewCell.m in Sources */,
+				381DCDC822699AAF00EC34F3 /* IMChatViewController.swift in Sources */,
 				38FF1F0321FEEC2A00A3CA7F /* HomeChannelModel.m in Sources */,
 				38717AE72255F4900020955F /* KingfisherExtension.swift in Sources */,
 				380101BD21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m in Sources */,
 				38636C0021E733AE00A834EE /* ZJDiskCache.m in Sources */,
 				38636C1421E8333600A834EE /* FeedNewContentModel.m in Sources */,
 				380101A721DF0AF000D5F7D2 /* SecondViewController.m in Sources */,
+				381DCDB62269754F00EC34F3 /* IMMessage.proto in Sources */,
 				38636BFF21E733AE00A834EE /* ZJLRUManager.m in Sources */,
 				380101AA21DF0AFD00D5F7D2 /* ThirdViewController.m in Sources */,
 				380101AD21DF0B2A00D5F7D2 /* FourthViewController.m in Sources */,
+				381DCDBF226994AD00EC34F3 /* ClientManager.swift in Sources */,
 				380101A121DE195000D5F7D2 /* ZJBaseViewController.m in Sources */,
 				38636C0B21E82FB300A834EE /* FeedNewsModel.m in Sources */,
 				3801019B21DE18B200D5F7D2 /* ZJBaseTabBarController.m in Sources */,
@@ -1434,6 +1465,7 @@
 				38C20A8021EDD97D007C4CB7 /* SearchBarView.m in Sources */,
 				38AC1A3121F17F6B001D491B /* ArtileInfomationModel.m in Sources */,
 				38FF1EEB21FEAC7C00A3CA7F /* ZJBasePresentViewController.m in Sources */,
+				381DCDBD22697DB100EC34F3 /* ServerManager.swift in Sources */,
 				38717AC0225364C00020955F /* GMCCardAnimationView.m in Sources */,
 				38717ADD2255D0D20020955F /* ZJTitleView.swift in Sources */,
 				38FF1F0621FEEC7800A3CA7F /* HomeChannelCollectionViewCell.m in Sources */,

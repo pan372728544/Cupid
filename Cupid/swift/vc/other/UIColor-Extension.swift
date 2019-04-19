@@ -17,5 +17,8 @@ extension UIColor {
     class func randomColor() -> UIColor {
         return UIColor(r: CGFloat(arc4random_uniform(256)), g: CGFloat(arc4random_uniform(256)), b: CGFloat(arc4random_uniform(256)))
     }
+    class func commonColor() -> UIColor {
+        return UIColor(r: CGFloat(222), g: CGFloat(74), b: CGFloat(67))
+    }
 }
 

@@ -22,6 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,assign)BOOL isRight;
 
+
+// 距离顶部的高度 默认状态栏高度
+@property(nonatomic,assign)CGFloat heightTop;
+
 @end
 
 NS_ASSUME_NONNULL_END

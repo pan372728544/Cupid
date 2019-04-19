@@ -11,6 +11,7 @@
 #import "NSData+ImageContentType.h"
 #import "UIImage+MultiFormat.h"
 #import <SDWebImage/SDImageCache.h>
+#import <SDWebImage/SDWebImageManager.h>
 
 
 // 获取请求中包含large的请求地址
