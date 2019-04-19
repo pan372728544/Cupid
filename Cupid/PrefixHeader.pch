@@ -18,7 +18,8 @@
 
 #import "ZJCommonMacro.h"
 #import "UIView+Frame.h"
-#import <Masonry.h>
+//#import <Masonry.h>
+#import <Masonry/Masonry.h>
 #import "ZJBaseViewController.h"
 #import "ZJBaseViewController+NavBar.h"
 #import "CommonHeader.h"

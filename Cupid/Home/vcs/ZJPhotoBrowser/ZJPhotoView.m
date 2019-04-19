@@ -10,8 +10,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #import <SDWebImage/UIImage+MultiFormat.h>
-#import <NSData+ImageContentType.h>
-#import <SDImageCache.h>
+#import <SDWebImage/NSData+ImageContentType.h>
+#import <SDWebImage/SDImageCache.h>
 
 @interface ZJPhotoView()
 

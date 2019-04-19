@@ -8,7 +8,7 @@
 
 #import "FeedNormalTableViewCell.h"
 #import "UIImageView+WebCache.h"
-#import <Masonry.h>
+#import <Masonry/Masonry.h>
 #import "ZJCommonMacro.h"
 
 @interface FeedNormalTableViewCell()

@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "NSData+ImageContentType.h"
 #import "UIImage+MultiFormat.h"
-#import <SDImageCache.h>
+#import <SDWebImage/SDImageCache.h>
 
 
 // 获取请求中包含large的请求地址

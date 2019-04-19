@@ -6,7 +6,8 @@
 //  Copyright © 2019 panzhijun. All rights reserved.
 //
 
-#import "MJRefreshBackFooter.h"
+//#import "MJRefreshBackFooter.h"
+#import <MJRefresh/MJRefreshBackFooter.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -1,4 +1,4 @@
-module Pods_Cupid {
+framework module Pods_Cupid {
   umbrella header "Pods-Cupid-umbrella.h"
 
   export *

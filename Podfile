@@ -4,10 +4,10 @@ flutter_application_path = 'my_flutter/'
  eval(File.read(File.join(flutter_application_path, '.ios', 'Flutter', 'podhelper.rb')), binding)
 
 platform :ios, '10.0'
-
+    use_frameworks!
 target 'Cupid' do
     
-#    use_frameworks!
+
     pod 'AFNetworking', '~> 3.2.1'
     pod 'SDWebImage','3.7.5'
     pod 'Masonry', '~> 1.0.2'

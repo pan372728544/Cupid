@@ -11,8 +11,6 @@ import UIKit
 
 class ZJSocket {
 
-    
-//    var socket   =  TCPClient()
-    
+
     
 }
