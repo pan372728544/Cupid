@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftSocket
 
 class IMStatusViewController: ZJBasePresentViewController {
 
@@ -17,7 +16,7 @@ class IMStatusViewController: ZJBasePresentViewController {
     fileprivate lazy var switchButton : UISwitch = UISwitch()
     
     
-      fileprivate lazy var serverMgr : ServerManager = ServerManager()
+//      fileprivate lazy var serverMgr : ServerManager = ServerManager()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -65,27 +64,27 @@ extension IMStatusViewController {
     
     @objc func switchClick()  {
         
-        if switchButton.isOn {
-            let result = serverMgr.startRunning()
-            
-            switch result {
-            case .success:
-                serverStatusLabel.text = "服务器链接成功"
-            case .failure(nil):
-                serverStatusLabel.text = "服务器未连接--连接失败"
-                switchButton.isOn = false
-            default:
-                serverStatusLabel.text = "服务器未连接--连接失败"
-                switchButton.isOn = false
-            }
-            
-        }else{
-            
-            serverMgr.stopRunning()
-            serverStatusLabel.text = "服务器未连接"
-   
-          
-        }
+//        if switchButton.isOn {
+//            let result = serverMgr.startRunning()
+//            
+//            switch result {
+//            case .success:
+//                serverStatusLabel.text = "服务器链接成功"
+//            case .failure(nil):
+//                serverStatusLabel.text = "服务器未连接--连接失败"
+//                switchButton.isOn = false
+//            default:
+//                serverStatusLabel.text = "服务器未连接--连接失败"
+//                switchButton.isOn = false
+//            }
+//            
+//        }else{
+//            
+//            serverMgr.stopRunning()
+//            serverStatusLabel.text = "服务器未连接"
+//   
+//          
+//        }
         
     }
     

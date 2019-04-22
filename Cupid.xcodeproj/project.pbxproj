@@ -40,7 +40,6 @@
 		381DCDAE2269710200EC34F3 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381DCDAD2269710200EC34F3 /* MBProgressHUD.framework */; };
 		381DCDB02269710200EC34F3 /* ProtocolBuffers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381DCDAF2269710200EC34F3 /* ProtocolBuffers.framework */; };
 		381DCDB22269710200EC34F3 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381DCDB12269710200EC34F3 /* SDWebImage.framework */; };
-		381DCDB42269710200EC34F3 /* SwiftSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381DCDB32269710200EC34F3 /* SwiftSocket.framework */; };
 		381DCDB62269754F00EC34F3 /* IMMessage.proto in Sources */ = {isa = PBXBuildFile; fileRef = 381DCDB52269754F00EC34F3 /* IMMessage.proto */; };
 		381DCDBA2269781700EC34F3 /* Immessage.proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381DCDB92269781700EC34F3 /* Immessage.proto.swift */; };
 		381DCDBD22697DB100EC34F3 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381DCDBC22697DB100EC34F3 /* ServerManager.swift */; };
@@ -160,6 +159,12 @@
 		38717AF62255F91B0020955F /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF52255F91B0020955F /* PlayViewController.swift */; };
 		38717AFA2255F9870020955F /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF82255F9870020955F /* HomeViewCell.swift */; };
 		38717AFB2255F9870020955F /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38717AF92255F9870020955F /* HomeViewCell.xib */; };
+		3899906A226D738D00B09412 /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 38999064226D738D00B09412 /* yudpsocket.c */; };
+		3899906B226D738D00B09412 /* ytcpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 38999065226D738D00B09412 /* ytcpsocket.c */; };
+		3899906C226D738D00B09412 /* TCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38999066226D738D00B09412 /* TCPClient.swift */; };
+		3899906D226D738D00B09412 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38999067226D738D00B09412 /* Result.swift */; };
+		3899906E226D738D00B09412 /* UDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38999068226D738D00B09412 /* UDPClient.swift */; };
+		3899906F226D738D00B09412 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38999069226D738D00B09412 /* Socket.swift */; };
 		38AC1A2521F05A88001D491B /* MJLoadMoreFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A2421F05A88001D491B /* MJLoadMoreFooter.m */; };
 		38AC1A2821F08EB8001D491B /* HomeOtherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A2721F08EB8001D491B /* HomeOtherDetailViewController.m */; };
 		38AC1A3121F17F6B001D491B /* ArtileInfomationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AC1A3021F17F6B001D491B /* ArtileInfomationModel.m */; };
@@ -422,6 +427,12 @@
 		38717AF52255F91B0020955F /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		38717AF82255F9870020955F /* HomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		38717AF92255F9870020955F /* HomeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
+		38999064226D738D00B09412 /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yudpsocket.c; sourceTree = "<group>"; };
+		38999065226D738D00B09412 /* ytcpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ytcpsocket.c; sourceTree = "<group>"; };
+		38999066226D738D00B09412 /* TCPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPClient.swift; sourceTree = "<group>"; };
+		38999067226D738D00B09412 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		38999068226D738D00B09412 /* UDPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPClient.swift; sourceTree = "<group>"; };
+		38999069226D738D00B09412 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		38AC1A2321F05A88001D491B /* MJLoadMoreFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJLoadMoreFooter.h; sourceTree = "<group>"; };
 		38AC1A2421F05A88001D491B /* MJLoadMoreFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJLoadMoreFooter.m; sourceTree = "<group>"; };
 		38AC1A2621F08EB8001D491B /* HomeOtherDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeOtherDetailViewController.h; sourceTree = "<group>"; };
@@ -519,7 +530,6 @@
 				381DCDAE2269710200EC34F3 /* MBProgressHUD.framework in Frameworks */,
 				381DCDB02269710200EC34F3 /* ProtocolBuffers.framework in Frameworks */,
 				381DCDB22269710200EC34F3 /* SDWebImage.framework in Frameworks */,
-				381DCDB42269710200EC34F3 /* SwiftSocket.framework in Frameworks */,
 				381DCDA2226970F400EC34F3 /* MJExtension.framework in Frameworks */,
 				381DCDA0226970E400EC34F3 /* MJRefresh.framework in Frameworks */,
 				72E4B4042B90CD30AE4F9698 /* Pods_Cupid.framework in Frameworks */,
@@ -652,6 +662,7 @@
 		384698A92266CEBE001234F8 /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				38999063226D738D00B09412 /* socket */,
 				381DCDB92269781700EC34F3 /* Immessage.proto.swift */,
 				3819F5572266D271009D0C03 /* ZJSocket.swift */,
 				381DCDB52269754F00EC34F3 /* IMMessage.proto */,
@@ -932,6 +943,19 @@
 				38717AF92255F9870020955F /* HomeViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		38999063226D738D00B09412 /* socket */ = {
+			isa = PBXGroup;
+			children = (
+				38999064226D738D00B09412 /* yudpsocket.c */,
+				38999065226D738D00B09412 /* ytcpsocket.c */,
+				38999066226D738D00B09412 /* TCPClient.swift */,
+				38999067226D738D00B09412 /* Result.swift */,
+				38999068226D738D00B09412 /* UDPClient.swift */,
+				38999069226D738D00B09412 /* Socket.swift */,
+			);
+			path = socket;
 			sourceTree = "<group>";
 		};
 		38FF1E4121F99D7900A3CA7F /* detail */ = {
@@ -1321,7 +1345,6 @@
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ProtocolBuffers-Swift/ProtocolBuffers.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftSocket/SwiftSocket.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -1338,7 +1361,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtocolBuffers.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSocket.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1376,9 +1398,11 @@
 			files = (
 				38636BB521E600E500A834EE /* CategoryTitleModel.m in Sources */,
 				38AC1A3421F1B4AA001D491B /* LoadingDefaultView.m in Sources */,
+				3899906C226D738D00B09412 /* TCPClient.swift in Sources */,
 				38FF1FB622019CB100A3CA7F /* ZJPhoto.m in Sources */,
 				3801018821DE175500D5F7D2 /* ViewController.m in Sources */,
 				38717AED2255F8620020955F /* HomeType.swift in Sources */,
+				3899906D226D738D00B09412 /* Result.swift in Sources */,
 				38636C0121E733AE00A834EE /* ZJMemoryCache.m in Sources */,
 				38FF1EF121FEB00E00A3CA7F /* ZJPresentationController.m in Sources */,
 				38717AC3225364D50020955F /* GMCDefaultCardView.m in Sources */,
@@ -1408,7 +1432,9 @@
 				3863936E21EC22EE00A834EE /* HomeDetailViewController.m in Sources */,
 				3801026921E4A88600D5F7D2 /* ZJTabBarManager.m in Sources */,
 				380101B121DF3CA900D5F7D2 /* ListViewController.m in Sources */,
+				3899906B226D738D00B09412 /* ytcpsocket.c in Sources */,
 				38636C0E21E82FF300A834EE /* HomeRequest.m in Sources */,
+				3899906F226D738D00B09412 /* Socket.swift in Sources */,
 				380101A421DF0AE200D5F7D2 /* HomeViewController.m in Sources */,
 				38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */,
 				38717AF02255F8870020955F /* BaseModel.swift in Sources */,
@@ -1418,6 +1444,7 @@
 				3801019E21DE193000D5F7D2 /* ZJBaseNavigationController.m in Sources */,
 				382D522E21F1EEAD00009C17 /* HomeCommentTableViewCell.m in Sources */,
 				381DCDC822699AAF00EC34F3 /* IMChatViewController.swift in Sources */,
+				3899906A226D738D00B09412 /* yudpsocket.c in Sources */,
 				38FF1F0321FEEC2A00A3CA7F /* HomeChannelModel.m in Sources */,
 				38717AE72255F4900020955F /* KingfisherExtension.swift in Sources */,
 				380101BD21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m in Sources */,
@@ -1457,6 +1484,7 @@
 				3863936B21E8ABE900A834EE /* PublishViewController.m in Sources */,
 				38717AF32255F8BD0020955F /* WaterfallLayout.swift in Sources */,
 				38717AE62255F4900020955F /* NetworkTools.swift in Sources */,
+				3899906E226D738D00B09412 /* UDPClient.swift in Sources */,
 				38FF1EFD21FEE37F00A3CA7F /* ChannelTopView.m in Sources */,
 				3801026321E49E5700D5F7D2 /* ZJBasePushAnimation.m in Sources */,
 				38FF1EEE21FEACDF00A3CA7F /* HomeChannelViewController.m in Sources */,
@@ -1623,6 +1651,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KYACQ4K486;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Cupid/PrefixHeader.pch";
@@ -1653,6 +1682,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KYACQ4K486;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Cupid/PrefixHeader.pch";

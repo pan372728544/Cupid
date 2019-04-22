@@ -27,7 +27,6 @@ PODS:
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
-  - SwiftSocket (2.0.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.2.1)
@@ -41,7 +40,6 @@ DEPENDENCIES:
   - MJRefresh (~> 3.1.15.7)
   - ProtocolBuffers-Swift (~> 4.0.6)
   - SDWebImage (= 3.7.5)
-  - SwiftSocket (~> 2.0.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -54,7 +52,6 @@ SPEC REPOS:
     - MJRefresh
     - ProtocolBuffers-Swift
     - SDWebImage
-    - SwiftSocket
 
 EXTERNAL SOURCES:
   Flutter:
@@ -74,8 +71,7 @@ SPEC CHECKSUMS:
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   ProtocolBuffers-Swift: 09b5cfcc641ab512d6aaa1d2cc3879a40432052c
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
-  SwiftSocket: 6f4c9c63fbc5c1d61188936bb3c599fd546f40ae
 
-PODFILE CHECKSUM: 62bc1436764fbbbb056d2f0471dd2d434008e653
+PODFILE CHECKSUM: c7f11e7579df7a4448885c02a2a91e142fdd6c90
 
 COCOAPODS: 1.5.3

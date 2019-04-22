@@ -13,6 +13,7 @@
 #import "Cupid-Swift.h"
 @interface SecondViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong) ServerManager *serM;
 @end
 
 @implementation SecondViewController
@@ -33,8 +34,12 @@
     
     self.typeAnimation = PopAnimationTypeOther;
     
+    // 开启服务器
+//    self.serM =  [[ServerManager alloc]init];
+//    [self.serM startRunning];
     
 }
+
 
 
 -(void)initNavView

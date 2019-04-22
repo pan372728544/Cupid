@@ -11,4 +11,6 @@
 #import "MJLoadMoreFooter.h"
 #import "PublishViewController.h"
 #import "VideoDetailViewController.h"
+#import <Foundation/Foundation.h>
+
 

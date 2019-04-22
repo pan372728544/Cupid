@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftSocket
 
 // 代理
 protocol ZJSocketDelegate : class {
@@ -26,7 +25,7 @@ class ZJSocket {
     // 用户信息
     fileprivate var userInfo : UserInfo.Builder = {
         let userInfo = UserInfo.Builder()
-        userInfo.name = "name:\(arc4random_uniform(10))"
+        userInfo.name = "name:wang\(arc4random_uniform(10))"
         userInfo.level = 2
         userInfo.iconUrl = "iconUrl=\(arc4random_uniform(10))"
         return userInfo
@@ -52,8 +51,10 @@ extension ZJSocket {
     func startReadMsg()  {
         // 开启线程读取消息
         DispatchQueue.global().async {
-            
+            print("客户端读取消息。。。\(Thread.current)")
+      
             while true {
+       
                 // 读取4个长度
                 guard let lMsg = self.tcpClient.read(4) else {
                     continue
@@ -70,7 +71,7 @@ extension ZJSocket {
                 let typeData = Data(bytes: typeMsg, count: 2)
                 var type : Int = 0
                 (typeData as NSData).getBytes(&type, length: 2)
-                print(type)
+//                print(type)
                 
                 // 2.根据长度, 读取真实消息
                 guard let msg = self.tcpClient.read(length) else {
@@ -174,6 +175,9 @@ extension ZJSocket {
         
         // 3.发送消息
         let totalData = headerData + typeData + data
-       _ = tcpClient.send(data: totalData)
+        let res : Result = tcpClient.send(data: totalData)
+        if res.isSuccess {
+            print("消息发送成功。。。")
+        }
     }
 }

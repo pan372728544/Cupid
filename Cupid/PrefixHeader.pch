@@ -29,6 +29,7 @@
 #import "MBProgressHUD.h"
 #import "MBProgressHUD+Extension.h"
 #import "ZJBasePresentViewController.h"
+#import "Cupid-Swift.h"
 
 #endif
 

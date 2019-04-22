@@ -18,6 +18,5 @@ target 'Cupid' do
     pod 'Alamofire', '~> 4.8.2'
     pod 'Kingfisher', '~> 5.3.1'
     pod 'ProtocolBuffers-Swift', '~> 4.0.6'
-    pod 'SwiftSocket', '~> 2.0.2'
     
 end
