@@ -133,9 +133,7 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "tableView")!
-//        let cell = tableView.de
+
         let cell = UITableViewCell.init(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "tableView")
         
         
@@ -213,7 +211,7 @@ extension IMChatViewController {
     @objc func sendClick()  {
         
         socket.sendTextMsg(message: self.textField.text ?? "空的消息")
-//        socket.startReadMsg()
+        self.textField.text = ""
     }
     
     
