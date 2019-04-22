@@ -15,13 +15,15 @@ class IMChatViewController: ZJBaseViewController {
     
     fileprivate var socket : ZJSocket = ZJSocket(addr: "10.2.116.26", port: 7878)
     
-    fileprivate var textField : UITextField = UITextField(frame: CGRect(x: 0, y: 300, width: Screen_W, height: 44))
+    fileprivate var textField : UITextField = UITextField(frame: CGRect(x: 15, y: 15, width: Screen_W-100, height: 44))
     
-    fileprivate var btnSend : UIButton = UIButton(frame: CGRect(x: 0, y: 355, width: 100, height: 44))
+    fileprivate var btnSend : UIButton = UIButton(frame: CGRect(x: Screen_W-15-50, y: 15, width: 50, height: 44))
     
     fileprivate var tableView : UITableView = UITableView(frame: CGRect(x: 0, y: StatusBar_H+44, width: Screen_W, height: Screen_H-StatusBar_H-44), style: UITableView.Style.plain)
     
     fileprivate var msgArray : [TextMessage] = [TextMessage]()
+    
+    fileprivate  var viewBottom : UIView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,43 +32,101 @@ class IMChatViewController: ZJBaseViewController {
         self.createNavLeftBtn(withItem: "", target: self, action: #selector(backClick(button:)))
         self.setRightTitleColro(UIColor.black)
         
+        // 处理通知
+    
+       registerNotification()
+     
         // 链接服务器
         connectServer()
-        
-        
-        
     
-        
+        // 创建聊天tableview
         setupTableView()
         
-        setupTextField()
+//        setupTextField()
+        setupChatTool()
     }
     deinit {
-
+    NotificationCenter.default.removeObserver(self)
     }
 
 
 }
 
-extension IMChatViewController : UITableViewDataSource,UITableViewDelegate {
+extension IMChatViewController {
     
-    func setupTextField()  {
-        textField.backgroundColor = UIColor.orange
-        btnSend.setTitle("发送", for: UIControl.State.normal)
-        btnSend.addTarget(self, action: #selector(sendClick), for: UIControl.Event.touchUpInside)
-        btnSend.backgroundColor = UIColor.blue
-        self.view.addSubview(textField)
-        self.view.addSubview(btnSend)
+    func registerNotification(){
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyBoardWillShow(_ :)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyBoardWillHide(_ :)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
+    
+    
+    //MARK:键盘通知相关操作
+    @objc func keyBoardWillShow(_ notification:Notification){
+        //1.获取动画执行的时间
+        let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
+        //2. 获取键盘最终的Y值
+        let endFrame = (notification.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
+        let y = endFrame.origin.y
+        //3.执行动画
+        UIView.animate(withDuration: duration) {
+            self.viewBottom.frame.origin.y = y - 49 - 30
+        }
+    }
+    
+    @objc func keyBoardWillHide(_ notification:Notification){
+        //1.获取动画执行的时间
+        let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
+
+        //2.执行动画
+        UIView.animate(withDuration: duration) {
+            self.viewBottom.frame.origin.y = Screen_H - Tabbar_H
+        }
+    }
+
+}
+
+extension IMChatViewController {
     
     func setupTableView() {
         
-      self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "tableView")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "tableView")
         self.tableView.delegate = self
         self.tableView.dataSource = self
-      view.addSubview(self.tableView)
+        view.addSubview(self.tableView)
         
     }
+    func setupChatTool()  {
+        
+        
+        viewBottom = UIView(frame: CGRect(x: 0, y: Screen_H-Tabbar_H, width: Screen_W, height: Tabbar_H))
+        
+        viewBottom.backgroundColor = UIColor.randomColor()
+        view.addSubview(viewBottom)
+        
+        
+        textField.backgroundColor = UIColor.lightGray
+        btnSend.setTitle("发送", for: UIControl.State.normal)
+        btnSend.addTarget(self, action: #selector(sendClick), for: UIControl.Event.touchUpInside)
+        btnSend.backgroundColor = UIColor.clear
+        btnSend.setTitleColor(UIColor.black, for: UIControl.State.normal)
+        btnSend.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
+        viewBottom.addSubview(textField)
+        viewBottom.addSubview(btnSend)
+    }
+}
+
+extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate {
+    
+
+    
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return msgArray.count
@@ -90,7 +150,10 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate {
         return cell
     }
     
-    
+ 
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
+    }
  
 }
 

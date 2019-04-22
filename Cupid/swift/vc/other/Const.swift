@@ -9,14 +9,16 @@
 import UIKit
 
 
-let Screen_W = UIScreen.main.bounds.width
+let Screen_W : CGFloat = UIScreen.main.bounds.width
 
-let Screen_H = UIScreen.main.bounds.height
+let Screen_H : CGFloat = UIScreen.main.bounds.height
 
-let Tabbar_H = CGFloat(49+(UIApplication.shared.keyWindow?.rootViewController?.view.safeAreaInsets.bottom)! ?? 0)
+let Tabbar_H : CGFloat = CGFloat(49+(UIApplication.shared.keyWindow?.rootViewController?.view.safeAreaInsets.bottom)! )
+
+let Bottom_H : CGFloat = (UIApplication.shared.keyWindow?.rootViewController?.view.safeAreaInsets.bottom)!
 
 
-let StatusBar_H = UIApplication.shared.statusBarFrame.size.height
+let StatusBar_H : CGFloat = UIApplication.shared.statusBarFrame.size.height
 
 
 
