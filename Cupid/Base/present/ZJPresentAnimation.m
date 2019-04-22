@@ -20,7 +20,7 @@
 
 // 自定义转场动画时间
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext{
-    return 0.88f;
+    return 0.35f;
 }
 
 
