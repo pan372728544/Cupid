@@ -58,7 +58,7 @@
     UIView *viewLine = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_W-80-100, 10, 1, 20)];
     viewLine.backgroundColor = [UIColor blackColor];
     
-    [viewA addSubview:viewLine];
+//    [viewA addSubview:viewLine];
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(viewLine.frame), 0, 100, 40)];
     [btn setTitle:@"发送验证码" forState:UIControlStateNormal];
@@ -78,7 +78,7 @@
     viewA2.layer.masksToBounds = YES;
     viewA2.layer.cornerRadius = 20;
     
-//    [self.view addSubview:viewA2];
+    [self.view addSubview:viewA2];
     
     
     UITextField *textFC = [[UITextField alloc]initWithFrame:CGRectMake(20, 0, SCREEN_W-80, 40)];
