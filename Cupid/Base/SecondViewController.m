@@ -11,6 +11,7 @@
 #import "ThirdViewController.h"
 #import "VideoDetailViewController.h"
 #import "Cupid-Swift.h"
+#import "LoginViewController.h"
 @interface SecondViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong) ServerManager *serM;
@@ -34,9 +35,6 @@
     
     self.typeAnimation = PopAnimationTypeOther;
     
-    // 开启服务器
-//    self.serM =  [[ServerManager alloc]init];
-//    [self.serM startRunning];
     
 }
 
@@ -45,6 +43,7 @@
 -(void)initNavView
 {
     [self createNavBarViewWithTitle:@"IM"];
+    self.superNavBarView.backgroundColor = COLOR_COMMONRED;
     
 }
 
@@ -59,7 +58,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return 1;
     
 }
 
@@ -67,7 +66,7 @@
 {
     
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    cell.textLabel.text = [NSString stringWithFormat:@"Test--%ld",indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"进入群聊页面"];
     
     return cell;
     
@@ -76,7 +75,17 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    [self.navigationController pushViewController:[IMChatViewController new] animated:YES];
+
+    LoginViewController *vc =   [LoginViewController new];
+    
+    vc.block = ^(NSString * _Nonnull nickName, NSString * _Nonnull type) {
+        IMChatViewController *chat = [[IMChatViewController alloc]init];
+        [chat setNickNameWithStr:nickName type:type];
+        [self.navigationController pushViewController:chat animated:YES];
+    };
+    
+
+    [self.navigationController presentViewController:vc animated:YES completion:nil];
 }
 
 @end

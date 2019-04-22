@@ -196,6 +196,7 @@
 		38C20A8821EDE4C8007C4CB7 /* back_24x24_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C20A8621EDE4C8007C4CB7 /* back_24x24_@3x.png */; };
 		38C20A8B21EED136007C4CB7 /* ResultSearchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C20A8A21EED136007C4CB7 /* ResultSearchDetailViewController.m */; };
 		38C20A8F21EF07CF007C4CB7 /* ResultTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C20A8E21EF07CF007C4CB7 /* ResultTopView.m */; };
+		38C3009F226DA1AD007A537F /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3009E226DA1AD007A537F /* ChatTableViewCell.swift */; };
 		38FF1E5421F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */; };
 		38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */; };
 		38FF1EDE21FADEF500A3CA7F /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1EDD21FADEF500A3CA7F /* VideoDetailViewController.m */; };
@@ -476,6 +477,7 @@
 		38C20A8C21EEE4C9007C4CB7 /* CommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonHeader.h; sourceTree = "<group>"; };
 		38C20A8D21EF07CF007C4CB7 /* ResultTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultTopView.h; sourceTree = "<group>"; };
 		38C20A8E21EF07CF007C4CB7 /* ResultTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultTopView.m; sourceTree = "<group>"; };
+		38C3009E226DA1AD007A537F /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WKWebVIew.m"; sourceTree = "<group>"; };
 		38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HybridNSURLProtocol.m; sourceTree = "<group>"; };
 		38FF1E5221F9C81200A3CA7F /* HybridNSURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HybridNSURLProtocol.h; sourceTree = "<group>"; };
@@ -623,6 +625,7 @@
 		381DCDC422699A8F00EC34F3 /* vc */ = {
 			isa = PBXGroup;
 			children = (
+				38C3009D226DA198007A537F /* cell */,
 				381DCDC722699AAF00EC34F3 /* IMChatViewController.swift */,
 				381DCDC92269A03700EC34F3 /* IMStatusViewController.swift */,
 			);
@@ -956,6 +959,14 @@
 				38999069226D738D00B09412 /* Socket.swift */,
 			);
 			path = socket;
+			sourceTree = "<group>";
+		};
+		38C3009D226DA198007A537F /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				38C3009E226DA1AD007A537F /* ChatTableViewCell.swift */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		38FF1E4121F99D7900A3CA7F /* detail */ = {
@@ -1448,6 +1459,7 @@
 				38FF1F0321FEEC2A00A3CA7F /* HomeChannelModel.m in Sources */,
 				38717AE72255F4900020955F /* KingfisherExtension.swift in Sources */,
 				380101BD21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m in Sources */,
+				38C3009F226DA1AD007A537F /* ChatTableViewCell.swift in Sources */,
 				38636C0021E733AE00A834EE /* ZJDiskCache.m in Sources */,
 				38636C1421E8333600A834EE /* FeedNewContentModel.m in Sources */,
 				380101A721DF0AF000D5F7D2 /* SecondViewController.m in Sources */,

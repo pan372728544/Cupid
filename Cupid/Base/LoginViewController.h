@@ -9,9 +9,9 @@
 #import "ZJBasePresentViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef void(^enterBlock)(NSString *nickName,NSString *type);
 @interface LoginViewController : ZJBasePresentViewController
-
+@property(nonatomic,copy)enterBlock block;
 @end
 
 NS_ASSUME_NONNULL_END

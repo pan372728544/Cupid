@@ -22,3 +22,4 @@ let StatusBar_H : CGFloat = UIApplication.shared.statusBarFrame.size.height
 
 
 
+let NavaBar_H : CGFloat = StatusBar_H + 50

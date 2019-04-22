@@ -12,5 +12,6 @@
 #import "PublishViewController.h"
 #import "VideoDetailViewController.h"
 #import <Foundation/Foundation.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 

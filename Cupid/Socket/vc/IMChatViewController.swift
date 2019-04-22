@@ -11,7 +11,6 @@ import UIKit
 
 class IMChatViewController: ZJBaseViewController {
     
-//    fileprivate lazy var serverMgr : ServerManager = ServerManager()
     
     fileprivate var socket : ZJSocket = ZJSocket(addr: "10.2.116.26", port: 7878)
     
@@ -19,11 +18,24 @@ class IMChatViewController: ZJBaseViewController {
     
     fileprivate var btnSend : UIButton = UIButton(frame: CGRect(x: Screen_W-15-50, y: 15, width: 50, height: 44))
     
-    fileprivate var tableView : UITableView = UITableView(frame: CGRect(x: 0, y: StatusBar_H+44, width: Screen_W, height: Screen_H-StatusBar_H-44), style: UITableView.Style.plain)
+    fileprivate var tableView : UITableView = UITableView(frame: CGRect(x: 0, y: NavaBar_H, width: Screen_W, height: Screen_H-Tabbar_H-NavaBar_H), style: UITableView.Style.plain)
     
     fileprivate var msgArray : [TextMessage] = [TextMessage]()
     
     fileprivate  var viewBottom : UIView = UIView()
+
+    fileprivate var nickName : String = ""
+    ///有参数无返回值
+    @objc public func setNickName(str: String, type : String)  {
+        print("有参数无返回值:\(str)");
+        self.nickName = str
+        
+        let defaults = UserDefaults.standard
+        defaults.set(self.nickName, forKey: "nikeName")
+                defaults.set(type, forKey: "type")
+
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +53,11 @@ class IMChatViewController: ZJBaseViewController {
     
         // 创建聊天tableview
         setupTableView()
-        
-//        setupTextField()
+
+        // 输入框
         setupChatTool()
     }
+
     deinit {
     NotificationCenter.default.removeObserver(self)
     }
@@ -53,6 +66,9 @@ class IMChatViewController: ZJBaseViewController {
 }
 
 extension IMChatViewController {
+    
+    
+
     
     func registerNotification(){
         NotificationCenter.default.addObserver(self,
@@ -76,8 +92,9 @@ extension IMChatViewController {
         let y = endFrame.origin.y
         //3.执行动画
         UIView.animate(withDuration: duration) {
-            self.viewBottom.frame.origin.y = y - 49 - 30
+            self.viewBottom.frame.origin.y = y - Tabbar_H
         }
+        self.tableView.frame.size.height = Screen_H-Tabbar_H-NavaBar_H - endFrame.size.height
     }
     
     @objc func keyBoardWillHide(_ notification:Notification){
@@ -88,7 +105,18 @@ extension IMChatViewController {
         UIView.animate(withDuration: duration) {
             self.viewBottom.frame.origin.y = Screen_H - Tabbar_H
         }
+        self.tableView.frame.size.height = Screen_H-Tabbar_H-NavaBar_H
     }
+    
+    func heightOfCell(text : String) -> CGFloat {
+        let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16)]
+        let option = NSStringDrawingOptions.usesLineFragmentOrigin
+        let rect:CGRect = text.boundingRect(with: CGSize(width: Screen_W - 100, height: 0), options: option, attributes: attributes, context: nil)
+        print("height is \(rect.size.height)")
+        return rect.size.height
+    }
+    
+
 
 }
 
@@ -96,9 +124,11 @@ extension IMChatViewController {
     
     func setupTableView() {
         
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "tableView")
+        self.tableView.register(ChatTableViewCell.self, forCellReuseIdentifier: "ChatTableViewCell")
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.separatorStyle = .none
+        self.tableView.backgroundColor = UIColor.init(r: 204, g: 204, b: 204)
         view.addSubview(self.tableView)
         
     }
@@ -133,18 +163,12 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as! ChatTableViewCell
 
-        let cell = UITableViewCell.init(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "tableView")
-        
-        
-        
         let msg : TextMessage = msgArray[indexPath.row]
         
-        cell.textLabel!.text = msg.text
-        cell.detailTextLabel?.text = msg.user.name
-        
-        cell.imageView?.image = UIImage.init(named: "tabbar_publish_article_34x34_")
-        
+        cell.textMes = msg
         return cell
     }
     
@@ -153,6 +177,16 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
         self.view.endEditing(true)
     }
  
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let msg : TextMessage = msgArray[indexPath.row]
+        
+        
+        return heightOfCell(text: msg.text) + 60
+
+    
+    }
 }
 
 extension IMChatViewController {
@@ -182,6 +216,9 @@ extension IMChatViewController : ZJSocketDelegate{
         
         msgArray.append(chatMsg)
         self.tableView.reloadData()
+        
+        self.tableView.scrollToRow(at: IndexPath(item: msgArray.count-1 < 0 ? 0: msgArray.count-1, section: 0 ), at: UITableView.ScrollPosition.top, animated: false)
+   
     }
     
     func socket(_ socket: ZJSocket, giftMsg: GiftMessage) {
@@ -210,7 +247,7 @@ extension IMChatViewController {
     
     @objc func sendClick()  {
         
-        socket.sendTextMsg(message: self.textField.text ?? "空的消息")
+        socket.sendTextMsg(message: self.textField.text ?? "空的消息",nikeName: self.nickName)
         self.textField.text = ""
     }
     

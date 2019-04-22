@@ -8,7 +8,16 @@
 
 #import "LoginViewController.h"
 
+
+
 @interface LoginViewController ()
+
+
+
+@property(nonatomic,strong)UITextField *textFPhone ;
+
+
+@property(nonatomic,strong)UITextField *textFC;
 
 @end
 
@@ -40,9 +49,10 @@
     
     
     UITextField *textFPhone = [[UITextField alloc]initWithFrame:CGRectMake(20, 0, 200, 40)];
-    textFPhone.placeholder = @"手机号";
+    textFPhone.placeholder = @"输入您想要的昵称";
     textFPhone.font = [UIFont systemFontOfSize:15];
     [viewA addSubview:textFPhone];
+    self.textFPhone = textFPhone;
     
     // 竖线
     UIView *viewLine = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_W-80-100, 10, 1, 20)];
@@ -54,7 +64,7 @@
     [btn setTitle:@"发送验证码" forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:15];
    [btn setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
-    [viewA addSubview:btn];
+//    [viewA addSubview:btn];
     
     
     
@@ -68,14 +78,14 @@
     viewA2.layer.masksToBounds = YES;
     viewA2.layer.cornerRadius = 20;
     
-    [self.view addSubview:viewA2];
+//    [self.view addSubview:viewA2];
     
     
     UITextField *textFC = [[UITextField alloc]initWithFrame:CGRectMake(20, 0, SCREEN_W-80, 40)];
-    textFC.placeholder = @"请输入验证码";
+    textFC.placeholder = @"输入头像地址 1 或者 2 或者 3";
         textFC.font = [UIFont systemFontOfSize:15];
     [viewA2 addSubview:textFC];
-    
+    self.textFC = textFC;
     
     UIButton *btnA = [[UIButton alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(viewA2.frame)+20, SCREEN_W-80, 40)];
     [btnA setTitle:@"进入头条" forState:UIControlStateNormal];
@@ -85,6 +95,7 @@
     
     btnA.layer.masksToBounds = YES;
     btnA.layer.cornerRadius = 20;
+    [btnA addTarget:self action:@selector(btnEnter) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnA];
     
     
@@ -95,6 +106,14 @@
     [self.view addSubview:imageV];
     
     
+}
+
+-(void)btnEnter
+{
+    [self btnClose:nil];
+    if (_block) {
+        _block(self.textFPhone.text,self.textFC.text);
+    }
 }
 
 -(void)initCloseView

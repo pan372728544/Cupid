@@ -23,13 +23,13 @@ class ZJSocket {
     
     fileprivate var tcpClient : TCPClient
     // 用户信息
-    fileprivate var userInfo : UserInfo.Builder = {
-        let userInfo = UserInfo.Builder()
-        userInfo.name = "name:wang\(arc4random_uniform(10))"
-        userInfo.level = 2
-        userInfo.iconUrl = "iconUrl=\(arc4random_uniform(10))"
-        return userInfo
-    }()
+//    fileprivate var userInfo : UserInfo.Builder = {
+//        let userInfo = UserInfo.Builder()
+//        userInfo.name = "name:wang\(arc4random_uniform(10))"
+//        userInfo.level = 2
+//        userInfo.iconUrl = "http://img.52z.com/upload/news/image/20180212/20180212084623_32086.jpg"
+//        return userInfo
+//    }()
     
     init(addr: String, port : Int32) {
         // 创建TCP
@@ -113,26 +113,45 @@ extension ZJSocket {
 extension ZJSocket {
     func sendJoinRoom() {
         // 1.获取消息的长度
-        let msgData = (try! userInfo.build()).data()
-        
-        // 2.发送消息
-        sendMsg(data: msgData, type: 0)
+//        let msgData = (try! userInfo.build()).data()
+//
+//        // 2.发送消息
+//        sendMsg(data: msgData, type: 0)
     }
     
     func sendLeaveRoom() {
-        // 1.获取消息的长度
-        let msgData = (try! userInfo.build()).data()
-        
-        // 2.发送消息
-        sendMsg(data: msgData, type: 1)
+//        // 1.获取消息的长度
+//        let msgData = (try! userInfo.build()).data()
+//
+//        // 2.发送消息
+//        sendMsg(data: msgData, type: 1)
     }
     
-    func sendTextMsg(message : String) {
+    func sendTextMsg(message : String ,nikeName : String) {
         // 1.创建TextMessage类型
         let chatMsg = TextMessage.Builder()
+//        chatMsg.user = try! userInfo.build()
+//        chatMsg.text = message
+        
+        let userInfo = UserInfo.Builder()
+        userInfo.name = nikeName
+        userInfo.level = 2
+        
+        
+        let imgs : [String] = ["http://pic102.nipic.com/file/20160624/22734439_173946745000_2.jpg","http://img.52z.com/upload/news/image/20180212/20180212084623_32086.jpg","http://photo.tuchong.com/4067228/f/508035880.jpg"]
+        
+        let defaults = UserDefaults.standard
+        let typeStr : String =  defaults.string(forKey: "type") ?? "1"
+
+        let n : Int = Int(typeStr) ?? 1
+        
+        let str = imgs[n-1]
+        
+        
+        userInfo.iconUrl = str
+        
         chatMsg.user = try! userInfo.build()
         chatMsg.text = message
-        
         // 2.获取对应的data
         let chatData = (try! chatMsg.build()).data()
         
@@ -142,17 +161,17 @@ extension ZJSocket {
     
     func sendGiftMsg(giftName : String, giftURL : String, giftCount : String) {
         // 1.创建GiftMessage
-        let giftMsg = GiftMessage.Builder()
-        giftMsg.user = try! userInfo.build()
-        giftMsg.giftname = giftName
-        giftMsg.giftUrl = giftURL
-        giftMsg.giftCount = giftCount
-        
-        // 2.获取对应的data
-        let giftData = (try! giftMsg.build()).data()
-        
-        // 3.发送礼物消息
-        sendMsg(data: giftData, type: 3)
+//        let giftMsg = GiftMessage.Builder()
+//        giftMsg.user = try! userInfo.build()
+//        giftMsg.giftname = giftName
+//        giftMsg.giftUrl = giftURL
+//        giftMsg.giftCount = giftCount
+//
+//        // 2.获取对应的data
+//        let giftData = (try! giftMsg.build()).data()
+//
+//        // 3.发送礼物消息
+//        sendMsg(data: giftData, type: 3)
     }
     
     func sendHeartBeat() {
