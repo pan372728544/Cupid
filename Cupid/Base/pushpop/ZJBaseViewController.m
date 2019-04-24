@@ -28,15 +28,15 @@
 @implementation ZJBaseViewController
 
 
-//-(id)init
-//{
-//    if (self = [super init]) {
-//        _isOpenTransiton = YES;
-//    }
-//    
-//    
-//    return self;
-//}
+-(id)init
+{
+    if (self = [super init]) {
+        _isOpenTransiton = YES;
+    }
+
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
