@@ -12,6 +12,12 @@
 #import "CommonHeader.h"
 
 
+@protocol BaseViewControllerPangestureDelegate <NSObject>
+
+- (void) panGesture:(UIPanGestureRecognizer *)pan;
+
+@end
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign) PopAnimationType typeAnimation;
 
 
-
+@property(nonatomic,weak)id<BaseViewControllerPangestureDelegate> delegate;
 
 
 @end

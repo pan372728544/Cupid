@@ -662,6 +662,320 @@ final public class TextMessage : GeneratedMessage {
 
 }
 
+final public class GroupMessage : GeneratedMessage {
+    public typealias BuilderType = GroupMessage.Builder
+
+    public static func == (lhs: GroupMessage, rhs: GroupMessage) -> Bool {
+        if lhs === rhs {
+            return true
+        }
+        var fieldCheck:Bool = (lhs.hashValue == rhs.hashValue)
+        fieldCheck = fieldCheck && (lhs.hasUser == rhs.hasUser) && (!lhs.hasUser || lhs.user == rhs.user)
+        fieldCheck = fieldCheck && (lhs.hasText == rhs.hasText) && (!lhs.hasText || lhs.text == rhs.text)
+        fieldCheck = (fieldCheck && (lhs.unknownFields == rhs.unknownFields))
+        return fieldCheck
+    }
+
+    public fileprivate(set) var user:UserInfo!
+    public fileprivate(set) var hasUser:Bool = false
+    public fileprivate(set) var text:String! = nil
+    public fileprivate(set) var hasText:Bool = false
+
+    required public init() {
+        super.init()
+    }
+    override public func isInitialized() throws {
+        if !hasUser {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(GroupMessage.self): field \"user\" mark required")
+        }
+        if !hasText {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(GroupMessage.self): field \"text\" mark required")
+        }
+        try user.isInitialized()
+    }
+    override public func writeTo(codedOutputStream: CodedOutputStream) throws {
+        if hasUser {
+            try codedOutputStream.writeMessage(fieldNumber: 1, value:user)
+        }
+        if hasText {
+            try codedOutputStream.writeString(fieldNumber: 2, value:text)
+        }
+        try unknownFields.writeTo(codedOutputStream: codedOutputStream)
+    }
+    override public func serializedSize() -> Int32 {
+        var serialize_size:Int32 = memoizedSerializedSize
+        if serialize_size != -1 {
+         return serialize_size
+        }
+
+        serialize_size = 0
+        if hasUser {
+            if let varSizeuser = user?.computeMessageSize(fieldNumber: 1) {
+                serialize_size += varSizeuser
+            }
+        }
+        if hasText {
+            serialize_size += text.computeStringSize(fieldNumber: 2)
+        }
+        serialize_size += unknownFields.serializedSize()
+        memoizedSerializedSize = serialize_size
+        return serialize_size
+    }
+    public class func getBuilder() -> GroupMessage.Builder {
+        return GroupMessage.classBuilder() as! GroupMessage.Builder
+    }
+    public func getBuilder() -> GroupMessage.Builder {
+        return classBuilder() as! GroupMessage.Builder
+    }
+    override public class func classBuilder() -> ProtocolBuffersMessageBuilder {
+        return GroupMessage.Builder()
+    }
+    override public func classBuilder() -> ProtocolBuffersMessageBuilder {
+        return GroupMessage.Builder()
+    }
+    public func toBuilder() throws -> GroupMessage.Builder {
+        return try GroupMessage.builderWithPrototype(prototype:self)
+    }
+    public class func builderWithPrototype(prototype:GroupMessage) throws -> GroupMessage.Builder {
+        return try GroupMessage.Builder().mergeFrom(other:prototype)
+    }
+    override public func encode() throws -> Dictionary<String,Any> {
+        try isInitialized()
+        var jsonMap:Dictionary<String,Any> = Dictionary<String,Any>()
+        if hasUser {
+            jsonMap["user"] = try user.encode()
+        }
+        if hasText {
+            jsonMap["text"] = text
+        }
+        return jsonMap
+    }
+    override class public func decode(jsonMap:Dictionary<String,Any>) throws -> GroupMessage {
+        return try GroupMessage.Builder.decodeToBuilder(jsonMap:jsonMap).build()
+    }
+    override class public func fromJSON(data:Data, options: JSONSerialization.ReadingOptions = []) throws -> GroupMessage {
+        return try GroupMessage.Builder.fromJSONToBuilder(data:data, options:options).build()
+    }
+    override public func getDescription(indent:String) throws -> String {
+        var output = ""
+        if hasUser {
+            output += "\(indent) user {\n"
+            if let outDescUser = user {
+                output += try outDescUser.getDescription(indent: "\(indent)  ")
+            }
+            output += "\(indent) }\n"
+        }
+        if hasText {
+            output += "\(indent) text: \(String(describing: text)) \n"
+        }
+        output += unknownFields.getDescription(indent: indent)
+        return output
+    }
+    override public var hashValue:Int {
+        get {
+            var hashCode:Int = 7
+            if hasUser {
+                if let hashValueuser = user?.hashValue {
+                    hashCode = (hashCode &* 31) &+ hashValueuser
+                }
+            }
+            if hasText {
+                hashCode = (hashCode &* 31) &+ text.hashValue
+            }
+            hashCode = (hashCode &* 31) &+  unknownFields.hashValue
+            return hashCode
+        }
+    }
+
+
+    //Meta information declaration start
+
+    override public class func className() -> String {
+        return "GroupMessage"
+    }
+    override public func className() -> String {
+        return "GroupMessage"
+    }
+    //Meta information declaration end
+
+    final public class Builder : GeneratedMessageBuilder {
+        fileprivate var builderResult:GroupMessage = GroupMessage()
+        public func getMessage() -> GroupMessage {
+            return builderResult
+        }
+
+        required override public init () {
+            super.init()
+        }
+        public var user:UserInfo! {
+            get {
+                if userBuilder_ != nil {
+                    builderResult.user = userBuilder_.getMessage()
+                }
+                return builderResult.user
+            }
+            set (value) {
+                builderResult.hasUser = value != nil
+                builderResult.user = value
+            }
+        }
+        public var hasUser:Bool {
+            get {
+                return builderResult.hasUser
+            }
+        }
+        fileprivate var userBuilder_:UserInfo.Builder! {
+            didSet {
+                builderResult.hasUser = true
+            }
+        }
+        public func getUserBuilder() -> UserInfo.Builder {
+            if userBuilder_ == nil {
+                userBuilder_ = UserInfo.Builder()
+                builderResult.user = userBuilder_.getMessage()
+                if user != nil {
+                    try! userBuilder_.mergeFrom(other: user)
+                }
+            }
+            return userBuilder_
+        }
+        @discardableResult
+        public func setUser(_ value:UserInfo!) -> GroupMessage.Builder {
+            self.user = value
+            return self
+        }
+        @discardableResult
+        public func mergeUser(value:UserInfo) throws -> GroupMessage.Builder {
+            if builderResult.hasUser {
+                builderResult.user = try UserInfo.builderWithPrototype(prototype:builderResult.user).mergeFrom(other: value).buildPartial()
+            } else {
+                builderResult.user = value
+            }
+            builderResult.hasUser = true
+            return self
+        }
+        @discardableResult
+        public func clearUser() -> GroupMessage.Builder {
+            userBuilder_ = nil
+            builderResult.hasUser = false
+            builderResult.user = nil
+            return self
+        }
+        public var text:String {
+            get {
+                return builderResult.text
+            }
+            set (value) {
+                builderResult.hasText = true
+                builderResult.text = value
+            }
+        }
+        public var hasText:Bool {
+            get {
+                return builderResult.hasText
+            }
+        }
+        @discardableResult
+        public func setText(_ value:String) -> GroupMessage.Builder {
+            self.text = value
+            return self
+        }
+        @discardableResult
+        public func clearText() -> GroupMessage.Builder{
+            builderResult.hasText = false
+            builderResult.text = nil
+            return self
+        }
+        override public var internalGetResult:GeneratedMessage {
+            get {
+                return builderResult
+            }
+        }
+        @discardableResult
+        override public func clear() -> GroupMessage.Builder {
+            builderResult = GroupMessage()
+            return self
+        }
+        override public func clone() throws -> GroupMessage.Builder {
+            return try GroupMessage.builderWithPrototype(prototype:builderResult)
+        }
+        override public func build() throws -> GroupMessage {
+            try checkInitialized()
+            return buildPartial()
+        }
+        public func buildPartial() -> GroupMessage {
+            let returnMe:GroupMessage = builderResult
+            return returnMe
+        }
+        @discardableResult
+        public func mergeFrom(other:GroupMessage) throws -> GroupMessage.Builder {
+            if other == GroupMessage() {
+                return self
+            }
+            if (other.hasUser) {
+                try mergeUser(value: other.user)
+            }
+            if other.hasText {
+                text = other.text
+            }
+            try merge(unknownField: other.unknownFields)
+            return self
+        }
+        @discardableResult
+        override public func mergeFrom(codedInputStream: CodedInputStream) throws -> GroupMessage.Builder {
+            return try mergeFrom(codedInputStream: codedInputStream, extensionRegistry:ExtensionRegistry())
+        }
+        @discardableResult
+        override public func mergeFrom(codedInputStream: CodedInputStream, extensionRegistry:ExtensionRegistry) throws -> GroupMessage.Builder {
+            let unknownFieldsBuilder:UnknownFieldSet.Builder = try UnknownFieldSet.builderWithUnknownFields(copyFrom:self.unknownFields)
+            while (true) {
+                let protobufTag = try codedInputStream.readTag()
+                switch protobufTag {
+                case 0: 
+                    self.unknownFields = try unknownFieldsBuilder.build()
+                    return self
+
+                case 10:
+                    let subBuilder:UserInfo.Builder = UserInfo.Builder()
+                    if hasUser {
+                        try subBuilder.mergeFrom(other: user)
+                    }
+                    try codedInputStream.readMessage(builder: subBuilder, extensionRegistry:extensionRegistry)
+                    user = subBuilder.buildPartial()
+
+                case 18:
+                    text = try codedInputStream.readString()
+
+                default:
+                    if (!(try parse(codedInputStream:codedInputStream, unknownFields:unknownFieldsBuilder, extensionRegistry:extensionRegistry, tag:protobufTag))) {
+                        unknownFields = try unknownFieldsBuilder.build()
+                        return self
+                    }
+                }
+            }
+        }
+        class override public func decodeToBuilder(jsonMap:Dictionary<String,Any>) throws -> GroupMessage.Builder {
+            let resultDecodedBuilder = GroupMessage.Builder()
+            if let jsonValueUser = jsonMap["user"] as? Dictionary<String,Any> {
+                resultDecodedBuilder.user = try UserInfo.Builder.decodeToBuilder(jsonMap:jsonValueUser).build()
+
+            }
+            if let jsonValueText = jsonMap["text"] as? String {
+                resultDecodedBuilder.text = jsonValueText
+            }
+            return resultDecodedBuilder
+        }
+        override class public func fromJSONToBuilder(data:Data, options: JSONSerialization.ReadingOptions = []) throws -> GroupMessage.Builder {
+            let jsonData = try JSONSerialization.jsonObject(with:data, options: options)
+            guard let jsDataCast = jsonData as? Dictionary<String,Any> else {
+              throw ProtocolBuffersError.invalidProtocolBuffer("Invalid JSON data")
+            }
+            return try GroupMessage.Builder.decodeToBuilder(jsonMap:jsDataCast)
+        }
+    }
+
+}
+
 final public class GiftMessage : GeneratedMessage {
     public typealias BuilderType = GiftMessage.Builder
 
@@ -1198,6 +1512,70 @@ extension TextMessage: GeneratedMessageProtocol {
 }
 extension TextMessage.Builder: GeneratedMessageBuilderProtocol {
     public typealias GeneratedMessageType = TextMessage
+    public subscript(key: String) -> Any? {
+        get { 
+            switch key {
+            case "user": return self.user
+            case "text": return self.text
+            default: return nil
+            }
+        }
+        set (newSubscriptValue) { 
+            switch key {
+            case "user":
+                guard let newSubscriptValue = newSubscriptValue as? UserInfo else {
+                    return
+                }
+                self.user = newSubscriptValue
+            case "text":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.text = newSubscriptValue
+            default: return
+            }
+        }
+    }
+}
+extension GroupMessage: GeneratedMessageProtocol {
+    public class func parseArrayDelimitedFrom(inputStream: InputStream) throws -> Array<GroupMessage> {
+        var mergedArray = Array<GroupMessage>()
+        while let value = try parseDelimitedFrom(inputStream: inputStream) {
+          mergedArray.append(value)
+        }
+        return mergedArray
+    }
+    public class func parseDelimitedFrom(inputStream: InputStream) throws -> GroupMessage? {
+        return try GroupMessage.Builder().mergeDelimitedFrom(inputStream: inputStream)?.build()
+    }
+    public class func parseFrom(data: Data) throws -> GroupMessage {
+        return try GroupMessage.Builder().mergeFrom(data: data, extensionRegistry:ImmessageRoot.default.extensionRegistry).build()
+    }
+    public class func parseFrom(data: Data, extensionRegistry:ExtensionRegistry) throws -> GroupMessage {
+        return try GroupMessage.Builder().mergeFrom(data: data, extensionRegistry:extensionRegistry).build()
+    }
+    public class func parseFrom(inputStream: InputStream) throws -> GroupMessage {
+        return try GroupMessage.Builder().mergeFrom(inputStream: inputStream).build()
+    }
+    public class func parseFrom(inputStream: InputStream, extensionRegistry:ExtensionRegistry) throws -> GroupMessage {
+        return try GroupMessage.Builder().mergeFrom(inputStream: inputStream, extensionRegistry:extensionRegistry).build()
+    }
+    public class func parseFrom(codedInputStream: CodedInputStream) throws -> GroupMessage {
+        return try GroupMessage.Builder().mergeFrom(codedInputStream: codedInputStream).build()
+    }
+    public class func parseFrom(codedInputStream: CodedInputStream, extensionRegistry:ExtensionRegistry) throws -> GroupMessage {
+        return try GroupMessage.Builder().mergeFrom(codedInputStream: codedInputStream, extensionRegistry:extensionRegistry).build()
+    }
+    public subscript(key: String) -> Any? {
+        switch key {
+        case "user": return self.user
+        case "text": return self.text
+        default: return nil
+        }
+    }
+}
+extension GroupMessage.Builder: GeneratedMessageBuilderProtocol {
+    public typealias GeneratedMessageType = GroupMessage
     public subscript(key: String) -> Any? {
         get { 
             switch key {

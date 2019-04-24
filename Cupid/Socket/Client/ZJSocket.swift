@@ -14,10 +14,11 @@ protocol ZJSocketDelegate : class {
     func socket(_ socket : ZJSocket, leaveRoom user : UserInfo)
     func socket(_ socket : ZJSocket, chatMsg : TextMessage)
     func socket(_ socket : ZJSocket, giftMsg : GiftMessage)
+    func socket(_ socket : ZJSocket, groupMsg : GroupMessage)
 }
 
 
-class ZJSocket {
+class ZJSocket : NSObject{
     
     weak var delegate : ZJSocketDelegate?
     
@@ -30,6 +31,9 @@ class ZJSocket {
 //        userInfo.iconUrl = "http://img.52z.com/upload/news/image/20180212/20180212084623_32086.jpg"
 //        return userInfo
 //    }()
+    
+    
+    let imgs : [String] = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091375677&di=b77ddcda0fdcb6e4062b63c2e349cd09&imgtype=0&src=http%3A%2F%2Fimg.storage.17wanba.org.cn%2Fgame%2F2016%2F05%2F10%2Fd729d853b0519256f9c6189e6f9eb457.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091346923&di=94a030de1baced5369065862835fad23&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F010b0d5541ef6c000001714a5ae2e9.jpg%402o.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091569946&di=e9d9569824014cb2733c8ceb10c19ad4&imgtype=0&src=http%3A%2F%2Fimg.7xz.com%2Fimg%2Fpicimg%2F201607%2F20160728163406_389ae972b1283f76160.jpg","http://img.qqzhi.com/upload/img_1_3452678024D953860635_23.jpg"]
     
     init(addr: String, port : Int32) {
         // 创建TCP
@@ -103,6 +107,10 @@ extension ZJSocket {
         case 3:
             let giftMsg = try! GiftMessage.parseFrom(data: data)
             delegate?.socket(self, giftMsg: giftMsg)
+            
+        case 10:
+            let group = try! GroupMessage.parseFrom(data: data)
+            delegate?.socket(self, groupMsg: group)
         default:
             print("未知类型")
         }
@@ -127,23 +135,27 @@ extension ZJSocket {
 //        sendMsg(data: msgData, type: 1)
     }
     
-    func sendTextMsg(message : String ,nikeName : String) {
-        // 1.创建TextMessage类型
-        let chatMsg = TextMessage.Builder()
-//        chatMsg.user = try! userInfo.build()
-//        chatMsg.text = message
-        
-        let userInfo = UserInfo.Builder()
-        userInfo.name = nikeName
-        userInfo.level = 2
-        
-        
-        let imgs : [String] = ["http://pic102.nipic.com/file/20160624/22734439_173946745000_2.jpg","http://img.52z.com/upload/news/image/20180212/20180212084623_32086.jpg","http://photo.tuchong.com/4067228/f/508035880.jpg"]
+    func sendTextMsg(message : String ) {
         
         let defaults = UserDefaults.standard
-        let typeStr : String =  defaults.string(forKey: "type") ?? "1"
+        // 获取用户名和id
+        let name = defaults.string(forKey: NICKNAME)
+        
+        let userId : String = String(name!.suffix(1))
 
-        let n : Int = Int(typeStr) ?? 1
+        let chatMsg = TextMessage.Builder()
+        
+        let userInfo = UserInfo.Builder()
+        
+        let Coun = name!.count
+    
+        userInfo.name = String(name!.prefix(Coun-4) )
+
+        
+        userInfo.level = Int64(userId)!
+
+
+        let n : Int = Int(userId)!
         
         let str = imgs[n-1]
         
@@ -157,6 +169,39 @@ extension ZJSocket {
         
         // 3.发送消息到服务器
         sendMsg(data: chatData, type: 2)
+    }
+    
+    // 获取聊天列表
+    func sendGroupMsg() {
+        
+        for  i in 0...3 {
+            
+            // 群组信息
+            let chatMsg = GroupMessage.Builder()
+            
+            let userInfo = UserInfo.Builder()
+            
+            let names = ["齐天大圣-001","BAYMAX-002","钢铁侠-003","群聊天555555-004"]
+            
+            let texts = ["如来在哪里？","你看起来很健康。","我没有电了！！！","大家都来这里，这里有好东西！"]
+            
+            let Coun = names[i].count - 4
+            
+            userInfo.name = String(names[i].prefix(Coun))
+            userInfo.level = Int64(i)
+
+            
+            userInfo.iconUrl = imgs[i]
+            
+            chatMsg.user = try! userInfo.build()
+            chatMsg.text = texts[i]
+            
+            // 2.获取对应的data
+            let chatData = (try! chatMsg.build()).data()
+            
+            sendMsg(data: chatData, type: 10)
+        }
+
     }
     
     func sendGiftMsg(giftName : String, giftURL : String, giftCount : String) {

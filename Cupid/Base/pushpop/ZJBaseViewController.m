@@ -28,15 +28,15 @@
 @implementation ZJBaseViewController
 
 
--(id)init
-{
-    if (self = [super init]) {
-        _isOpenTransiton = YES;
-    }
-    
-    
-    return self;
-}
+//-(id)init
+//{
+//    if (self = [super init]) {
+//        _isOpenTransiton = YES;
+//    }
+//    
+//    
+//    return self;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,9 +46,10 @@
     self.view.userInteractionEnabled = YES;
     // 添加手势
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(customControllerPopHandle:)];
-    [self.navigationController.view addGestureRecognizer:panGesture];
+    [self.view addGestureRecognizer:panGesture];
     panGesture.delegate = self;
-    
+    self.navigationController.interactivePopGestureRecognizer.enabled = false;
+
     self.popAnimation = [[ZJBasePopAnimation alloc]init];
 
     
@@ -108,6 +109,10 @@
         return;
     }
     
+    // 执行delegate
+    if (self.delegate && [self.delegate respondsToSelector:@selector(panGesture:)]) {
+        [self.delegate panGesture:recognizer];
+    }
     // _interactiveTransition就是代理方法2返回的交互对象，我们需要更新它的进度来控制POP动画的流程。（以手指在视图中的位置与屏幕宽度的比例作为进度）
     CGFloat process =fabs( [recognizer translationInView:self.navigationController.view].x/self.view.bounds.size.width);
 //    NSLog(@"%f===== %f",[recognizer translationInView:self.view].x,process);

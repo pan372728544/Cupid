@@ -12,9 +12,12 @@
 #import "VideoDetailViewController.h"
 #import "Cupid-Swift.h"
 #import "LoginViewController.h"
+#import "SelectAccountViewController.h"
+
+
 @interface SecondViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong) ServerManager *serM;
+@property(nonatomic,strong) ZJSocket *socket;
 @end
 
 @implementation SecondViewController
@@ -23,6 +26,12 @@
     [super viewDidLoad];
     self.view.backgroundColor= [UIColor whiteColor];
     // Do any additional setup after loading the view.
+//    zjsco
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *name = [defaults objectForKey:NICKNAME];
+
     [self initNavView];
     
     
@@ -35,19 +44,60 @@
     
     self.typeAnimation = PopAnimationTypeOther;
     
+    if (name && name.length >0) {
+       
+        
+    } else {
+        
+        
+        SelectAccountViewController *vc =   [SelectAccountViewController new];
+        vc.completedBlock = ^{
+          
+            [self.tableView reloadData];
+        };
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
+    }
+    
+    
+   
+    
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
 
+-(void)connectSer{
+//    if socket.connectServer().isSuccess {
+//        print("连接成功")
+//        socket.delegate = self
+//
+//        socket.startReadMsg()
+//    }
+//    self.socket
+//    self.socket con
+//    if () {
+//        <#statements#>
+//    }
+}
 
 -(void)initNavView
 {
     [self createNavBarViewWithTitle:@"IM"];
+    [self createNavRightBtnWithItem:@"退出登录" target:self action:@selector(logOut)];
     self.superNavBarView.backgroundColor = COLOR_COMMONRED;
     
 }
 
 
+-(void)logOut
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:NICKNAME];
+}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -74,18 +124,21 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-
-    LoginViewController *vc =   [LoginViewController new];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *nickName = [defaults objectForKey:NICKNAME];
     
-    vc.block = ^(NSString * _Nonnull nickName, NSString * _Nonnull type) {
+    if (nickName && nickName.length > 0) {
         IMChatViewController *chat = [[IMChatViewController alloc]init];
-        [chat setNickNameWithStr:nickName type:type];
         [self.navigationController pushViewController:chat animated:YES];
-    };
-    
+    } else {
+        SelectAccountViewController *vc =   [SelectAccountViewController new];
+        vc.completedBlock = ^{
+            
+            [self.tableView reloadData];
+        };
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
+    }
 
-    [self.navigationController presentViewController:vc animated:YES completion:nil];
 }
 
 @end

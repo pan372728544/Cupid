@@ -197,6 +197,16 @@
 		38C20A8B21EED136007C4CB7 /* ResultSearchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C20A8A21EED136007C4CB7 /* ResultSearchDetailViewController.m */; };
 		38C20A8F21EF07CF007C4CB7 /* ResultTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C20A8E21EF07CF007C4CB7 /* ResultTopView.m */; };
 		38C3009F226DA1AD007A537F /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C3009E226DA1AD007A537F /* ChatTableViewCell.swift */; };
+		38C300A1226EAE61007A537F /* ChatTableViewMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C300A0226EAE61007A537F /* ChatTableViewMeCell.swift */; };
+		38C300A3226FF111007A537F /* ChatInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C300A2226FF111007A537F /* ChatInputTextField.swift */; };
+		38C300AC2270151D007A537F /* SelectAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C300AB2270151D007A537F /* SelectAccountViewController.m */; };
+		38C300B022702C54007A537F /* 2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 38C300AD22702C54007A537F /* 2.jpeg */; };
+		38C300B122702C54007A537F /* 3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 38C300AE22702C54007A537F /* 3.jpeg */; };
+		38C300B222702C54007A537F /* 1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 38C300AF22702C54007A537F /* 1.jpeg */; };
+		38C300B52270318C007A537F /* CommonExtern.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C300B42270318C007A537F /* CommonExtern.m */; };
+		38C300B922703862007A537F /* TabChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C300B822703862007A537F /* TabChatViewController.swift */; };
+		38C300BB22703B8D007A537F /* TabChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C300BA22703B8D007A537F /* TabChatTableViewCell.swift */; };
+		38CC1D6B22707FAB00DD22D5 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CC1D6A22707FAB00DD22D5 /* TestViewController.swift */; };
 		38FF1E5421F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */; };
 		38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */; };
 		38FF1EDE21FADEF500A3CA7F /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1EDD21FADEF500A3CA7F /* VideoDetailViewController.m */; };
@@ -478,6 +488,18 @@
 		38C20A8D21EF07CF007C4CB7 /* ResultTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultTopView.h; sourceTree = "<group>"; };
 		38C20A8E21EF07CF007C4CB7 /* ResultTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultTopView.m; sourceTree = "<group>"; };
 		38C3009E226DA1AD007A537F /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		38C300A0226EAE61007A537F /* ChatTableViewMeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewMeCell.swift; sourceTree = "<group>"; };
+		38C300A2226FF111007A537F /* ChatInputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputTextField.swift; sourceTree = "<group>"; };
+		38C300AA2270151D007A537F /* SelectAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectAccountViewController.h; sourceTree = "<group>"; };
+		38C300AB2270151D007A537F /* SelectAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectAccountViewController.m; sourceTree = "<group>"; };
+		38C300AD22702C54007A537F /* 2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpeg; sourceTree = "<group>"; };
+		38C300AE22702C54007A537F /* 3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpeg; sourceTree = "<group>"; };
+		38C300AF22702C54007A537F /* 1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpeg; sourceTree = "<group>"; };
+		38C300B32270318C007A537F /* CommonExtern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonExtern.h; sourceTree = "<group>"; };
+		38C300B42270318C007A537F /* CommonExtern.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonExtern.m; sourceTree = "<group>"; };
+		38C300B822703862007A537F /* TabChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabChatViewController.swift; sourceTree = "<group>"; };
+		38C300BA22703B8D007A537F /* TabChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabChatTableViewCell.swift; sourceTree = "<group>"; };
+		38CC1D6A22707FAB00DD22D5 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WKWebVIew.m"; sourceTree = "<group>"; };
 		38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HybridNSURLProtocol.m; sourceTree = "<group>"; };
 		38FF1E5221F9C81200A3CA7F /* HybridNSURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HybridNSURLProtocol.h; sourceTree = "<group>"; };
@@ -585,6 +607,8 @@
 				38717AC5225366320020955F /* CardDemoViewController.m */,
 				38C20A4621ED7A06007C4CB7 /* PrefixHeader.pch */,
 				38C20A8C21EEE4C9007C4CB7 /* CommonHeader.h */,
+				38C300B32270318C007A537F /* CommonExtern.h */,
+				38C300B42270318C007A537F /* CommonExtern.m */,
 				380101E621E35CEA00D5F7D2 /* MyView.h */,
 				380101E721E35CEA00D5F7D2 /* MyView.m */,
 				3801018621DE175500D5F7D2 /* ViewController.h */,
@@ -611,6 +635,8 @@
 				38FF1EDD21FADEF500A3CA7F /* VideoDetailViewController.m */,
 				3837E7502230C3BB0094D2EA /* LoginViewController.h */,
 				3837E7512230C3BB0094D2EA /* LoginViewController.m */,
+				38C300AA2270151D007A537F /* SelectAccountViewController.h */,
+				38C300AB2270151D007A537F /* SelectAccountViewController.m */,
 				380101A821DF0AFD00D5F7D2 /* ThirdViewController.h */,
 				380101A921DF0AFD00D5F7D2 /* ThirdViewController.m */,
 				380101AB21DF0B2A00D5F7D2 /* FourthViewController.h */,
@@ -627,7 +653,9 @@
 			children = (
 				38C3009D226DA198007A537F /* cell */,
 				381DCDC722699AAF00EC34F3 /* IMChatViewController.swift */,
+				38C300B822703862007A537F /* TabChatViewController.swift */,
 				381DCDC92269A03700EC34F3 /* IMStatusViewController.swift */,
+				38CC1D6A22707FAB00DD22D5 /* TestViewController.swift */,
 			);
 			path = vc;
 			sourceTree = "<group>";
@@ -805,6 +833,9 @@
 		386392E921E8709F00A834EE /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				38C300AF22702C54007A537F /* 1.jpeg */,
+				38C300AD22702C54007A537F /* 2.jpeg */,
+				38C300AE22702C54007A537F /* 3.jpeg */,
 				3846989222648122001234F8 /* chatroom_video_night_28x28_@2x.png */,
 				3846989122648121001234F8 /* chatroom_video_night_28x28_@3x.png */,
 				3846988E22647FCA001234F8 /* finish_live_video_32x24_@2x.png */,
@@ -965,6 +996,9 @@
 			isa = PBXGroup;
 			children = (
 				38C3009E226DA1AD007A537F /* ChatTableViewCell.swift */,
+				38C300A0226EAE61007A537F /* ChatTableViewMeCell.swift */,
+				38C300A2226FF111007A537F /* ChatInputTextField.swift */,
+				38C300BA22703B8D007A537F /* TabChatTableViewCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1241,6 +1275,7 @@
 				3863934921E8733100A834EE /* video_tabbar_night_32x32_@2x.png in Resources */,
 				38C20A8821EDE4C8007C4CB7 /* back_24x24_@3x.png in Resources */,
 				38C20A4321ED78E0007C4CB7 /* search_icon_20x20_@2x.png in Resources */,
+				38C300B122702C54007A537F /* 3.jpeg in Resources */,
 				38C20A4521ED78E0007C4CB7 /* searchbox_search_press_20x28_@3x.png in Resources */,
 				3801019021DE175600D5F7D2 /* LaunchScreen.storyboard in Resources */,
 				3863932C21E872F600A834EE /* no_login_tabbar_night_33x32_@2x.png in Resources */,
@@ -1250,12 +1285,14 @@
 				3863930A21E8729B00A834EE /* home_tabbar_press_night_32x32_@2x.png in Resources */,
 				3863931821E872C000A834EE /* huoshan_tabbar_press_32x32_@2x.png in Resources */,
 				38C20A0921EC81AA007C4CB7 /* tsv_close_popup_textpage_24x24_@2x.png in Resources */,
+				38C300B222702C54007A537F /* 1.jpeg in Resources */,
 				3846989022647FCA001234F8 /* finish_live_video_32x24_@2x.png in Resources */,
 				38AC1A3821F1B6DC001D491B /* lefterbackicon_titlebar_night_24x24_@2x.png in Resources */,
 				3863936221E8A6F500A834EE /* tabbar_publish_question_34x34_@3x.png in Resources */,
 				3863934821E8733100A834EE /* video_tabbar_press_night_32x32_@3x.png in Resources */,
 				386392EE21E870F100A834EE /* add_channel_titlbar_thin_new_night_24x24_@2x.png in Resources */,
 				38C20A4421ED78E0007C4CB7 /* search_icon_20x20_@3x.png in Resources */,
+				38C300B022702C54007A537F /* 2.jpeg in Resources */,
 				3863931921E872C000A834EE /* huoshan_tabbar_press_32x32_@3x.png in Resources */,
 				38C20A0821EC81AA007C4CB7 /* tsv_close_popup_textpage_24x24_@3x.png in Resources */,
 				3846989422648122001234F8 /* chatroom_video_night_28x28_@2x.png in Resources */,
@@ -1421,6 +1458,7 @@
 				38FF1FBA22019CB100A3CA7F /* ZJPhotoView.m in Sources */,
 				38636BBE21E6067E00A834EE /* HomeDisplayViewController.m in Sources */,
 				38636C0221E733AE00A834EE /* ZJCacheManager.m in Sources */,
+				38C300B52270318C007A537F /* CommonExtern.m in Sources */,
 				38717AD32254BE910020955F /* Const.swift in Sources */,
 				38636BB221E5F88100A834EE /* HomeTopBarView.m in Sources */,
 				380101B721DF5D8400D5F7D2 /* ZJNavgationBarView.m in Sources */,
@@ -1466,6 +1504,7 @@
 				381DCDB62269754F00EC34F3 /* IMMessage.proto in Sources */,
 				38636BFF21E733AE00A834EE /* ZJLRUManager.m in Sources */,
 				380101AA21DF0AFD00D5F7D2 /* ThirdViewController.m in Sources */,
+				38C300B922703862007A537F /* TabChatViewController.swift in Sources */,
 				380101AD21DF0B2A00D5F7D2 /* FourthViewController.m in Sources */,
 				381DCDBF226994AD00EC34F3 /* ClientManager.swift in Sources */,
 				380101A121DE195000D5F7D2 /* ZJBaseViewController.m in Sources */,
@@ -1479,10 +1518,12 @@
 				3837E7522230C3BB0094D2EA /* LoginViewController.m in Sources */,
 				38FF1FB522019CB100A3CA7F /* ZJPhotoBrowser.m in Sources */,
 				38717ADB2255B1D90020955F /* UIColor-Extension.swift in Sources */,
+				38C300A3226FF111007A537F /* ChatInputTextField.swift in Sources */,
 				38717AE12255E7080020955F /* ZJPageView.swift in Sources */,
 				3801018521DE175500D5F7D2 /* AppDelegate.m in Sources */,
 				38FF1EDE21FADEF500A3CA7F /* VideoDetailViewController.m in Sources */,
 				380101E821E35CEA00D5F7D2 /* MyView.m in Sources */,
+				38C300BB22703B8D007A537F /* TabChatTableViewCell.swift in Sources */,
 				38636BAF21E5F7D700A834EE /* HomeContentViewController.m in Sources */,
 				38C20A1021EC8D1D007C4CB7 /* FeedWeiboTableViewCell.m in Sources */,
 				38636BEC21E6FAA700A834EE /* HomeDisplayTitleLabel.m in Sources */,
@@ -1490,8 +1531,10 @@
 				38FF1F0F21FF127500A3CA7F /* ChannelCollectionView.m in Sources */,
 				38717AF62255F91B0020955F /* PlayViewController.swift in Sources */,
 				38636C1721E8428000A834EE /* FeedNormalTableViewCell.m in Sources */,
+				38C300AC2270151D007A537F /* SelectAccountViewController.m in Sources */,
 				38717ADF2255D2E60020955F /* ZJTitleStyle.swift in Sources */,
 				38717AD72255A9CB0020955F /* VideoViewController.swift in Sources */,
+				38CC1D6B22707FAB00DD22D5 /* TestViewController.swift in Sources */,
 				38C20A8B21EED136007C4CB7 /* ResultSearchDetailViewController.m in Sources */,
 				3863936B21E8ABE900A834EE /* PublishViewController.m in Sources */,
 				38717AF32255F8BD0020955F /* WaterfallLayout.swift in Sources */,
@@ -1504,6 +1547,7 @@
 				38636C0521E73E5A00A834EE /* HomeCategoryAddView.m in Sources */,
 				38C20A8021EDD97D007C4CB7 /* SearchBarView.m in Sources */,
 				38AC1A3121F17F6B001D491B /* ArtileInfomationModel.m in Sources */,
+				38C300A1226EAE61007A537F /* ChatTableViewMeCell.swift in Sources */,
 				38FF1EEB21FEAC7C00A3CA7F /* ZJBasePresentViewController.m in Sources */,
 				381DCDBD22697DB100EC34F3 /* ServerManager.swift in Sources */,
 				38717AC0225364C00020955F /* GMCCardAnimationView.m in Sources */,

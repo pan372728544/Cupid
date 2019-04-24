@@ -30,6 +30,7 @@
 #import "MBProgressHUD+Extension.h"
 #import "ZJBasePresentViewController.h"
 #import "Cupid-Swift.h"
+#import "CommonExtern.h"
 
 #endif
 

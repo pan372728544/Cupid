@@ -45,7 +45,7 @@
         HomeViewController * homeVC = [HomeViewController new];
         
         // IM
-        SecondViewController * secondVC = [SecondViewController new];
+        TabChatViewController * secondVC = [TabChatViewController new];
         
         // 小视频
         VideoViewController * thirdVC = [VideoViewController new];
@@ -99,7 +99,7 @@
         
         config.normalImages = @[@"home_tabbar_night_32x32_",@"video_tabbar_night_32x32_",@"huoshan_tabbar_night_32x32_",@"no_login_tabbar_night_33x32_"];
         config.selectedImages = @[@"home_tabbar_press_32x32_", @"video_tabbar_press_32x32_", @"huoshan_tabbar_press_32x32_",@"no_login_tabbar_press_33x32_"];
-        config.titles = @[@"首页",@"西瓜视频",@"小视频",@"未登录"];
+        config.titles = @[@"首页",@"聊天",@"小视频",@"未登录"];
         
         config.isNavigation = NO;
         return config;

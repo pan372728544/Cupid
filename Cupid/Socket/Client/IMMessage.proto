@@ -11,6 +11,11 @@ message TextMessage {
     required string text = 2;
 }
 
+message GroupMessage {
+    required UserInfo user = 1;
+    required string text = 2;
+}
+
 message GiftMessage {
     required UserInfo user = 1;
     required string giftname = 2;

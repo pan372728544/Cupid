@@ -75,4 +75,5 @@ alpha:1.0]
 
 #define SearchBar_H (38)       /// 左右Button的高度
 
+
 #endif /* ZJCommonMacro_h */
