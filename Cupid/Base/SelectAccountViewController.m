@@ -73,7 +73,7 @@
 
     UIImageView *imgV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, SCREEN_W-20, 180)];
     
-    [imgV sd_setImageWithURL:[NSURL URLWithString:self.maryIMg[indexPath.row]]];
+//    [imgV sd_setImageWithURL:[NSURL URLWithString:self.maryIMg[indexPath.row]]];
     [cell.contentView addSubview:imgV];
     
     

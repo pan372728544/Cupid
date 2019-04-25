@@ -51,6 +51,14 @@ extension ZJSocket {
         return tcpClient.connect(timeout: 5)
     }
     
+    
+    // 连接服务器
+    func closeServer() {
+        
+        return tcpClient.close()
+    }
+    
+    
     // 读取消息
     func startReadMsg()  {
         // 开启线程读取消息
@@ -135,7 +143,7 @@ extension ZJSocket {
 //        sendMsg(data: msgData, type: 1)
     }
     
-    func sendTextMsg(message : String ) {
+    func sendTextMsg(message : String, group : GroupMessage) {
         
         let defaults = UserDefaults.standard
         // 获取用户名和id
@@ -149,9 +157,10 @@ extension ZJSocket {
         
         let Coun = name!.count
     
+        // 用户名
         userInfo.name = String(name!.prefix(Coun-4) )
 
-        
+        // 用户
         userInfo.level = Int64(userId)!
 
 
@@ -159,11 +168,12 @@ extension ZJSocket {
         
         let str = imgs[n-1]
         
-        
+        // 头
         userInfo.iconUrl = str
         
         chatMsg.user = try! userInfo.build()
         chatMsg.text = message
+        chatMsg.chatId = String(group.groupId)
         // 2.获取对应的data
         let chatData = (try! chatMsg.build()).data()
         
@@ -174,16 +184,26 @@ extension ZJSocket {
     // 获取聊天列表
     func sendGroupMsg() {
         
-        for  i in 0...3 {
+        var names = ["齐天大圣-001","BAYMAX-002","钢铁侠-003","群聊天555555-004"]
+        
+        var texts = ["如来在哪里？","你看起来很健康。","我没有电了！！！","大家都来这里，这里有好东西！"]
+        
+        let defaults = UserDefaults.standard
+        // 获取用户名和id
+        let name = defaults.string(forKey: NICKNAME)
+        let userId : String = String(name!.suffix(1))
+        
+        names.remove(at: Int(userId)!-1)
+        texts.remove(at: Int(userId)!-1)
+        
+        for  i in 0...2 {
             
             // 群组信息
             let chatMsg = GroupMessage.Builder()
             
             let userInfo = UserInfo.Builder()
             
-            let names = ["齐天大圣-001","BAYMAX-002","钢铁侠-003","群聊天555555-004"]
-            
-            let texts = ["如来在哪里？","你看起来很健康。","我没有电了！！！","大家都来这里，这里有好东西！"]
+      
             
             let Coun = names[i].count - 4
             
@@ -195,6 +215,7 @@ extension ZJSocket {
             
             chatMsg.user = try! userInfo.build()
             chatMsg.text = texts[i]
+            chatMsg.groupId = Int64(names[i].suffix(3))! + 1000
             
             // 2.获取对应的data
             let chatData = (try! chatMsg.build()).data()

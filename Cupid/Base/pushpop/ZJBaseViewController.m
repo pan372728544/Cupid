@@ -33,7 +33,7 @@
     if (self = [super init]) {
         _isOpenTransiton = YES;
     }
-
+    
     
     return self;
 }

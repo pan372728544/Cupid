@@ -358,6 +358,7 @@ final public class TextMessage : GeneratedMessage {
         var fieldCheck:Bool = (lhs.hashValue == rhs.hashValue)
         fieldCheck = fieldCheck && (lhs.hasUser == rhs.hasUser) && (!lhs.hasUser || lhs.user == rhs.user)
         fieldCheck = fieldCheck && (lhs.hasText == rhs.hasText) && (!lhs.hasText || lhs.text == rhs.text)
+        fieldCheck = fieldCheck && (lhs.hasChatId == rhs.hasChatId) && (!lhs.hasChatId || lhs.chatId == rhs.chatId)
         fieldCheck = (fieldCheck && (lhs.unknownFields == rhs.unknownFields))
         return fieldCheck
     }
@@ -366,6 +367,9 @@ final public class TextMessage : GeneratedMessage {
     public fileprivate(set) var hasUser:Bool = false
     public fileprivate(set) var text:String! = nil
     public fileprivate(set) var hasText:Bool = false
+
+    public fileprivate(set) var chatId:String! = nil
+    public fileprivate(set) var hasChatId:Bool = false
 
     required public init() {
         super.init()
@@ -377,6 +381,9 @@ final public class TextMessage : GeneratedMessage {
         if !hasText {
             throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(TextMessage.self): field \"text\" mark required")
         }
+        if !hasChatId {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(TextMessage.self): field \"chatId\" mark required")
+        }
         try user.isInitialized()
     }
     override public func writeTo(codedOutputStream: CodedOutputStream) throws {
@@ -385,6 +392,9 @@ final public class TextMessage : GeneratedMessage {
         }
         if hasText {
             try codedOutputStream.writeString(fieldNumber: 2, value:text)
+        }
+        if hasChatId {
+            try codedOutputStream.writeString(fieldNumber: 3, value:chatId)
         }
         try unknownFields.writeTo(codedOutputStream: codedOutputStream)
     }
@@ -402,6 +412,9 @@ final public class TextMessage : GeneratedMessage {
         }
         if hasText {
             serialize_size += text.computeStringSize(fieldNumber: 2)
+        }
+        if hasChatId {
+            serialize_size += chatId.computeStringSize(fieldNumber: 3)
         }
         serialize_size += unknownFields.serializedSize()
         memoizedSerializedSize = serialize_size
@@ -434,6 +447,9 @@ final public class TextMessage : GeneratedMessage {
         if hasText {
             jsonMap["text"] = text
         }
+        if hasChatId {
+            jsonMap["chatId"] = chatId
+        }
         return jsonMap
     }
     override class public func decode(jsonMap:Dictionary<String,Any>) throws -> TextMessage {
@@ -454,6 +470,9 @@ final public class TextMessage : GeneratedMessage {
         if hasText {
             output += "\(indent) text: \(String(describing: text)) \n"
         }
+        if hasChatId {
+            output += "\(indent) chatId: \(String(describing: chatId)) \n"
+        }
         output += unknownFields.getDescription(indent: indent)
         return output
     }
@@ -467,6 +486,9 @@ final public class TextMessage : GeneratedMessage {
             }
             if hasText {
                 hashCode = (hashCode &* 31) &+ text.hashValue
+            }
+            if hasChatId {
+                hashCode = (hashCode &* 31) &+ chatId.hashValue
             }
             hashCode = (hashCode &* 31) &+  unknownFields.hashValue
             return hashCode
@@ -572,6 +594,31 @@ final public class TextMessage : GeneratedMessage {
             builderResult.text = nil
             return self
         }
+        public var chatId:String {
+            get {
+                return builderResult.chatId
+            }
+            set (value) {
+                builderResult.hasChatId = true
+                builderResult.chatId = value
+            }
+        }
+        public var hasChatId:Bool {
+            get {
+                return builderResult.hasChatId
+            }
+        }
+        @discardableResult
+        public func setChatId(_ value:String) -> TextMessage.Builder {
+            self.chatId = value
+            return self
+        }
+        @discardableResult
+        public func clearChatId() -> TextMessage.Builder{
+            builderResult.hasChatId = false
+            builderResult.chatId = nil
+            return self
+        }
         override public var internalGetResult:GeneratedMessage {
             get {
                 return builderResult
@@ -604,6 +651,9 @@ final public class TextMessage : GeneratedMessage {
             if other.hasText {
                 text = other.text
             }
+            if other.hasChatId {
+                chatId = other.chatId
+            }
             try merge(unknownField: other.unknownFields)
             return self
         }
@@ -632,6 +682,9 @@ final public class TextMessage : GeneratedMessage {
                 case 18:
                     text = try codedInputStream.readString()
 
+                case 26:
+                    chatId = try codedInputStream.readString()
+
                 default:
                     if (!(try parse(codedInputStream:codedInputStream, unknownFields:unknownFieldsBuilder, extensionRegistry:extensionRegistry, tag:protobufTag))) {
                         unknownFields = try unknownFieldsBuilder.build()
@@ -648,6 +701,9 @@ final public class TextMessage : GeneratedMessage {
             }
             if let jsonValueText = jsonMap["text"] as? String {
                 resultDecodedBuilder.text = jsonValueText
+            }
+            if let jsonValueChatId = jsonMap["chatId"] as? String {
+                resultDecodedBuilder.chatId = jsonValueChatId
             }
             return resultDecodedBuilder
         }
@@ -672,6 +728,7 @@ final public class GroupMessage : GeneratedMessage {
         var fieldCheck:Bool = (lhs.hashValue == rhs.hashValue)
         fieldCheck = fieldCheck && (lhs.hasUser == rhs.hasUser) && (!lhs.hasUser || lhs.user == rhs.user)
         fieldCheck = fieldCheck && (lhs.hasText == rhs.hasText) && (!lhs.hasText || lhs.text == rhs.text)
+        fieldCheck = fieldCheck && (lhs.hasGroupId == rhs.hasGroupId) && (!lhs.hasGroupId || lhs.groupId == rhs.groupId)
         fieldCheck = (fieldCheck && (lhs.unknownFields == rhs.unknownFields))
         return fieldCheck
     }
@@ -680,6 +737,9 @@ final public class GroupMessage : GeneratedMessage {
     public fileprivate(set) var hasUser:Bool = false
     public fileprivate(set) var text:String! = nil
     public fileprivate(set) var hasText:Bool = false
+
+    public fileprivate(set) var groupId:Int64! = nil
+    public fileprivate(set) var hasGroupId:Bool = false
 
     required public init() {
         super.init()
@@ -691,6 +751,9 @@ final public class GroupMessage : GeneratedMessage {
         if !hasText {
             throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(GroupMessage.self): field \"text\" mark required")
         }
+        if !hasGroupId {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(GroupMessage.self): field \"groupId\" mark required")
+        }
         try user.isInitialized()
     }
     override public func writeTo(codedOutputStream: CodedOutputStream) throws {
@@ -699,6 +762,9 @@ final public class GroupMessage : GeneratedMessage {
         }
         if hasText {
             try codedOutputStream.writeString(fieldNumber: 2, value:text)
+        }
+        if hasGroupId {
+            try codedOutputStream.writeInt64(fieldNumber: 3, value:groupId)
         }
         try unknownFields.writeTo(codedOutputStream: codedOutputStream)
     }
@@ -716,6 +782,9 @@ final public class GroupMessage : GeneratedMessage {
         }
         if hasText {
             serialize_size += text.computeStringSize(fieldNumber: 2)
+        }
+        if hasGroupId {
+            serialize_size += groupId.computeInt64Size(fieldNumber: 3)
         }
         serialize_size += unknownFields.serializedSize()
         memoizedSerializedSize = serialize_size
@@ -748,6 +817,9 @@ final public class GroupMessage : GeneratedMessage {
         if hasText {
             jsonMap["text"] = text
         }
+        if hasGroupId {
+            jsonMap["groupId"] = "\(groupId!)"
+        }
         return jsonMap
     }
     override class public func decode(jsonMap:Dictionary<String,Any>) throws -> GroupMessage {
@@ -768,6 +840,9 @@ final public class GroupMessage : GeneratedMessage {
         if hasText {
             output += "\(indent) text: \(String(describing: text)) \n"
         }
+        if hasGroupId {
+            output += "\(indent) groupId: \(String(describing: groupId)) \n"
+        }
         output += unknownFields.getDescription(indent: indent)
         return output
     }
@@ -781,6 +856,9 @@ final public class GroupMessage : GeneratedMessage {
             }
             if hasText {
                 hashCode = (hashCode &* 31) &+ text.hashValue
+            }
+            if hasGroupId {
+                hashCode = (hashCode &* 31) &+ groupId.hashValue
             }
             hashCode = (hashCode &* 31) &+  unknownFields.hashValue
             return hashCode
@@ -886,6 +964,31 @@ final public class GroupMessage : GeneratedMessage {
             builderResult.text = nil
             return self
         }
+        public var groupId:Int64 {
+            get {
+                return builderResult.groupId
+            }
+            set (value) {
+                builderResult.hasGroupId = true
+                builderResult.groupId = value
+            }
+        }
+        public var hasGroupId:Bool {
+            get {
+                return builderResult.hasGroupId
+            }
+        }
+        @discardableResult
+        public func setGroupId(_ value:Int64) -> GroupMessage.Builder {
+            self.groupId = value
+            return self
+        }
+        @discardableResult
+        public func clearGroupId() -> GroupMessage.Builder{
+            builderResult.hasGroupId = false
+            builderResult.groupId = nil
+            return self
+        }
         override public var internalGetResult:GeneratedMessage {
             get {
                 return builderResult
@@ -918,6 +1021,9 @@ final public class GroupMessage : GeneratedMessage {
             if other.hasText {
                 text = other.text
             }
+            if other.hasGroupId {
+                groupId = other.groupId
+            }
             try merge(unknownField: other.unknownFields)
             return self
         }
@@ -946,6 +1052,9 @@ final public class GroupMessage : GeneratedMessage {
                 case 18:
                     text = try codedInputStream.readString()
 
+                case 24:
+                    groupId = try codedInputStream.readInt64()
+
                 default:
                     if (!(try parse(codedInputStream:codedInputStream, unknownFields:unknownFieldsBuilder, extensionRegistry:extensionRegistry, tag:protobufTag))) {
                         unknownFields = try unknownFieldsBuilder.build()
@@ -962,6 +1071,11 @@ final public class GroupMessage : GeneratedMessage {
             }
             if let jsonValueText = jsonMap["text"] as? String {
                 resultDecodedBuilder.text = jsonValueText
+            }
+            if let jsonValueGroupId = jsonMap["groupId"] as? String {
+                resultDecodedBuilder.groupId = Int64(jsonValueGroupId)!
+            } else if let jsonValueGroupId = jsonMap["groupId"] as? Int {
+                resultDecodedBuilder.groupId = Int64(jsonValueGroupId)
             }
             return resultDecodedBuilder
         }
@@ -1506,6 +1620,7 @@ extension TextMessage: GeneratedMessageProtocol {
         switch key {
         case "user": return self.user
         case "text": return self.text
+        case "chatId": return self.chatId
         default: return nil
         }
     }
@@ -1517,6 +1632,7 @@ extension TextMessage.Builder: GeneratedMessageBuilderProtocol {
             switch key {
             case "user": return self.user
             case "text": return self.text
+            case "chatId": return self.chatId
             default: return nil
             }
         }
@@ -1532,6 +1648,11 @@ extension TextMessage.Builder: GeneratedMessageBuilderProtocol {
                     return
                 }
                 self.text = newSubscriptValue
+            case "chatId":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.chatId = newSubscriptValue
             default: return
             }
         }
@@ -1570,6 +1691,7 @@ extension GroupMessage: GeneratedMessageProtocol {
         switch key {
         case "user": return self.user
         case "text": return self.text
+        case "groupId": return self.groupId
         default: return nil
         }
     }
@@ -1581,6 +1703,7 @@ extension GroupMessage.Builder: GeneratedMessageBuilderProtocol {
             switch key {
             case "user": return self.user
             case "text": return self.text
+            case "groupId": return self.groupId
             default: return nil
             }
         }
@@ -1596,6 +1719,11 @@ extension GroupMessage.Builder: GeneratedMessageBuilderProtocol {
                     return
                 }
                 self.text = newSubscriptValue
+            case "groupId":
+                guard let newSubscriptValue = newSubscriptValue as? Int64 else {
+                    return
+                }
+                self.groupId = newSubscriptValue
             default: return
             }
         }

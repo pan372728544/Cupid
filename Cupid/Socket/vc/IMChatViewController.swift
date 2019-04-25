@@ -14,7 +14,9 @@ class IMChatViewController: ZJBaseViewController {
     fileprivate var viewBottom_Height : CGFloat =   60
     fileprivate var viewBottom_H : CGFloat =  Bottom_H + 60
     
-    fileprivate var titleNav : String
+    fileprivate var isScrolling : Bool = false
+    
+    fileprivate var  group : GroupMessage
     // 服务器地址
     fileprivate var socket : ZJSocket = ZJSocket(addr: "10.2.116.69", port: 7878)
     
@@ -63,7 +65,8 @@ class IMChatViewController: ZJBaseViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        self.createNavBarView(withTitle: titleNav)
+       
+        self.createNavBarView(withTitle:  self.group.user.name)
         self.createNavLeftBtn(withItem: "", target: self, action: #selector(backClick(button:)))
         self.setRightTitleColro(UIColor.black)
         self.delegate = self
@@ -81,8 +84,8 @@ class IMChatViewController: ZJBaseViewController {
     }
     
 
-    init(titleNav : String) {
-        self.titleNav = titleNav
+    init(group : GroupMessage) {
+        self.group  = group
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -113,6 +116,11 @@ extension IMChatViewController {
     
     //MARK:键盘通知相关操作
     @objc func keyBoardWillShow(_ notification:Notification){
+        
+        print("keyBoardWillShow")
+        if isScrolling {
+            return
+        }
         // 1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
         // 2. 获取键盘最终的Y值
@@ -128,6 +136,10 @@ extension IMChatViewController {
     }
     
     @objc func keyBoardWillHide(_ notification:Notification){
+                print("keyBoardWillHide")
+        if isScrolling {
+            return
+        }
         //1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
 
@@ -182,6 +194,12 @@ extension IMChatViewController {
 extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextFieldDelegate,BaseViewControllerPangestureDelegate {
     func panGesture(_ pan: UIPanGestureRecognizer!) {
 
+        
+        print("\(textField.isFirstResponder)")
+        
+//        textField.becomeFirstResponder()
+        self.view.becomeFirstResponder()
+        self.isScrolling = true
 //        print("\(pan.state)")
 ////        if pan.state == .began {
 ////            if textField.isFirstResponder {
@@ -317,7 +335,8 @@ extension IMChatViewController {
     
     @objc func sendClick()  {
         
-        socket.sendTextMsg(message: self.textField.text ?? "空的消息")
+//        socket.sendTextMsg(message: self.textField.text ?? "空的消息")
+        socket.sendTextMsg(message: self.textField.text ?? " ", group: group)
         self.textField.text = ""
     }
     

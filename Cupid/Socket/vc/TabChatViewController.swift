@@ -25,26 +25,21 @@ class TabChatViewController: ZJBaseViewController {
         return tableView
     }()
     
-    
+    fileprivate lazy var  name : String =  UserDefaults.standard.string(forKey: NICKNAME) ?? ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
        
-       let name : String =  UserDefaults.standard.string(forKey: NICKNAME) ?? ""
-    
-        if name == "" {
+        if UserDefaults.standard.string(forKey: NICKNAME) == nil {
             
-            let vc = SelectAccountViewController()
-            vc.completedBlock = {
-                
-                self.tableView.reloadData()
-            }
-            self.present(vc, animated: true, completion: nil)
+            popLoginView()
             
-        }        
+        } else {
+            connectServer()
+        }
         
-        connectServer()
+
     }
     
 
@@ -57,6 +52,7 @@ extension TabChatViewController {
     @objc func logOut (){
         
         UserDefaults.standard.removeObject(forKey: NICKNAME)
+//        self.socket.closeServer()
     }
 }
 
@@ -74,7 +70,17 @@ extension TabChatViewController {
     }
     
     func setupView()  {
-        self.createNavBarView(withTitle: "消息中心")
+        if (UserDefaults.standard.string(forKey: NICKNAME) != nil) {
+            let name = UserDefaults.standard.string(forKey: NICKNAME)
+            
+            let Coun = name!.count
+            
+            self.createNavBarView(withTitle: "欢迎-\( String(name!.prefix(Coun-4)))-归来")
+        }else
+        {
+            self.createNavBarView(withTitle: "消息中心")
+        }
+
         self.createNavRightBtn(withItem: "退出登录", target: self, action: #selector(logOut))
         self.superNavBarView.backgroundColor = UIColor.commonColor()
         
@@ -82,14 +88,35 @@ extension TabChatViewController {
     }
     
     func connectServer() {
-        if socket.connectServer().isSuccess {
-            print("连接成功")
-            socket.delegate = self
-            
-            socket.sendGroupMsg()
-            socket.startReadMsg()
-        }
         
+        DispatchQueue.global().async {
+            
+            if self.socket.connectServer().isSuccess {
+                print("连接成功")
+                DispatchQueue.main.async {
+                    self.socket.delegate = self
+                    
+                    self.socket.sendGroupMsg()
+                    self.socket.startReadMsg()
+                }
+             
+            }
+            
+        }
+    }
+    
+    func popLoginView()  {
+        let vc = SelectAccountViewController()
+        vc.completedBlock = {
+            self.connectServer()
+            let name = UserDefaults.standard.string(forKey: NICKNAME)
+            
+            let Coun = name!.count
+            
+            self.createNavBarView(withTitle: "欢迎-\( String(name!.prefix(Coun-4)))-归来")
+            self.tableView.reloadData()
+        }
+        self.present(vc, animated: true, completion: nil)
     }
    
 }
@@ -150,11 +177,17 @@ extension TabChatViewController : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //
-        let group = msgArray[indexPath.row]
-        
-        let chatVc = IMChatViewController(titleNav: group.user.name)
-        
-        self.navigationController?.pushViewController(chatVc, animated: true)
+        if UserDefaults.standard.string(forKey: NICKNAME) != nil  {
+            let group = msgArray[indexPath.row]
+            
+            let chatVc = IMChatViewController(group: group)
+            
+            self.navigationController?.pushViewController(chatVc, animated: true)
+        } else {
+            
+               popLoginView()
+        }
+
         
         
     }

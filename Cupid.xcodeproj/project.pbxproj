@@ -207,6 +207,10 @@
 		38C300B922703862007A537F /* TabChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C300B822703862007A537F /* TabChatViewController.swift */; };
 		38C300BB22703B8D007A537F /* TabChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C300BA22703B8D007A537F /* TabChatTableViewCell.swift */; };
 		38CC1D6B22707FAB00DD22D5 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CC1D6A22707FAB00DD22D5 /* TestViewController.swift */; };
+		38CC1DB922718C6C00DD22D5 /* sendchat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38CC1DB722718C6B00DD22D5 /* sendchat@2x.png */; };
+		38CC1DBA22718C6C00DD22D5 /* sendchat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38CC1DB822718C6B00DD22D5 /* sendchat@3x.png */; };
+		38CC1DBD22718C9400DD22D5 /* rechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38CC1DBB22718C9400DD22D5 /* rechat@2x.png */; };
+		38CC1DBE22718C9400DD22D5 /* rechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38CC1DBC22718C9400DD22D5 /* rechat@3x.png */; };
 		38FF1E5421F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */; };
 		38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */; };
 		38FF1EDE21FADEF500A3CA7F /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1EDD21FADEF500A3CA7F /* VideoDetailViewController.m */; };
@@ -500,6 +504,10 @@
 		38C300B822703862007A537F /* TabChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabChatViewController.swift; sourceTree = "<group>"; };
 		38C300BA22703B8D007A537F /* TabChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabChatTableViewCell.swift; sourceTree = "<group>"; };
 		38CC1D6A22707FAB00DD22D5 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		38CC1DB722718C6B00DD22D5 /* sendchat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sendchat@2x.png"; sourceTree = "<group>"; };
+		38CC1DB822718C6B00DD22D5 /* sendchat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sendchat@3x.png"; sourceTree = "<group>"; };
+		38CC1DBB22718C9400DD22D5 /* rechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rechat@2x.png"; sourceTree = "<group>"; };
+		38CC1DBC22718C9400DD22D5 /* rechat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rechat@3x.png"; sourceTree = "<group>"; };
 		38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WKWebVIew.m"; sourceTree = "<group>"; };
 		38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HybridNSURLProtocol.m; sourceTree = "<group>"; };
 		38FF1E5221F9C81200A3CA7F /* HybridNSURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HybridNSURLProtocol.h; sourceTree = "<group>"; };
@@ -833,6 +841,10 @@
 		386392E921E8709F00A834EE /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				38CC1DB722718C6B00DD22D5 /* sendchat@2x.png */,
+				38CC1DB822718C6B00DD22D5 /* sendchat@3x.png */,
+				38CC1DBB22718C9400DD22D5 /* rechat@2x.png */,
+				38CC1DBC22718C9400DD22D5 /* rechat@3x.png */,
 				38C300AF22702C54007A537F /* 1.jpeg */,
 				38C300AD22702C54007A537F /* 2.jpeg */,
 				38C300AE22702C54007A537F /* 3.jpeg */,
@@ -1260,6 +1272,7 @@
 				3846988F22647FCA001234F8 /* finish_live_video_32x24_@3x.png in Resources */,
 				3863936321E8A6F500A834EE /* tabbar_publish_article_34x34_@3x.png in Resources */,
 				38C20A0D21EC8207007C4CB7 /* tabbar_closebtn_56x56_@3x.png in Resources */,
+				38CC1DBD22718C9400DD22D5 /* rechat@2x.png in Resources */,
 				38FF1F0921FEF52B00A3CA7F /* deleteicon_channel_18x18_@3x.png in Resources */,
 				3863935821E89F3300A834EE /* chatroom_close_18x18_@2x.png in Resources */,
 				3863936621E8A6F500A834EE /* tabbar_publish_uploadvideo_34x34_@3x.png in Resources */,
@@ -1272,6 +1285,7 @@
 				3863930021E8718300A834EE /* addfriend_tabbar_press_32x32_@3x.png in Resources */,
 				38FF1FC62204012B00A3CA7F /* c_comment_like_icon_18x18_@2x.png in Resources */,
 				3863933D21E8730C00A834EE /* pgc_tabbar_icon_more_night_24x24_@3x.png in Resources */,
+				38CC1DB922718C6C00DD22D5 /* sendchat@2x.png in Resources */,
 				3863934921E8733100A834EE /* video_tabbar_night_32x32_@2x.png in Resources */,
 				38C20A8821EDE4C8007C4CB7 /* back_24x24_@3x.png in Resources */,
 				38C20A4321ED78E0007C4CB7 /* search_icon_20x20_@2x.png in Resources */,
@@ -1282,6 +1296,7 @@
 				3863932021E872E400A834EE /* mine_tabbar_night_33x32_@3x.png in Resources */,
 				38AC1A3C21F1B7FF001D491B /* title_86x22_@2x.png in Resources */,
 				3863932E21E872F600A834EE /* no_login_tabbar_press_33x32_@3x.png in Resources */,
+				38CC1DBA22718C6C00DD22D5 /* sendchat@3x.png in Resources */,
 				3863930A21E8729B00A834EE /* home_tabbar_press_night_32x32_@2x.png in Resources */,
 				3863931821E872C000A834EE /* huoshan_tabbar_press_32x32_@2x.png in Resources */,
 				38C20A0921EC81AA007C4CB7 /* tsv_close_popup_textpage_24x24_@2x.png in Resources */,
@@ -1333,6 +1348,7 @@
 				386392FE21E8718300A834EE /* addfriend_tabbar_32x32_@3x.png in Resources */,
 				38FF1F0A21FEF52C00A3CA7F /* deleteicon_channel_18x18_@2x.png in Resources */,
 				3863936421E8A6F500A834EE /* tabbar_publish_shortvideo_34x34_@3x.png in Resources */,
+				38CC1DBE22718C9400DD22D5 /* rechat@3x.png in Resources */,
 				3863936121E8A6F500A834EE /* tabbar_publish_uploadvideo_34x34_@2x.png in Resources */,
 				3863934521E8733100A834EE /* video_tabbar_night_32x32_@3x.png in Resources */,
 				3863934621E8733100A834EE /* video_tabbar_press_32x32_@3x.png in Resources */,

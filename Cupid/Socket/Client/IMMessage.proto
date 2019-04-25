@@ -9,11 +9,13 @@ message UserInfo {
 message TextMessage {
     required UserInfo user = 1;
     required string text = 2;
+    required string chatId = 3;
 }
 
 message GroupMessage {
     required UserInfo user = 1;
     required string text = 2;
+    required int64 groupId = 3;
 }
 
 message GiftMessage {
