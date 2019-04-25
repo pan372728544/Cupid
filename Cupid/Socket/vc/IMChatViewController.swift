@@ -118,9 +118,7 @@ extension IMChatViewController {
     @objc func keyBoardWillShow(_ notification:Notification){
         
         print("keyBoardWillShow")
-        if isScrolling {
-            return
-        }
+
         // 1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
         // 2. 获取键盘最终的Y值
@@ -137,9 +135,7 @@ extension IMChatViewController {
     
     @objc func keyBoardWillHide(_ notification:Notification){
                 print("keyBoardWillHide")
-        if isScrolling {
-            return
-        }
+
         //1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
 
