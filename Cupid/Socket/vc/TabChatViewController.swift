@@ -75,7 +75,7 @@ extension TabChatViewController {
             
             let Coun = name!.count
             
-            self.createNavBarView(withTitle: "欢迎-\( String(name!.prefix(Coun-4)))-归来")
+            self.createNavBarView(withTitle: "\( String(name!.prefix(Coun-4)))")
         }else
         {
             self.createNavBarView(withTitle: "消息中心")

@@ -30,6 +30,7 @@ final public class UserInfo : GeneratedMessage {
         fieldCheck = fieldCheck && (lhs.hasName == rhs.hasName) && (!lhs.hasName || lhs.name == rhs.name)
         fieldCheck = fieldCheck && (lhs.hasLevel == rhs.hasLevel) && (!lhs.hasLevel || lhs.level == rhs.level)
         fieldCheck = fieldCheck && (lhs.hasIconUrl == rhs.hasIconUrl) && (!lhs.hasIconUrl || lhs.iconUrl == rhs.iconUrl)
+        fieldCheck = fieldCheck && (lhs.hasUserId == rhs.hasUserId) && (!lhs.hasUserId || lhs.userId == rhs.userId)
         fieldCheck = (fieldCheck && (lhs.unknownFields == rhs.unknownFields))
         return fieldCheck
     }
@@ -42,6 +43,9 @@ final public class UserInfo : GeneratedMessage {
 
     public fileprivate(set) var iconUrl:String! = nil
     public fileprivate(set) var hasIconUrl:Bool = false
+
+    public fileprivate(set) var userId:String! = nil
+    public fileprivate(set) var hasUserId:Bool = false
 
     required public init() {
         super.init()
@@ -56,6 +60,9 @@ final public class UserInfo : GeneratedMessage {
         if !hasIconUrl {
             throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(UserInfo.self): field \"iconUrl\" mark required")
         }
+        if !hasUserId {
+            throw ProtocolBuffersError.invalidProtocolBuffer("Uninitialized Message \(UserInfo.self): field \"userId\" mark required")
+        }
     }
     override public func writeTo(codedOutputStream: CodedOutputStream) throws {
         if hasName {
@@ -66,6 +73,9 @@ final public class UserInfo : GeneratedMessage {
         }
         if hasIconUrl {
             try codedOutputStream.writeString(fieldNumber: 3, value:iconUrl)
+        }
+        if hasUserId {
+            try codedOutputStream.writeString(fieldNumber: 4, value:userId)
         }
         try unknownFields.writeTo(codedOutputStream: codedOutputStream)
     }
@@ -84,6 +94,9 @@ final public class UserInfo : GeneratedMessage {
         }
         if hasIconUrl {
             serialize_size += iconUrl.computeStringSize(fieldNumber: 3)
+        }
+        if hasUserId {
+            serialize_size += userId.computeStringSize(fieldNumber: 4)
         }
         serialize_size += unknownFields.serializedSize()
         memoizedSerializedSize = serialize_size
@@ -119,6 +132,9 @@ final public class UserInfo : GeneratedMessage {
         if hasIconUrl {
             jsonMap["iconUrl"] = iconUrl
         }
+        if hasUserId {
+            jsonMap["userId"] = userId
+        }
         return jsonMap
     }
     override class public func decode(jsonMap:Dictionary<String,Any>) throws -> UserInfo {
@@ -138,6 +154,9 @@ final public class UserInfo : GeneratedMessage {
         if hasIconUrl {
             output += "\(indent) iconUrl: \(String(describing: iconUrl)) \n"
         }
+        if hasUserId {
+            output += "\(indent) userId: \(String(describing: userId)) \n"
+        }
         output += unknownFields.getDescription(indent: indent)
         return output
     }
@@ -152,6 +171,9 @@ final public class UserInfo : GeneratedMessage {
             }
             if hasIconUrl {
                 hashCode = (hashCode &* 31) &+ iconUrl.hashValue
+            }
+            if hasUserId {
+                hashCode = (hashCode &* 31) &+ userId.hashValue
             }
             hashCode = (hashCode &* 31) &+  unknownFields.hashValue
             return hashCode
@@ -253,6 +275,31 @@ final public class UserInfo : GeneratedMessage {
             builderResult.iconUrl = nil
             return self
         }
+        public var userId:String {
+            get {
+                return builderResult.userId
+            }
+            set (value) {
+                builderResult.hasUserId = true
+                builderResult.userId = value
+            }
+        }
+        public var hasUserId:Bool {
+            get {
+                return builderResult.hasUserId
+            }
+        }
+        @discardableResult
+        public func setUserId(_ value:String) -> UserInfo.Builder {
+            self.userId = value
+            return self
+        }
+        @discardableResult
+        public func clearUserId() -> UserInfo.Builder{
+            builderResult.hasUserId = false
+            builderResult.userId = nil
+            return self
+        }
         override public var internalGetResult:GeneratedMessage {
             get {
                 return builderResult
@@ -288,6 +335,9 @@ final public class UserInfo : GeneratedMessage {
             if other.hasIconUrl {
                 iconUrl = other.iconUrl
             }
+            if other.hasUserId {
+                userId = other.userId
+            }
             try merge(unknownField: other.unknownFields)
             return self
         }
@@ -314,6 +364,9 @@ final public class UserInfo : GeneratedMessage {
                 case 26:
                     iconUrl = try codedInputStream.readString()
 
+                case 34:
+                    userId = try codedInputStream.readString()
+
                 default:
                     if (!(try parse(codedInputStream:codedInputStream, unknownFields:unknownFieldsBuilder, extensionRegistry:extensionRegistry, tag:protobufTag))) {
                         unknownFields = try unknownFieldsBuilder.build()
@@ -334,6 +387,9 @@ final public class UserInfo : GeneratedMessage {
             }
             if let jsonValueIconUrl = jsonMap["iconUrl"] as? String {
                 resultDecodedBuilder.iconUrl = jsonValueIconUrl
+            }
+            if let jsonValueUserId = jsonMap["userId"] as? String {
+                resultDecodedBuilder.userId = jsonValueUserId
             }
             return resultDecodedBuilder
         }
@@ -1550,6 +1606,7 @@ extension UserInfo: GeneratedMessageProtocol {
         case "name": return self.name
         case "level": return self.level
         case "iconUrl": return self.iconUrl
+        case "userId": return self.userId
         default: return nil
         }
     }
@@ -1562,6 +1619,7 @@ extension UserInfo.Builder: GeneratedMessageBuilderProtocol {
             case "name": return self.name
             case "level": return self.level
             case "iconUrl": return self.iconUrl
+            case "userId": return self.userId
             default: return nil
             }
         }
@@ -1582,6 +1640,11 @@ extension UserInfo.Builder: GeneratedMessageBuilderProtocol {
                     return
                 }
                 self.iconUrl = newSubscriptValue
+            case "userId":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.userId = newSubscriptValue
             default: return
             }
         }

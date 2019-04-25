@@ -4,6 +4,7 @@ message UserInfo {
     required string name = 1;
     required int64 level = 2;
     required string iconUrl = 3;
+    required string userId = 4;
 }
 
 message TextMessage {

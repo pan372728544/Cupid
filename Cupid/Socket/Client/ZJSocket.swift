@@ -23,17 +23,8 @@ class ZJSocket : NSObject{
     weak var delegate : ZJSocketDelegate?
     
     fileprivate var tcpClient : TCPClient
-    // 用户信息
-//    fileprivate var userInfo : UserInfo.Builder = {
-//        let userInfo = UserInfo.Builder()
-//        userInfo.name = "name:wang\(arc4random_uniform(10))"
-//        userInfo.level = 2
-//        userInfo.iconUrl = "http://img.52z.com/upload/news/image/20180212/20180212084623_32086.jpg"
-//        return userInfo
-//    }()
-    
-    
-    let imgs : [String] = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091375677&di=b77ddcda0fdcb6e4062b63c2e349cd09&imgtype=0&src=http%3A%2F%2Fimg.storage.17wanba.org.cn%2Fgame%2F2016%2F05%2F10%2Fd729d853b0519256f9c6189e6f9eb457.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091346923&di=94a030de1baced5369065862835fad23&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F010b0d5541ef6c000001714a5ae2e9.jpg%402o.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091569946&di=e9d9569824014cb2733c8ceb10c19ad4&imgtype=0&src=http%3A%2F%2Fimg.7xz.com%2Fimg%2Fpicimg%2F201607%2F20160728163406_389ae972b1283f76160.jpg","http://img.qqzhi.com/upload/img_1_3452678024D953860635_23.jpg"]
+
+    var imgs : [String] = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091375677&di=b77ddcda0fdcb6e4062b63c2e349cd09&imgtype=0&src=http%3A%2F%2Fimg.storage.17wanba.org.cn%2Fgame%2F2016%2F05%2F10%2Fd729d853b0519256f9c6189e6f9eb457.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091346923&di=94a030de1baced5369065862835fad23&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F010b0d5541ef6c000001714a5ae2e9.jpg%402o.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091569946&di=e9d9569824014cb2733c8ceb10c19ad4&imgtype=0&src=http%3A%2F%2Fimg.7xz.com%2Fimg%2Fpicimg%2F201607%2F20160728163406_389ae972b1283f76160.jpg","http://img.qqzhi.com/upload/img_1_3452678024D953860635_23.jpg"]
     
     init(addr: String, port : Int32) {
         // 创建TCP
@@ -160,8 +151,10 @@ extension ZJSocket {
         // 用户名
         userInfo.name = String(name!.prefix(Coun-4) )
 
-        // 用户
+        // 用户等级
         userInfo.level = Int64(userId)!
+        // 用户ID
+        userInfo.userId = userId
 
 
         let n : Int = Int(userId)!
@@ -195,6 +188,7 @@ extension ZJSocket {
         
         names.remove(at: Int(userId)!-1)
         texts.remove(at: Int(userId)!-1)
+        imgs.remove(at:  Int(userId)!-1)
         
         for  i in 0...2 {
             
@@ -210,7 +204,7 @@ extension ZJSocket {
             userInfo.name = String(names[i].prefix(Coun))
             userInfo.level = Int64(i)
 
-            
+            userInfo.userId = String(i)
             userInfo.iconUrl = imgs[i]
             
             chatMsg.user = try! userInfo.build()
