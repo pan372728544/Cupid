@@ -71,7 +71,8 @@ extension ZJSocket {
     }
     
     // 读取消息
-    func startReadMsg()  {
+    func
+        startReadMsg()  {
         // 开启线程读取消息
         print("客户端读取消息。。。\(Thread.current)")
         let timer = Timer(fireAt: Date(), interval: 0.2, target: self, selector: #selector(self.readMessage), userInfo: nil, repeats: true)
@@ -226,7 +227,7 @@ extension ZJSocket {
     
     func sendHeartBeat() {
         // 1.获取心跳包中的数据
-        let heartString = "I am is heart beat;"
+        let heartString = "I am a heart beat;"
         let heartData = heartString.data(using: .utf8)!
         
         // 2.发送数据
