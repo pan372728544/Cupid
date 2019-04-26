@@ -58,6 +58,7 @@ class IMChatViewController: ZJBaseViewController {
         self.createNavBarView(withTitle:  self.group.user.name)
         self.createNavLeftBtn(withItem: "", target: self, action: #selector(backClick(button:)))
         self.setRightTitleColro(UIColor.black)
+        self.setTitleColor(UIColor.white)
         self.delegate = self
         // 处理通知
         registerNotification()

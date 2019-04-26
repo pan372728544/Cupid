@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)setRightTitleColro:(UIColor *)color;
 
+-(void)setTitleColor:(UIColor *)color;
+
 @end
 
 NS_ASSUME_NONNULL_END

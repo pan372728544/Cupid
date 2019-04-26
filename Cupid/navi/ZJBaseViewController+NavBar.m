@@ -73,4 +73,9 @@
 {
     [self.superNavBarView.btnRight setTitleColor:color forState:UIControlStateNormal];
 }
+
+-(void)setTitleColor:(UIColor *)color
+{
+    [self.superNavBarView.labelTitle setTextColor:color];
+}
 @end
