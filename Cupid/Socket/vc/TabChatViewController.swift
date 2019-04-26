@@ -105,6 +105,7 @@ extension TabChatViewController {
         vc.completedBlock = {
             // 登录完成连接服务器
             self.connectServer()
+            LogInName =  UserDefaults.standard.string(forKey: NICKNAME)
             
             let Coun = LogInName!.count
             self.createNavBarView(withTitle: "欢迎-\( String(LogInName!.prefix(Coun-4)))-归来")

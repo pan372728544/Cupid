@@ -169,6 +169,7 @@ extension IMChatViewController {
         textField.backgroundColor = UIColor.white
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 10.0
+        textField.becomeFirstResponder()
         btnSend.setTitle("发送", for: UIControl.State.normal)
         btnSend.addTarget(self, action: #selector(sendClick), for: UIControl.Event.touchUpInside)
         btnSend.backgroundColor = UIColor.clear
