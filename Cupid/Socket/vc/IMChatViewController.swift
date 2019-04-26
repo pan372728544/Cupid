@@ -18,7 +18,7 @@ class IMChatViewController: ZJBaseViewController {
     
     fileprivate var  group : GroupMessage
     // 服务器地址
-    fileprivate var socket : ZJSocket = ZJSocket(addr: "10.2.116.69", port: 7878)
+    fileprivate var socket : ZJSocket = ZJSocket(addr: "10.2.116.43", port: 7878)
     
     // 输入框
     fileprivate lazy var textField : ChatInputTextField = {
@@ -267,6 +267,8 @@ extension IMChatViewController {
         if socket.connectServer().isSuccess {
             print("连接成功")
             socket.delegate = self
+            
+            socket.sendJoinRoom()
             
             socket.startReadMsg()
         }

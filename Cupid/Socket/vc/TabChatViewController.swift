@@ -11,7 +11,7 @@ import UIKit
 class TabChatViewController: ZJBaseViewController {
 
     // 服务器地址
-    fileprivate var socket : ZJSocket = ZJSocket(addr: "10.2.116.69", port: 7878)
+    fileprivate var socket : ZJSocket = ZJSocket(addr: "10.2.116.43", port: 7878)
     
         fileprivate var msgArray : [GroupMessage] = [GroupMessage]()
     
@@ -95,7 +95,6 @@ extension TabChatViewController {
                 print("连接成功")
                 DispatchQueue.main.async {
                     self.socket.delegate = self
-                    
                     self.socket.sendGroupMsg()
                     self.socket.startReadMsg()
                 }
@@ -123,8 +122,15 @@ extension TabChatViewController {
 
 extension TabChatViewController : ZJSocketDelegate{
     func socket(_ socket: ZJSocket, groupMsg: GroupMessage) {
-        msgArray.append(groupMsg)
-        self.tableView.reloadData()
+        
+        if msgArray.count == 3 {
+            
+        }
+        else {
+            msgArray.append(groupMsg)
+            self.tableView.reloadData()
+            
+        }
     }
     
     func socket(_ socket: ZJSocket, joinRoom user: UserInfo) {
@@ -176,7 +182,8 @@ extension TabChatViewController : UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
+
+        // 跳转到聊天页面
         if UserDefaults.standard.string(forKey: NICKNAME) != nil  {
             let group = msgArray[indexPath.row]
             

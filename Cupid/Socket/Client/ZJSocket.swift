@@ -24,7 +24,9 @@ class ZJSocket : NSObject{
     
     fileprivate var tcpClient : TCPClient
 
-    var imgs : [String] = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091375677&di=b77ddcda0fdcb6e4062b63c2e349cd09&imgtype=0&src=http%3A%2F%2Fimg.storage.17wanba.org.cn%2Fgame%2F2016%2F05%2F10%2Fd729d853b0519256f9c6189e6f9eb457.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091346923&di=94a030de1baced5369065862835fad23&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F010b0d5541ef6c000001714a5ae2e9.jpg%402o.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091569946&di=e9d9569824014cb2733c8ceb10c19ad4&imgtype=0&src=http%3A%2F%2Fimg.7xz.com%2Fimg%2Fpicimg%2F201607%2F20160728163406_389ae972b1283f76160.jpg","http://img.qqzhi.com/upload/img_1_3452678024D953860635_23.jpg"]
+//    var imgs : [String] = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091375677&di=b77ddcda0fdcb6e4062b63c2e349cd09&imgtype=0&src=http%3A%2F%2Fimg.storage.17wanba.org.cn%2Fgame%2F2016%2F05%2F10%2Fd729d853b0519256f9c6189e6f9eb457.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091346923&di=94a030de1baced5369065862835fad23&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F010b0d5541ef6c000001714a5ae2e9.jpg%402o.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091569946&di=e9d9569824014cb2733c8ceb10c19ad4&imgtype=0&src=http%3A%2F%2Fimg.7xz.com%2Fimg%2Fpicimg%2F201607%2F20160728163406_389ae972b1283f76160.jpg","http://img.qqzhi.com/upload/img_1_3452678024D953860635_23.jpg"]
+    
+   var imgs : [String] =  ["1.jpeg","2.jpeg","3.jpeg","4.jpeg"]
     
     init(addr: String, port : Int32) {
         // 创建TCP
@@ -121,9 +123,41 @@ extension ZJSocket {
     func sendJoinRoom() {
         // 1.获取消息的长度
 //        let msgData = (try! userInfo.build()).data()
-//
-//        // 2.发送消息
-//        sendMsg(data: msgData, type: 0)
+        
+        let defaults = UserDefaults.standard
+        // 获取用户名和id
+        let name = defaults.string(forKey: NICKNAME)
+        
+        let userId : String = String(name!.suffix(1))
+        
+        let chatMsg = TextMessage.Builder()
+        
+        let userInfo = UserInfo.Builder()
+        
+        let Coun = name!.count
+        
+        // 用户名
+        userInfo.name = String(name!.prefix(Coun-4) )
+        
+        // 用户等级
+        userInfo.level = Int64(userId)!
+        // 用户ID
+        userInfo.userId = userId
+        
+        
+        let n : Int = Int(userId)!
+        
+        let str = imgs[n-1]
+        
+        // 头
+        userInfo.iconUrl = str
+
+        
+      let msgData = (try! userInfo.build()).data()
+        // 2.发送消息
+        sendMsg(data: msgData, type: 0)
+    
+        
     }
     
     func sendLeaveRoom() {
@@ -166,7 +200,19 @@ extension ZJSocket {
         
         chatMsg.user = try! userInfo.build()
         chatMsg.text = message
-        chatMsg.chatId = String(group.groupId)
+
+        // 发送给
+        chatMsg.toUserId = group.user.userId
+        
+        // 聊天ID
+        chatMsg.chatId = "\(userId)_\( chatMsg.toUserId)"
+        
+        if group.groupId != 1004 {
+               chatMsg.chatType = "1"
+        } else {
+            chatMsg.chatType = "2"
+        }
+     
         // 2.获取对应的data
         let chatData = (try! chatMsg.build()).data()
         
@@ -181,6 +227,10 @@ extension ZJSocket {
         
         var texts = ["如来在哪里？","你看起来很健康。","我没有电了！！！","大家都来这里，这里有好东西！"]
         
+//        var imgsGroup : [String] = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091375677&di=b77ddcda0fdcb6e4062b63c2e349cd09&imgtype=0&src=http%3A%2F%2Fimg.storage.17wanba.org.cn%2Fgame%2F2016%2F05%2F10%2Fd729d853b0519256f9c6189e6f9eb457.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091346923&di=94a030de1baced5369065862835fad23&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F010b0d5541ef6c000001714a5ae2e9.jpg%402o.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091569946&di=e9d9569824014cb2733c8ceb10c19ad4&imgtype=0&src=http%3A%2F%2Fimg.7xz.com%2Fimg%2Fpicimg%2F201607%2F20160728163406_389ae972b1283f76160.jpg","http://img.qqzhi.com/upload/img_1_3452678024D953860635_23.jpg"]
+        
+        var imgsGroup : [String] = ["1.jpeg","2.jpeg","3.jpeg","4.jpeg"]
+        
         let defaults = UserDefaults.standard
         // 获取用户名和id
         let name = defaults.string(forKey: NICKNAME)
@@ -188,7 +238,7 @@ extension ZJSocket {
         
         names.remove(at: Int(userId)!-1)
         texts.remove(at: Int(userId)!-1)
-        imgs.remove(at:  Int(userId)!-1)
+        imgsGroup.remove(at:  Int(userId)!-1)
         
         for  i in 0...2 {
             
@@ -197,15 +247,19 @@ extension ZJSocket {
             
             let userInfo = UserInfo.Builder()
             
-      
+            
             
             let Coun = names[i].count - 4
             
             userInfo.name = String(names[i].prefix(Coun))
             userInfo.level = Int64(i)
 
-            userInfo.userId = String(i)
-            userInfo.iconUrl = imgs[i]
+//            let countName = name[i]
+            
+            
+            let userId = names[i].suffix(1)
+            userInfo.userId = String(userId)
+            userInfo.iconUrl = imgsGroup[i]
             
             chatMsg.user = try! userInfo.build()
             chatMsg.text = texts[i]

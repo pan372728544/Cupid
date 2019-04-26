@@ -74,6 +74,8 @@
     UIImageView *imgV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, SCREEN_W-20, 180)];
     
 //    [imgV sd_setImageWithURL:[NSURL URLWithString:self.maryIMg[indexPath.row]]];
+    
+    imgV.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld.jpeg",indexPath.row+1]];
     [cell.contentView addSubview:imgV];
     
     

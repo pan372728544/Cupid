@@ -39,7 +39,8 @@ class ChatTableViewMeCell: UITableViewCell {
             
             let url : URL =  URL(string: textMes!.user.iconUrl)!
             
-            imgTou.sd_setImage(with: url)
+            //            imgTou.sd_setImage(with: url)
+            imgTou.image = UIImage.init(named: textMes!.user.iconUrl)
             
             nameLabel.text = textMes?.user.name
             contentLabel.text = textMes?.text
