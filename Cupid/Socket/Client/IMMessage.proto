@@ -21,9 +21,4 @@ message GroupMessage {
     required int64 groupId = 3;
 }
 
-message GiftMessage {
-    required UserInfo user = 1;
-    required string giftname = 2;
-    required string giftURL = 3;
-    required string giftCount = 4;
-}
+

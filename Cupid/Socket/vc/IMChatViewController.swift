@@ -13,13 +13,11 @@ class IMChatViewController: ZJBaseViewController {
     
     fileprivate var viewBottom_Height : CGFloat =   60
     fileprivate var viewBottom_H : CGFloat =  Bottom_H + 60
-    
     fileprivate var isScrolling : Bool = false
     
+    // 聊天列表数据
     fileprivate var  group : GroupMessage
-    // 服务器地址
-    fileprivate var socket : ZJSocket = ZJSocket(addr: "10.2.116.43", port: 7878)
-    
+
     // 输入框
     fileprivate lazy var textField : ChatInputTextField = {
        
@@ -49,23 +47,12 @@ class IMChatViewController: ZJBaseViewController {
     
     // 输入视图
     fileprivate  var viewBottom : UIView = UIView()
-    
-    // 用户名
-//    let name : String =  UserDefaults.standard.string(forKey: "nikeName") ?? ""
 
-    // 设置昵称图片
-//    @objc public func setNickName(str: String, type : String)  {
-//        let defaults = UserDefaults.standard
-//        defaults.set(str, forKey: "nikeName")
-//        defaults.set(type, forKey: "type")
-//
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-       
         self.createNavBarView(withTitle:  self.group.user.name)
         self.createNavLeftBtn(withItem: "", target: self, action: #selector(backClick(button:)))
         self.setRightTitleColro(UIColor.black)
@@ -73,7 +60,7 @@ class IMChatViewController: ZJBaseViewController {
         // 处理通知
         registerNotification()
         
-        // 链接服务器
+        // 连接服务器
         connectServer()
         
         // 创建聊天tableview
@@ -83,7 +70,7 @@ class IMChatViewController: ZJBaseViewController {
         setupChatTool()
     }
     
-
+    // 初始化
     init(group : GroupMessage) {
         self.group  = group
         super.init(nibName: nil, bundle: nil)
@@ -117,8 +104,6 @@ extension IMChatViewController {
     //MARK:键盘通知相关操作
     @objc func keyBoardWillShow(_ notification:Notification){
         
-        print("keyBoardWillShow")
-
         // 1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
         // 2. 获取键盘最终的Y值
@@ -134,7 +119,6 @@ extension IMChatViewController {
     }
     
     @objc func keyBoardWillHide(_ notification:Notification){
-                print("keyBoardWillHide")
 
         //1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
@@ -161,7 +145,6 @@ extension IMChatViewController {
         
         self.tableView.register(ChatTableViewCell.self, forCellReuseIdentifier: "ChatTableViewCell")
         self.tableView.register(ChatTableViewMeCell.self, forCellReuseIdentifier: "ChatTableViewMeCell")
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.separatorStyle = .none
@@ -188,23 +171,9 @@ extension IMChatViewController {
 }
 
 extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextFieldDelegate,BaseViewControllerPangestureDelegate {
+    
     func panGesture(_ pan: UIPanGestureRecognizer!) {
 
-        
-        print("\(textField.isFirstResponder)")
-        
-//        textField.becomeFirstResponder()
-        self.view.becomeFirstResponder()
-        self.isScrolling = true
-//        print("\(pan.state)")
-////        if pan.state == .began {
-////            if textField.isFirstResponder {
-//        textField.nextText = self.view.superview?.superview?.next
-//
-//            }
-//        } else {
-//            textField.nextText = nil
-//        }
     }
     
     
@@ -215,15 +184,10 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         let msg : TextMessage = msgArray[indexPath.row]
-        
-        let name = UserDefaults.standard.string(forKey: NICKNAME)
-        
-        let Coun = name!.count
 
-        if String(name!.prefix(Coun-4)) == msg.user.name {
-
+        let count = LogInName!.count
+        if String(LogInName!.prefix(count-4)) == msg.user.name {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewMeCell") as! ChatTableViewMeCell
             cell.textMes = msg
             return cell
@@ -239,20 +203,14 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let msg : TextMessage = msgArray[indexPath.row]
-        
-        
         return heightOfCell(text: msg.text) + 60
 
-    
     }
     
-
     // scrollview
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
     }
-    
-    // textfield
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         sendClick()
@@ -264,17 +222,23 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
 extension IMChatViewController {
     
     func connectServer() {
-        if socket.connectServer().isSuccess {
-            print("连接成功")
-            socket.delegate = self
-            
-            socket.sendJoinRoom()
-            
-            socket.startReadMsg()
-        }
         
+        DispatchQueue.global().async {
+            if socketClient.connectServer().isSuccess {
+                print("连接会话成功")
+                DispatchQueue.main.async {
+                    socketClient.delegate = self
+                    // 进入会话
+                    socketClient.sendJoinRoom()
+                    // 接受消息
+                    socketClient.startReadMsg()
+                }
+            }
+        }
+
     }
     
+    // 滚动到底部
     func scrollToEnd() {
         guard msgArray.count == 0 else {
             self.tableView.scrollToRow(at: IndexPath(item: msgArray.count-1 < 0 ? 0: msgArray.count-1, section: 0 ), at: UITableView.ScrollPosition.top, animated: false)
@@ -284,7 +248,8 @@ extension IMChatViewController {
     }
 }
 
-extension IMChatViewController : ZJSocketDelegate{
+extension IMChatViewController : ZJSocketDelegate {
+    
     func socket(_ socket: ZJSocket, groupMsg: GroupMessage) {
         
     }
@@ -298,17 +263,12 @@ extension IMChatViewController : ZJSocketDelegate{
     }
     
     func socket(_ socket: ZJSocket, chatMsg: TextMessage) {
-        print("收到服务器消息： \(String(describing: chatMsg.text))")
         
+        print("收到服务器消息： \(String(describing: chatMsg.text))")
         msgArray.append(chatMsg)
         self.tableView.reloadData()
         // 滚动到tableview底部
         scrollToEnd()
-   
-    }
-    
-    func socket(_ socket: ZJSocket, giftMsg: GiftMessage) {
-        
     }
     
  
@@ -330,11 +290,9 @@ extension IMChatViewController {
         
     }
     
-    
     @objc func sendClick()  {
         
-//        socket.sendTextMsg(message: self.textField.text ?? "空的消息")
-        socket.sendTextMsg(message: self.textField.text ?? " ", group: group)
+        socketClient.sendTextMsg(message: self.textField.text ?? "", group: group)
         self.textField.text = ""
     }
     

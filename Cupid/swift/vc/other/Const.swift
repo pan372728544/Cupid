@@ -23,3 +23,9 @@ let StatusBar_H : CGFloat = UIApplication.shared.statusBarFrame.size.height
 
 
 let NavaBar_H : CGFloat = StatusBar_H + 50
+
+
+let socketClient : ZJSocket = ZJSocket(addr: "10.2.116.43", port: 7878)
+
+let LogInName =  UserDefaults.standard.string(forKey: NICKNAME)
+

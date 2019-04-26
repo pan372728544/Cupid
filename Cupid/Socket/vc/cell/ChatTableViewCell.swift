@@ -10,12 +10,10 @@ import UIKit
 
 class ChatTableViewCell: UITableViewCell {
     
+    // 头像
     internal var imgTou: UIImageView = UIImageView()
-    
     internal var nameLabel : UILabel = UILabel()
-    
     internal var contentLabel : UILabel = UILabel()
-    
     
     // 气泡
     internal var imgPao: UIImageView = UIImageView()
@@ -24,9 +22,7 @@ class ChatTableViewCell: UITableViewCell {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.selectionStyle = .none
-
         self.backgroundColor = UIColor.clear
-        
         // 创建视图
         setupView()
     }
@@ -40,7 +36,7 @@ class ChatTableViewCell: UITableViewCell {
             
             let url : URL =  URL(string: textMes!.user.iconUrl)!
             
-//            imgTou.sd_setImage(with: url)
+            //            imgTou.sd_setImage(with: url)
             imgTou.image = UIImage.init(named: textMes!.user.iconUrl)
             
             nameLabel.text = textMes?.user.name
@@ -68,7 +64,7 @@ class ChatTableViewCell: UITableViewCell {
         }
     }
     
-
+    
 }
 
 
@@ -77,6 +73,8 @@ extension ChatTableViewCell {
     func setupView()  {
         
         imgTou.frame = CGRect(x: 15, y: 15, width: 40, height: 40)
+        imgTou.contentMode = .scaleAspectFill
+        imgTou.clipsToBounds = true
         self.contentView.addSubview(imgTou)
         
         nameLabel.frame = CGRect(x: imgTou.frame.origin.x+imgTou.frame.size.width+10, y: 15, width: Screen_W - 100, height: 20)
@@ -102,7 +100,7 @@ extension ChatTableViewCell {
 
 extension ChatTableViewCell {
     
-  public  func heightOfCell(text : String) -> CGFloat {
+    public  func heightOfCell(text : String) -> CGFloat {
         let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16)]
         let option = NSStringDrawingOptions.usesLineFragmentOrigin
         let rect:CGRect = text.boundingRect(with: CGSize(width: Screen_W - 100, height: 0), options: option, attributes: attributes, context: nil)

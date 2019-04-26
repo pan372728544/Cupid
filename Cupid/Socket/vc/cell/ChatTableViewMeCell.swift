@@ -80,6 +80,8 @@ extension ChatTableViewMeCell {
     func setupView()  {
         
         imgTou.frame = CGRect(x: Screen_W - 15 - 40, y: 15, width: 40, height: 40)
+        imgTou.contentMode = .scaleAspectFill
+        imgTou.clipsToBounds = true
         self.contentView.addSubview(imgTou)
         
         nameLabel.frame = CGRect(x: imgTou.frame.origin.x - 10 - Screen_W + 100, y: 15, width: Screen_W - 100, height: 20)

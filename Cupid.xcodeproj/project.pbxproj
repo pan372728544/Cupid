@@ -47,7 +47,6 @@
 		381DCDC822699AAF00EC34F3 /* IMChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381DCDC722699AAF00EC34F3 /* IMChatViewController.swift */; };
 		381DCDCA2269A03700EC34F3 /* IMStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381DCDC92269A03700EC34F3 /* IMStatusViewController.swift */; };
 		382D522E21F1EEAD00009C17 /* HomeCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 382D522D21F1EEAD00009C17 /* HomeCommentTableViewCell.m */; };
-		38303C8C2271BD8700D1A0B4 /* socketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38303C8B2271BD8700D1A0B4 /* socketManager.swift */; };
 		3837E7522230C3BB0094D2EA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837E7512230C3BB0094D2EA /* LoginViewController.m */; };
 		3837E7542230CD350094D2EA /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 3837E7532230CD350094D2EA /* abc.png */; };
 		3846988F22647FCA001234F8 /* finish_live_video_32x24_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3846988D22647FCA001234F8 /* finish_live_video_32x24_@3x.png */; };
@@ -303,7 +302,6 @@
 		381DCDC92269A03700EC34F3 /* IMStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMStatusViewController.swift; sourceTree = "<group>"; };
 		382D522C21F1EEAD00009C17 /* HomeCommentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCommentTableViewCell.h; sourceTree = "<group>"; };
 		382D522D21F1EEAD00009C17 /* HomeCommentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCommentTableViewCell.m; sourceTree = "<group>"; };
-		38303C8B2271BD8700D1A0B4 /* socketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = socketManager.swift; sourceTree = "<group>"; };
 		3837E7502230C3BB0094D2EA /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		3837E7512230C3BB0094D2EA /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3837E7532230CD350094D2EA /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = abc.png; sourceTree = "<group>"; };
@@ -709,7 +707,6 @@
 				381DCDB92269781700EC34F3 /* Immessage.proto.swift */,
 				3819F5572266D271009D0C03 /* ZJSocket.swift */,
 				381DCDB52269754F00EC34F3 /* IMMessage.proto */,
-				38303C8B2271BD8700D1A0B4 /* socketManager.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -1510,7 +1507,6 @@
 				380101A421DF0AE200D5F7D2 /* HomeViewController.m in Sources */,
 				38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */,
 				38717AF02255F8870020955F /* BaseModel.swift in Sources */,
-				38303C8C2271BD8700D1A0B4 /* socketManager.swift in Sources */,
 				38636C0821E7572E00A834EE /* FeedFocusonTableViewCell.m in Sources */,
 				38FF1E5421F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m in Sources */,
 				38717AEA2255F81B0020955F /* AnchorViewController.swift in Sources */,
