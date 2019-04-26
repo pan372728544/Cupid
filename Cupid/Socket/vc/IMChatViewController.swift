@@ -8,15 +8,17 @@
 
 import UIKit
 
+private let viewBottom_Height : CGFloat =   60
+private let viewBottom_H : CGFloat =  Bottom_H + 60
 
 class IMChatViewController: ZJBaseViewController {
     
-    fileprivate var viewBottom_Height : CGFloat =   60
-    fileprivate var viewBottom_H : CGFloat =  Bottom_H + 60
     fileprivate var isScrolling : Bool = false
     
     // 聊天列表数据
     fileprivate var  group : GroupMessage
+    // 定时器
+    fileprivate var heartBeatTimer : Timer?
 
     // 输入框
     fileprivate lazy var textField : ChatInputTextField = {
@@ -81,12 +83,19 @@ class IMChatViewController: ZJBaseViewController {
     }
     
     deinit {
+        heartBeatTimer?.invalidate()
+        heartBeatTimer = nil
         NotificationCenter.default.removeObserver(self)
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        socketClient.sendLeaveRoom()
+    }
 
 }
 
+// MARK:- 键盘通知
 extension IMChatViewController {
     // 通知
     func registerNotification(){
@@ -111,9 +120,9 @@ extension IMChatViewController {
         let y = endFrame.origin.y
         // 3.执行动画
         UIView.animate(withDuration: duration) {
-            self.viewBottom.frame.origin.y = y - self.viewBottom_Height
+            self.viewBottom.frame.origin.y = y - viewBottom_Height
         }
-        self.tableView.frame.size.height = Screen_H-NavaBar_H - endFrame.size.height-self.viewBottom_Height
+        self.tableView.frame.size.height = Screen_H-NavaBar_H - endFrame.size.height-viewBottom_Height
         // 滚动到tableview底部
         scrollToEnd()
     }
@@ -125,7 +134,7 @@ extension IMChatViewController {
 
         //2.执行动画
         UIView.animate(withDuration: duration) {
-            self.viewBottom.frame.origin.y = Screen_H - self.viewBottom_H
+            self.viewBottom.frame.origin.y = Screen_H - viewBottom_H
         }
         self.tableView.frame.size.height = Screen_H-NavaBar_H-viewBottom_H
     }
@@ -170,14 +179,14 @@ extension IMChatViewController {
     }
 }
 
+// MARK:- 代理
 extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextFieldDelegate,BaseViewControllerPangestureDelegate {
     
     func panGesture(_ pan: UIPanGestureRecognizer!) {
 
     }
     
-    
-    // tabview代理
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return msgArray.count
     }
@@ -219,6 +228,7 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     
 }
 
+// MARK:-连接服务器
 extension IMChatViewController {
     
     func connectServer() {
@@ -232,6 +242,8 @@ extension IMChatViewController {
                     socketClient.sendJoinRoom()
                     // 接受消息
                     socketClient.startReadMsg()
+                    // 发送心跳包
+                    self.addHeartBeatTimer()
                 }
             }
         }
@@ -248,6 +260,7 @@ extension IMChatViewController {
     }
 }
 
+// MARK:- socket代理
 extension IMChatViewController : ZJSocketDelegate {
     
     func socket(_ socket: ZJSocket, groupMsg: GroupMessage) {
@@ -274,6 +287,20 @@ extension IMChatViewController : ZJSocketDelegate {
  
 }
 
+// MARK:- 给服务器发送即时消息
+extension IMChatViewController {
+    
+    fileprivate func addHeartBeatTimer() {
+        heartBeatTimer = Timer(fireAt: Date(), interval: 9, target: self, selector: #selector(sendHeartBeat), userInfo: nil, repeats: true)
+        RunLoop.main.add(heartBeatTimer!, forMode: RunLoop.Mode.common)
+    }
+    
+    @objc fileprivate func sendHeartBeat() {
+        socketClient.sendHeartBeat()
+    }
+}
+
+// MARK:- 点击事件
 extension IMChatViewController {
 
     // 返回上一页面
