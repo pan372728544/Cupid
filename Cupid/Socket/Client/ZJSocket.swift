@@ -24,7 +24,7 @@ class ZJSocket : NSObject{
     fileprivate var tcpClient : TCPClient
 
 //    var imgs : [String] = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091375677&di=b77ddcda0fdcb6e4062b63c2e349cd09&imgtype=0&src=http%3A%2F%2Fimg.storage.17wanba.org.cn%2Fgame%2F2016%2F05%2F10%2Fd729d853b0519256f9c6189e6f9eb457.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091346923&di=94a030de1baced5369065862835fad23&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F010b0d5541ef6c000001714a5ae2e9.jpg%402o.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091569946&di=e9d9569824014cb2733c8ceb10c19ad4&imgtype=0&src=http%3A%2F%2Fimg.7xz.com%2Fimg%2Fpicimg%2F201607%2F20160728163406_389ae972b1283f76160.jpg","http://img.qqzhi.com/upload/img_1_3452678024D953860635_23.jpg"]
-    
+//    fileprivate let timer : Timer
     fileprivate var userInfo : UserInfo.Builder = {
 
         var imgs : [String] =  ["1.jpeg","2.jpeg","3.jpeg","4.jpeg"]
@@ -73,44 +73,10 @@ extension ZJSocket {
     // 读取消息
     func startReadMsg()  {
         // 开启线程读取消息
-        DispatchQueue.global().async {
-            print("客户端读取消息。。。\(Thread.current)")
-      
-            while true {
-       
-                // 读取4个长度
-                guard let lMsg = self.tcpClient.read(4) else {
-                    continue
-                }
-                // 1.读取长度的data
-                let headData = Data(bytes: lMsg, count: 4)
-                var length : Int = 0
-                (headData as NSData).getBytes(&length, length: 4)
-                
-                // 2.读取类型
-                guard let typeMsg = self.tcpClient.read(2) else {
-                    return
-                }
-                let typeData = Data(bytes: typeMsg, count: 2)
-                var type : Int = 0
-                (typeData as NSData).getBytes(&type, length: 2)
-                
-                // 3.根据长度, 读取真实消息
-                guard let msg = self.tcpClient.read(length) else {
-                    return
-                }
-                let data = Data(bytes: msg, count: length)
-                
-                // 4.处理消息
-                DispatchQueue.main.async {
-                    self.handleMsg(type: type, data: data)
-                }
-                
-                
-                
-            }
-            
-        }
+        print("客户端读取消息。。。\(Thread.current)")
+        let timer = Timer(fireAt: Date(), interval: 0.2, target: self, selector: #selector(self.readMessage), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer, forMode: RunLoop.Mode.default)
+        timer.fire()
     }
     
     // 处理消息
@@ -133,8 +99,47 @@ extension ZJSocket {
     }
 }
 
-
+// MARK:- 异步读取消息
 extension ZJSocket {
+    @objc func readMessage()  {
+        
+        DispatchQueue.global().async {
+            // 读取4个长度
+            guard let lMsg = self.tcpClient.read(4) else {
+                return
+            }
+            // 1.读取长度的data
+            let headData = Data(bytes: lMsg, count: 4)
+            var length : Int = 0
+            (headData as NSData).getBytes(&length, length: 4)
+            
+            // 2.读取类型
+            guard let typeMsg = self.tcpClient.read(2) else {
+                return
+            }
+            let typeData = Data(bytes: typeMsg, count: 2)
+            var type : Int = 0
+            (typeData as NSData).getBytes(&type, length: 2)
+            
+            // 3.根据长度, 读取真实消息
+            guard let msg = self.tcpClient.read(length) else {
+                return
+            }
+            let data = Data(bytes: msg, count: length)
+            
+            // 4.处理消息
+            DispatchQueue.main.async {
+                self.handleMsg(type: type, data: data)
+            }
+        }
+
+    }
+    
+}
+
+// MARK:- 发送不同类型消息
+extension ZJSocket {
+    
     func sendJoinRoom() {
         // 用户信息
         let msgData = (try! userInfo.build()).data()
