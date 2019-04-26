@@ -75,7 +75,7 @@ extension ZJSocket {
         startReadMsg()  {
         // 开启线程读取消息
         print("客户端读取消息。。。\(Thread.current)")
-        let timer = Timer(fireAt: Date(), interval: 0.2, target: self, selector: #selector(self.readMessage), userInfo: nil, repeats: true)
+        let timer = Timer(fireAt: Date(), interval: 0.1, target: self, selector: #selector(self.readMessage), userInfo: nil, repeats: true)
         RunLoop.current.add(timer, forMode: RunLoop.Mode.default)
         timer.fire()
     }
@@ -89,13 +89,15 @@ extension ZJSocket {
         case 2:
             let chatMsg = try! TextMessage.parseFrom(data: data)
             delegate?.socket(self, chatMsg: chatMsg)
-
             
         case 10:
             let group = try! GroupMessage.parseFrom(data: data)
             delegate?.socket(self, groupMsg: group)
         default:
-            print("未知类型")
+            self.alert(msg: "服务器异常，稍后重试") { () -> (Void) in
+            }
+            
+            print("未知类型: \(type)")
         }
     }
 }
@@ -250,4 +252,23 @@ extension ZJSocket {
             print("消息发送成功。。。")
         }
     }
+}
+
+// MARK:- 弹框
+extension ZJSocket {
+    
+    //弹出消息框
+    func alert(msg:String,after:()->(Void)){
+        let alertController = UIAlertController(title: "",
+                                                message: msg,
+                                                preferredStyle: .alert)
+      
+        UIApplication.shared.keyWindow?.rootViewController!.present(alertController, animated: true, completion: nil)
+        
+        //1.5秒后自动消失
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+            alertController.dismiss(animated: false, completion: nil)
+        }
+    }
+    
 }

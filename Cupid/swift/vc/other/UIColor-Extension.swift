@@ -20,7 +20,7 @@ extension UIColor {
     }
     // 标准红
     class func commonColor() -> UIColor {
-        return UIColor(r: CGFloat(222), g: CGFloat(74), b: CGFloat(67))
+        return UIColor(r: CGFloat(211), g: CGFloat(61), b: CGFloat(61))
     }
     
     // 聊天背景颜色

@@ -62,7 +62,10 @@ blue:(random() % 256) / 255.0  \
 alpha:1.0]
 
 
-#define COLOR_COMMONRED RGBAllColor(0xDE4A43)
+#define COLOR_COMMONRED [UIColor colorWithRed:211 / 255.0  \
+green:61 / 255.0  \
+blue:61 / 255.0  \
+alpha:1.0]
 
 
 #define WEAKSELF typeof(self) __weak weakSelf = self;

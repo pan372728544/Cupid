@@ -47,7 +47,7 @@ class ChatTableViewCell: UITableViewCell {
             
             contentLabel.frame.size.height = heightCell
             contentLabel.frame.size.width = widthCell
-            contentLabel.frame = CGRect(x: 15 + 40 + 10 + 10, y: nameLabel.frame.origin.y+nameLabel.frame.size.height + 10 , width: widthCell, height: heightCell)
+            contentLabel.frame = CGRect(x: 15 + 40 + 10 + 10 - 2, y: nameLabel.frame.origin.y+nameLabel.frame.size.height + 10 + 1.5, width: widthCell, height: heightCell)
             
             let oriImg = UIImage.init(named: "rechat")
             
@@ -90,6 +90,7 @@ extension ChatTableViewCell {
         contentLabel.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         contentLabel.numberOfLines = 0
         contentLabel.font = UIFont.systemFont(ofSize: 16)
+//        contentLabel.backgroundColor = UIColor.randomColor()
         self.contentView.addSubview(contentLabel)
         
     }

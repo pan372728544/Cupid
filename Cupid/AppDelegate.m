@@ -21,7 +21,8 @@
    
     [self initViews];
 //    return YES;
-    
+
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [GeneratedPluginRegistrant registerWithRegistry:self];
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }

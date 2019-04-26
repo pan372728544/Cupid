@@ -49,7 +49,7 @@ class ChatTableViewMeCell: UITableViewCell {
             
             contentLabel.frame.size.height = heightCell
             contentLabel.frame.size.width = widthCell
-            contentLabel.frame = CGRect(x: Screen_W-15-40-10-widthCell-5, y: nameLabel.frame.origin.y+nameLabel.frame.size.height + 10, width: widthCell, height: heightCell)
+            contentLabel.frame = CGRect(x: Screen_W-15-40-10-widthCell-7, y: nameLabel.frame.origin.y+nameLabel.frame.size.height + 10 + 1.5, width: widthCell, height: heightCell)
             
             let oriImg = UIImage.init(named: "sendchat")
             
@@ -99,6 +99,7 @@ extension ChatTableViewMeCell {
         contentLabel.numberOfLines = 0
         contentLabel.font = UIFont.systemFont(ofSize: 16)
         contentLabel.textAlignment = NSTextAlignment.right
+//        contentLabel.backgroundColor = UIColor.randomColor()
         self.contentView.addSubview(contentLabel)
 
         

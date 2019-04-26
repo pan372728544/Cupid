@@ -74,6 +74,7 @@ extension TabChatViewController {
         self.tableView.register(TabChatTableViewCell.self, forCellReuseIdentifier: "TabChatTableViewCell")
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.backgroundColor = UIColor.white
         view.addSubview(self.tableView)
         
     }
