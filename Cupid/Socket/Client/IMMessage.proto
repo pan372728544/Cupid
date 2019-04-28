@@ -13,6 +13,7 @@ message TextMessage {
     required string chatId = 3;
     optional string toUserId = 4;
     required string chatType = 5;
+    optional string success = 6;
 }
 
 message GroupMessage {

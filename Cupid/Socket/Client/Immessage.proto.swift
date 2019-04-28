@@ -417,6 +417,7 @@ final public class TextMessage : GeneratedMessage {
         fieldCheck = fieldCheck && (lhs.hasChatId == rhs.hasChatId) && (!lhs.hasChatId || lhs.chatId == rhs.chatId)
         fieldCheck = fieldCheck && (lhs.hasToUserId == rhs.hasToUserId) && (!lhs.hasToUserId || lhs.toUserId == rhs.toUserId)
         fieldCheck = fieldCheck && (lhs.hasChatType == rhs.hasChatType) && (!lhs.hasChatType || lhs.chatType == rhs.chatType)
+        fieldCheck = fieldCheck && (lhs.hasSuccess == rhs.hasSuccess) && (!lhs.hasSuccess || lhs.success == rhs.success)
         fieldCheck = (fieldCheck && (lhs.unknownFields == rhs.unknownFields))
         return fieldCheck
     }
@@ -434,6 +435,9 @@ final public class TextMessage : GeneratedMessage {
 
     public fileprivate(set) var chatType:String! = nil
     public fileprivate(set) var hasChatType:Bool = false
+
+    public fileprivate(set) var success:String! = nil
+    public fileprivate(set) var hasSuccess:Bool = false
 
     required public init() {
         super.init()
@@ -469,6 +473,9 @@ final public class TextMessage : GeneratedMessage {
         if hasChatType {
             try codedOutputStream.writeString(fieldNumber: 5, value:chatType)
         }
+        if hasSuccess {
+            try codedOutputStream.writeString(fieldNumber: 6, value:success)
+        }
         try unknownFields.writeTo(codedOutputStream: codedOutputStream)
     }
     override public func serializedSize() -> Int32 {
@@ -494,6 +501,9 @@ final public class TextMessage : GeneratedMessage {
         }
         if hasChatType {
             serialize_size += chatType.computeStringSize(fieldNumber: 5)
+        }
+        if hasSuccess {
+            serialize_size += success.computeStringSize(fieldNumber: 6)
         }
         serialize_size += unknownFields.serializedSize()
         memoizedSerializedSize = serialize_size
@@ -535,6 +545,9 @@ final public class TextMessage : GeneratedMessage {
         if hasChatType {
             jsonMap["chatType"] = chatType
         }
+        if hasSuccess {
+            jsonMap["success"] = success
+        }
         return jsonMap
     }
     override class public func decode(jsonMap:Dictionary<String,Any>) throws -> TextMessage {
@@ -564,6 +577,9 @@ final public class TextMessage : GeneratedMessage {
         if hasChatType {
             output += "\(indent) chatType: \(String(describing: chatType)) \n"
         }
+        if hasSuccess {
+            output += "\(indent) success: \(String(describing: success)) \n"
+        }
         output += unknownFields.getDescription(indent: indent)
         return output
     }
@@ -586,6 +602,9 @@ final public class TextMessage : GeneratedMessage {
             }
             if hasChatType {
                 hashCode = (hashCode &* 31) &+ chatType.hashValue
+            }
+            if hasSuccess {
+                hashCode = (hashCode &* 31) &+ success.hashValue
             }
             hashCode = (hashCode &* 31) &+  unknownFields.hashValue
             return hashCode
@@ -766,6 +785,31 @@ final public class TextMessage : GeneratedMessage {
             builderResult.chatType = nil
             return self
         }
+        public var success:String {
+            get {
+                return builderResult.success
+            }
+            set (value) {
+                builderResult.hasSuccess = true
+                builderResult.success = value
+            }
+        }
+        public var hasSuccess:Bool {
+            get {
+                return builderResult.hasSuccess
+            }
+        }
+        @discardableResult
+        public func setSuccess(_ value:String) -> TextMessage.Builder {
+            self.success = value
+            return self
+        }
+        @discardableResult
+        public func clearSuccess() -> TextMessage.Builder{
+            builderResult.hasSuccess = false
+            builderResult.success = nil
+            return self
+        }
         override public var internalGetResult:GeneratedMessage {
             get {
                 return builderResult
@@ -807,6 +851,9 @@ final public class TextMessage : GeneratedMessage {
             if other.hasChatType {
                 chatType = other.chatType
             }
+            if other.hasSuccess {
+                success = other.success
+            }
             try merge(unknownField: other.unknownFields)
             return self
         }
@@ -844,6 +891,9 @@ final public class TextMessage : GeneratedMessage {
                 case 42:
                     chatType = try codedInputStream.readString()
 
+                case 50:
+                    success = try codedInputStream.readString()
+
                 default:
                     if (!(try parse(codedInputStream:codedInputStream, unknownFields:unknownFieldsBuilder, extensionRegistry:extensionRegistry, tag:protobufTag))) {
                         unknownFields = try unknownFieldsBuilder.build()
@@ -869,6 +919,9 @@ final public class TextMessage : GeneratedMessage {
             }
             if let jsonValueChatType = jsonMap["chatType"] as? String {
                 resultDecodedBuilder.chatType = jsonValueChatType
+            }
+            if let jsonValueSuccess = jsonMap["success"] as? String {
+                resultDecodedBuilder.success = jsonValueSuccess
             }
             return resultDecodedBuilder
         }
@@ -1369,6 +1422,7 @@ extension TextMessage: GeneratedMessageProtocol {
         case "chatId": return self.chatId
         case "toUserId": return self.toUserId
         case "chatType": return self.chatType
+        case "success": return self.success
         default: return nil
         }
     }
@@ -1383,6 +1437,7 @@ extension TextMessage.Builder: GeneratedMessageBuilderProtocol {
             case "chatId": return self.chatId
             case "toUserId": return self.toUserId
             case "chatType": return self.chatType
+            case "success": return self.success
             default: return nil
             }
         }
@@ -1413,6 +1468,11 @@ extension TextMessage.Builder: GeneratedMessageBuilderProtocol {
                     return
                 }
                 self.chatType = newSubscriptValue
+            case "success":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.success = newSubscriptValue
             default: return
             }
         }

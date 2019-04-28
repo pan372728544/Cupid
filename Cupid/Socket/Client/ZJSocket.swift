@@ -145,7 +145,7 @@ extension ZJSocket {
         sendMsg(data: msgData, type: 1)
     }
     @discardableResult
-    func sendTextMsg(message : String, group : GroupMessage) -> (re: Result,da: Data) {
+    func sendTextMsg(message : String, group : GroupMessage) -> (re: Result,da: Data,ch: TextMessage.Builder) {
         
         // 发送消息
         let chatMsg = TextMessage.Builder()
@@ -161,6 +161,9 @@ extension ZJSocket {
         // 聊天ID
         chatMsg.chatId = "\(chatMsg.user.userId!)_\( chatMsg.toUserId)"
         
+        // 发送成功标示
+        chatMsg.success = "true"
+        
         // 聊天类型
         if group.groupId != 1004 {
             chatMsg.chatType = "1"
@@ -173,7 +176,7 @@ extension ZJSocket {
         
         // 发送消息到服务器
         let result = sendMsg(data: chatData, type: 2)
-        return (result,chatData)
+        return (result,chatData,chatMsg)
     }
     
     // 获取聊天列表

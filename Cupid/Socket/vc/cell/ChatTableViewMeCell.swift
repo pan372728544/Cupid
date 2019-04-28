@@ -69,9 +69,9 @@ class ChatTableViewMeCell: UITableViewCell {
             } else {
                 contentLabel.textAlignment = NSTextAlignment.right
             }
-            
-//            imgFaild =
 
+            imgFaild.frame = CGRect(x: imgPao.frame.origin.x-15, y: imgPao.frame.origin.y + 4, width: 20, height: 20)
+            imgFaild.isHidden = textMes?.success == "true"
         }
 
     }

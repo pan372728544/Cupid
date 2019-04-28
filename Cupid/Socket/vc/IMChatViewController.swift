@@ -17,10 +17,9 @@ class IMChatViewController: ZJBaseViewController {
     
     // 聊天列表数据
     fileprivate var  group : GroupMessage
-    fileprivate var isSuccess : Bool = true
     // 定时器
     fileprivate var heartBeatTimer : Timer?
-    fileprivate var socket : ZJSocket = ZJSocket(addr: "10.2.116.43", port: 7878)
+    fileprivate var socketClient : ZJSocket = ZJSocket(addr: "10.2.116.43", port: 7878)
     // 输入框
     fileprivate lazy var textField : ChatInputTextField = {
        
@@ -51,7 +50,6 @@ class IMChatViewController: ZJBaseViewController {
     // 输入视图
     fileprivate  var viewBottom : UIView = UIView()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -92,7 +90,7 @@ class IMChatViewController: ZJBaseViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        socket.sendLeaveRoom()
+        socketClient.sendLeaveRoom()
     }
 
 }
@@ -203,7 +201,6 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
         if String(LogInName!.prefix(count-4)) == msg.user.name {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewMeCell") as! ChatTableViewMeCell
             cell.textMes = msg
-            cell.isSuccess = isSuccess
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as! ChatTableViewCell
@@ -239,14 +236,14 @@ extension IMChatViewController {
     func connectServer() {
         
         DispatchQueue.global().async {
-            if self.socket.connectServer().isSuccess {
+            if self.socketClient.connectServer().isSuccess {
                 print("连接会话成功")
                 DispatchQueue.main.async {
-                    self.socket.delegate = self
+                    self.socketClient.delegate = self
                     // 进入会话
-                    self.socket.sendJoinRoom()
+                    self.socketClient.sendJoinRoom()
                     // 接受消息
-                    self.socket.startReadMsg()
+                    self.socketClient.startReadMsg()
                     // 发送心跳包
                     self.addHeartBeatTimer()
                 }
@@ -301,7 +298,7 @@ extension IMChatViewController {
     }
     
     @objc fileprivate func sendHeartBeat() {
-        socket.sendHeartBeat()
+        socketClient.sendHeartBeat()
     }
 }
 
@@ -325,17 +322,17 @@ extension IMChatViewController {
     // 发送消息
     @objc func sendClick()  {
         
-        let cupid =  socket.sendTextMsg(message: self.textField.text ?? "", group: group)
+        let cupid =  socketClient.sendTextMsg(message: self.textField.text ?? "", group: group)
         
         if cupid.re.isSuccess {
-            self.isSuccess =  true
             print("消息发送成功了")
         } else {
-            
-            let chatMsg = try! TextMessage.parseFrom(data: cupid.da)
-            socket(self.socket, chatMsg: chatMsg)
-            self.isSuccess = false
-            print("消息发送失败")
+
+            let chatMsgBuild = cupid.ch
+            chatMsgBuild.success = "false"
+            let chatMsg = try! chatMsgBuild.build()
+            socket(self.socketClient, chatMsg: chatMsg)
+            print("消息发送失败\(chatMsg)")
             
         }
         
