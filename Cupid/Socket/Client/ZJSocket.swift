@@ -47,6 +47,8 @@ class ZJSocket : NSObject{
         return userInfo
     }()
     
+    // 记录之前的时间c
+    fileprivate var timeOld : String = ""
     fileprivate var isConnected : Bool = false
     init(addr: String, port : Int32) {
         // 创建TCP
@@ -164,6 +166,15 @@ extension ZJSocket {
         // 发送成功标示
         chatMsg.success = "true"
         
+        // 发送时间
+        let currentData = Date()
+        let dataFormatter = DateFormatter()
+        dataFormatter.dateFormat = "YYYY-MM-dd HH:mm"
+        let customDate = dataFormatter.string(from: currentData)
+        if timeOld != customDate {
+            chatMsg.sendTime = "\(customDate)"
+            timeOld = chatMsg.sendTime
+        }
         // 聊天类型
         if group.groupId != 1004 {
             chatMsg.chatType = "1"

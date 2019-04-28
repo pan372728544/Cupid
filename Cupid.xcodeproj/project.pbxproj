@@ -214,6 +214,8 @@
 		38CC1DBA22718C6C00DD22D5 /* sendchat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38CC1DB822718C6B00DD22D5 /* sendchat@3x.png */; };
 		38CC1DBD22718C9400DD22D5 /* rechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38CC1DBB22718C9400DD22D5 /* rechat@2x.png */; };
 		38CC1DBE22718C9400DD22D5 /* rechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38CC1DBC22718C9400DD22D5 /* rechat@3x.png */; };
+		38ECA73C22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ECA73A22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png */; };
+		38ECA73D22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ECA73B22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png */; };
 		38FF1E5421F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */; };
 		38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */; };
 		38FF1EDE21FADEF500A3CA7F /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1EDD21FADEF500A3CA7F /* VideoDetailViewController.m */; };
@@ -514,6 +516,8 @@
 		38CC1DB822718C6B00DD22D5 /* sendchat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sendchat@3x.png"; sourceTree = "<group>"; };
 		38CC1DBB22718C9400DD22D5 /* rechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rechat@2x.png"; sourceTree = "<group>"; };
 		38CC1DBC22718C9400DD22D5 /* rechat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rechat@3x.png"; sourceTree = "<group>"; };
+		38ECA73A22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png"; sourceTree = "<group>"; };
+		38ECA73B22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png"; sourceTree = "<group>"; };
 		38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WKWebVIew.m"; sourceTree = "<group>"; };
 		38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HybridNSURLProtocol.m; sourceTree = "<group>"; };
 		38FF1E5221F9C81200A3CA7F /* HybridNSURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HybridNSURLProtocol.h; sourceTree = "<group>"; };
@@ -847,6 +851,8 @@
 		386392E921E8709F00A834EE /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				38ECA73A22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png */,
+				38ECA73B22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png */,
 				3849D5652275676400F4222C /* MessageListSendFail~iphone.png */,
 				3849D5662275676400F4222C /* MessageListSendFail~iphone@2x.png */,
 				38CC1DB722718C6B00DD22D5 /* sendchat@2x.png */,
@@ -1365,6 +1371,7 @@
 				3863934521E8733100A834EE /* video_tabbar_night_32x32_@3x.png in Resources */,
 				3863934621E8733100A834EE /* video_tabbar_press_32x32_@3x.png in Resources */,
 				38FF1EF921FEE34B00A3CA7F /* close_channel_24x24_@2x.png in Resources */,
+				38ECA73D22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png in Resources */,
 				3863932D21E872F600A834EE /* no_login_tabbar_press_33x32_@2x.png in Resources */,
 				386392FA21E8718300A834EE /* addfriend_tabbar_32x32_@2x.png in Resources */,
 				3863932421E872E400A834EE /* mine_tabbar_press_night_33x32_@2x.png in Resources */,
@@ -1377,6 +1384,7 @@
 				3863934421E8733100A834EE /* video_tabbar_press_32x32_@2x.png in Resources */,
 				3863930121E8718300A834EE /* addfriend_tabbar_press_night_32x32_@2x.png in Resources */,
 				38C20A8421EDE3CB007C4CB7 /* feed_dislike_arrow_left_10x16_@2x.png in Resources */,
+				38ECA73C22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png in Resources */,
 				3863934D21E87ECA00A834EE /* addicon_channel_12x12_@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

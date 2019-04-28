@@ -14,7 +14,8 @@ private let viewBottom_H : CGFloat =  Bottom_H + 60
 class IMChatViewController: ZJBaseViewController {
     
     fileprivate var isScrolling : Bool = false
-    
+    // 记录之前的时间c
+    fileprivate var timeOld : String = ""
     // 聊天列表数据
     fileprivate var  group : GroupMessage
     // 定时器
@@ -196,7 +197,9 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let msg : TextMessage = msgArray[indexPath.row]
-
+        
+       print("\(msg.sendTime)====")
+        
         let count = LogInName!.count
         if String(LogInName!.prefix(count-4)) == msg.user.name {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewMeCell") as! ChatTableViewMeCell
@@ -214,7 +217,10 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let msg : TextMessage = msgArray[indexPath.row]
-        return heightOfCell(text: msg.text) + 60
+        if msg.sendTime != nil {
+            return heightOfCell(text: msg.text) + 45 + 40
+        }
+        return heightOfCell(text: msg.text) + 45
 
     }
     

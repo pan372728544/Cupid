@@ -418,6 +418,7 @@ final public class TextMessage : GeneratedMessage {
         fieldCheck = fieldCheck && (lhs.hasToUserId == rhs.hasToUserId) && (!lhs.hasToUserId || lhs.toUserId == rhs.toUserId)
         fieldCheck = fieldCheck && (lhs.hasChatType == rhs.hasChatType) && (!lhs.hasChatType || lhs.chatType == rhs.chatType)
         fieldCheck = fieldCheck && (lhs.hasSuccess == rhs.hasSuccess) && (!lhs.hasSuccess || lhs.success == rhs.success)
+        fieldCheck = fieldCheck && (lhs.hasSendTime == rhs.hasSendTime) && (!lhs.hasSendTime || lhs.sendTime == rhs.sendTime)
         fieldCheck = (fieldCheck && (lhs.unknownFields == rhs.unknownFields))
         return fieldCheck
     }
@@ -438,6 +439,9 @@ final public class TextMessage : GeneratedMessage {
 
     public fileprivate(set) var success:String! = nil
     public fileprivate(set) var hasSuccess:Bool = false
+
+    public fileprivate(set) var sendTime:String! = nil
+    public fileprivate(set) var hasSendTime:Bool = false
 
     required public init() {
         super.init()
@@ -476,6 +480,9 @@ final public class TextMessage : GeneratedMessage {
         if hasSuccess {
             try codedOutputStream.writeString(fieldNumber: 6, value:success)
         }
+        if hasSendTime {
+            try codedOutputStream.writeString(fieldNumber: 7, value:sendTime)
+        }
         try unknownFields.writeTo(codedOutputStream: codedOutputStream)
     }
     override public func serializedSize() -> Int32 {
@@ -504,6 +511,9 @@ final public class TextMessage : GeneratedMessage {
         }
         if hasSuccess {
             serialize_size += success.computeStringSize(fieldNumber: 6)
+        }
+        if hasSendTime {
+            serialize_size += sendTime.computeStringSize(fieldNumber: 7)
         }
         serialize_size += unknownFields.serializedSize()
         memoizedSerializedSize = serialize_size
@@ -548,6 +558,9 @@ final public class TextMessage : GeneratedMessage {
         if hasSuccess {
             jsonMap["success"] = success
         }
+        if hasSendTime {
+            jsonMap["sendTime"] = sendTime
+        }
         return jsonMap
     }
     override class public func decode(jsonMap:Dictionary<String,Any>) throws -> TextMessage {
@@ -580,6 +593,9 @@ final public class TextMessage : GeneratedMessage {
         if hasSuccess {
             output += "\(indent) success: \(String(describing: success)) \n"
         }
+        if hasSendTime {
+            output += "\(indent) sendTime: \(String(describing: sendTime)) \n"
+        }
         output += unknownFields.getDescription(indent: indent)
         return output
     }
@@ -605,6 +621,9 @@ final public class TextMessage : GeneratedMessage {
             }
             if hasSuccess {
                 hashCode = (hashCode &* 31) &+ success.hashValue
+            }
+            if hasSendTime {
+                hashCode = (hashCode &* 31) &+ sendTime.hashValue
             }
             hashCode = (hashCode &* 31) &+  unknownFields.hashValue
             return hashCode
@@ -810,6 +829,31 @@ final public class TextMessage : GeneratedMessage {
             builderResult.success = nil
             return self
         }
+        public var sendTime:String {
+            get {
+                return builderResult.sendTime
+            }
+            set (value) {
+                builderResult.hasSendTime = true
+                builderResult.sendTime = value
+            }
+        }
+        public var hasSendTime:Bool {
+            get {
+                return builderResult.hasSendTime
+            }
+        }
+        @discardableResult
+        public func setSendTime(_ value:String) -> TextMessage.Builder {
+            self.sendTime = value
+            return self
+        }
+        @discardableResult
+        public func clearSendTime() -> TextMessage.Builder{
+            builderResult.hasSendTime = false
+            builderResult.sendTime = nil
+            return self
+        }
         override public var internalGetResult:GeneratedMessage {
             get {
                 return builderResult
@@ -854,6 +898,9 @@ final public class TextMessage : GeneratedMessage {
             if other.hasSuccess {
                 success = other.success
             }
+            if other.hasSendTime {
+                sendTime = other.sendTime
+            }
             try merge(unknownField: other.unknownFields)
             return self
         }
@@ -894,6 +941,9 @@ final public class TextMessage : GeneratedMessage {
                 case 50:
                     success = try codedInputStream.readString()
 
+                case 58:
+                    sendTime = try codedInputStream.readString()
+
                 default:
                     if (!(try parse(codedInputStream:codedInputStream, unknownFields:unknownFieldsBuilder, extensionRegistry:extensionRegistry, tag:protobufTag))) {
                         unknownFields = try unknownFieldsBuilder.build()
@@ -922,6 +972,9 @@ final public class TextMessage : GeneratedMessage {
             }
             if let jsonValueSuccess = jsonMap["success"] as? String {
                 resultDecodedBuilder.success = jsonValueSuccess
+            }
+            if let jsonValueSendTime = jsonMap["sendTime"] as? String {
+                resultDecodedBuilder.sendTime = jsonValueSendTime
             }
             return resultDecodedBuilder
         }
@@ -1423,6 +1476,7 @@ extension TextMessage: GeneratedMessageProtocol {
         case "toUserId": return self.toUserId
         case "chatType": return self.chatType
         case "success": return self.success
+        case "sendTime": return self.sendTime
         default: return nil
         }
     }
@@ -1438,6 +1492,7 @@ extension TextMessage.Builder: GeneratedMessageBuilderProtocol {
             case "toUserId": return self.toUserId
             case "chatType": return self.chatType
             case "success": return self.success
+            case "sendTime": return self.sendTime
             default: return nil
             }
         }
@@ -1473,6 +1528,11 @@ extension TextMessage.Builder: GeneratedMessageBuilderProtocol {
                     return
                 }
                 self.success = newSubscriptValue
+            case "sendTime":
+                guard let newSubscriptValue = newSubscriptValue as? String else {
+                    return
+                }
+                self.sendTime = newSubscriptValue
             default: return
             }
         }

@@ -10,6 +10,9 @@ import UIKit
 
 class ChatTableViewMeCell: UITableViewCell {
     
+    
+    internal var timeLabel : UILabel = UILabel()
+    
     internal var imgTou: UIImageView = UIImageView()
     
     internal var nameLabel : UILabel = UILabel()
@@ -39,21 +42,25 @@ class ChatTableViewMeCell: UITableViewCell {
     
     var textMes : TextMessage? {
         didSet {
-            
-            let url : URL =  URL(string: textMes!.user.iconUrl)!
-            
-            //            imgTou.sd_setImage(with: url)
+            timeLabel.isHidden = true
+            if textMes?.sendTime != nil {
+                timeLabel.text = textMes?.sendTime
+                timeLabel.isHidden = false
+            }
+
             imgTou.image = UIImage.init(named: textMes!.user.iconUrl)
+            imgTou.frame.origin.y = textMes?.sendTime != nil ? 15+40 : 15
             
             nameLabel.text = textMes?.user.name
+            nameLabel.frame.origin.y = imgTou.frame.origin.y
             contentLabel.text = textMes?.text
             let heightCell =  heightOfCell(text: contentLabel.text ?? "")
             let widthCell = widthOfCell(text: contentLabel.text ?? "")
             
             contentLabel.frame.size.height = heightCell
             contentLabel.frame.size.width = widthCell
-            contentLabel.frame = CGRect(x: Screen_W-15-40-10-widthCell-7, y: nameLabel.frame.origin.y+nameLabel.frame.size.height + 10 + 1.5, width: widthCell, height: heightCell)
-            
+//            contentLabel.frame = CGRect(x: Screen_W-15-40-10-widthCell-10+4, y: nameLabel.frame.origin.y+nameLabel.frame.size.height + 10+1.5 , width: widthCell, height: heightCell)
+            contentLabel.frame = CGRect(x: Screen_W-15-40-10-widthCell-10+4, y: imgTou.frame.origin.y+10+1.5 , width: widthCell, height: heightCell)
             let oriImg = UIImage.init(named: "sendchat")
             
             let edgeInsets = UIEdgeInsets(top: oriImg!.size.height*0.7, left: oriImg!.size.width*0.3, bottom: oriImg!.size.height*0.29, right: oriImg!.size.width*0.3)
@@ -61,7 +68,7 @@ class ChatTableViewMeCell: UITableViewCell {
             
             let resiImg = oriImg!.resizableImage(withCapInsets: edgeInsets, resizingMode: UIImage.ResizingMode.stretch)
             // 计算图片尺寸
-            imgPao.frame = CGRect(x: Screen_W-15-40-10-widthCell - 20, y: nameLabel.frame.origin.y+nameLabel.frame.size.height , width: widthCell + 25, height: heightCell + 30)
+            imgPao.frame = CGRect(x: Screen_W-15-40-10-widthCell - 18  , y: imgTou.frame.origin.y , width: widthCell + 25, height: heightCell + 30)
             imgPao.image = resiImg
 
             if  heightCell > 20 {
@@ -72,6 +79,7 @@ class ChatTableViewMeCell: UITableViewCell {
 
             imgFaild.frame = CGRect(x: imgPao.frame.origin.x-15, y: imgPao.frame.origin.y + 4, width: 20, height: 20)
             imgFaild.isHidden = textMes?.success == "true"
+
         }
 
     }
@@ -91,16 +99,23 @@ class ChatTableViewMeCell: UITableViewCell {
 extension ChatTableViewMeCell {
     
     func setupView()  {
-        
-        imgTou.frame = CGRect(x: Screen_W - 15 - 40, y: 15, width: 40, height: 40)
+        timeLabel.frame = CGRect(x: 0, y: 10, width: Screen_W, height: 40)
+        timeLabel.textAlignment = NSTextAlignment.center
+        timeLabel.font = UIFont.systemFont(ofSize: 14)
+        timeLabel.textColor = UIColor.textNameColor()
+        self.contentView.addSubview(timeLabel)
+        imgTou.frame = CGRect(x: Screen_W - 15 - 40, y: 15 , width: 40, height: 40)
         imgTou.contentMode = .scaleAspectFill
         imgTou.clipsToBounds = true
         self.contentView.addSubview(imgTou)
+        
+
         
         nameLabel.frame = CGRect(x: imgTou.frame.origin.x - 10 - Screen_W + 100, y: 15, width: Screen_W - 100, height: 20)
         nameLabel.font = UIFont.systemFont(ofSize: 12)
         nameLabel.textColor = UIColor.textNameColor()
         nameLabel.textAlignment = NSTextAlignment.right
+        nameLabel.isHidden = true
         self.contentView.addSubview(nameLabel)
         
         
