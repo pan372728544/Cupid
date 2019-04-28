@@ -17,9 +17,10 @@ class IMChatViewController: ZJBaseViewController {
     
     // 聊天列表数据
     fileprivate var  group : GroupMessage
+    fileprivate var success : String = "y"
     // 定时器
     fileprivate var heartBeatTimer : Timer?
-
+    fileprivate var socket : ZJSocket = ZJSocket(addr: "10.2.116.43", port: 7878)
     // 输入框
     fileprivate lazy var textField : ChatInputTextField = {
        
@@ -57,8 +58,8 @@ class IMChatViewController: ZJBaseViewController {
         
         self.createNavBarView(withTitle:  self.group.user.name)
         self.createNavLeftBtn(withItem: "", target: self, action: #selector(backClick(button:)))
-        self.setRightTitleColro(UIColor.black)
-        self.setTitleColor(UIColor.white)
+//        self.setRightTitleColro(UIColor.black)
+//        self.setTitleColor(UIColor.white)
         self.delegate = self
         // 处理通知
         registerNotification()
@@ -91,7 +92,7 @@ class IMChatViewController: ZJBaseViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        socketClient.sendLeaveRoom()
+        socket.sendLeaveRoom()
     }
 
 }
@@ -171,6 +172,7 @@ extension IMChatViewController {
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 10.0
         textField.becomeFirstResponder()
+        textField.returnKeyType = .send
         btnSend.setTitle("发送", for: UIControl.State.normal)
         btnSend.addTarget(self, action: #selector(sendClick), for: UIControl.Event.touchUpInside)
         btnSend.backgroundColor = UIColor.clear
@@ -201,6 +203,7 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
         if String(LogInName!.prefix(count-4)) == msg.user.name {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewMeCell") as! ChatTableViewMeCell
             cell.textMes = msg
+            cell.success = success
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as! ChatTableViewCell
@@ -236,14 +239,14 @@ extension IMChatViewController {
     func connectServer() {
         
         DispatchQueue.global().async {
-            if socketClient.connectServer().isSuccess {
+            if self.socket.connectServer().isSuccess {
                 print("连接会话成功")
                 DispatchQueue.main.async {
-                    socketClient.delegate = self
+                    self.socket.delegate = self
                     // 进入会话
-                    socketClient.sendJoinRoom()
+                    self.socket.sendJoinRoom()
                     // 接受消息
-                    socketClient.startReadMsg()
+                    self.socket.startReadMsg()
                     // 发送心跳包
                     self.addHeartBeatTimer()
                 }
@@ -298,7 +301,7 @@ extension IMChatViewController {
     }
     
     @objc fileprivate func sendHeartBeat() {
-        socketClient.sendHeartBeat()
+        socket.sendHeartBeat()
     }
 }
 
@@ -319,9 +322,23 @@ extension IMChatViewController {
         
     }
     
+    // 发送消息
     @objc func sendClick()  {
         
-        socketClient.sendTextMsg(message: self.textField.text ?? "", group: group)
+        let cupid =  socket.sendTextMsg(message: self.textField.text ?? "", group: group)
+        
+        if cupid.re.isSuccess {
+            self.success = "y"
+            print("消息发送成功了")
+        } else {
+            
+            let chatMsg = try! TextMessage.parseFrom(data: cupid.da)
+            socket(self.socket, chatMsg: chatMsg)
+            self.success = "n"
+            print("消息发送失败")
+            
+        }
+        
         self.textField.text = ""
     }
     

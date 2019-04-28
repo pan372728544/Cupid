@@ -47,6 +47,7 @@ class ZJSocket : NSObject{
         return userInfo
     }()
     
+    fileprivate var isConnected : Bool = false
     init(addr: String, port : Int32) {
         // 创建TCP
         tcpClient = TCPClient(address: addr, port: port )
@@ -59,7 +60,7 @@ extension ZJSocket {
     
     // 连接服务器
     func connectServer() -> Result {
-        
+        isConnected = true
         return tcpClient.connect(timeout: 5)
     }
     
@@ -71,13 +72,39 @@ extension ZJSocket {
     }
     
     // 读取消息
-    func
-        startReadMsg()  {
-        // 开启线程读取消息
-        print("客户端读取消息。。。\(Thread.current)")
-        let timer = Timer(fireAt: Date(), interval: 0.1, target: self, selector: #selector(self.readMessage), userInfo: nil, repeats: true)
-        RunLoop.current.add(timer, forMode: RunLoop.Mode.default)
-        timer.fire()
+    func startReadMsg() {
+        DispatchQueue.global().async {
+            while self.isConnected {
+                
+                Thread.sleep(forTimeInterval: 0.1)
+                // 1.取出长度消息
+                if let lengthMsg = self.tcpClient.read(4) {
+                    let lData = Data(bytes: lengthMsg, count: 4)
+                    var length : Int = 0
+                    (lData as NSData).getBytes(&length, length: 4)
+                    
+                    // 2.读取类型消息
+                    guard let typeMsg = self.tcpClient.read(2) else {
+                        return
+                    }
+                    
+                    var type : Int = 0
+                    let tdata = Data(bytes: typeMsg, count: 2)
+                    (tdata as NSData).getBytes(&type, length: 2)
+                    
+                    // 3.读取消息
+                    guard let msg = self.tcpClient.read(length) else {
+                        return
+                    }
+                    let msgData = Data(bytes: msg, count: length)
+                    
+                    // 4.消息转发出去
+                    DispatchQueue.main.async {
+                        self.handleMsg(type: type, data: msgData)
+                    }
+                }
+            }
+        }
     }
     
     // 处理消息
@@ -94,51 +121,12 @@ extension ZJSocket {
             let group = try! GroupMessage.parseFrom(data: data)
             delegate?.socket(self, groupMsg: group)
         default:
-            self.alert(msg: "服务器异常，稍后重试") { () -> (Void) in
-            }
-            
+
             print("未知类型: \(type)")
         }
     }
 }
 
-// MARK:- 异步读取消息
-extension ZJSocket {
-    @objc func readMessage()  {
-        
-        DispatchQueue.global().async {
-            // 读取4个长度
-            guard let lMsg = self.tcpClient.read(4) else {
-                return
-            }
-            // 1.读取长度的data
-            let headData = Data(bytes: lMsg, count: 4)
-            var length : Int = 0
-            (headData as NSData).getBytes(&length, length: 4)
-            
-            // 2.读取类型
-            guard let typeMsg = self.tcpClient.read(2) else {
-                return
-            }
-            let typeData = Data(bytes: typeMsg, count: 2)
-            var type : Int = 0
-            (typeData as NSData).getBytes(&type, length: 2)
-            
-            // 3.根据长度, 读取真实消息
-            guard let msg = self.tcpClient.read(length) else {
-                return
-            }
-            let data = Data(bytes: msg, count: length)
-            
-            // 4.处理消息
-            DispatchQueue.main.async {
-                self.handleMsg(type: type, data: data)
-            }
-        }
-
-    }
-    
-}
 
 // MARK:- 发送不同类型消息
 extension ZJSocket {
@@ -156,8 +144,8 @@ extension ZJSocket {
         // 发送
         sendMsg(data: msgData, type: 1)
     }
-    
-    func sendTextMsg(message : String, group : GroupMessage) {
+    @discardableResult
+    func sendTextMsg(message : String, group : GroupMessage) -> (re: Result,da: Data) {
         
         // 发送消息
         let chatMsg = TextMessage.Builder()
@@ -184,7 +172,8 @@ extension ZJSocket {
         let chatData = (try! chatMsg.build()).data()
         
         // 发送消息到服务器
-        sendMsg(data: chatData, type: 2)
+        let result = sendMsg(data: chatData, type: 2)
+        return (result,chatData)
     }
     
     // 获取聊天列表
@@ -235,8 +224,8 @@ extension ZJSocket {
         // 2.发送数据
         sendMsg(data: heartData, type: 100)
     }
-    
-    func sendMsg(data : Data, type : Int) {
+    @discardableResult
+    func sendMsg(data : Data, type : Int) -> Result{
         // 1.将消息长度, 写入到data
         var length = data.count
         let headerData = Data(bytes: &length, count: 4)
@@ -251,6 +240,7 @@ extension ZJSocket {
         if res.isSuccess {
             print("消息发送成功。。。")
         }
+        return res
     }
 }
 

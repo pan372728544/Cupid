@@ -15,7 +15,7 @@
 // 返回动画执行的时间
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    return 0.34;
+    return 0.2;
 }
 
 

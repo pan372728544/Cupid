@@ -54,6 +54,8 @@
 		3846989322648122001234F8 /* chatroom_video_night_28x28_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3846989122648121001234F8 /* chatroom_video_night_28x28_@3x.png */; };
 		3846989422648122001234F8 /* chatroom_video_night_28x28_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3846989222648122001234F8 /* chatroom_video_night_28x28_@2x.png */; };
 		3849D5472272B01C00F4222C /* 4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3849D5462272B01C00F4222C /* 4.jpeg */; };
+		3849D5672275676400F4222C /* MessageListSendFail~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3849D5652275676400F4222C /* MessageListSendFail~iphone.png */; };
+		3849D5682275676400F4222C /* MessageListSendFail~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3849D5662275676400F4222C /* MessageListSendFail~iphone@2x.png */; };
 		38636BAF21E5F7D700A834EE /* HomeContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38636BAE21E5F7D700A834EE /* HomeContentViewController.m */; };
 		38636BB221E5F88100A834EE /* HomeTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38636BB121E5F88100A834EE /* HomeTopBarView.m */; };
 		38636BB521E600E500A834EE /* CategoryTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38636BB421E600E500A834EE /* CategoryTitleModel.m */; };
@@ -310,6 +312,8 @@
 		3846989122648121001234F8 /* chatroom_video_night_28x28_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatroom_video_night_28x28_@3x.png"; sourceTree = "<group>"; };
 		3846989222648122001234F8 /* chatroom_video_night_28x28_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatroom_video_night_28x28_@2x.png"; sourceTree = "<group>"; };
 		3849D5462272B01C00F4222C /* 4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpeg; sourceTree = "<group>"; };
+		3849D5652275676400F4222C /* MessageListSendFail~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MessageListSendFail~iphone.png"; sourceTree = "<group>"; };
+		3849D5662275676400F4222C /* MessageListSendFail~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MessageListSendFail~iphone@2x.png"; sourceTree = "<group>"; };
 		38636BAD21E5F7D700A834EE /* HomeContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeContentViewController.h; sourceTree = "<group>"; };
 		38636BAE21E5F7D700A834EE /* HomeContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeContentViewController.m; sourceTree = "<group>"; };
 		38636BB021E5F88100A834EE /* HomeTopBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTopBarView.h; sourceTree = "<group>"; };
@@ -843,6 +847,8 @@
 		386392E921E8709F00A834EE /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				3849D5652275676400F4222C /* MessageListSendFail~iphone.png */,
+				3849D5662275676400F4222C /* MessageListSendFail~iphone@2x.png */,
 				38CC1DB722718C6B00DD22D5 /* sendchat@2x.png */,
 				38CC1DB822718C6B00DD22D5 /* sendchat@3x.png */,
 				38CC1DBB22718C9400DD22D5 /* rechat@2x.png */,
@@ -1266,6 +1272,7 @@
 			files = (
 				3863933B21E8730C00A834EE /* pgc_tabbar_icon_more_night_press_24x24_@2x.png in Resources */,
 				3863936821E8A6F500A834EE /* tabbar_publish_shortvideo_34x34_@2x.png in Resources */,
+				3849D5682275676400F4222C /* MessageListSendFail~iphone@2x.png in Resources */,
 				38C20A4221ED78E0007C4CB7 /* searchbox_search_press_20x28_@2x.png in Resources */,
 				386392F021E870F100A834EE /* add_channel_titlbar_thin_new_night_24x24_@3x.png in Resources */,
 				38AC1A3721F1B6DC001D491B /* lefterbackicon_titlebar_night_24x24_@3x.png in Resources */,
@@ -1309,6 +1316,7 @@
 				3863936221E8A6F500A834EE /* tabbar_publish_question_34x34_@3x.png in Resources */,
 				3863934821E8733100A834EE /* video_tabbar_press_night_32x32_@3x.png in Resources */,
 				386392EE21E870F100A834EE /* add_channel_titlbar_thin_new_night_24x24_@2x.png in Resources */,
+				3849D5672275676400F4222C /* MessageListSendFail~iphone.png in Resources */,
 				38C20A4421ED78E0007C4CB7 /* search_icon_20x20_@3x.png in Resources */,
 				38C300B022702C54007A537F /* 2.jpeg in Resources */,
 				3863931921E872C000A834EE /* huoshan_tabbar_press_32x32_@3x.png in Resources */,

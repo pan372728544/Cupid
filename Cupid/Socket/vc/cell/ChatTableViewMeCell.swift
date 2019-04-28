@@ -19,6 +19,9 @@ class ChatTableViewMeCell: UITableViewCell {
     // 气泡
     internal var imgPao: UIImageView = UIImageView()
     
+    // 发送失败图片
+    internal var imgFaild: UIImageView = UIImageView()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -67,7 +70,20 @@ class ChatTableViewMeCell: UITableViewCell {
                 contentLabel.textAlignment = NSTextAlignment.right
             }
             
+//            imgFaild =
 
+        }
+
+    }
+    
+    var success: String?  {
+        didSet {
+            
+            if success == "y" {
+                
+                imgFaild.frame = CGRect(x: imgPao.frame.origin.x-15, y: imgPao.frame.origin.y + 4, width: 20, height: 20)
+                imgFaild.image = UIImage.init(named: "MessageListSendFail~iphone")
+            }
         }
     }
     
@@ -94,6 +110,8 @@ extension ChatTableViewMeCell {
         imgPao.frame =  CGRect(x: 0, y: 0, width: 0, height: 0)
         self.contentView.addSubview(imgPao)
       
+        imgFaild.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        self.contentView.addSubview(imgFaild)
         
         contentLabel.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         contentLabel.numberOfLines = 0
