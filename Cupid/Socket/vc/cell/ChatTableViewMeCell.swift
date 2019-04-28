@@ -76,15 +76,12 @@ class ChatTableViewMeCell: UITableViewCell {
 
     }
     
-    var success: String?  {
+    var isSuccess: Bool?  {
         didSet {
+            imgFaild.frame = CGRect(x: imgPao.frame.origin.x-15, y: imgPao.frame.origin.y + 4, width: 20, height: 20)
             
-            if success == "y" {
-                
-                imgFaild.frame = CGRect(x: imgPao.frame.origin.x-15, y: imgPao.frame.origin.y + 4, width: 20, height: 20)
-                imgFaild.image = UIImage.init(named: "MessageListSendFail~iphone")
+            imgFaild.isHidden = isSuccess!
             }
-        }
     }
     
     
@@ -111,6 +108,8 @@ extension ChatTableViewMeCell {
         self.contentView.addSubview(imgPao)
       
         imgFaild.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        imgFaild.image = UIImage.init(named: "MessageListSendFail~iphone")
+        imgFaild.isHidden = true
         self.contentView.addSubview(imgFaild)
         
         contentLabel.frame = CGRect(x: 0, y: 0, width: 0, height: 0)

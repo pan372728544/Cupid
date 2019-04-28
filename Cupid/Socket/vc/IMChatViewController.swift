@@ -17,7 +17,7 @@ class IMChatViewController: ZJBaseViewController {
     
     // 聊天列表数据
     fileprivate var  group : GroupMessage
-    fileprivate var success : String = "y"
+    fileprivate var isSuccess : Bool = true
     // 定时器
     fileprivate var heartBeatTimer : Timer?
     fileprivate var socket : ZJSocket = ZJSocket(addr: "10.2.116.43", port: 7878)
@@ -203,7 +203,7 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
         if String(LogInName!.prefix(count-4)) == msg.user.name {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewMeCell") as! ChatTableViewMeCell
             cell.textMes = msg
-            cell.success = success
+            cell.isSuccess = isSuccess
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as! ChatTableViewCell
@@ -328,13 +328,13 @@ extension IMChatViewController {
         let cupid =  socket.sendTextMsg(message: self.textField.text ?? "", group: group)
         
         if cupid.re.isSuccess {
-            self.success = "y"
+            self.isSuccess =  true
             print("消息发送成功了")
         } else {
             
             let chatMsg = try! TextMessage.parseFrom(data: cupid.da)
             socket(self.socket, chatMsg: chatMsg)
-            self.success = "n"
+            self.isSuccess = false
             print("消息发送失败")
             
         }
