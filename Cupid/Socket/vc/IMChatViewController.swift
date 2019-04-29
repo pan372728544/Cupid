@@ -7,9 +7,28 @@
 //
 
 import UIKit
+import RealmSwift
 
 private let viewBottom_Height : CGFloat =   60
 private let viewBottom_H : CGFloat =  Bottom_H + 60
+
+// 加载视图高度
+private let loadingH : CGFloat =  60
+
+// 每次加载多少条数据
+private let page :  Int = 10
+
+// 当前页数
+private var currentPage :  Int = 1
+// 最大页数
+private var maxCount :  Int = 0
+
+// 记录当前tableview偏移位置
+private var tableViewoffsetY :  CGFloat = 0
+
+
+private var tableViewoffsetBefore :  CGFloat = 0
+private var tableViewoffsetEnd :  CGFloat = 0
 
 class IMChatViewController: ZJBaseViewController {
     
@@ -50,6 +69,9 @@ class IMChatViewController: ZJBaseViewController {
     
     // 输入视图
     fileprivate  var viewBottom : UIView = UIView()
+    
+    // 下拉刷新
+    fileprivate var indicatorView : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: -loadingH, width: Screen_W, height: loadingH))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +80,7 @@ class IMChatViewController: ZJBaseViewController {
         self.createNavBarView(withTitle:  self.group.user.name)
         self.createNavLeftBtn(withItem: "", target: self, action: #selector(backClick(button:)))
 
+        currentPage = 1
         self.delegate = self
         // 处理通知
         registerNotification()
@@ -72,7 +95,7 @@ class IMChatViewController: ZJBaseViewController {
         setupChatTool()
         
         // 查询数据库
-        searchRealm()
+        searchRealm(curr: currentPage)
     }
     
     // 初始化
@@ -163,6 +186,13 @@ extension IMChatViewController {
         self.tableView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleHeight.rawValue | UIView.AutoresizingMask.flexibleWidth.rawValue)
         view.addSubview(self.tableView)
         
+        //加载
+        indicatorView.backgroundColor = UIColor.tableViewBackGroundColor()
+        indicatorView.startAnimating()
+        indicatorView.style = UIActivityIndicatorView.Style.gray
+        self.tableView.addSubview(indicatorView)
+
+        
     }
     
     func setupChatTool()  {
@@ -173,7 +203,6 @@ extension IMChatViewController {
         textField.backgroundColor = UIColor.white
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 10.0
-//        textField.becomeFirstResponder()
         textField.returnKeyType = .send
         btnSend.setTitle("发送", for: UIControl.State.normal)
         btnSend.addTarget(self, action: #selector(sendClick), for: UIControl.Event.touchUpInside)
@@ -200,8 +229,6 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let msg : TextMessage = msgArray[indexPath.row]
-        
-       print("\(msg.sendTime)====")
         
         let count = LogInName!.count
         if String(LogInName!.prefix(count-4)) == msg.user.name {
@@ -230,8 +257,35 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     // scrollview
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
+//        tableViewoffsetBefore = self.tableView.contentSize.height
+//                print("\(tableViewoffsetBefore)scrollViewWillBeginDragging")
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//          tableViewoffsetEnd = self.tableView.contentSize.height
+//        print("\(tableViewoffsetEnd)scrollViewDidScroll")
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let contentY = scrollView.contentOffset.y
+
+        tableViewoffsetY = contentY
+        // 滑动距离大于loading添加新的数据
+        if contentY < -loadingH {
+    
+          print("scrollViewDidEndDragging     最大页数为： \(maxCount)")
+
+            currentPage += 1
+            if currentPage > maxCount {
+                currentPage = maxCount
+                indicatorView.stopAnimating()
+                return
+            }
+            searchRealm(curr: currentPage)
+        }
     }
     
+ 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         sendClick()
         return true
@@ -303,6 +357,7 @@ extension IMChatViewController : ZJSocketDelegate {
     
  
 }
+
 
 // MARK:- 给服务器发送即时消息
 extension IMChatViewController {
@@ -388,13 +443,50 @@ extension IMChatViewController {
     }
     
     // 查询数据
-    func searchRealm()  {
+    func searchRealm(curr : Int)  {
 
-        // 获取数据
-        let messages = RealmTool.getMessages()
-        // 遍历数据
-        for mess : ChatMessage in messages {
+        let userId : String = String(LogInName!.suffix(1))
+        let otherId = self.group.user.userId!
+        let messages : Results<ChatMessage>
+        var querString = ""
+        
+        // 群聊天
+        if self.group.groupId == 1004 {
+            querString = "chatType = '2'"
+        } else {
+            querString = "chatId = \'\(userId)_\(otherId)\' OR chatId = \'\(otherId)_\(userId)\'"
             
+        }
+        messages =  RealmTool.getMessageByPredicate(querString)
+        
+       /* 大多数其他数据库技术都提供了从检索中对结果进行“分页”的能力（例如 SQLite 中的 “LIMIT” 关键字）。这通常是很有必要的，可以避免一次性从硬盘中读取太多的数据，或者将太多查询结果加载到内存当中。
+        
+        由于 Realm 中的检索是惰性的，因此这行这种分页行为是没有必要的。因为 Realm 只会在检索到的结果被明确访问时，才会从其中加载对象。
+        
+        如果由于 UI 相关或者其他代码实现相关的原因导致您需要从检索中获取一个特定的对象子集，这和获取 Results 对象一样简单，只需要读出您所需要的对象即可。*/
+        
+        // 数据库总数据
+        let  messageCount = messages.count
+        if messageCount == 0 {
+            return
+        }
+        maxCount = messageCount/page + 1
+        
+        var start : Int = 0
+        var end : Int = 0
+        
+        // 获取开始index
+        start = messageCount > page*currentPage ? messageCount-page*currentPage : 0
+        if maxCount == 1 {
+          end = messageCount
+        } else {
+            end = start + page
+        }
+        var index : Int = 0
+        // 遍历数据
+        for i in start..<end {
+            
+            let mess = messages[i]
             // 创建聊天类型数据
             let textMsg = TextMessage.Builder()
             textMsg.chatId = mess.chatId!
@@ -419,9 +511,41 @@ extension IMChatViewController {
             
             let msg = try? textMsg.build()
             if msg != nil {
-                self.msgArray.append(msg!)
+                
+                if currentPage ==  1 {
+                    self.msgArray.append(msg!)
+                } else {
+                    self.msgArray.insert(msg!, at: index)
+                    
+                }
             }
+            index += 1
         }
-        self.tableView.reloadData()
+        index = 0
+        
+        reloadTableView()
+    }
+    
+    
+    func reloadTableView() {
+
+        updateOffset {
+            self.tableView.reloadData()
+   
+        }
+        
+    }
+    
+    func updateOffset(finishedCallback : @escaping () -> ())  {
+        
+//        let oldOffset = tableViewoffsetBefore - self.tableView.contentOffset.y
+        finishedCallback()
+        
+//        if oldOffset == 0 {
+//            return
+//        }
+//        let  offset = tableViewoffsetEnd - oldOffset
+//        self.tableView.contentOffset = CGPoint(x: self.tableView.contentOffset.x, y: offset)
+        
     }
 }

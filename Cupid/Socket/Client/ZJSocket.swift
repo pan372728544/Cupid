@@ -253,9 +253,6 @@ extension ZJSocket {
         // 3.发送消息
         let totalData = headerData + typeData + data
         let res : Result = tcpClient.send(data: totalData)
-        if res.isSuccess {
-            print("消息发送成功。。。")
-        }
         return res
     }
 }
