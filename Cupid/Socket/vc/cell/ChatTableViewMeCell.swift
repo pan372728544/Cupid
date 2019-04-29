@@ -43,7 +43,7 @@ class ChatTableViewMeCell: UITableViewCell {
     var textMes : TextMessage? {
         didSet {
             timeLabel.isHidden = true
-            if textMes?.sendTime != nil {
+            if textMes?.sendTime != "" {
                 timeLabel.text = textMes?.sendTime
                 timeLabel.isHidden = false
             }

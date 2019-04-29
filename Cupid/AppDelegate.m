@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "AppDelegate+Internal.h"
 #import <FlutterPluginRegistrant/GeneratedPluginRegistrant.h> // Only if you have Flutter Plugins
+#import "Cupid-Swift.h"
 
 @interface AppDelegate ()
 
@@ -20,10 +21,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
     [self initViews];
-//    return YES;
 
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [GeneratedPluginRegistrant registerWithRegistry:self];
+    
+    
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

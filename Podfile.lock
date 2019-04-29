@@ -24,6 +24,11 @@ PODS:
   - MJExtension (3.0.15.1)
   - MJRefresh (3.1.15.7)
   - ProtocolBuffers-Swift (4.0.6)
+  - Realm (3.14.1):
+    - Realm/Headers (= 3.14.1)
+  - Realm/Headers (3.14.1)
+  - RealmSwift (3.14.1):
+    - Realm (= 3.14.1)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -39,6 +44,7 @@ DEPENDENCIES:
   - MJExtension (~> 3.0.15.1)
   - MJRefresh (~> 3.1.15.7)
   - ProtocolBuffers-Swift (~> 4.0.6)
+  - RealmSwift (~> 3.14.1)
   - SDWebImage (= 3.7.5)
 
 SPEC REPOS:
@@ -51,6 +57,8 @@ SPEC REPOS:
     - MJExtension
     - MJRefresh
     - ProtocolBuffers-Swift
+    - Realm
+    - RealmSwift
     - SDWebImage
 
 EXTERNAL SOURCES:
@@ -70,8 +78,10 @@ SPEC CHECKSUMS:
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   ProtocolBuffers-Swift: 09b5cfcc641ab512d6aaa1d2cc3879a40432052c
+  Realm: e12c9c2387d05c5bba3a9c394838f5870e85763b
+  RealmSwift: a82eab9b04c3e1616082c7e17aa300740847769c
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
 
-PODFILE CHECKSUM: c7f11e7579df7a4448885c02a2a91e142fdd6c90
+PODFILE CHECKSUM: 1d125583793dc02efa67ac37d32400563342af35
 
 COCOAPODS: 1.5.3

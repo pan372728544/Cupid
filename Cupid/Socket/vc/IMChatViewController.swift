@@ -20,7 +20,7 @@ class IMChatViewController: ZJBaseViewController {
     fileprivate var  group : GroupMessage
     // 定时器
     fileprivate var heartBeatTimer : Timer?
-    fileprivate var socketClient : ZJSocket = ZJSocket(addr: "10.2.116.43", port: 7878)
+    fileprivate var socketClient : ZJSocket = ZJSocket(addr: "10.2.116.49", port: 7878)
     // 输入框
     fileprivate lazy var textField : ChatInputTextField = {
        
@@ -57,8 +57,7 @@ class IMChatViewController: ZJBaseViewController {
         
         self.createNavBarView(withTitle:  self.group.user.name)
         self.createNavLeftBtn(withItem: "", target: self, action: #selector(backClick(button:)))
-//        self.setRightTitleColro(UIColor.black)
-//        self.setTitleColor(UIColor.white)
+
         self.delegate = self
         // 处理通知
         registerNotification()
@@ -71,6 +70,9 @@ class IMChatViewController: ZJBaseViewController {
         
         // 输入框
         setupChatTool()
+        
+        // 查询数据库
+        searchRealm()
     }
     
     // 初始化
@@ -158,6 +160,7 @@ extension IMChatViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.separatorStyle = .none
+        self.tableView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleHeight.rawValue | UIView.AutoresizingMask.flexibleWidth.rawValue)
         view.addSubview(self.tableView)
         
     }
@@ -170,7 +173,7 @@ extension IMChatViewController {
         textField.backgroundColor = UIColor.white
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 10.0
-        textField.becomeFirstResponder()
+//        textField.becomeFirstResponder()
         textField.returnKeyType = .send
         btnSend.setTitle("发送", for: UIControl.State.normal)
         btnSend.addTarget(self, action: #selector(sendClick), for: UIControl.Event.touchUpInside)
@@ -217,7 +220,7 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let msg : TextMessage = msgArray[indexPath.row]
-        if msg.sendTime != nil {
+        if msg.sendTime != "" {
             return heightOfCell(text: msg.text) + 45 + 40
         }
         return heightOfCell(text: msg.text) + 45
@@ -290,6 +293,12 @@ extension IMChatViewController : ZJSocketDelegate {
         self.tableView.reloadData()
         // 滚动到tableview底部
         scrollToEnd()
+        // 其他人发送的消息
+        if chatMsg.user.name != String(LogInName!.prefix(LogInName!.count-4)) {
+            let build = try! chatMsg.toBuilder()
+            insertRealm(cupid: build)
+        }
+  
     }
     
  
@@ -331,20 +340,88 @@ extension IMChatViewController {
         let cupid =  socketClient.sendTextMsg(message: self.textField.text ?? "", group: group)
         
         if cupid.re.isSuccess {
-            print("消息发送成功了")
         } else {
-
             let chatMsgBuild = cupid.ch
             chatMsgBuild.success = "false"
             let chatMsg = try! chatMsgBuild.build()
             socket(self.socketClient, chatMsg: chatMsg)
             print("消息发送失败\(chatMsg)")
-            
         }
-        
+        // 清空数据框
         self.textField.text = ""
+        // 保存数据库
+        insertRealm(cupid: cupid.ch)
     }
     
     
 }
 
+extension IMChatViewController {
+    
+}
+
+// MARK: - 数据库操作
+extension IMChatViewController {
+    
+    // 插入数据
+    func insertRealm(cupid : TextMessage.Builder) {
+        let chatMsg = try! cupid.build()
+        let userChat = chatMsg.user
+        // realm消息数据
+        let message = ChatMessage()
+        message.text = chatMsg.text
+        message.chatId = chatMsg.chatId
+        message.toUserId = chatMsg.toUserId
+        message.chatType = chatMsg.chatType
+        message.success = chatMsg.success
+        message.sendTime = chatMsg.sendTime
+        
+        // realm用户数据
+        let realmUser = UserInfoRealm()
+        realmUser.name = userChat!.name
+        realmUser.level = Int(userChat!.level)
+        realmUser.iconUrl = userChat!.iconUrl
+        realmUser.userId = userChat!.userId
+
+        message.userInfo = realmUser
+        RealmTool.insertMessage(by: message)
+    }
+    
+    // 查询数据
+    func searchRealm()  {
+
+        // 获取数据
+        let messages = RealmTool.getMessages()
+        // 遍历数据
+        for mess : ChatMessage in messages {
+            
+            // 创建聊天类型数据
+            let textMsg = TextMessage.Builder()
+            textMsg.chatId = mess.chatId!
+            textMsg.text = mess.text!
+            textMsg.toUserId = mess.toUserId!
+            textMsg.chatType = mess.chatType!
+            textMsg.success = mess.success!
+            textMsg.sendTime = mess.sendTime ?? ""
+            
+            // realm类型用户信息
+            let userRealm : UserInfoRealm = mess.userInfo!
+            
+            // 创建聊天用户类型数据
+            let  userInfo = UserInfo.Builder()
+            userInfo.name = userRealm.name!
+            userInfo.level = Int64(userRealm.level)
+            userInfo.iconUrl = userRealm.iconUrl!
+            userInfo.userId = userRealm.userId!
+            
+            // 用户信息
+            textMsg.user = try! userInfo.build()
+            
+            let msg = try? textMsg.build()
+            if msg != nil {
+                self.msgArray.append(msg!)
+            }
+        }
+        self.tableView.reloadData()
+    }
+}

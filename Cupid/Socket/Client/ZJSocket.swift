@@ -174,6 +174,8 @@ extension ZJSocket {
         if timeOld != customDate {
             chatMsg.sendTime = "\(customDate)"
             timeOld = chatMsg.sendTime
+        } else {
+            chatMsg.sendTime = ""
         }
         // 聊天类型
         if group.groupId != 1004 {

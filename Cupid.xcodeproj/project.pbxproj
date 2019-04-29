@@ -214,8 +214,12 @@
 		38CC1DBA22718C6C00DD22D5 /* sendchat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38CC1DB822718C6B00DD22D5 /* sendchat@3x.png */; };
 		38CC1DBD22718C9400DD22D5 /* rechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38CC1DBB22718C9400DD22D5 /* rechat@2x.png */; };
 		38CC1DBE22718C9400DD22D5 /* rechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38CC1DBC22718C9400DD22D5 /* rechat@3x.png */; };
-		38ECA73C22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ECA73A22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png */; };
-		38ECA73D22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ECA73B22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png */; };
+		38ECA73C22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ECA73A22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone.png */; };
+		38ECA73D22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ECA73B22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png */; };
+		38ECA7A92275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ECA7A72275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone.png */; };
+		38ECA7AA2275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ECA7A82275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png */; };
+		38ECA7C32275B64E00D41D08 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38ECA7C22275B64E00D41D08 /* ChatMessage.swift */; };
+		38ECA7C52275CC1C00D41D08 /* RealmTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38ECA7C42275CC1C00D41D08 /* RealmTool.swift */; };
 		38FF1E5421F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */; };
 		38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */; };
 		38FF1EDE21FADEF500A3CA7F /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1EDD21FADEF500A3CA7F /* VideoDetailViewController.m */; };
@@ -516,8 +520,12 @@
 		38CC1DB822718C6B00DD22D5 /* sendchat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sendchat@3x.png"; sourceTree = "<group>"; };
 		38CC1DBB22718C9400DD22D5 /* rechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rechat@2x.png"; sourceTree = "<group>"; };
 		38CC1DBC22718C9400DD22D5 /* rechat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rechat@3x.png"; sourceTree = "<group>"; };
-		38ECA73A22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png"; sourceTree = "<group>"; };
-		38ECA73B22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png"; sourceTree = "<group>"; };
+		38ECA73A22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChatRoom_Bubble_Text_Sender_Green~iphone.png"; sourceTree = "<group>"; };
+		38ECA73B22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png"; sourceTree = "<group>"; };
+		38ECA7A72275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ChatRoom_Bubble_Text_Receiver_White~iphone.png"; path = "../../../../socket/生成car图片的目录/ChatRoom_Bubble_Text_Receiver_White~iphone.png"; sourceTree = "<group>"; };
+		38ECA7A82275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png"; path = "../../../../socket/生成car图片的目录/ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png"; sourceTree = "<group>"; };
+		38ECA7C22275B64E00D41D08 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		38ECA7C42275CC1C00D41D08 /* RealmTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTool.swift; sourceTree = "<group>"; };
 		38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WKWebVIew.m"; sourceTree = "<group>"; };
 		38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HybridNSURLProtocol.m; sourceTree = "<group>"; };
 		38FF1E5221F9C81200A3CA7F /* HybridNSURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HybridNSURLProtocol.h; sourceTree = "<group>"; };
@@ -602,6 +610,7 @@
 		3801018221DE175500D5F7D2 /* Cupid */ = {
 			isa = PBXGroup;
 			children = (
+				38ECA7AB2275A6F000D41D08 /* RealmSwift */,
 				384698A82266CEA1001234F8 /* Socket */,
 				38717AE22255F3BE0020955F /* swift */,
 				38636BEE21E7336500A834EE /* NetWorking */,
@@ -851,8 +860,10 @@
 		386392E921E8709F00A834EE /* imgs */ = {
 			isa = PBXGroup;
 			children = (
-				38ECA73A22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png */,
-				38ECA73B22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png */,
+				38ECA7A72275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone.png */,
+				38ECA7A82275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png */,
+				38ECA73A22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone.png */,
+				38ECA73B22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png */,
 				3849D5652275676400F4222C /* MessageListSendFail~iphone.png */,
 				3849D5662275676400F4222C /* MessageListSendFail~iphone@2x.png */,
 				38CC1DB722718C6B00DD22D5 /* sendchat@2x.png */,
@@ -1028,6 +1039,15 @@
 				38C300BA22703B8D007A537F /* TabChatTableViewCell.swift */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		38ECA7AB2275A6F000D41D08 /* RealmSwift */ = {
+			isa = PBXGroup;
+			children = (
+				38ECA7C42275CC1C00D41D08 /* RealmTool.swift */,
+				38ECA7C22275B64E00D41D08 /* ChatMessage.swift */,
+			);
+			path = RealmSwift;
 			sourceTree = "<group>";
 		};
 		38FF1E4121F99D7900A3CA7F /* detail */ = {
@@ -1311,6 +1331,7 @@
 				3863932C21E872F600A834EE /* no_login_tabbar_night_33x32_@2x.png in Resources */,
 				3863932021E872E400A834EE /* mine_tabbar_night_33x32_@3x.png in Resources */,
 				38AC1A3C21F1B7FF001D491B /* title_86x22_@2x.png in Resources */,
+				38ECA7A92275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone.png in Resources */,
 				3863932E21E872F600A834EE /* no_login_tabbar_press_33x32_@3x.png in Resources */,
 				38CC1DBA22718C6C00DD22D5 /* sendchat@3x.png in Resources */,
 				3863930A21E8729B00A834EE /* home_tabbar_press_night_32x32_@2x.png in Resources */,
@@ -1354,6 +1375,7 @@
 				3863935721E89F3300A834EE /* chatroom_close_18x18_@3x.png in Resources */,
 				3863936721E8A6F500A834EE /* tabbar_publish_article_34x34_@2x.png in Resources */,
 				38AC1A3D21F1B7FF001D491B /* title_72x20_@3x.png in Resources */,
+				38ECA7AA2275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png in Resources */,
 				3863933021E872F600A834EE /* no_login_tabbar_press_night_33x32_@2x.png in Resources */,
 				386392EF21E870F100A834EE /* add_channel_titlbar_thin_new_24x24_@3x.png in Resources */,
 				3863932321E872E400A834EE /* mine_tabbar_press_33x32_@3x.png in Resources */,
@@ -1371,7 +1393,7 @@
 				3863934521E8733100A834EE /* video_tabbar_night_32x32_@3x.png in Resources */,
 				3863934621E8733100A834EE /* video_tabbar_press_32x32_@3x.png in Resources */,
 				38FF1EF921FEE34B00A3CA7F /* close_channel_24x24_@2x.png in Resources */,
-				38ECA73D22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@3x.png in Resources */,
+				38ECA73D22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png in Resources */,
 				3863932D21E872F600A834EE /* no_login_tabbar_press_33x32_@2x.png in Resources */,
 				386392FA21E8718300A834EE /* addfriend_tabbar_32x32_@2x.png in Resources */,
 				3863932421E872E400A834EE /* mine_tabbar_press_night_33x32_@2x.png in Resources */,
@@ -1384,7 +1406,7 @@
 				3863934421E8733100A834EE /* video_tabbar_press_32x32_@2x.png in Resources */,
 				3863930121E8718300A834EE /* addfriend_tabbar_press_night_32x32_@2x.png in Resources */,
 				38C20A8421EDE3CB007C4CB7 /* feed_dislike_arrow_left_10x16_@2x.png in Resources */,
-				38ECA73C22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone@2x.png in Resources */,
+				38ECA73C22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone.png in Resources */,
 				3863934D21E87ECA00A834EE /* addicon_channel_12x12_@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1428,6 +1450,8 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ProtocolBuffers-Swift/ProtocolBuffers.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1444,6 +1468,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtocolBuffers.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1492,6 +1518,7 @@
 				38717AC3225364D50020955F /* GMCDefaultCardView.m in Sources */,
 				38AC1A2521F05A88001D491B /* MJLoadMoreFooter.m in Sources */,
 				38FF1FBA22019CB100A3CA7F /* ZJPhotoView.m in Sources */,
+				38ECA7C52275CC1C00D41D08 /* RealmTool.swift in Sources */,
 				38636BBE21E6067E00A834EE /* HomeDisplayViewController.m in Sources */,
 				38636C0221E733AE00A834EE /* ZJCacheManager.m in Sources */,
 				38C300B52270318C007A537F /* CommonExtern.m in Sources */,
@@ -1533,6 +1560,7 @@
 				38FF1F0321FEEC2A00A3CA7F /* HomeChannelModel.m in Sources */,
 				38717AE72255F4900020955F /* KingfisherExtension.swift in Sources */,
 				380101BD21DF602C00D5F7D2 /* ZJBaseViewController+NavBar.m in Sources */,
+				38ECA7C32275B64E00D41D08 /* ChatMessage.swift in Sources */,
 				38C3009F226DA1AD007A537F /* ChatTableViewCell.swift in Sources */,
 				38636C0021E733AE00A834EE /* ZJDiskCache.m in Sources */,
 				38636C1421E8333600A834EE /* FeedNewContentModel.m in Sources */,

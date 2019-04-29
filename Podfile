@@ -19,4 +19,6 @@ target 'Cupid' do
     pod 'Kingfisher', '~> 5.3.1'
     pod 'ProtocolBuffers-Swift', '~> 4.0.6'
     
+      pod 'RealmSwift', '~> 3.14.1'
+    
 end

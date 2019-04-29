@@ -26,6 +26,8 @@ class TabChatViewController: ZJBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 配置数据库
+        RealmTool.configRealm()
         
         // 初始化View
         setupMainView()
