@@ -1,5 +1,5 @@
 //
-//  ChatMessageData.swift
+//  ChatMessage.swift
 //  Cupid
 //
 //  Created by panzhijun on 2019/4/28.
@@ -30,5 +30,19 @@ class ChatMessage: Object {
     @objc dynamic var success : String? = ""
     @objc dynamic var sendTime : String? = ""
     @objc dynamic var userInfo: UserInfoRealm? = nil
+    
+}
+
+
+class GroupListMessage: Object {
+    
+    // 群组列表
+    @objc dynamic var text : String? = ""
+    @objc dynamic var groupId = 0
+    @objc dynamic var id = 0
+    @objc dynamic var userInfo: UserInfoRealm? = nil
+    override static func primaryKey() -> String? {
+        return "id"
+    }
     
 }

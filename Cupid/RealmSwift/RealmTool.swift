@@ -66,6 +66,14 @@ extension RealmTool {
         }
     }
     
+    /// 保存群组列表
+    public class func insertMessage(by message : GroupListMessage) {
+        let realm = self.defaultRealm()
+        try! realm.write {
+            realm.add(message)
+        }
+    }
+    
 }
 
 // MARK: - 数据库操作 查找
@@ -74,6 +82,13 @@ extension RealmTool {
     public class func getMessages() -> Results<ChatMessage> {
         let realm = self.defaultRealm()
         return realm.objects(ChatMessage.self)
+    }
+    
+    
+    /// 获取 所保存的 groupMessage
+    public class func getGroupMessages() -> Results<GroupListMessage> {
+        let realm = self.defaultRealm()
+        return realm.objects(GroupListMessage.self)
     }
     
     /// 获取 指定id (主键) 的 ChatMessage
@@ -101,6 +116,16 @@ extension RealmTool {
 
 // MARK: - 数据库操作 更新
 extension RealmTool {
+    
+    /// 更新单个 messages
+    public class func updateGroupMessage(message : GroupListMessage) {
+        let realm = self.defaultRealm()
+        try! realm.write {
+            realm.add(message, update: true)
+        }
+    }
+    
+    
     /// 更新单个 messages
     public class func updateMessage(message : ChatMessage) {
         let realm = self.defaultRealm()

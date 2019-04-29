@@ -351,6 +351,7 @@ extension IMChatViewController : ZJSocketDelegate {
         if chatMsg.user.name != String(LogInName!.prefix(LogInName!.count-4)) {
             let build = try! chatMsg.toBuilder()
             insertRealm(cupid: build)
+            
         }
   
     }
@@ -400,12 +401,12 @@ extension IMChatViewController {
             chatMsgBuild.success = "false"
             let chatMsg = try! chatMsgBuild.build()
             socket(self.socketClient, chatMsg: chatMsg)
-            print("消息发送失败\(chatMsg)")
         }
         // 清空数据框
         self.textField.text = ""
         // 保存数据库
         insertRealm(cupid: cupid.ch)
+
     }
     
     
@@ -440,6 +441,11 @@ extension IMChatViewController {
 
         message.userInfo = realmUser
         RealmTool.insertMessage(by: message)
+        
+        // 发送通知
+        let id = Int(chatMsg.toUserId)! + 1000
+        
+        notificationUpdateText(chatMsg.text ?? "",String(id),String(userChat!.userId))
     }
     
     // 查询数据
@@ -547,5 +553,11 @@ extension IMChatViewController {
 //        let  offset = tableViewoffsetEnd - oldOffset
 //        self.tableView.contentOffset = CGPoint(x: self.tableView.contentOffset.x, y: offset)
         
+    }
+    
+    
+    func notificationUpdateText(_ text: String,_ id: String,_ toid: String)  {
+        
+        NotificationCenter.default.post(name: NSNotification.Name("updateText"), object: self, userInfo: ["text":"\(text)","id":"\(id)","toid":"\(toid)"])
     }
 }

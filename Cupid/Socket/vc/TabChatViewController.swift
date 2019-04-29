@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TabChatViewController: ZJBaseViewController {
     
@@ -36,9 +37,18 @@ class TabChatViewController: ZJBaseViewController {
         if LogInName == nil {
             popLoginView()
         } else {
+            // 查询数据
+            let count =  searchRealm(curr: 1)
+            if count == 0 {
             // 连接服务器
-            connectServer()
+                connectServer()
+            } else {
+
+            }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updataText), name: NSNotification.Name(rawValue:"updateText"), object: nil)
+
     }
 }
 
@@ -48,6 +58,34 @@ extension TabChatViewController {
     @objc func logOut (){
         // 删除登录信息
         UserDefaults.standard.removeObject(forKey: NICKNAME)
+    }
+    
+    @objc func updataText(nofi : Notification){
+        let str = nofi.userInfo!["text"]
+        let id : String = nofi.userInfo!["id"] as! String
+        let toid : String = nofi.userInfo!["toid"] as! String
+        let messages  =  RealmTool.getGroupMessages()
+        
+        let num : Int64 = Int64(id)!
+        let tonum : Int = Int(toid)! - 1
+        let text : String = str as! String
+        let  messageCount = messages.count
+        for i in 0..<messageCount {
+            
+            let mess = messages[i]
+            if mess.groupId == num {
+                
+                let newMess =  GroupListMessage()
+                newMess.groupId = Int(num)
+                newMess.userInfo = mess.userInfo
+                var names = ["齐天大圣:","BAYMAX:","钢铁侠:","群聊天555555:"]
+                newMess.text = "\(names[tonum]) \(text)"
+                newMess.id = Int(num)
+                RealmTool.updateGroupMessage(message: newMess)
+            }
+        }
+        self.msgArray .removeAll()
+        _ = searchRealm(curr: 1)
     }
 }
 
@@ -127,6 +165,11 @@ extension TabChatViewController : ZJSocketDelegate {
         
         if msgArray.count < 3 {
             msgArray.append(groupMsg)
+            
+            // 插入数据
+            let build = try! groupMsg.toBuilder()
+            
+            insertRealm(cupid: build)
             self.tableView.reloadData()
         }
     }
@@ -162,7 +205,7 @@ extension TabChatViewController : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 60
+        return 80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -176,6 +219,76 @@ extension TabChatViewController : UITableViewDataSource,UITableViewDelegate {
             popLoginView()
         }
         
+    }
+    
+}
+
+extension TabChatViewController {
+    
+    // 插入数据
+    func insertRealm(cupid : GroupMessage.Builder) {
+        let chatMsg = try! cupid.build()
+        let userChat = chatMsg.user
+        // realm消息数据
+        let message = GroupListMessage()
+        message.text = chatMsg.text
+        message.groupId = Int(chatMsg.groupId)
+        message.id = Int(chatMsg.groupId)
+        // realm用户数据
+        let realmUser = UserInfoRealm()
+        realmUser.name = userChat!.name
+        realmUser.level = Int(userChat!.level)
+        realmUser.iconUrl = userChat!.iconUrl
+        realmUser.userId = userChat!.userId
+        
+        message.userInfo = realmUser
+        RealmTool.insertMessage(by: message)
+    }
+    
+    
+    // 查询数据
+    func searchRealm(curr : Int) -> Int {
+        let messages : Results<GroupListMessage>
+
+        messages =  RealmTool.getGroupMessages()
+
+        // 数据库总数据
+        let  messageCount = messages.count
+        if messageCount == 0 {
+            return 0
+        }
+        
+        // 遍历数据
+        for mess in messages {
+            
+            // 创建聊天类型数据
+            let textMsg = GroupMessage.Builder()
+            textMsg.text = mess.text!
+            textMsg.groupId = Int64(mess.groupId)
+            
+            // realm类型用户信息
+            let userRealm : UserInfoRealm = mess.userInfo!
+            
+            // 创建聊天用户类型数据
+            let  userInfo = UserInfo.Builder()
+            userInfo.name = userRealm.name!
+            userInfo.level = Int64(userRealm.level)
+            userInfo.iconUrl = userRealm.iconUrl!
+            userInfo.userId = userRealm.userId!
+            
+            // 用户信息
+            textMsg.user = try! userInfo.build()
+            
+            let msg = try? textMsg.build()
+            if msg != nil {
+                if messageCount == 3 {
+                self.msgArray.append(msg!)
+                }
+            }
+            
+        }
+        self.tableView.reloadData()
+        return messageCount
     }
     
 }
