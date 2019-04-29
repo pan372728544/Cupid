@@ -52,7 +52,7 @@ extension TabChatTableViewCell {
         imgTou.clipsToBounds = true
         self.contentView.addSubview(imgTou)
         
-        nameLabel.frame = CGRect(x: imgTou.frame.origin.x+imgTou.frame.size.width+10, y: 25, width: Screen_W - 100, height: 10)
+        nameLabel.frame = CGRect(x: imgTou.frame.origin.x+imgTou.frame.size.width+10, y: 15, width: Screen_W - 100, height: 20)
         nameLabel.font = UIFont.systemFont(ofSize: 17)
         self.contentView.addSubview(nameLabel)
         

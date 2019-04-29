@@ -70,6 +70,10 @@ extension TabChatViewController {
         let tonum : Int = Int(toid)! - 1
         let text : String = str as! String
         let  messageCount = messages.count
+        
+        let other : Int = Int(toid)! + 1000
+        
+        var names = ["齐天大圣:","BAYMAX:","钢铁侠:","群聊天555555:"]
         for i in 0..<messageCount {
             
             let mess = messages[i]
@@ -78,9 +82,16 @@ extension TabChatViewController {
                 let newMess =  GroupListMessage()
                 newMess.groupId = Int(num)
                 newMess.userInfo = mess.userInfo
-                var names = ["齐天大圣:","BAYMAX:","钢铁侠:","群聊天555555:"]
+                
                 newMess.text = "\(names[tonum]) \(text)"
                 newMess.id = Int(num)
+                RealmTool.updateGroupMessage(message: newMess)
+            } else if mess.groupId == other {
+                let newMess =  GroupListMessage()
+                newMess.groupId = Int(other)
+                newMess.userInfo = mess.userInfo
+                newMess.text = "\(names[tonum]) \(text)"
+                newMess.id = Int(other)
                 RealmTool.updateGroupMessage(message: newMess)
             }
         }
