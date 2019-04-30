@@ -71,6 +71,9 @@ class IMChatViewController: ZJBaseViewController {
     // 输入视图
     fileprivate  var viewBottom : UIView = UIView()
     
+    // 输入视图
+    fileprivate  var imageView : UIImageView = UIImageView()
+    
     // 下拉刷新
     fileprivate var indicatorView : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: -loadingH, width: Screen_W, height: loadingH))
 
@@ -203,7 +206,7 @@ extension IMChatViewController {
         indicatorView.style = UIActivityIndicatorView.Style.gray
         self.tableView.addSubview(indicatorView)
 
-        
+
     }
     
     func setupChatTool()  {
@@ -239,10 +242,12 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
             
             if key?.subviews.first != nil {
                 view.addSubview(key!)
-                key?.transform = CGAffineTransform(translationX: 0, y: xx )
+  
+                key?.transform = CGAffineTransform(translationX: 0, y: 0 )
             }
         }
         else {
+            imageView.removeFromSuperview()
             key?.transform = CGAffineTransform.identity
         }
     }
