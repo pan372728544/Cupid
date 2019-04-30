@@ -114,7 +114,7 @@ class IMChatViewController: ZJBaseViewController {
     }
     
     deinit {
-//        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

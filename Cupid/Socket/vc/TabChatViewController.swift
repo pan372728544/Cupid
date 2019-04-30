@@ -45,15 +45,19 @@ class TabChatViewController: ZJBaseViewController {
             // 连接服务器
             connectServer()
             
-
+            
         }
-
+        addNotifi()
     }
    
     deinit {
-        socketClient.sendLeaveRoom()
+ 
 
     }
+    
+    
+ 
+
 }
 
 
@@ -411,5 +415,31 @@ extension TabChatViewController {
         message.userInfo = realmUser
         RealmTool.insertMessage(by: message)
         
+    }
+}
+
+
+extension TabChatViewController {
+    
+    func  addNotifi() {
+        
+        //注册进入前台的通知
+        NotificationCenter.default.addObserver(self, selector:#selector(becomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        //注册进入后台的通知
+        NotificationCenter.default.addObserver(self, selector:#selector(becomeDeath), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        
+    }
+    
+    // 进入前台
+    @objc  func becomeActive(noti:Notification){
+        
+        connectServer()
+    }
+    //进后台
+    @objc  func becomeDeath(noti:Notification){
+        heartBeatTimer?.invalidate()
+        heartBeatTimer = nil
+        socketClient.sendLeaveRoom()
+        socketClient.closeServer()
     }
 }
