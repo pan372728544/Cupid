@@ -378,10 +378,7 @@ extension IMChatViewController {
         let textMsg = message as! TextMessage
         
         socket(socketClient, chatMsg: textMsg)
-        print("ddd")
-        
-        
-        
+
     }
 }
 

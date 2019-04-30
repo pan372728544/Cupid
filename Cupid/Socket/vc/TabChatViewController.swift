@@ -45,11 +45,15 @@ class TabChatViewController: ZJBaseViewController {
             // 连接服务器
             connectServer()
             
-//              socketClient.sendLeaveRoom()
+
         }
 
     }
    
+    deinit {
+        socketClient.sendLeaveRoom()
+
+    }
 }
 
 
@@ -327,23 +331,37 @@ extension TabChatViewController {
         for i in 0..<messageCount {
             
             let mess = messages[i]
-            if mess.groupId == num {
+            
+            if chatMsg.chatType == "1" {
+                if mess.groupId == num {
+                    
+                    let newMess =  GroupListMessage()
+                    newMess.groupId = Int(num)
+                    newMess.userInfo = mess.userInfo
+                    
+                    newMess.text = "\(names[tonum]) \(text)"
+                    newMess.id = Int(num)
+                    RealmTool.updateGroupMessage(message: newMess)
+                } else if mess.groupId == other {
+                    let newMess =  GroupListMessage()
+                    newMess.groupId = Int(other)
+                    newMess.userInfo = mess.userInfo
+                    newMess.text = "\(names[tonum]) \(text)"
+                    newMess.id = Int(other)
+                    RealmTool.updateGroupMessage(message: newMess)
+                }
+            } else if String(mess.groupId) == "1004" {
+                print("qun")
                 
                 let newMess =  GroupListMessage()
-                newMess.groupId = Int(num)
-                newMess.userInfo = mess.userInfo
-                
-                newMess.text = "\(names[tonum]) \(text))"
-                newMess.id = Int(num)
-                RealmTool.updateGroupMessage(message: newMess)
-            } else if mess.groupId == other {
-                let newMess =  GroupListMessage()
-                newMess.groupId = Int(other)
+                newMess.groupId = mess.groupId
                 newMess.userInfo = mess.userInfo
                 newMess.text = "\(names[tonum]) \(text)"
-                newMess.id = Int(other)
+                newMess.id = Int(mess.groupId)
                 RealmTool.updateGroupMessage(message: newMess)
             }
+            
+           
         }
         self.msgArray .removeAll()
         _ = searchRealm(curr: 1)
