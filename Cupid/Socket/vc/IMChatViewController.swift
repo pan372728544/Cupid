@@ -37,9 +37,7 @@ class IMChatViewController: ZJBaseViewController {
     fileprivate var timeOld : String = ""
     // 聊天列表数据
     fileprivate var  group : GroupMessage
-    // 定时器
-    fileprivate var heartBeatTimer : Timer?
-    fileprivate var socketClient : ZJSocket = ZJSocket(addr: "10.2.116.49", port: 7878)
+
     // 输入框
     fileprivate lazy var textField : ChatInputTextField = {
        
@@ -84,9 +82,7 @@ class IMChatViewController: ZJBaseViewController {
         self.delegate = self
         // 处理通知
         registerNotification()
-        
-        // 连接服务器
-        connectServer()
+    
         
         // 创建聊天tableview
         setupTableView()
@@ -96,6 +92,9 @@ class IMChatViewController: ZJBaseViewController {
         
         // 查询数据库
         searchRealm(curr: currentPage)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateMeseage), name: NSNotification.Name(rawValue:"chatUpdate"), object: nil)
     }
     
     // 初始化
@@ -109,14 +108,12 @@ class IMChatViewController: ZJBaseViewController {
     }
     
     deinit {
-        heartBeatTimer?.invalidate()
-        heartBeatTimer = nil
         NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        socketClient.sendLeaveRoom()
+
     }
 
 }
@@ -257,13 +254,11 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     // scrollview
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
-//        tableViewoffsetBefore = self.tableView.contentSize.height
-//                print("\(tableViewoffsetBefore)scrollViewWillBeginDragging")
+
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//          tableViewoffsetEnd = self.tableView.contentSize.height
-//        print("\(tableViewoffsetEnd)scrollViewDidScroll")
+
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -296,25 +291,6 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
 // MARK:-连接服务器
 extension IMChatViewController {
     
-    func connectServer() {
-        
-        DispatchQueue.global().async {
-            if self.socketClient.connectServer().isSuccess {
-                print("连接会话成功")
-                DispatchQueue.main.async {
-                    self.socketClient.delegate = self
-                    // 进入会话
-                    self.socketClient.sendJoinRoom()
-                    // 接受消息
-                    self.socketClient.startReadMsg()
-                    // 发送心跳包
-                    self.addHeartBeatTimer()
-                }
-            }
-        }
-
-    }
-    
     // 滚动到底部
     func scrollToEnd() {
         guard msgArray.count == 0 else {
@@ -325,21 +301,10 @@ extension IMChatViewController {
     }
 }
 
-// MARK:- socket代理
-extension IMChatViewController : ZJSocketDelegate {
+// MARK:-
+extension IMChatViewController  {
     
-    func socket(_ socket: ZJSocket, groupMsg: GroupMessage) {
-        
-    }
-    
-    func socket(_ socket: ZJSocket, joinRoom user: UserInfo) {
-        
-    }
-    
-    func socket(_ socket: ZJSocket, leaveRoom user: UserInfo) {
-        
-    }
-    
+    // 通知收到消息
     func socket(_ socket: ZJSocket, chatMsg: TextMessage) {
         
         print("收到服务器消息： \(String(describing: chatMsg.text))")
@@ -363,14 +328,6 @@ extension IMChatViewController : ZJSocketDelegate {
 // MARK:- 给服务器发送即时消息
 extension IMChatViewController {
     
-    fileprivate func addHeartBeatTimer() {
-        heartBeatTimer = Timer(fireAt: Date(), interval: 9, target: self, selector: #selector(sendHeartBeat), userInfo: nil, repeats: true)
-        RunLoop.main.add(heartBeatTimer!, forMode: RunLoop.Mode.common)
-    }
-    
-    @objc fileprivate func sendHeartBeat() {
-        socketClient.sendHeartBeat()
-    }
 }
 
 // MARK:- 点击事件
@@ -396,11 +353,12 @@ extension IMChatViewController {
         let cupid =  socketClient.sendTextMsg(message: self.textField.text ?? "", group: group)
         
         if cupid.re.isSuccess {
+            print("聊天消息发送成功 \(self.textField.text)")
         } else {
             let chatMsgBuild = cupid.ch
             chatMsgBuild.success = "false"
             let chatMsg = try! chatMsgBuild.build()
-            socket(self.socketClient, chatMsg: chatMsg)
+            socket(socketClient, chatMsg: chatMsg)
         }
         // 清空数据框
         self.textField.text = ""
@@ -414,6 +372,17 @@ extension IMChatViewController {
 
 extension IMChatViewController {
     
+    @objc func updateMeseage(nofi : Notification){
+        
+        let message = nofi.userInfo!["mess"]
+        let textMsg = message as! TextMessage
+        
+        socket(socketClient, chatMsg: textMsg)
+        print("ddd")
+        
+        
+        
+    }
 }
 
 // MARK: - 数据库操作
@@ -441,11 +410,7 @@ extension IMChatViewController {
 
         message.userInfo = realmUser
         RealmTool.insertMessage(by: message)
-        
-        // 发送通知
-        let id = Int(chatMsg.toUserId)! + 1000
-        
-        notificationUpdateText(chatMsg.text ?? "",String(id),String(userChat!.userId))
+
     }
     
     // 查询数据
@@ -556,8 +521,4 @@ extension IMChatViewController {
     }
     
     
-    func notificationUpdateText(_ text: String,_ id: String,_ toid: String)  {
-        
-        NotificationCenter.default.post(name: NSNotification.Name("updateText"), object: self, userInfo: ["text":"\(text)","id":"\(id)","toid":"\(toid)"])
-    }
 }

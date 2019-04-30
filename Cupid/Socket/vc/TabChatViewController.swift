@@ -24,7 +24,8 @@ class TabChatViewController: ZJBaseViewController {
         tableView.backgroundColor = UIColor.tableViewBackGroundColor()
         return tableView
     }()
-    
+    // 定时器
+    fileprivate var heartBeatTimer : Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
         // 配置数据库
@@ -38,18 +39,17 @@ class TabChatViewController: ZJBaseViewController {
             popLoginView()
         } else {
             // 查询数据
-            let count =  searchRealm(curr: 1)
-            if count == 0 {
+            _ =  searchRealm(curr: 1)
+            
+            
             // 连接服务器
-                connectServer()
-            } else {
-
-            }
+            connectServer()
+            
+//              socketClient.sendLeaveRoom()
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updataText), name: NSNotification.Name(rawValue:"updateText"), object: nil)
 
     }
+   
 }
 
 
@@ -60,44 +60,6 @@ extension TabChatViewController {
         UserDefaults.standard.removeObject(forKey: NICKNAME)
     }
     
-    @objc func updataText(nofi : Notification){
-        let str = nofi.userInfo!["text"]
-        let id : String = nofi.userInfo!["id"] as! String
-        let toid : String = nofi.userInfo!["toid"] as! String
-        let messages  =  RealmTool.getGroupMessages()
-        
-        let num : Int64 = Int64(id)!
-        let tonum : Int = Int(toid)! - 1
-        let text : String = str as! String
-        let  messageCount = messages.count
-        
-        let other : Int = Int(toid)! + 1000
-        
-        var names = ["齐天大圣:","BAYMAX:","钢铁侠:","群聊天555555:"]
-        for i in 0..<messageCount {
-            
-            let mess = messages[i]
-            if mess.groupId == num {
-                
-                let newMess =  GroupListMessage()
-                newMess.groupId = Int(num)
-                newMess.userInfo = mess.userInfo
-                
-                newMess.text = "\(names[tonum]) \(text)"
-                newMess.id = Int(num)
-                RealmTool.updateGroupMessage(message: newMess)
-            } else if mess.groupId == other {
-                let newMess =  GroupListMessage()
-                newMess.groupId = Int(other)
-                newMess.userInfo = mess.userInfo
-                newMess.text = "\(names[tonum]) \(text)"
-                newMess.id = Int(other)
-                RealmTool.updateGroupMessage(message: newMess)
-            }
-        }
-        self.msgArray .removeAll()
-        _ = searchRealm(curr: 1)
-    }
 }
 
 
@@ -147,6 +109,11 @@ extension TabChatViewController {
                     socketClient.sendGroupMsg()
                     // 读取消息
                     socketClient.startReadMsg()
+                    
+                    // 加入房间
+                    socketClient.sendJoinRoom()
+                    // 发送心跳包
+                    self.addHeartBeatTimer()
                 }
             }
         }
@@ -174,6 +141,7 @@ extension TabChatViewController : ZJSocketDelegate {
     // 收到聊天列表消息
     func socket(_ socket: ZJSocket, groupMsg: GroupMessage) {
         
+           print("接收到群组消息： \(groupMsg.text)")
         if msgArray.count < 3 {
             msgArray.append(groupMsg)
             
@@ -195,6 +163,14 @@ extension TabChatViewController : ZJSocketDelegate {
     
     func socket(_ socket: ZJSocket, chatMsg: TextMessage) {
   
+        print("接收到回话消息： \(chatMsg.text)")
+        
+        // 发送通知给会话页面
+        notificationToChat(chatMsg)
+        
+        // 更新聊天列表
+        updateChatList(chatMsg)
+
     }
 
 }
@@ -302,4 +278,105 @@ extension TabChatViewController {
         return messageCount
     }
     
+}
+
+
+// MARK:- 给服务器发送即时消息
+extension TabChatViewController {
+    
+    fileprivate func addHeartBeatTimer() {
+        heartBeatTimer = Timer(fireAt: Date(), interval: 9, target: self, selector: #selector(sendHeartBeat), userInfo: nil, repeats: true)
+        RunLoop.main.add(heartBeatTimer!, forMode: RunLoop.Mode.common)
+    }
+    
+    @objc fileprivate func sendHeartBeat() {
+        socketClient.sendHeartBeat()
+        print("发送心跳包")
+    }
+}
+
+extension TabChatViewController {
+    
+    // 收到消息通知给会话页面
+    func notificationToChat(_ message: Any)  {
+        
+        NotificationCenter.default.post(name: NSNotification.Name("chatUpdate"), object: self, userInfo: ["mess": message])
+    }
+    
+    // 更新消息列表
+    func updateChatList(_ chatMsg: TextMessage)  {
+
+        handleMsgList(chatMsg: chatMsg)
+    
+    }
+    
+    func handleMsgList(chatMsg: TextMessage) {
+        
+        // 聊天内容
+        let  text = chatMsg.text!
+        // 发送给谁的id
+        let id = Int(chatMsg.toUserId)! + 1000
+        // 发送者id
+        let toid  = chatMsg.user.userId
+        let messages  =  RealmTool.getGroupMessages()
+        let num : Int64 = Int64(id)
+        let tonum : Int = Int(toid!)! - 1
+        let  messageCount = messages.count
+        let other : Int = Int(toid!)! + 1000
+        var names = ["齐天大圣:","BAYMAX:","钢铁侠:","群聊天555555:"]
+        for i in 0..<messageCount {
+            
+            let mess = messages[i]
+            if mess.groupId == num {
+                
+                let newMess =  GroupListMessage()
+                newMess.groupId = Int(num)
+                newMess.userInfo = mess.userInfo
+                
+                newMess.text = "\(names[tonum]) \(text))"
+                newMess.id = Int(num)
+                RealmTool.updateGroupMessage(message: newMess)
+            } else if mess.groupId == other {
+                let newMess =  GroupListMessage()
+                newMess.groupId = Int(other)
+                newMess.userInfo = mess.userInfo
+                newMess.text = "\(names[tonum]) \(text)"
+                newMess.id = Int(other)
+                RealmTool.updateGroupMessage(message: newMess)
+            }
+        }
+        self.msgArray .removeAll()
+        _ = searchRealm(curr: 1)
+        
+        // 插入数据到数据库
+        let builder = try! chatMsg.toBuilder()
+        insertRealm(cupid: builder)
+    }
+    
+    
+    
+    // 插入数据
+    func insertRealm(cupid : TextMessage.Builder) {
+        let chatMsg = try! cupid.build()
+        let userChat = chatMsg.user
+        // realm消息数据
+        let message = ChatMessage()
+        message.text = chatMsg.text
+        message.chatId = chatMsg.chatId
+        message.toUserId = chatMsg.toUserId
+        message.chatType = chatMsg.chatType
+        message.success = chatMsg.success
+        message.sendTime = chatMsg.sendTime
+        
+        // realm用户数据
+        let realmUser = UserInfoRealm()
+        realmUser.name = userChat!.name
+        realmUser.level = Int(userChat!.level)
+        realmUser.iconUrl = userChat!.iconUrl
+        realmUser.userId = userChat!.userId
+        
+        message.userInfo = realmUser
+        RealmTool.insertMessage(by: message)
+        
+    }
 }
