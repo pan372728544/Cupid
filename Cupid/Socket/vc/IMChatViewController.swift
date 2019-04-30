@@ -114,9 +114,12 @@ class IMChatViewController: ZJBaseViewController {
     }
     
     deinit {
+//        NotificationCenter.default.removeObserver(self)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
-
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
@@ -235,21 +238,21 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     func panGesture(_ pan: UIPanGestureRecognizer!) {
 
         isScrolling = true
-        let key  = UIApplication.shared.windows.last
-        let x = pan.translation(in: self.navigationController?.view).x
-        let xx = 0-x*keyboardH/keyboardW > 0 ? 0 :  0-x*keyboardH/keyboardW
-        if pan.state == .changed  {
-            
-            if key?.subviews.first != nil {
-                view.addSubview(key!)
-  
-                key?.transform = CGAffineTransform(translationX: 0, y: 0 )
-            }
-        }
-        else {
-            imageView.removeFromSuperview()
-            key?.transform = CGAffineTransform.identity
-        }
+//        let key  = UIApplication.shared.windows.last
+//        let x = pan.translation(in: self.navigationController?.view).x
+//        let xx = 0-x*keyboardH/keyboardW > 0 ? 0 :  0-x*keyboardH/keyboardW
+//        if pan.state == .changed  {
+//
+//            if key?.subviews.first != nil {
+//                view.addSubview(key!)
+//                key?.removeFromSuperview()
+//                key?.transform = CGAffineTransform(translationX: 0, y: 0 )
+//            }
+//        }
+//        else {
+//            key?.removeFromSuperview()
+//            key?.transform = CGAffineTransform.identity
+//        }
     }
     
 

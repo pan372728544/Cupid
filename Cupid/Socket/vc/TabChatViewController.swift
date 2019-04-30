@@ -131,7 +131,7 @@ extension TabChatViewController {
                     // 加入房间
                     socketClient.sendJoinRoom()
                     // 发送心跳包
-                    self.addHeartBeatTimer()
+//                    self.addHeartBeatTimer()
                 }
             }
         }
