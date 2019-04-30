@@ -27,6 +27,8 @@ class ZJSocket : NSObject{
 //    fileprivate let timer : Timer
     fileprivate var userInfo : UserInfo.Builder = {
 
+        
+        LogInName =  UserDefaults.standard.string(forKey: NICKNAME)
         var imgs : [String] =  ["1.jpeg","2.jpeg","3.jpeg","4.jpeg"]
         let userInfo = UserInfo.Builder()
         // 用户ID
@@ -123,7 +125,9 @@ extension ZJSocket {
             let group = try! GroupMessage.parseFrom(data: data)
             delegate?.socket(self, groupMsg: group)
         default:
-
+            alert(msg: "服务器异常，请重试") { () -> (Void) in
+                
+            }
             print("未知类型: \(type)")
         }
     }
@@ -135,14 +139,18 @@ extension ZJSocket {
     
     func sendJoinRoom() {
         // 用户信息
-        let msgData = (try! userInfo.build()).data()
+
+        let userInfoNew = getUserInfo()
+        let msgData = (try! userInfoNew.build()).data()
+        
         // 发送
         sendMsg(data: msgData, type: 0)
     }
     
     func sendLeaveRoom() {
         // 用户信息
-        let msgData = (try! userInfo.build()).data()
+        let userInfoNew = getUserInfo()
+        let msgData = (try! userInfoNew.build()).data()
         // 发送
         sendMsg(data: msgData, type: 1)
     }
@@ -152,8 +160,10 @@ extension ZJSocket {
         // 发送消息
         let chatMsg = TextMessage.Builder()
         
+        let userInfoNew = getUserInfo()
+        
         // 用户
-        chatMsg.user = try! userInfo.build()
+        chatMsg.user = try! userInfoNew.build()
         // 发送信息
         chatMsg.text = message
         
@@ -274,4 +284,30 @@ extension ZJSocket {
         }
     }
     
+    
+    func getUserInfo() ->  UserInfo.Builder {
+        
+
+        LogInName =  UserDefaults.standard.string(forKey: NICKNAME)
+        var imgs : [String] =  ["1.jpeg","2.jpeg","3.jpeg","4.jpeg"]
+        let userInfo = UserInfo.Builder()
+        // 用户ID
+        let userId : String = String(LogInName!.suffix(1))
+        userInfo.userId = userId
+        
+        // 用户名
+        let count = LogInName!.count
+        userInfo.name = String(LogInName!.prefix(count-4) )
+        
+        // 用户等级
+        userInfo.level = Int64(userId)!
+        
+        // 用户头像
+        let n : Int = Int(userId)!
+        let str = imgs[n-1]
+        userInfo.iconUrl = str
+        
+        return userInfo
+        
+    }
 }

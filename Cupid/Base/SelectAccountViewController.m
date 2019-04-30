@@ -94,6 +94,7 @@
     [self btnClose:nil];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.maryData[indexPath.row] forKey:NICKNAME];
+    [defaults synchronize];
     if (self.completedBlock) {
         self.completedBlock();
     }

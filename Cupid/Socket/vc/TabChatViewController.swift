@@ -60,8 +60,23 @@ class TabChatViewController: ZJBaseViewController {
 extension TabChatViewController {
     
     @objc func logOut (){
+
+        let messagesGroup : Results<GroupListMessage> =  RealmTool.getGroupMessages()
+        RealmTool.deleteGroupMessages(messages: messagesGroup)
+        
+        let messages : Results<ChatMessage> =  RealmTool.getMessages()
+        RealmTool.deleteMessages(messages: messages)
+        
+        let user : Results<UserInfoRealm> =  RealmTool.getUserInfo()
+        RealmTool.deleteUserInfos(messages: user)
+        
+        socketClient.sendLeaveRoom()
+        // 先关闭连接
+        socketClient.closeServer()
+        self.msgArray.removeAll()
         // 删除登录信息
         UserDefaults.standard.removeObject(forKey: NICKNAME)
+        popLoginView()
     }
     
 }
@@ -100,8 +115,7 @@ extension TabChatViewController {
     func connectServer() {
         
         DispatchQueue.global().async {
-            // 先关闭连接
-            socketClient.closeServer()
+       
             
             // 开始连接
             if socketClient.connectServer().isSuccess {
@@ -127,10 +141,11 @@ extension TabChatViewController {
     func popLoginView()  {
         let vc = SelectAccountViewController()
         vc.completedBlock = {
+            
+            LogInName =  UserDefaults.standard.string(forKey: NICKNAME)
             // 登录完成连接服务器
             self.connectServer()
-            LogInName =  UserDefaults.standard.string(forKey: NICKNAME)
-            
+
             let Coun = LogInName!.count
             self.createNavBarView(withTitle: "欢迎-\( String(LogInName!.prefix(Coun-4)))-归来")
             self.tableView.reloadData()

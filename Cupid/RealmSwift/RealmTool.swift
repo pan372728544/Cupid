@@ -85,6 +85,12 @@ extension RealmTool {
     }
     
     
+    public class func getUserInfo() -> Results<UserInfoRealm> {
+        let realm = self.defaultRealm()
+        return realm.objects(UserInfoRealm.self)
+    }
+    
+    
     /// 获取 所保存的 groupMessage
     public class func getGroupMessages() -> Results<GroupListMessage> {
         let realm = self.defaultRealm()
@@ -164,7 +170,25 @@ extension RealmTool {
     }
     
     /// 删除多个 ChatMessage
-    public class func deleteMessage(messages : Results<ChatMessage>) {
+    public class func deleteMessages(messages : Results<ChatMessage>) {
+        let realm = self.defaultRealm()
+        try! realm.write {
+            realm.delete(messages)
+        }
+    }
+    
+    
+    /// 删除多个 GroupListMessage
+    public class func deleteGroupMessages(messages : Results<GroupListMessage>) {
+        let realm = self.defaultRealm()
+        try! realm.write {
+            realm.delete(messages)
+        }
+    }
+    
+    
+    /// 删除多个 UserInfoRealm
+    public class func deleteUserInfos(messages : Results<UserInfoRealm>) {
         let realm = self.defaultRealm()
         try! realm.write {
             realm.delete(messages)
