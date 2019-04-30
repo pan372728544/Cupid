@@ -279,8 +279,11 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
         
         let msg : TextMessage = msgArray[indexPath.row]
         if msg.sendTime != "" {
+            print("\(heightOfCell(text: msg.text) + 45 + 40)  \(msg.user.name)")
             return heightOfCell(text: msg.text) + 45 + 40
         }
+
+                    print("\(heightOfCell(text: msg.text) + 45 )  \(msg.user.name)")
         return heightOfCell(text: msg.text) + 45
 
     }
@@ -347,11 +350,11 @@ extension IMChatViewController  {
         // 滚动到tableview底部
         scrollToEnd()
         // 其他人发送的消息
-        if chatMsg.user.name != String(LogInName!.prefix(LogInName!.count-4)) {
-            let build = try! chatMsg.toBuilder()
-            insertRealm(cupid: build)
-            
-        }
+//        if chatMsg.user.name != String(LogInName!.prefix(LogInName!.count-4)) {
+//            let build = try! chatMsg.toBuilder()
+//            insertRealm(cupid: build)
+//
+//        }
   
     }
     

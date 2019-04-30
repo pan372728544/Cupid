@@ -37,12 +37,12 @@ class ChatTableViewCell: UITableViewCell {
             
             timeLabel.isHidden = true
             if textMes?.sendTime != "" {
-                timeLabel.text = textMes?.sendTime
+                timeLabel.text = String((textMes?.sendTime.suffix(5))!)
                 timeLabel.isHidden = false
             }
             
             imgTou.image = UIImage.init(named: textMes!.user.iconUrl)
-            imgTou.frame.origin.y = textMes?.sendTime != nil ? 15+40 : 15
+            imgTou.frame.origin.y = textMes?.sendTime != "" ? 15+40 : 15
             
             nameLabel.text = textMes?.user.name
             nameLabel.frame.origin.y = imgTou.frame.origin.y
