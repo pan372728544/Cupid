@@ -29,9 +29,11 @@
     UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_W, 44)];
     lab.text = @"发布";
     lab.textAlignment = NSTextAlignmentCenter;
-    
+    self.heightTop = 10;
     [self.view addSubview:lab];
-
+    UITextField *ff = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, SCREEN_W, 70)];
+    [self.view addSubview:ff];
+    ff.backgroundColor = [UIColor orangeColor];
     
 }
 

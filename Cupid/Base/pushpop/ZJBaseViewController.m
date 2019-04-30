@@ -52,7 +52,12 @@
 
     self.popAnimation = [[ZJBasePopAnimation alloc]init];
 
-    
+    // 为了不使键盘向下移动
+//    id target = self.navigationController.interactivePopGestureRecognizer.delegate;
+//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:NSSelectorFromString(@"handleNavigationTransition:")];
+//    pan.delegate = self;
+//    [self.view addGestureRecognizer:pan];
+//    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
 
 

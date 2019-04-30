@@ -15,6 +15,9 @@ private let viewBottom_H : CGFloat =  Bottom_H + 60
 // 加载视图高度
 private let loadingH : CGFloat =  60
 
+private var keyboardH : CGFloat =  0
+private var keyboardW : CGFloat =  0
+
 // 每次加载多少条数据
 private let page :  Int = 10
 
@@ -136,11 +139,19 @@ extension IMChatViewController {
     //MARK:键盘通知相关操作
     @objc func keyBoardWillShow(_ notification:Notification){
         
+        print("keyBoardWillShow")
         // 1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
         // 2. 获取键盘最终的Y值
         let endFrame = (notification.userInfo!["UIKeyboardFrameEndUserInfoKey"] as! NSValue).cgRectValue
         let y = endFrame.origin.y
+        
+        keyboardH = endFrame.height
+        keyboardW = endFrame.width
+        if isScrolling {
+            isScrolling = false
+            return
+        }
         // 3.执行动画
         UIView.animate(withDuration: duration) {
             self.viewBottom.frame.origin.y = y - viewBottom_Height
@@ -151,10 +162,13 @@ extension IMChatViewController {
     }
     
     @objc func keyBoardWillHide(_ notification:Notification){
-
+        print("keyBoardWillHide")
         //1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
-
+        if isScrolling {
+            isScrolling = false
+            return
+        }
         //2.执行动画
         UIView.animate(withDuration: duration) {
             self.viewBottom.frame.origin.y = Screen_H - viewBottom_H
@@ -213,9 +227,24 @@ extension IMChatViewController {
 
 // MARK:- 代理
 extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextFieldDelegate,BaseViewControllerPangestureDelegate {
-    
+   
+    // 处理键盘
     func panGesture(_ pan: UIPanGestureRecognizer!) {
 
+        isScrolling = true
+        let key  = UIApplication.shared.windows.last
+        let x = pan.translation(in: self.navigationController?.view).x
+        let xx = 0-x*keyboardH/keyboardW > 0 ? 0 :  0-x*keyboardH/keyboardW
+        if pan.state == .changed  {
+            
+            if key?.subviews.first != nil {
+                view.addSubview(key!)
+                key?.transform = CGAffineTransform(translationX: 0, y: xx )
+            }
+        }
+        else {
+            key?.transform = CGAffineTransform.identity
+        }
     }
     
 
