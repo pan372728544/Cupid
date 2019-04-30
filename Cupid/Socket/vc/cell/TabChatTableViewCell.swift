@@ -11,6 +11,7 @@ import UIKit
 class TabChatTableViewCell: UITableViewCell {
     internal var imgTou: UIImageView = UIImageView()
     
+    internal var messageCenter: UIImageView = UIImageView()
     internal var nameLabel : UILabel = UILabel()
     
     internal var contentLabel : UILabel = UILabel()
@@ -51,6 +52,11 @@ extension TabChatTableViewCell {
         imgTou.contentMode = .scaleAspectFill
         imgTou.clipsToBounds = true
         self.contentView.addSubview(imgTou)
+        
+        messageCenter.frame = CGRect(x: imgTou.frame.origin.x+imgTou.frame.size.width-5, y: 12, width: 15, height: 16)
+        messageCenter.contentMode = .scaleAspectFill
+        messageCenter.image = UIImage(named: "MessageCenter_NewNotify~iphone")
+//        self.contentView.addSubview(messageCenter)
         
         nameLabel.frame = CGRect(x: imgTou.frame.origin.x+imgTou.frame.size.width+10, y: 15, width: Screen_W - 100, height: 20)
         nameLabel.font = UIFont.systemFont(ofSize: 17)

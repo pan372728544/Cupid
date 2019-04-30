@@ -162,6 +162,10 @@
 		38717AF62255F91B0020955F /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF52255F91B0020955F /* PlayViewController.swift */; };
 		38717AFA2255F9870020955F /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38717AF82255F9870020955F /* HomeViewCell.swift */; };
 		38717AFB2255F9870020955F /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38717AF92255F9870020955F /* HomeViewCell.xib */; };
+		38767DF4227804E700A28AF9 /* MessageCenter_NewNotify~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38767DF2227804E600A28AF9 /* MessageCenter_NewNotify~iphone.png */; };
+		38767DF5227804E700A28AF9 /* MessageCenter_NewNotify~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38767DF3227804E700A28AF9 /* MessageCenter_NewNotify~iphone@2x.png */; };
+		38767DF8227806A800A28AF9 /* ReceiveOrPayNew~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38767DF6227806A800A28AF9 /* ReceiveOrPayNew~iphone@2x.png */; };
+		38767DF9227806A800A28AF9 /* ReceiveOrPayNew~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 38767DF7227806A800A28AF9 /* ReceiveOrPayNew~iphone.png */; };
 		3899906A226D738D00B09412 /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 38999064226D738D00B09412 /* yudpsocket.c */; };
 		3899906B226D738D00B09412 /* ytcpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 38999065226D738D00B09412 /* ytcpsocket.c */; };
 		3899906C226D738D00B09412 /* TCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38999066226D738D00B09412 /* TCPClient.swift */; };
@@ -454,6 +458,10 @@
 		38717AF52255F91B0020955F /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		38717AF82255F9870020955F /* HomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		38717AF92255F9870020955F /* HomeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
+		38767DF2227804E600A28AF9 /* MessageCenter_NewNotify~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MessageCenter_NewNotify~iphone.png"; sourceTree = "<group>"; };
+		38767DF3227804E700A28AF9 /* MessageCenter_NewNotify~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MessageCenter_NewNotify~iphone@2x.png"; sourceTree = "<group>"; };
+		38767DF6227806A800A28AF9 /* ReceiveOrPayNew~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiveOrPayNew~iphone@2x.png"; sourceTree = "<group>"; };
+		38767DF7227806A800A28AF9 /* ReceiveOrPayNew~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiveOrPayNew~iphone.png"; sourceTree = "<group>"; };
 		38999064226D738D00B09412 /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yudpsocket.c; sourceTree = "<group>"; };
 		38999065226D738D00B09412 /* ytcpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ytcpsocket.c; sourceTree = "<group>"; };
 		38999066226D738D00B09412 /* TCPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPClient.swift; sourceTree = "<group>"; };
@@ -860,6 +868,10 @@
 		386392E921E8709F00A834EE /* imgs */ = {
 			isa = PBXGroup;
 			children = (
+				38767DF7227806A800A28AF9 /* ReceiveOrPayNew~iphone.png */,
+				38767DF6227806A800A28AF9 /* ReceiveOrPayNew~iphone@2x.png */,
+				38767DF2227804E600A28AF9 /* MessageCenter_NewNotify~iphone.png */,
+				38767DF3227804E700A28AF9 /* MessageCenter_NewNotify~iphone@2x.png */,
 				38ECA7A72275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone.png */,
 				38ECA7A82275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png */,
 				38ECA73A22757EF800D41D08 /* ChatRoom_Bubble_Text_Sender_Green~iphone.png */,
@@ -1309,12 +1321,15 @@
 				3863936321E8A6F500A834EE /* tabbar_publish_article_34x34_@3x.png in Resources */,
 				38C20A0D21EC8207007C4CB7 /* tabbar_closebtn_56x56_@3x.png in Resources */,
 				38CC1DBD22718C9400DD22D5 /* rechat@2x.png in Resources */,
+				38767DF5227804E700A28AF9 /* MessageCenter_NewNotify~iphone@2x.png in Resources */,
 				38FF1F0921FEF52B00A3CA7F /* deleteicon_channel_18x18_@3x.png in Resources */,
+				38767DF8227806A800A28AF9 /* ReceiveOrPayNew~iphone@2x.png in Resources */,
 				3863935821E89F3300A834EE /* chatroom_close_18x18_@2x.png in Resources */,
 				3863936621E8A6F500A834EE /* tabbar_publish_uploadvideo_34x34_@3x.png in Resources */,
 				3863932F21E872F600A834EE /* no_login_tabbar_night_33x32_@3x.png in Resources */,
 				3863932521E872E400A834EE /* mine_tabbar_press_night_33x32_@3x.png in Resources */,
 				386392FF21E8718300A834EE /* addfriend_tabbar_night_32x32_@3x.png in Resources */,
+				38767DF4227804E700A28AF9 /* MessageCenter_NewNotify~iphone.png in Resources */,
 				3863933121E872F600A834EE /* no_login_tabbar_press_night_33x32_@3x.png in Resources */,
 				3863930D21E8729B00A834EE /* home_tabbar_night_32x32_@2x.png in Resources */,
 				3863930921E8729B00A834EE /* home_tabbar_press_night_32x32_@3x.png in Resources */,
@@ -1375,6 +1390,7 @@
 				3863935721E89F3300A834EE /* chatroom_close_18x18_@3x.png in Resources */,
 				3863936721E8A6F500A834EE /* tabbar_publish_article_34x34_@2x.png in Resources */,
 				38AC1A3D21F1B7FF001D491B /* title_72x20_@3x.png in Resources */,
+				38767DF9227806A800A28AF9 /* ReceiveOrPayNew~iphone.png in Resources */,
 				38ECA7AA2275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png in Resources */,
 				3863933021E872F600A834EE /* no_login_tabbar_press_night_33x32_@2x.png in Resources */,
 				386392EF21E870F100A834EE /* add_channel_titlbar_thin_new_24x24_@3x.png in Resources */,

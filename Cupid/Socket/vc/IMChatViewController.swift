@@ -359,11 +359,12 @@ extension IMChatViewController {
             chatMsgBuild.success = "false"
             let chatMsg = try! chatMsgBuild.build()
             socket(socketClient, chatMsg: chatMsg)
+            // 保存数据库 发送失败保存数据库
+            insertRealm(cupid: cupid.ch)
         }
         // 清空数据框
         self.textField.text = ""
-        // 保存数据库
-        insertRealm(cupid: cupid.ch)
+
 
     }
     
@@ -499,6 +500,7 @@ extension IMChatViewController {
 
         updateOffset {
             self.tableView.reloadData()
+            self.tableView.layoutIfNeeded()
    
         }
         
@@ -506,14 +508,14 @@ extension IMChatViewController {
     
     func updateOffset(finishedCallback : @escaping () -> ())  {
         
-//        let oldOffset = tableViewoffsetBefore - self.tableView.contentOffset.y
+        let oldOffset = self.tableView.contentSize.height - self.tableView.contentOffset.y
         finishedCallback()
         
-//        if oldOffset == 0 {
-//            return
-//        }
-//        let  offset = tableViewoffsetEnd - oldOffset
-//        self.tableView.contentOffset = CGPoint(x: self.tableView.contentOffset.x, y: offset)
+        if oldOffset == 0 {
+            return
+        }
+        let  offset = self.tableView.contentSize.height - oldOffset
+        self.tableView.contentOffset = CGPoint(x: self.tableView.contentOffset.x, y: offset)
         
     }
     
