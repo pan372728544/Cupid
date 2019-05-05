@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cupid/Socket/vc/IMChatViewController.swift"
-            timestampString = "578737957.5364701"
+            timestampString = "578740032.83608"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "sendClick()"
             landmarkType = "7">
          </BreakpointContent>
@@ -121,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Cupid/RealmSwift/RealmTool.swift"
-            timestampString = "578737957.536768"
+            filePath = "Cupid/Socket/vc/TabChatViewController.swift"
+            timestampString = "578740032.836437"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "getRealmPath()"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "socket(_:chatMsg:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

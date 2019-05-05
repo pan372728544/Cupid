@@ -162,7 +162,10 @@ extension IMChatViewController {
         UIView.animate(withDuration: duration) {
             self.viewBottom.frame.origin.y = y - viewBottom_Height
         }
-        self.tableView.frame.size.height = Screen_H-NavaBar_H - endFrame.size.height-viewBottom_Height
+        UIView.performWithoutAnimation {
+            self.tableView.frame.size.height = Screen_H-NavaBar_H - endFrame.size.height-viewBottom_Height
+        }
+        
         // 滚动到tableview底部
         scrollToEnd()
     }
@@ -241,7 +244,7 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     // 处理键盘
     func panGesture(_ pan: UIPanGestureRecognizer!) {
 
-        isScrolling = true
+//        isScrolling = true
 //        let key  = UIApplication.shared.windows.last
 //        let x = pan.translation(in: self.navigationController?.view).x
 //        let xx = 0-x*keyboardH/keyboardW > 0 ? 0 :  0-x*keyboardH/keyboardW
@@ -337,7 +340,9 @@ extension IMChatViewController {
     
     // 滚动到底部
     func scrollToEnd() {
+        
         guard msgArray.count == 0 else {
+
             self.tableView.scrollToRow(at: IndexPath(item: msgArray.count-1 < 0 ? 0: msgArray.count-1, section: 0 ), at: UITableView.ScrollPosition.bottom, animated: false)
             return
         }
@@ -564,13 +569,14 @@ extension IMChatViewController {
         
         let oldOffset = self.tableView.contentSize.height - self.tableView.contentOffset.y
         finishedCallback()
-        
+        scrollToEnd()
         if oldOffset == 0 {
             return
         }
         let  offset = self.tableView.contentSize.height - oldOffset
         self.tableView.contentOffset = CGPoint(x: self.tableView.contentOffset.x, y: offset)
         
+    
     }
     
     
