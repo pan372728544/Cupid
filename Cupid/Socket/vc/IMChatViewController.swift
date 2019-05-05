@@ -85,7 +85,7 @@ class IMChatViewController: ZJBaseViewController {
         self.createNavLeftBtn(withItem: "", target: self, action: #selector(backClick(button:)))
 
         currentPage = 1
-        self.delegate = self
+//        self.delegate = self
         // 处理通知
         registerNotification()
     
@@ -99,8 +99,6 @@ class IMChatViewController: ZJBaseViewController {
         // 查询数据库
         searchRealm(curr: currentPage)
         
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updateMeseage), name: NSNotification.Name(rawValue:"chatUpdate"), object: nil)
     }
     
     // 初始化
@@ -140,6 +138,9 @@ extension IMChatViewController {
                                                selector: #selector(keyBoardWillHide(_ :)),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateMeseage), name: NSNotification.Name(rawValue:"chatUpdate"), object: nil)
     }
     
     //MARK:键盘通知相关操作
@@ -154,17 +155,13 @@ extension IMChatViewController {
         
         keyboardH = endFrame.height
         keyboardW = endFrame.width
-        if isScrolling {
-            isScrolling = false
-            return
-        }
+
         // 3.执行动画
         UIView.animate(withDuration: duration) {
             self.viewBottom.frame.origin.y = y - viewBottom_Height
         }
-        UIView.performWithoutAnimation {
-            self.tableView.frame.size.height = Screen_H-NavaBar_H - endFrame.size.height-viewBottom_Height
-        }
+        self.tableView.frame.size.height = Screen_H-NavaBar_H - endFrame.size.height-viewBottom_Height
+        
         
         // 滚动到tableview底部
         scrollToEnd()
@@ -174,10 +171,7 @@ extension IMChatViewController {
         print("keyBoardWillHide")
         //1.获取动画执行的时间
         let duration =  notification.userInfo!["UIKeyboardAnimationDurationUserInfoKey"] as! Double
-        if isScrolling {
-            isScrolling = false
-            return
-        }
+
         //2.执行动画
         UIView.animate(withDuration: duration) {
             self.viewBottom.frame.origin.y = Screen_H - viewBottom_H
@@ -209,6 +203,7 @@ extension IMChatViewController {
         self.tableView.separatorStyle = .none
         self.tableView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleHeight.rawValue | UIView.AutoresizingMask.flexibleWidth.rawValue)
         view.addSubview(self.tableView)
+//        self.tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.interactive
         
         //加载
         indicatorView.backgroundColor = UIColor.tableViewBackGroundColor()
@@ -239,28 +234,28 @@ extension IMChatViewController {
 }
 
 // MARK:- 代理
-extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextFieldDelegate,BaseViewControllerPangestureDelegate {
+extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextFieldDelegate {
    
     // 处理键盘
-    func panGesture(_ pan: UIPanGestureRecognizer!) {
-
-//        isScrolling = true
-//        let key  = UIApplication.shared.windows.last
-//        let x = pan.translation(in: self.navigationController?.view).x
-//        let xx = 0-x*keyboardH/keyboardW > 0 ? 0 :  0-x*keyboardH/keyboardW
-//        if pan.state == .changed  {
+//    func panGesture(_ pan: UIPanGestureRecognizer!) {
 //
-//            if key?.subviews.first != nil {
-//                view.addSubview(key!)
-//                key?.removeFromSuperview()
-//                key?.transform = CGAffineTransform(translationX: 0, y: 0 )
-//            }
-//        }
-//        else {
-//            key?.removeFromSuperview()
-//            key?.transform = CGAffineTransform.identity
-//        }
-    }
+////        isScrolling = true
+////        let key  = UIApplication.shared.windows.last
+////        let x = pan.translation(in: self.navigationController?.view).x
+////        let xx = 0-x*keyboardH/keyboardW > 0 ? 0 :  0-x*keyboardH/keyboardW
+////        if pan.state == .changed  {
+////
+////            if key?.subviews.first != nil {
+////                view.addSubview(key!)
+////                key?.removeFromSuperview()
+////                key?.transform = CGAffineTransform(translationX: 0, y: 0 )
+////            }
+////        }
+////        else {
+////            key?.removeFromSuperview()
+////            key?.transform = CGAffineTransform.identity
+////        }
+//    }
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -289,11 +284,11 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
         
         let msg : TextMessage = msgArray[indexPath.row]
         if msg.sendTime != "" {
-            print("\(heightOfCell(text: msg.text) + 45 + 40)  \(msg.user.name)")
+//            print("\(heightOfCell(text: msg.text) + 45 + 40)  \(msg.user.name)")
             return heightOfCell(text: msg.text) + 45 + 40
         }
 
-                    print("\(heightOfCell(text: msg.text) + 45 )  \(msg.user.name)")
+//                    print("\(heightOfCell(text: msg.text) + 45 )  \(msg.user.name)")
         return heightOfCell(text: msg.text) + 45
 
     }
@@ -301,6 +296,7 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     // scrollview
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
+//        textField.resignFirstResponder()
 
     }
 
@@ -567,9 +563,11 @@ extension IMChatViewController {
     
     func updateOffset(finishedCallback : @escaping () -> ())  {
         
-        let oldOffset = self.tableView.contentSize.height - self.tableView.contentOffset.y
+        let oldOffset = self.tableView.contentSize.height 
         finishedCallback()
-        scrollToEnd()
+        if currentPage == 1 {
+            scrollToEnd()
+        }
         if oldOffset == 0 {
             return
         }

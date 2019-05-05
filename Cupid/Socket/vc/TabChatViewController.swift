@@ -66,8 +66,8 @@ extension TabChatViewController {
     
     @objc func logOut (){
 
-//        let messagesGroup : Results<GroupListMessage> =  RealmTool.getGroupMessages()
-//        RealmTool.deleteGroupMessages(messages: messagesGroup)
+        let messagesGroup : Results<GroupListMessage> =  RealmTool.getGroupMessages()
+        RealmTool.deleteGroupMessages(messages: messagesGroup)
         
 //        let messages : Results<ChatMessage> =  RealmTool.getMessages()
 //        RealmTool.deleteMessages(messages: messages)
@@ -76,8 +76,12 @@ extension TabChatViewController {
 //        RealmTool.deleteUserInfos(messages: user)
         
         socketClient.sendLeaveRoom()
-        // 先关闭连接
+        
+        heartBeatTimer?.invalidate()
+        heartBeatTimer = nil
         socketClient.closeServer()
+        // 先关闭连接
+//        socketClient.closeServer()
         self.msgArray.removeAll()
         // 删除登录信息
         UserDefaults.standard.removeObject(forKey: NICKNAME)
@@ -137,11 +141,11 @@ extension TabChatViewController {
         
         DispatchQueue.global().async {
        
-            
+            socketClient.closeServer()
             // 开始连接
             if socketClient.connectServer().isSuccess {
                 print("连接服务器成功")
-                DispatchQueue.main.async {
+                DispatchQueue.global().async {
                     socketClient.delegate = self
                     
                     // 获取聊天列表
@@ -152,7 +156,7 @@ extension TabChatViewController {
                     // 加入房间
                     socketClient.sendJoinRoom()
                     // 发送心跳包
-//                    self.addHeartBeatTimer()
+                    self.addHeartBeatTimer()
                 }
             }
         }

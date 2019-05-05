@@ -106,12 +106,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cupid/Socket/vc/IMChatViewController.swift"
-            timestampString = "578740032.83608"
+            timestampString = "578743693.385289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "418"
-            endingLineNumber = "418"
-            landmarkName = "sendClick()"
+            startingLineNumber = "568"
+            endingLineNumber = "568"
+            landmarkName = "updateOffset(finishedCallback:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cupid/Socket/vc/IMChatViewController.swift"
+            timestampString = "578743693.385343"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "567"
+            endingLineNumber = "567"
+            landmarkName = "updateOffset(finishedCallback:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,12 +138,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cupid/Socket/vc/TabChatViewController.swift"
-            timestampString = "578740032.836437"
+            timestampString = "578743693.385389"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "socket(_:chatMsg:)"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
+            landmarkName = "insertRealm(cupid:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
