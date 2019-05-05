@@ -30,7 +30,8 @@ class TabChatViewController: ZJBaseViewController {
         super.viewDidLoad()
         // 配置数据库
         RealmTool.configRealm()
-        
+        // 通知
+        registerNotification()
         // 初始化View
         setupMainView()
         
@@ -65,14 +66,14 @@ extension TabChatViewController {
     
     @objc func logOut (){
 
-        let messagesGroup : Results<GroupListMessage> =  RealmTool.getGroupMessages()
-        RealmTool.deleteGroupMessages(messages: messagesGroup)
+//        let messagesGroup : Results<GroupListMessage> =  RealmTool.getGroupMessages()
+//        RealmTool.deleteGroupMessages(messages: messagesGroup)
         
-        let messages : Results<ChatMessage> =  RealmTool.getMessages()
-        RealmTool.deleteMessages(messages: messages)
-        
-        let user : Results<UserInfoRealm> =  RealmTool.getUserInfo()
-        RealmTool.deleteUserInfos(messages: user)
+//        let messages : Results<ChatMessage> =  RealmTool.getMessages()
+//        RealmTool.deleteMessages(messages: messages)
+//
+//        let user : Results<UserInfoRealm> =  RealmTool.getUserInfo()
+//        RealmTool.deleteUserInfos(messages: user)
         
         socketClient.sendLeaveRoom()
         // 先关闭连接
@@ -83,10 +84,26 @@ extension TabChatViewController {
         popLoginView()
     }
     
+    // 通知
+    func registerNotification(){
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateGroup(nofi:)),
+                                               name: NSNotification.Name(rawValue: "chatUpdateGroupList"),
+                                               object: nil)
+    }
 }
 
 
 extension TabChatViewController {
+    
+    @objc func updateGroup(nofi : Notification){
+        
+        let message = nofi.userInfo!["mess"]
+        let textMsg = message as! TextMessage
+        
+        updateChatList(textMsg)
+        
+    }
     
     func setupMainView()  {
         if (LogInName != nil) {
@@ -346,7 +363,7 @@ extension TabChatViewController {
         let tonum : Int = Int(toid!)! - 1
         let  messageCount = messages.count
         let other : Int = Int(toid!)! + 1000
-        var names = ["齐天大圣:","BAYMAX:","钢铁侠:","群聊天555555:"]
+        var names = ["TheMokeyKing:","BAYMAX:","IronMan:","群聊天555555:"]
         for i in 0..<messageCount {
             
             let mess = messages[i]

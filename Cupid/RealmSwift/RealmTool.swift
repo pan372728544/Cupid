@@ -21,7 +21,18 @@ extension RealmTool {
     
     private class func getRealmPath() -> String{
         let docPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] as String
-        let dbPath = docPath.appending("/message.realm")
+        
+        var name : String
+        
+        if LogInName == nil {
+            name = "common"
+        }
+        else {
+            let count = LogInName!.count
+            name = String(LogInName!.prefix(count-4))
+        }
+        
+        let dbPath = docPath.appending("/\(name).realm")
         print("realm地址为： \(dbPath)")
         return dbPath
     }
@@ -32,9 +43,25 @@ extension RealmTool  {
 
     @objc  public class func configRealm() {
 
-        var config = Realm.Configuration()
-        // 设置路径
-        config.fileURL = URL.init(string: getRealmPath())
+//        var config = Realm.Configuration()
+        // 设置路径 配置一
+//        config.fileURL = URL.init(string: getRealmPath())
+//        Realm.Configuration.defaultConfiguration = config
+        
+        // 配置二 数据库迁移 （数据库发生变化版本号也要变化）
+        let currentVersion = 1
+        
+        let config = Realm.Configuration(fileURL: URL.init(string: getRealmPath()), inMemoryIdentifier: nil, syncConfiguration: nil, encryptionKey: nil, readOnly: false, schemaVersion: UInt64(currentVersion), migrationBlock: { (migration, oldVersion) in
+
+            migration.enumerateObjects(ofType: ChatMessage.className(), { (OldMigrationObject, NewMigrationObject) in
+                // 数据库迁移操作
+//                let name =  OldMigrationObject["name"]
+//                NewMigrationObject["aaa"] = name
+            })
+
+            print("")
+            
+        }, deleteRealmIfMigrationNeeded: false, shouldCompactOnLaunch: nil, objectTypes: nil)
         Realm.Configuration.defaultConfiguration = config
         
         // 异步打开数据库

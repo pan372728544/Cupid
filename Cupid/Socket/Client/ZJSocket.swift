@@ -206,7 +206,7 @@ extension ZJSocket {
     func sendGroupMsg() {
         
         // 获取本地数据传给服务器
-        var names = ["齐天大圣-001","BAYMAX-002","钢铁侠-003","群聊天555555-004"]
+        var names = ["TheMokeyKing-001","BAYMAX-002","IronMan-003","群聊天555555-004"]
         var texts = ["如来在哪里？","你看起来很健康。","我没有电了！！！","大家都来这里，这里有好东西！"]
         var imgsGroup : [String] = ["1.jpeg","2.jpeg","3.jpeg","4.jpeg"]
         

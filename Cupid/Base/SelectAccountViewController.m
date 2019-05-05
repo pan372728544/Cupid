@@ -40,7 +40,7 @@
     [self.view addSubview:self.tableView];
     
     
-    self.maryData = [NSMutableArray arrayWithObjects:@"齐天大圣-001",@"BAYMAX-002",@"钢铁侠-003", nil];
+    self.maryData = [NSMutableArray arrayWithObjects:@"TheMokeyKing-001",@"BAYMAX-002",@"IronMan-003", nil];
     
         self.maryIMg = [NSMutableArray arrayWithObjects:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091375677&di=b77ddcda0fdcb6e4062b63c2e349cd09&imgtype=0&src=http%3A%2F%2Fimg.storage.17wanba.org.cn%2Fgame%2F2016%2F05%2F10%2Fd729d853b0519256f9c6189e6f9eb457.jpg",
                         @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556091346923&di=94a030de1baced5369065862835fad23&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F010b0d5541ef6c000001714a5ae2e9.jpg%402o.jpg",

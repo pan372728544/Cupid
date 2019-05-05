@@ -179,7 +179,11 @@ extension IMChatViewController {
         UIView.animate(withDuration: duration) {
             self.viewBottom.frame.origin.y = Screen_H - viewBottom_H
         }
-        self.tableView.frame.size.height = Screen_H-NavaBar_H-viewBottom_H
+        
+        UIView.performWithoutAnimation {
+            self.tableView.frame.size.height = Screen_H-NavaBar_H-viewBottom_H
+        }
+
     }
     
     func heightOfCell(text : String) -> CGFloat {
@@ -334,7 +338,7 @@ extension IMChatViewController {
     // 滚动到底部
     func scrollToEnd() {
         guard msgArray.count == 0 else {
-            self.tableView.scrollToRow(at: IndexPath(item: msgArray.count-1 < 0 ? 0: msgArray.count-1, section: 0 ), at: UITableView.ScrollPosition.top, animated: false)
+            self.tableView.scrollToRow(at: IndexPath(item: msgArray.count-1 < 0 ? 0: msgArray.count-1, section: 0 ), at: UITableView.ScrollPosition.bottom, animated: false)
             return
         }
 
@@ -401,6 +405,10 @@ extension IMChatViewController {
             socket(socketClient, chatMsg: chatMsg)
             // 保存数据库 发送失败保存数据库
             insertRealm(cupid: cupid.ch)
+            
+        
+            // 发送失败 通知更新列表
+            notificationToChatList(chatMsg)
         }
         // 清空数据框
         self.textField.text = ""
@@ -420,6 +428,12 @@ extension IMChatViewController {
         
         socket(socketClient, chatMsg: textMsg)
 
+    }
+    
+    // 收到消息通知给列表
+    func notificationToChatList(_ message: Any)  {
+        
+        NotificationCenter.default.post(name: NSNotification.Name("chatUpdateGroupList"), object: self, userInfo: ["mess": message])
     }
 }
 
