@@ -51,6 +51,23 @@ class IMChatViewController: SwiftBaseViewController {
         return textField
     }()
     
+    fileprivate lazy var titleLabel : UILabel = {
+        
+        let titleLabel =  UILabel()
+        titleLabel.frame = CGRect(x: 0, y: StatusBar_H, width: Screen_W, height: 50)
+        titleLabel.textColor = UIColor.black
+        titleLabel.textAlignment = NSTextAlignment.center
+        return titleLabel
+    }()
+    
+    fileprivate lazy var leftBtn : UIButton = {
+        
+        let leftBtn =  UIButton()
+        leftBtn.frame = CGRect(x: 0, y: StatusBar_H, width: 50, height: 50)
+        leftBtn.setImage(UIImage(named: "back_24x24_"), for: UIControl.State.normal)
+        return leftBtn
+    }()
+    
     // 发送按钮
     fileprivate var btnSend : UIButton = UIButton(frame: CGRect(x: Screen_W-80, y: 10, width: 80, height: 44))
     
@@ -202,6 +219,7 @@ extension IMChatViewController {
         let rect:CGRect = text.boundingRect(with: CGSize(width: Screen_W - 100, height: 0), options: option, attributes: attributes, context: nil)
         return rect.size.height
     }
+    
 }
 
 extension IMChatViewController {
@@ -254,10 +272,15 @@ extension IMChatViewController {
     
     func createNavBarView(withTitle : String)  {
         
+        self.view.addSubview(self.titleLabel)
+        self.titleLabel.text = withTitle
     }
     
     func createNavLeftBtn(withItem: String, target: Any, action: Selector)  {
         
+        
+        self.view.addSubview(self.leftBtn)
+        self.leftBtn.addTarget(target, action: action, for: UIControl.Event.touchUpInside)
     }
 }
 
