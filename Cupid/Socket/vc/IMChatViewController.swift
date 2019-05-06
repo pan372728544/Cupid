@@ -33,7 +33,7 @@ private var tableViewoffsetY :  CGFloat = 0
 private var tableViewoffsetBefore :  CGFloat = 0
 private var tableViewoffsetEnd :  CGFloat = 0
 
-class IMChatViewController: ZJBaseViewController {
+class IMChatViewController: UIViewController {
     
     fileprivate var isScrolling : Bool = false
     // 记录之前的时间c
@@ -88,7 +88,7 @@ class IMChatViewController: ZJBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        
+
         self.createNavBarView(withTitle:  self.group.user.name)
         self.createNavLeftBtn(withItem: "", target: self, action: #selector(backClick(button:)))
 
@@ -106,6 +106,7 @@ class IMChatViewController: ZJBaseViewController {
         
         // 查询数据库
         searchRealm(curr: currentPage)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
         
     }
     
@@ -124,11 +125,15 @@ class IMChatViewController: ZJBaseViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        // 禁止键盘移动
         NotificationCenter.default.removeObserver(self)
+        
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // 重新添加通知
+        registerNotification()
     }
 
 }
@@ -307,7 +312,8 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     
     // scrollview
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
+//        self.view.endEditing(true)
+        self.textField.resignFirstResponder()
         self.tableView.contentInset =  UIEdgeInsets(top: loadingH, left: 0, bottom: 0, right: 0 )
     }
 
@@ -349,7 +355,7 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     
 }
 
-// MARK:-连接服务器
+// MARK:-
 extension IMChatViewController {
     
     // 滚动到底部
