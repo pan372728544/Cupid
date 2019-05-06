@@ -44,7 +44,18 @@ class ChatTableViewMeCell: UITableViewCell {
         didSet {
             timeLabel.isHidden = true
             if textMes?.sendTime != "" {
-                timeLabel.text = String((textMes?.sendTime.suffix(5))!)
+                
+                
+                let currentData = Date()
+                let dataFormatter = DateFormatter()
+                dataFormatter.dateFormat = "YYYY-MM-dd HH:mm"
+                let customDate = dataFormatter.string(from: currentData)
+                
+                if customDate.prefix(10) == textMes?.sendTime.prefix(10){
+                    timeLabel.text = String((textMes?.sendTime.suffix(5))!)
+                }else {
+                    timeLabel.text = String((textMes?.sendTime)!)
+                }
                 timeLabel.isHidden = false
             }
 

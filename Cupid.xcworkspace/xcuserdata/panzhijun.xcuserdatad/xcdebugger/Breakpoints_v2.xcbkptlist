@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cupid/Socket/vc/TabChatViewController.swift"
-            timestampString = "578834169.207165"
+            timestampString = "578834949.049809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "261"
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cupid/Socket/vc/IMChatViewController.swift"
-            timestampString = "578834169.207424"
+            timestampString = "578834949.049886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
             landmarkName = "updateMeseage(nofi:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,13 +138,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cupid/Socket/vc/TabChatViewController.swift"
-            timestampString = "578834169.207848"
+            timestampString = "578834949.049937"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "347"
             endingLineNumber = "347"
             landmarkName = "notificationToChat(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cupid/Socket/vc/cell/ChatTableViewMeCell.swift"
+            timestampString = "578834949.049982"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "textMes"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Cupid.ChatTableViewMeCell.textMes.didset : Swift.Optional&lt;Cupid.TextMessage&gt;"
+                  moduleName = "Cupid"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/panzhijun/Desktop/Demo/Cupid/Cupid/Socket/vc/cell/ChatTableViewMeCell.swift"
+                  timestampString = "578834949.255022"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "2999">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Cupid.ChatTableViewMeCell.textMes.didset : Swift.Optional&lt;Cupid.TextMessage&gt;"
+                  moduleName = "Cupid"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/panzhijun/Desktop/Demo/Cupid/Cupid/Socket/vc/cell/ChatTableViewMeCell.swift"
+                  timestampString = "578834949.257553"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "13152">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

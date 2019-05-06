@@ -271,6 +271,7 @@ extension IMChatViewController {
         btnSend.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
         viewBottom.addSubview(textField)
         viewBottom.addSubview(btnSend)
+        
     }
     
     func createNavBarView(withTitle : String)  {
