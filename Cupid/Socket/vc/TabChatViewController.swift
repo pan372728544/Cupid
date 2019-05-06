@@ -123,9 +123,9 @@ extension TabChatViewController {
             self.createNavBarView(withTitle: "消息中心")
         }
         
-        self.createNavRightBtn(withItem: "退出登录", target: self, action: #selector(logOut))
+        self.createNavRightBtn(withItem: "退出", target: self, action: #selector(logOut))
         self.superNavBarView.backgroundColor = UIColor.commonColor()
-        self.setRightTitleColro(UIColor.black)
+        self.setRightTitleColro(UIColor.white)
         self.setTitleColor(UIColor.white)
         setupTableView()
     }
