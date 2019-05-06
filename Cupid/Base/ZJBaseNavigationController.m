@@ -34,8 +34,13 @@
 }
 
 
-
-
+-(UIViewController *)childViewControllerForStatusBarStyle{
+    return self.topViewController;
+}
+-(UIViewController *)childViewControllerForStatusBarHidden
+{
+    return self.topViewController;
+}
 
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {

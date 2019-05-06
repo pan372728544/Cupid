@@ -125,6 +125,16 @@ class IMChatViewController: SwiftBaseViewController {
         searchRealm(curr: currentPage)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
         
+     
+       
+    }
+    
+   
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        
+        return .`default`
+        
     }
     
     // 初始化
@@ -155,6 +165,7 @@ class IMChatViewController: SwiftBaseViewController {
         registerNotification()
     }
 
+    
 }
 
 // MARK:- 键盘通知

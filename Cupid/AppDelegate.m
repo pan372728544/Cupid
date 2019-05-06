@@ -24,7 +24,7 @@
 
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [GeneratedPluginRegistrant registerWithRegistry:self];
-    
+    application.statusBarStyle = UIStatusBarStyleLightContent;
     
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }

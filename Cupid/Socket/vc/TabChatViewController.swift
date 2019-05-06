@@ -56,7 +56,11 @@ class TabChatViewController: ZJBaseViewController {
 
     }
     
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        
+        return .lightContent
+        
+    }
  
 
 }
