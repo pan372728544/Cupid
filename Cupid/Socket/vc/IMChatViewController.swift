@@ -33,7 +33,7 @@ private var tableViewoffsetY :  CGFloat = 0
 private var tableViewoffsetBefore :  CGFloat = 0
 private var tableViewoffsetEnd :  CGFloat = 0
 
-class IMChatViewController: UIViewController {
+class IMChatViewController: SwiftBaseViewController {
     
     fileprivate var isScrolling : Bool = false
     // 记录之前的时间c
@@ -250,6 +250,14 @@ extension IMChatViewController {
         btnSend.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
         viewBottom.addSubview(textField)
         viewBottom.addSubview(btnSend)
+    }
+    
+    func createNavBarView(withTitle : String)  {
+        
+    }
+    
+    func createNavLeftBtn(withItem: String, target: Any, action: Selector)  {
+        
     }
 }
 

@@ -224,6 +224,7 @@
 		38ECA7AA2275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ECA7A82275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png */; };
 		38ECA7C32275B64E00D41D08 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38ECA7C22275B64E00D41D08 /* ChatMessage.swift */; };
 		38ECA7C52275CC1C00D41D08 /* RealmTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38ECA7C42275CC1C00D41D08 /* RealmTool.swift */; };
+		38FAF07522803A8C00BCE225 /* SwiftBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAF07422803A8C00BCE225 /* SwiftBaseViewController.swift */; };
 		38FF1E5421F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */; };
 		38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */; };
 		38FF1EDE21FADEF500A3CA7F /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1EDD21FADEF500A3CA7F /* VideoDetailViewController.m */; };
@@ -534,6 +535,7 @@
 		38ECA7A82275A64800D41D08 /* ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png"; path = "../../../../socket/生成car图片的目录/ChatRoom_Bubble_Text_Receiver_White~iphone@2x.png"; sourceTree = "<group>"; };
 		38ECA7C22275B64E00D41D08 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		38ECA7C42275CC1C00D41D08 /* RealmTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTool.swift; sourceTree = "<group>"; };
+		38FAF07422803A8C00BCE225 /* SwiftBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBaseViewController.swift; sourceTree = "<group>"; };
 		38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WKWebVIew.m"; sourceTree = "<group>"; };
 		38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HybridNSURLProtocol.m; sourceTree = "<group>"; };
 		38FF1E5221F9C81200A3CA7F /* HybridNSURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HybridNSURLProtocol.h; sourceTree = "<group>"; };
@@ -691,6 +693,7 @@
 				38C300B822703862007A537F /* TabChatViewController.swift */,
 				381DCDC92269A03700EC34F3 /* IMStatusViewController.swift */,
 				38CC1D6A22707FAB00DD22D5 /* TestViewController.swift */,
+				38FAF07422803A8C00BCE225 /* SwiftBaseViewController.swift */,
 			);
 			path = vc;
 			sourceTree = "<group>";
@@ -1581,6 +1584,7 @@
 				38636C0021E733AE00A834EE /* ZJDiskCache.m in Sources */,
 				38636C1421E8333600A834EE /* FeedNewContentModel.m in Sources */,
 				380101A721DF0AF000D5F7D2 /* SecondViewController.m in Sources */,
+				38FAF07522803A8C00BCE225 /* SwiftBaseViewController.swift in Sources */,
 				381DCDB62269754F00EC34F3 /* IMMessage.proto in Sources */,
 				38636BFF21E733AE00A834EE /* ZJLRUManager.m in Sources */,
 				380101AA21DF0AFD00D5F7D2 /* ThirdViewController.m in Sources */,
