@@ -110,7 +110,7 @@ class IMChatViewController: SwiftBaseViewController {
         self.createNavLeftBtn(withItem: "", target: self, action: #selector(backClick(button:)))
 
         currentPage = 1
-//        self.delegate = self
+
         // 处理通知
         registerNotification()
     
@@ -237,6 +237,7 @@ extension IMChatViewController {
         self.tableView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleHeight.rawValue | UIView.AutoresizingMask.flexibleWidth.rawValue)
         view.addSubview(self.tableView)
 //        self.tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.interactive
+                self.tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
         self.tableView.estimatedSectionFooterHeight = 0
         self.tableView.estimatedSectionHeaderHeight = 0
         self.tableView.estimatedRowHeight = 0
@@ -346,7 +347,7 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     // scrollview
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
 //        self.view.endEditing(true)
-        self.textField.resignFirstResponder()
+//        self.textField.resignFirstResponder()
         self.tableView.contentInset =  UIEdgeInsets(top: loadingH, left: 0, bottom: 0, right: 0 )
     }
 
