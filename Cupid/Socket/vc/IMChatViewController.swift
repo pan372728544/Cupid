@@ -13,7 +13,7 @@ private let viewBottom_Height : CGFloat =   60
 private let viewBottom_H : CGFloat =  Bottom_H + 60
 
 // 加载视图高度
-private let loadingH : CGFloat =  60
+private let loadingH : CGFloat =  44
 
 private var keyboardH : CGFloat =  0
 private var keyboardW : CGFloat =  0
@@ -76,6 +76,14 @@ class IMChatViewController: ZJBaseViewController {
     
     // 下拉刷新
     fileprivate var indicatorView : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: -loadingH, width: Screen_W, height: loadingH))
+    
+    fileprivate lazy var myView : UIView = {
+        
+        let myView = UIView(frame: CGRect(x: 0, y: -loadingH, width: self.view.frame.size.width, height: loadingH))
+        
+        myView.backgroundColor = UIColor.red
+        return myView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,12 +212,19 @@ extension IMChatViewController {
         self.tableView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleHeight.rawValue | UIView.AutoresizingMask.flexibleWidth.rawValue)
         view.addSubview(self.tableView)
 //        self.tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.interactive
+        self.tableView.estimatedSectionFooterHeight = 0
+        self.tableView.estimatedSectionHeaderHeight = 0
+        self.tableView.estimatedRowHeight = 0
+        
         
         //加载
         indicatorView.backgroundColor = UIColor.tableViewBackGroundColor()
+//        indicatorView.backgroundColor = .red
         indicatorView.startAnimating()
         indicatorView.style = UIActivityIndicatorView.Style.gray
         self.tableView.addSubview(indicatorView)
+        
+//        self.tableView.addSubview(myView)
 
 
     }
@@ -284,11 +299,8 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
         
         let msg : TextMessage = msgArray[indexPath.row]
         if msg.sendTime != "" {
-//            print("\(heightOfCell(text: msg.text) + 45 + 40)  \(msg.user.name)")
             return heightOfCell(text: msg.text) + 45 + 40
         }
-
-//                    print("\(heightOfCell(text: msg.text) + 45 )  \(msg.user.name)")
         return heightOfCell(text: msg.text) + 45
 
     }
@@ -296,33 +308,39 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     // scrollview
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
-//        textField.resignFirstResponder()
-
+        self.tableView.contentInset =  UIEdgeInsets(top: loadingH, left: 0, bottom: 0, right: 0 )
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
+        if  currentPage == maxCount {
+            self.tableView.contentInset.top = 0
+        }
     }
 
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let contentY = scrollView.contentOffset.y
-
-        tableViewoffsetY = contentY
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
         // 滑动距离大于loading添加新的数据
-        if contentY < -loadingH {
-    
-          print("scrollViewDidEndDragging     最大页数为： \(maxCount)")
+        if scrollView.contentOffset.y == -loadingH {
 
             currentPage += 1
             if currentPage > maxCount {
                 currentPage = maxCount
                 indicatorView.stopAnimating()
                 return
+            } else if currentPage == maxCount {
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                    self.searchRealm(curr: currentPage)
+                }
+                
+                indicatorView.stopAnimating()
+                return
             }
-            searchRealm(curr: currentPage)
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                self.searchRealm(curr: currentPage)
+            }
+
         }
     }
-    
  
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         sendClick()
@@ -573,8 +591,11 @@ extension IMChatViewController {
     
     func updateOffset(finishedCallback : @escaping () -> ())  {
         
-        let oldOffset = self.tableView.contentSize.height 
+        let oldOffset = self.tableView.contentSize.height - self.tableView.contentOffset.y
+        
         finishedCallback()
+        
+        self.tableView.contentInset =  UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0 )
         if currentPage == 1 {
             scrollToEnd()
         }
