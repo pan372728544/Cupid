@@ -499,12 +499,22 @@ extension IMChatViewController {
         var start : Int = 0
         var end : Int = 0
         
-        // 获取开始index
-        start = messageCount > page*currentPage ? messageCount-page*currentPage : 0
+  
         if maxCount == 1 {
-          end = messageCount
+            // 总共一页
+            // 获取开始index
+            start = 0
+            end = messageCount
         } else {
-            end = start + page
+            if currentPage < maxCount {
+                start = messageCount-page*currentPage
+                end = start + page
+            }
+            else {
+                
+                start =  0
+                end = messageCount - (currentPage-1)*page
+            }
         }
         var index : Int = 0
         // 遍历数据
