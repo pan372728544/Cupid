@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cupid/Socket/vc/TabChatViewController.swift"
-            timestampString = "578836513.826715"
+            timestampString = "578883659.720839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "265"
@@ -121,24 +121,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Cupid/Socket/vc/IMChatViewController.swift"
-            timestampString = "578836513.826831"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "498"
-            endingLineNumber = "498"
-            landmarkName = "updateMeseage(nofi:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Cupid/Socket/vc/cell/ChatTableViewMeCell.swift"
-            timestampString = "578836513.826924"
+            timestampString = "578883659.7209491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
@@ -154,12 +138,12 @@
                   moduleName = "Cupid"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/panzhijun/Desktop/Demo/Cupid/Cupid/Socket/vc/cell/ChatTableViewMeCell.swift"
-                  timestampString = "578836514.6976219"
+                  timestampString = "578836743.354997"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "2999">
+                  offsetFromSymbolStart = "2300">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -169,14 +153,30 @@
                   moduleName = "Cupid"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/panzhijun/Desktop/Demo/Cupid/Cupid/Socket/vc/cell/ChatTableViewMeCell.swift"
-                  timestampString = "578836514.699155"
+                  timestampString = "578836743.356534"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "13152">
+                  offsetFromSymbolStart = "10168">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cupid/Socket/vc/cell/ChatTableViewMeCell.swift"
+            timestampString = "578883659.7210129"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "textMes"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
