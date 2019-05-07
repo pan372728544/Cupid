@@ -145,7 +145,15 @@ extension ChatTableViewMeCell {
 //        contentLabel.backgroundColor = UIColor.randomColor()
         self.contentView.addSubview(contentLabel)
 
-        
+        //        // 富文本测试卡顿
+        //        let htmlText = "空は<font color=\"blue\">青い</font>。<br>An apple is <font color=\"red\">red</font>."
+        //        do{
+        //             attrStr =       try NSAttributedString(data: htmlText.data(using: String.Encoding.utf8)!, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil )
+        //
+        //
+        //        }catch let error as NSError {
+        //            print(error.localizedDescription)
+        //        }
     }
     
     
