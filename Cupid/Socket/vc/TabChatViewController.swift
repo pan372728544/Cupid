@@ -30,8 +30,7 @@ class TabChatViewController: ZJBaseViewController {
         super.viewDidLoad()
         // 配置数据库
         RealmTool.configRealm()
-        // 通知
-        registerNotification()
+
         // 初始化View
         setupMainView()
         
@@ -41,19 +40,30 @@ class TabChatViewController: ZJBaseViewController {
         } else {
             // 查询数据
             _ =  searchRealm(curr: 1)
-            
-            
             // 连接服务器
             connectServer()
-            
-            
         }
-        addNotifi()
     }
    
+    
     deinit {
- 
-
+        heartBeatTimer?.invalidate()
+        heartBeatTimer = nil
+        socketClient.sendLeaveRoom()
+        socketClient.closeServer()
+        NotificationCenter.default.removeObserver(self)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        registerNotification()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -98,6 +108,10 @@ extension TabChatViewController {
                                                selector: #selector(updateGroup(nofi:)),
                                                name: NSNotification.Name(rawValue: "chatUpdateGroupList"),
                                                object: nil)
+        //注册进入前台的通知
+        NotificationCenter.default.addObserver(self, selector:#selector(becomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        //注册进入后台的通知
+        NotificationCenter.default.addObserver(self, selector:#selector(becomeDeath), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
 }
 
@@ -446,14 +460,6 @@ extension TabChatViewController {
 
 extension TabChatViewController {
     
-    func  addNotifi() {
-        
-        //注册进入前台的通知
-        NotificationCenter.default.addObserver(self, selector:#selector(becomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-        //注册进入后台的通知
-        NotificationCenter.default.addObserver(self, selector:#selector(becomeDeath), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        
-    }
     
     // 进入前台
     @objc  func becomeActive(noti:Notification){

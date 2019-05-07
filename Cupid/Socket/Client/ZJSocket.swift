@@ -71,7 +71,7 @@ extension ZJSocket {
     
     // 关闭服务器连接
     func closeServer() {
-        
+        isConnected = false
         return tcpClient.close()
     }
     

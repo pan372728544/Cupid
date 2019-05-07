@@ -149,19 +149,13 @@ class IMChatViewController: SwiftBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        print("移除通知--viewWillDisappear")
-        // 禁止键盘移动
         NotificationCenter.default.removeObserver(self)
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // 禁止键盘移动
-//        NotificationCenter.default.removeObserver(self)
-        // 重新添加通知
-        
-        print("添加通知--viewDidAppear")
+
         registerNotification()
     }
 
