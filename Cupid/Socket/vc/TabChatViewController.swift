@@ -53,12 +53,7 @@ class TabChatViewController: ZJBaseViewController {
         socketClient.closeServer()
         NotificationCenter.default.removeObserver(self)
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self)
-        
-    }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

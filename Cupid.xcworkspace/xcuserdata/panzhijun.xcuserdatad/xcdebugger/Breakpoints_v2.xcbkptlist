@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cupid/Socket/vc/TabChatViewController.swift"
-            timestampString = "578901135.788965"
+            timestampString = "578907656.774446"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "279"
@@ -121,46 +121,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Cupid/Socket/vc/cell/ChatTableViewMeCell.swift"
-            timestampString = "578883659.7209491"
+            filePath = "Cupid/Socket/vc/IMChatViewController.swift"
+            timestampString = "578907526.956442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "textMes"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Cupid.ChatTableViewMeCell.textMes.didset : Swift.Optional&lt;Cupid.TextMessage&gt;"
-                  moduleName = "Cupid"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/panzhijun/Desktop/Demo/Cupid/Cupid/Socket/vc/cell/ChatTableViewMeCell.swift"
-                  timestampString = "578901136.121286"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "2300">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Cupid.ChatTableViewMeCell.textMes.didset : Swift.Optional&lt;Cupid.TextMessage&gt;"
-                  moduleName = "Cupid"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/panzhijun/Desktop/Demo/Cupid/Cupid/Socket/vc/cell/ChatTableViewMeCell.swift"
-                  timestampString = "578901136.122975"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "10168">
-               </Location>
-            </Locations>
+            startingLineNumber = "476"
+            endingLineNumber = "476"
+            landmarkName = "sendClick()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -169,14 +137,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Cupid/Socket/vc/cell/ChatTableViewMeCell.swift"
-            timestampString = "578883659.7210129"
+            filePath = "Cupid/Socket/vc/IMChatViewController.swift"
+            timestampString = "578907590.915222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "textMes"
-            landmarkType = "24">
+            startingLineNumber = "501"
+            endingLineNumber = "501"
+            landmarkName = "notificationToChatList(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
