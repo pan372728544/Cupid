@@ -72,9 +72,7 @@ open class SocketManager : NSObject {
             self.heartBeatTimer = nil
             socketClient.sendLeaveRoom()
             socketClient.closeServer()
-            
-            // 删除登录信息
-            UserDefaults.standard.removeObject(forKey: NICKNAME)
+
 
         }
     }

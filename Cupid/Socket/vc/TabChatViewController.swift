@@ -152,6 +152,9 @@ extension TabChatViewController {
             self.tableView.reloadData()
         }
         self.present(vc, animated: true, completion: nil)
+        
+        // 删除登录信息
+        UserDefaults.standard.removeObject(forKey: NICKNAME)
     }
    
 }
