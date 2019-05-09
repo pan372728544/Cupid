@@ -136,7 +136,7 @@ class IMChatViewController: SwiftBaseViewController {
     // 初始化
     init(group : GroupMessage) {
         self.group  = group
-        super.init(nibName: nil, bu/Users/panzhijun/Desktop/Demo/Cupid/Cupidndle: nil)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
