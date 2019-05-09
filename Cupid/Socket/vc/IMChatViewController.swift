@@ -136,7 +136,7 @@ class IMChatViewController: SwiftBaseViewController {
     // 初始化
     init(group : GroupMessage) {
         self.group  = group
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: nil, bu/Users/panzhijun/Desktop/Demo/Cupid/Cupidndle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -155,7 +155,7 @@ class IMChatViewController: SwiftBaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        NotificationCenter.default.removeObserver(self)
         registerNotification()
     }
 
