@@ -29,3 +29,6 @@ let socketClient : ZJSocket = ZJSocket(addr: "10.2.116.42", port: 7878)
 
 var LogInName =  UserDefaults.standard.string(forKey: NICKNAME)
 
+var isConnected = false
+
+

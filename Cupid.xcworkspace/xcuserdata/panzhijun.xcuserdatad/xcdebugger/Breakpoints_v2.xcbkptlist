@@ -105,24 +105,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Cupid/Socket/vc/TabChatViewController.swift"
-            timestampString = "578911497.646552"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
-            landmarkName = "insertRealm(cupid:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Cupid/Socket/vc/IMChatViewController.swift"
-            timestampString = "579060071.617329"
+            timestampString = "579095378.520219"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "501"
@@ -137,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Cupid/Socket/vc/TabChatViewController.swift"
-            timestampString = "578911497.646637"
+            filePath = "Cupid/Socket/Client/ZJSocket.swift"
+            timestampString = "579095378.520328"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
+            landmarkName = "getUserInfo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

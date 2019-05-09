@@ -33,7 +33,7 @@ extension RealmTool {
         }
         
         let dbPath = docPath.appending("/\(name).realm")
-        print("realm地址为： \(dbPath)")
+
         return dbPath
     }
 }
@@ -41,7 +41,7 @@ extension RealmTool {
 // MARK: - 配置
 extension RealmTool  {
 
-    @objc  public class func configRealm() {
+    @objc open class func configRealm() {
 
 //        var config = Realm.Configuration()
         // 设置路径 配置一
@@ -50,7 +50,7 @@ extension RealmTool  {
         
         // 配置二 数据库迁移 （数据库发生变化版本号也要变化）
         let currentVersion = 1
-        
+        print(getRealmPath())
         let config = Realm.Configuration(fileURL: URL.init(string: getRealmPath()), inMemoryIdentifier: nil, syncConfiguration: nil, encryptionKey: nil, readOnly: false, schemaVersion: UInt64(currentVersion), migrationBlock: { (migration, oldVersion) in
 
             migration.enumerateObjects(ofType: ChatMessage.className(), { (OldMigrationObject, NewMigrationObject) in

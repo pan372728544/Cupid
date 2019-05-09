@@ -225,6 +225,8 @@
 		38ECA7C32275B64E00D41D08 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38ECA7C22275B64E00D41D08 /* ChatMessage.swift */; };
 		38ECA7C52275CC1C00D41D08 /* RealmTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38ECA7C42275CC1C00D41D08 /* RealmTool.swift */; };
 		38FAF07522803A8C00BCE225 /* SwiftBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAF07422803A8C00BCE225 /* SwiftBaseViewController.swift */; };
+		38FAF0A12283D73100BCE225 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAF0A02283D73100BCE225 /* SocketManager.swift */; };
+		38FAF0A32283F8D900BCE225 /* MessageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAF0A22283F8D900BCE225 /* MessageDataManager.swift */; };
 		38FF1E5421F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */; };
 		38FF1E5521F9C81200A3CA7F /* HybridNSURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */; };
 		38FF1EDE21FADEF500A3CA7F /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FF1EDD21FADEF500A3CA7F /* VideoDetailViewController.m */; };
@@ -536,6 +538,8 @@
 		38ECA7C22275B64E00D41D08 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		38ECA7C42275CC1C00D41D08 /* RealmTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTool.swift; sourceTree = "<group>"; };
 		38FAF07422803A8C00BCE225 /* SwiftBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBaseViewController.swift; sourceTree = "<group>"; };
+		38FAF0A02283D73100BCE225 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		38FAF0A22283F8D900BCE225 /* MessageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDataManager.swift; sourceTree = "<group>"; };
 		38FF1E5021F9C81200A3CA7F /* NSURLProtocol+WKWebVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WKWebVIew.m"; sourceTree = "<group>"; };
 		38FF1E5121F9C81200A3CA7F /* HybridNSURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HybridNSURLProtocol.m; sourceTree = "<group>"; };
 		38FF1E5221F9C81200A3CA7F /* HybridNSURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HybridNSURLProtocol.h; sourceTree = "<group>"; };
@@ -694,6 +698,8 @@
 				381DCDC92269A03700EC34F3 /* IMStatusViewController.swift */,
 				38CC1D6A22707FAB00DD22D5 /* TestViewController.swift */,
 				38FAF07422803A8C00BCE225 /* SwiftBaseViewController.swift */,
+				38FAF0A02283D73100BCE225 /* SocketManager.swift */,
+				38FAF0A22283F8D900BCE225 /* MessageDataManager.swift */,
 			);
 			path = vc;
 			sourceTree = "<group>";
@@ -1525,6 +1531,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38FAF0A32283F8D900BCE225 /* MessageDataManager.swift in Sources */,
 				38636BB521E600E500A834EE /* CategoryTitleModel.m in Sources */,
 				38AC1A3421F1B4AA001D491B /* LoadingDefaultView.m in Sources */,
 				3899906C226D738D00B09412 /* TCPClient.swift in Sources */,
@@ -1607,6 +1614,7 @@
 				3801018521DE175500D5F7D2 /* AppDelegate.m in Sources */,
 				38FF1EDE21FADEF500A3CA7F /* VideoDetailViewController.m in Sources */,
 				380101E821E35CEA00D5F7D2 /* MyView.m in Sources */,
+				38FAF0A12283D73100BCE225 /* SocketManager.swift in Sources */,
 				38C300BB22703B8D007A537F /* TabChatTableViewCell.swift in Sources */,
 				38636BAF21E5F7D700A834EE /* HomeContentViewController.m in Sources */,
 				38C20A1021EC8D1D007C4CB7 /* FeedWeiboTableViewCell.m in Sources */,

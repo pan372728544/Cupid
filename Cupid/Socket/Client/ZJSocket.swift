@@ -51,7 +51,6 @@ class ZJSocket : NSObject{
     
     // 记录之前的时间c
     fileprivate var timeOld : String = ""
-    fileprivate var isConnected : Bool = false
     init(addr: String, port : Int32) {
         // 创建TCP
         tcpClient = TCPClient(address: addr, port: port )
@@ -78,7 +77,7 @@ extension ZJSocket {
     // 读取消息
     func startReadMsg() {
         DispatchQueue.global().async {
-            while self.isConnected {
+            while isConnected {
                 
                 Thread.sleep(forTimeInterval: 0.1)
                 // 1.取出长度消息
@@ -291,6 +290,7 @@ extension ZJSocket {
         LogInName =  UserDefaults.standard.string(forKey: NICKNAME)
         var imgs : [String] =  ["1.jpeg","2.jpeg","3.jpeg","4.jpeg"]
         let userInfo = UserInfo.Builder()
+        print(LogInName)
         // 用户ID
         let userId : String = String(LogInName!.suffix(1))
         userInfo.userId = userId

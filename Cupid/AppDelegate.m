@@ -26,6 +26,9 @@
     [GeneratedPluginRegistrant registerWithRegistry:self];
     application.statusBarStyle = UIStatusBarStyleLightContent;
     
+    // 配置数据库
+    [RealmTool configRealm];
+    
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
@@ -46,6 +49,8 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[SocketManager sharedInstance] close];
+    NSLog(@"进入后台");
  
 }
 
@@ -57,6 +62,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[SocketManager sharedInstance] connect];
+        NSLog(@"进入qiantai");
 }
 
 

@@ -93,7 +93,6 @@
                 }
             }
         }];
-        
 
         config.viewControllers = @[homeVC, secondVC, thirdVC,flutterViewController];
         
@@ -103,6 +102,7 @@
         
         config.isNavigation = NO;
         return config;
+     
     }];
     
     ZJBaseNavigationController *navRoot = [[ZJBaseNavigationController alloc]initWithRootViewController:tabBarViewController];
@@ -110,6 +110,8 @@
     navRoot.tabBarController.tabBar.hidden = YES;
     self.window.rootViewController = navRoot;
     [self.window makeKeyAndVisible];
+    
+
 }
 
 
