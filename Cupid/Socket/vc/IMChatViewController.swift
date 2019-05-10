@@ -122,6 +122,8 @@ class IMChatViewController: SwiftBaseViewController {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
         
      
+        // 收到消息后的通知
+        NotificationCenter.default.addObserver(self, selector: #selector(updateMeseage), name: NSNotification.Name(rawValue:"updataHuiHua"), object: nil)
        
     }
     
@@ -149,13 +151,18 @@ class IMChatViewController: SwiftBaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        NotificationCenter.default.removeObserver(self)
+//        NotificationCenter.default.removeObserver(self)
         
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"updataHuiHua"), object: nil
+        )
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.removeObserver(self)
+//        NotificationCenter.default.removeObserver(self)
+      
         registerNotification()
     }
 
@@ -176,8 +183,7 @@ extension IMChatViewController {
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
         
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updateMeseage), name: NSNotification.Name(rawValue:"chatUpdate"), object: nil)
+  
     }
     
     //MARK:键盘通知相关操作
@@ -352,8 +358,6 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     
     // scrollview
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        self.view.endEditing(true)
-//        self.textField.resignFirstResponder()
         self.tableView.contentInset =  UIEdgeInsets(top: loadingH, left: 0, bottom: 0, right: 0 )
     }
 

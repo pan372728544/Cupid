@@ -14,8 +14,8 @@ class MessageDataManager: NSObject {
     
     static let shareInstance = MessageDataManager()
     
-    func notificationToChatVC(_ message: Any)  {
-        NotificationCenter.default.post(name: NSNotification.Name("chatUpdate"), object: self, userInfo: ["mess": message])
+    func updateHuiHua(_ message: Any)  {
+        NotificationCenter.default.post(name: NSNotification.Name("updataHuiHua"), object: self, userInfo: ["mess": message])
     }
     
     // 更新列表数据库
@@ -64,7 +64,7 @@ class MessageDataManager: NSObject {
     }
     
     
-    // 查询数据
+    // 查询聊天列表数据
     func searchRealmGroupList(curr : Int) -> [GroupMessage] {
         
         // 返回的数组
@@ -189,13 +189,14 @@ extension MessageDataManager : ZJSocketDelegate {
     func socket(_ socket: ZJSocket, chatMsg: TextMessage) {
         print("接收到会话消息： \(chatMsg.text ?? "")")
         
-        // 发送通知给会话页面
-        MessageDataManager.shareInstance.notificationToChatVC(chatMsg)
+        // 发送通知给会话页面 数组添加这条数据
+        MessageDataManager.shareInstance.updateHuiHua(chatMsg)
         
-        // 更新聊天列表
+        // 更新聊天列表数据库 和 插入数据到聊天记录数据库
         MessageDataManager.shareInstance.handleMsgList(chatMsg: chatMsg)
         
-        notificationToChatList(chatMsg)
+        // 上面已经存储数据到数据库
+        notificationToGroupList()
     }
     
     func socket(_ socket: ZJSocket, groupMsg: GroupMessage) {
@@ -214,8 +215,8 @@ extension MessageDataManager : ZJSocketDelegate {
 extension MessageDataManager {
     
     // 收到消息通知给列表
-    func notificationToChatList(_ message: Any)  {
+    func notificationToGroupList()  {
         
-        NotificationCenter.default.post(name: NSNotification.Name("chatUpdateGroupList"), object: self, userInfo: ["mess": message])
+        NotificationCenter.default.post(name: NSNotification.Name("updateGroupList"), object: self, userInfo:nil)
     }
 }

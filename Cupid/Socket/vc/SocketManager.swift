@@ -19,19 +19,18 @@ open class SocketManager : NSObject {
     // 聊天列表数组
     fileprivate var msgGroups : [GroupMessage] = [GroupMessage]()
     // 连接
-    @objc open func connect() {
-        
-
+    @objc open func connect() -> Bool {
         
         if  UserDefaults.standard.string(forKey: NICKNAME) == nil {
-            return
+            return false
         }
-
+        
         // 开始连接
         if socketClient.connectServer().isSuccess {
             print("连接服务器成功")
+            Toast.showCenterWithText(text: "连接服务器成功")
             DispatchQueue.global().async {
-
+                
                 socketClient.delegate = MessageDataManager.shareInstance as ZJSocketDelegate
                 
                 
@@ -45,9 +44,9 @@ open class SocketManager : NSObject {
                         print(Thread.current)
                         NotificationCenter.default.post(name: NSNotification.Name("chatUpdateGroupList"), object: self, userInfo: nil)
                     }
-               
+                    
                 }
-
+                
                 // 读取消息
                 socketClient.startReadMsg()
                 
@@ -56,7 +55,9 @@ open class SocketManager : NSObject {
                 // 发送心跳包
                 self.addHeartBeatTimer()
             }
+             return true
         }
+        return false
     }
     
     // swift 获取
@@ -84,7 +85,7 @@ open class SocketManager : NSObject {
     
     @objc fileprivate func sendHeartBeat() {
         socketClient.sendHeartBeat()
-        print("发送心跳包")
+//        print("发送心跳包")
     }
 
 }

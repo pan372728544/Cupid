@@ -38,13 +38,13 @@ class TabChatViewController: ZJBaseViewController {
             // 查询并刷新tableview
             searchAndReload()
         }
+        // 注册通知 添加收到消息更新列表数据
+        registerNotification()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // 注册通知 添加收到消息更新列表数据
-        registerNotification()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -58,15 +58,6 @@ extension TabChatViewController {
     
     @objc func logOut (){
 
-//        let messagesGroup : Results<GroupListMessage> =  RealmTool.getGroupMessages()
-//        RealmTool.deleteGroupMessages(messages: messagesGroup)
-        
-//        let messages : Results<ChatMessage> =  RealmTool.getMessages()
-//        RealmTool.deleteMessages(messages: messages)
-//
-//        let user : Results<UserInfoRealm> =  RealmTool.getUserInfo()
-//        RealmTool.deleteUserInfos(messages: user)
-        
         SocketManager.sharedInstanceSwift.close()
         self.msgArray.removeAll()
 
@@ -77,14 +68,15 @@ extension TabChatViewController {
     func registerNotification(){
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateGroup(nofi:)),
-                                               name: NSNotification.Name(rawValue: "chatUpdateGroupList"),
+                                               name: NSNotification.Name(rawValue: "updateGroupList"),
                                                object: nil)
         
     }
     
     // 查询数据并且刷新列表
     func searchAndReload() {
-        // 查询数据
+        // 查询聊天列表数据
+        msgArray.removeAll()
         msgArray =  MessageDataManager.shareInstance.searchRealmGroupList(curr: 1)
         self.tableView.reloadData()
     }
@@ -95,17 +87,9 @@ extension TabChatViewController {
     
     @objc func updateGroup(nofi : Notification){
         
-        if nofi.userInfo != nil {
-            let message = nofi.userInfo!["mess"]
-            let textMsg = message as! TextMessage
-            MessageDataManager.shareInstance.handleMsgList(chatMsg: textMsg)
-            
-        }
-
-
+        // 刷新数据
         searchAndReload()
-        
-        
+
     }
     
     func setupMainView()  {
@@ -145,11 +129,19 @@ extension TabChatViewController {
             
             LogInName =  UserDefaults.standard.string(forKey: NICKNAME)
             // 登录完成连接服务器
-            SocketManager.sharedInstanceSwift.connect()
+            let succ = SocketManager.sharedInstanceSwift.connect()
 
             let Coun = LogInName!.count
             self.createNavBarView(withTitle: "欢迎-\( String(LogInName!.prefix(Coun-4)))-归来")
-            self.tableView.reloadData()
+            
+            if !succ {
+                Toast.showCenterWithText(text: "连接服务器失败!!!")
+                // 服务器连接失败，刷新本地数据
+                self.searchAndReload()
+            } else {
+                Toast.showCenterWithText(text: "登录成功)")
+            }
+
         }
         self.present(vc, animated: true, completion: nil)
         

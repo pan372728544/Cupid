@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cupid/Socket/vc/IMChatViewController.swift"
-            timestampString = "579095805.2413059"
+            timestampString = "579152146.294974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "501"
-            endingLineNumber = "501"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
             landmarkName = "notificationToChatList(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -121,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Cupid/Socket/Client/ZJSocket.swift"
-            timestampString = "579095805.241372"
+            filePath = "Cupid/Socket/vc/IMChatViewController.swift"
+            timestampString = "579152146.295031"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
-            landmarkName = "getUserInfo()"
+            startingLineNumber = "498"
+            endingLineNumber = "498"
+            landmarkName = "updateMeseage(nofi:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
