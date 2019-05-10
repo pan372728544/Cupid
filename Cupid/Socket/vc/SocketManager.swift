@@ -19,46 +19,50 @@ open class SocketManager : NSObject {
     // 聊天列表数组
     fileprivate var msgGroups : [GroupMessage] = [GroupMessage]()
     // 连接
-    @objc open func connect() -> Bool {
+    @objc open func connect(completionHandler : @escaping (_ succ : Bool) -> ())  {
         
         if  UserDefaults.standard.string(forKey: NICKNAME) == nil {
-            return false
+            completionHandler(false)
         }
         
-        // 开始连接
-        if socketClient.connectServer().isSuccess {
-            print("连接服务器成功")
-//            Toast.showCenterWithText(text: "连接服务器成功")
-            DispatchQueue.global().async {
-                
-                socketClient.delegate = MessageDataManager.shareInstance as ZJSocketDelegate
-                
-                
-                self.msgGroups   =  MessageDataManager.shareInstance.searchRealmGroupList(curr: 1)
-                if self.msgGroups.count <= 0 {
-                    // 获取聊天列表
-                    socketClient.sendGroupMsg()
-                } else {
+        DispatchQueue.global().async {
+            
+            
+            // 开始连接
+            if socketClient.connectServer().isSuccess {
+                print("连接服务器成功")
                     
-                    DispatchQueue.main.async {
-                        print(Thread.current)
-                        // 更新聊天列表
-                        MessageDataManager.shareInstance.notificationToGroupList()
+                    socketClient.delegate = MessageDataManager.shareInstance as ZJSocketDelegate
+                    
+                    
+                    self.msgGroups   =  MessageDataManager.shareInstance.searchRealmGroupList(curr: 1)
+                    if self.msgGroups.count <= 0 {
+                        // 获取聊天列表
+                        socketClient.sendGroupMsg()
+                    } else {
+                        
+                        DispatchQueue.main.async {
+                            print(Thread.current)
+                            // 更新聊天列表
+                            MessageDataManager.shareInstance.notificationToGroupList()
+                        }
+                        
                     }
                     
+                    // 读取消息
+                    socketClient.startReadMsg()
+                    
+                    // 加入房间
+                    socketClient.sendJoinRoom()
+                    // 发送心跳包
+                    self.addHeartBeatTimer()
+                    completionHandler(true)
                 }
-                
-                // 读取消息
-                socketClient.startReadMsg()
-                
-                // 加入房间
-                socketClient.sendJoinRoom()
-                // 发送心跳包
-                self.addHeartBeatTimer()
-            }
-             return true
+                   completionHandler(false)
+        
+            
         }
-        return false
+      
     }
     
     // swift 获取

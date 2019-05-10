@@ -128,19 +128,24 @@ extension TabChatViewController {
         vc.completedBlock = {
             
             LogInName =  UserDefaults.standard.string(forKey: NICKNAME)
-            // 登录完成连接服务器
-            let succ = SocketManager.sharedInstanceSwift.connect()
 
-            let Coun = LogInName!.count
-            self.createNavBarView(withTitle: "欢迎-\( String(LogInName!.prefix(Coun-4)))-归来")
-            
-            if !succ {
-                Toast.showCenterWithText(text: "连接服务器失败!!!")
-                // 服务器连接失败，刷新本地数据
-                self.searchAndReload()
-            } else {
-                Toast.showCenterWithText(text: "登录成功\(String(LogInName!.prefix(Coun-4)))")
-            }
+    
+            SocketManager.sharedInstanceSwift.connect(completionHandler: { (succ: Bool) in
+
+                DispatchQueue.main.async {
+                    let Coun = LogInName!.count
+                    self.createNavBarView(withTitle: "欢迎-\( String(LogInName!.prefix(Coun-4)))-归来")
+                    
+                    if !succ {
+                        Toast.showCenterWithText(text: "连接服务器失败!!!")
+                        // 服务器连接失败，刷新本地数据
+                        self.searchAndReload()
+                    } else {
+                        Toast.showCenterWithText(text: "登录成功\(String(LogInName!.prefix(Coun-4)))")
+                    }
+                }
+
+            })
 
         }
         self.present(vc, animated: true, completion: nil)
