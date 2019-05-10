@@ -116,6 +116,110 @@ class MessageDataManager: NSObject {
         return msgArray
     }
     
+    
+    // 查询聊天记录 数据
+    func searchRealmChatMessagesList(currentPage : Int,group : GroupMessage) -> ([TextMessage],Int) {
+        
+        var msgArray : [TextMessage] = [TextMessage]()
+        // 每次加载多少条数据
+        let page :  Int = 10
+        // 最大页数
+        var maxCount :  Int = 0
+        
+        let userId : String = String(LogInName!.suffix(1))
+        let otherId = group.user.userId!
+        let messages : Results<ChatMessage>
+        var querString = ""
+        
+        // 群聊天
+        if group.groupId == 1004 {
+            querString = "chatType = '2'"
+        } else {
+            querString = "chatId = \'\(userId)_\(otherId)\' OR chatId = \'\(otherId)_\(userId)\'"
+            
+        }
+        messages =  RealmTool.getMessageByPredicate(querString)
+        
+        /* 大多数其他数据库技术都提供了从检索中对结果进行“分页”的能力（例如 SQLite 中的 “LIMIT” 关键字）。这通常是很有必要的，可以避免一次性从硬盘中读取太多的数据，或者将太多查询结果加载到内存当中。
+         
+         由于 Realm 中的检索是惰性的，因此这行这种分页行为是没有必要的。因为 Realm 只会在检索到的结果被明确访问时，才会从其中加载对象。
+         
+         如果由于 UI 相关或者其他代码实现相关的原因导致您需要从检索中获取一个特定的对象子集，这和获取 Results 对象一样简单，只需要读出您所需要的对象即可。*/
+        
+        // 数据库总数据
+        let  messageCount = messages.count
+        if messageCount == 0 {
+            return ([],0)
+        }
+        maxCount = messageCount/page + 1
+        
+        var start : Int = 0
+        var end : Int = 0
+        
+        
+        if maxCount == 1 {
+            // 总共一页
+            // 获取开始index
+            start = 0
+            end = messageCount
+        } else {
+            if currentPage < maxCount {
+                start = messageCount-page*currentPage
+                end = start + page
+            }
+            else {
+                
+                start =  0
+                end = messageCount - (currentPage-1)*page
+            }
+        }
+        var index : Int = 0
+        // 遍历数据
+        for i in start..<end {
+            
+            let mess = messages[i]
+            // 创建聊天类型数据
+            let textMsg = TextMessage.Builder()
+            textMsg.chatId = mess.chatId!
+            textMsg.text = mess.text!
+            textMsg.toUserId = mess.toUserId!
+            textMsg.chatType = mess.chatType!
+            textMsg.success = mess.success!
+            textMsg.sendTime = mess.sendTime ?? ""
+            
+            // realm类型用户信息
+            let userRealm : UserInfoRealm = mess.userInfo!
+            
+            // 创建聊天用户类型数据
+            let  userInfo = UserInfo.Builder()
+            userInfo.name = userRealm.name!
+            userInfo.level = Int64(userRealm.level)
+            userInfo.iconUrl = userRealm.iconUrl!
+            userInfo.userId = userRealm.userId!
+            
+            // 用户信息
+            textMsg.user = try! userInfo.build()
+            
+            let msg = try? textMsg.build()
+            if msg != nil {
+                
+                if currentPage ==  1 {
+                    msgArray.append(msg!)
+                
+                } else {
+                    msgArray.insert(msg!, at: index)
+                    
+                }
+            }
+            index += 1
+        }
+        index = 0
+        
+        return (msgArray,maxCount)
+    }
+    
+    
+    
 }
 
 extension MessageDataManager {
@@ -206,6 +310,8 @@ extension MessageDataManager : ZJSocketDelegate {
         let build = try! groupMsg.toBuilder()
         
         MessageDataManager.shareInstance.insertRealmGroupMessage(cupid: build)
+        // 上面已经存储数据到数据库
+        notificationToGroupList()
     }
     
     

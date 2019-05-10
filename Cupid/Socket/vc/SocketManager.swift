@@ -28,7 +28,7 @@ open class SocketManager : NSObject {
         // 开始连接
         if socketClient.connectServer().isSuccess {
             print("连接服务器成功")
-            Toast.showCenterWithText(text: "连接服务器成功")
+//            Toast.showCenterWithText(text: "连接服务器成功")
             DispatchQueue.global().async {
                 
                 socketClient.delegate = MessageDataManager.shareInstance as ZJSocketDelegate
