@@ -124,10 +124,9 @@ extension ZJSocket {
             let group = try! GroupMessage.parseFrom(data: data)
             delegate?.socket(self, groupMsg: group)
         default:
-            alert(msg: "服务器异常，请重试") { () -> (Void) in
-                
-            }
+
             print("未知类型: \(type)")
+            Toast.showCenterWithText(text: "未知数据类型： \(type)")
         }
     }
 }

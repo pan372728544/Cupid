@@ -331,6 +331,11 @@ extension IMChatViewController : UITableViewDataSource,UITableViewDelegate,UIScr
     // scrollview
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.tableView.contentInset =  UIEdgeInsets(top: loadingH, left: 0, bottom: 0, right: 0 )
+        if maxCount == 1 {
+            indicatorView.stopAnimating()
+        } else {
+
+        }
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

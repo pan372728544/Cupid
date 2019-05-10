@@ -42,7 +42,8 @@ open class SocketManager : NSObject {
                     
                     DispatchQueue.main.async {
                         print(Thread.current)
-                        NotificationCenter.default.post(name: NSNotification.Name("chatUpdateGroupList"), object: self, userInfo: nil)
+                        // 更新聊天列表
+                        MessageDataManager.shareInstance.notificationToGroupList()
                     }
                     
                 }

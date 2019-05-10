@@ -139,7 +139,7 @@ extension TabChatViewController {
                 // 服务器连接失败，刷新本地数据
                 self.searchAndReload()
             } else {
-                Toast.showCenterWithText(text: "登录成功)")
+                Toast.showCenterWithText(text: "登录成功\(String(LogInName!.prefix(Coun-4)))")
             }
 
         }
