@@ -23,6 +23,8 @@ open class SocketManager : NSObject {
         
         if  UserDefaults.standard.string(forKey: NICKNAME) == nil {
             completionHandler(false)
+            Toast.showCenterWithText(text: "还未登录")
+            return
         }
         
         DispatchQueue.global().async {
